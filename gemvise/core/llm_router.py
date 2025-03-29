@@ -69,6 +69,7 @@ import json
 import os
 from dotenv import load_dotenv
 from langchain_openai import OpenAIEmbeddings, OpenAI
+import google.generativeai as genai
 from ..memory.manager import MemoryManager
 
 # Load environment variables
@@ -78,11 +79,23 @@ load_dotenv()
 DEFAULT_MODEL = os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')
 DEFAULT_TEMPERATURE = float(os.getenv('OPENAI_TEMPERATURE', '0.7'))
 
+# Configure Gemini
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
+
 class CharacterLLMRouter:
     """Routes queries to character LLMs and manages dynamic response generation."""
     
-    def __init__(self, gemvise, model_name=None, temperature=None):
-        """Initialize the router."""
+    def __init__(self, gemvise, model_name=None, temperature=None, provider='openai'):
+        """Initialize the router.
+        
+        Args:
+            gemvise: GemVise instance
+            model_name: Name of the model to use
+            temperature: Temperature for response generation
+            provider: LLM provider ('openai' or 'gemini')
+        """
         self.gemvise = gemvise
         self.memory_manager = MemoryManager()
         self.embeddings = OpenAIEmbeddings()
@@ -90,12 +103,20 @@ class CharacterLLMRouter:
         # Use provided model settings or defaults from env
         self.model_name = model_name or DEFAULT_MODEL
         self.temperature = temperature or DEFAULT_TEMPERATURE
+        self.provider = provider
         
-        # Initialize the LLM
-        self.llm = OpenAI(
-            model_name=self.model_name,
-            temperature=self.temperature
-        )
+        # Initialize the LLMs
+        if self.provider == 'openai':
+            self.llm = OpenAI(
+                model_name=self.model_name,
+                temperature=self.temperature
+            )
+        elif self.provider == 'gemini':
+            if not GEMINI_API_KEY:
+                raise ValueError("Gemini API key not found in environment variables")
+            self.llm = genai.GenerativeModel('gemini-pro')
+        else:
+            raise ValueError(f"Unsupported provider: {provider}")
         
     def get_response(self, gem_name: str, query: str) -> str:
         """Get a response from a character's LLM."""
@@ -114,7 +135,10 @@ class CharacterLLMRouter:
         prompt = self._build_prompt(gem.facets, query, templates, context)
         
         # Get response from LLM
-        response = self.llm.generate([prompt])[0].text
+        if self.provider == 'openai':
+            response = self.llm.generate([prompt])[0].text
+        else:  # gemini
+            response = self.llm.generate_content(prompt).text
         
         # Update template usage if one was used
         if templates:
@@ -178,7 +202,10 @@ class CharacterLLMRouter:
         Create a template that would be triggered by these words: {', '.join(trigger_words)}
         """
         
-        template = self.llm.generate([prompt])[0].text.strip()
+        if self.provider == 'openai':
+            template = self.llm.generate([prompt])[0].text.strip()
+        else:  # gemini
+            template = self.llm.generate_content(prompt).text.strip()
         
         # Store the template
         self.memory_manager.store_template(gem_name, topic, template, trigger_words)
