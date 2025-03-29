@@ -1,0 +1,73 @@
+{
+  "basic_info": {
+    "id": "charles_koch",
+    "name": "Charles Koch",
+    "net_worth": "$42.9\u00a0billion",
+    "source": "79",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Charles_Koch",
+    "summary": "Charles de Ganahl Koch ( KOHK; born November 1, 1935) is an American billionaire businessman and engineer. As of February 2024, he was ranked as the 23rd richest man in the world on the Bloomberg Billionaires Index, with an estimated net worth of $64.9 billion. Koch has been co-owner, chairman, and chief executive officer of Koch Industries since 1967, while his late brother David Koch served as executive vice president. Charles and David each owned 42% of the conglomerate. The brothers inherited the business from their father, Fred C. Koch, then expanded the business. Koch Industries is the largest privately held company by revenue in the United States, according to Forbes.\nKoch also supports a number of libertarian think tanks, including the Institute for Humane Studies, the Cato Institute, the Ayn Rand Institute, and the Mercatus Center at George Mason University. He also contributes to the Republican Party and candidates, libertarian groups, and various charitable and cultural institutions. He co-founded the Washington, D.C.\u2013based Cato Institute. Along with his brother, Koch has been an important funder of think tanks that lobby to oppose environmental regulation. Koch has published four books detailing his business philosophy, Market Based Management (2006), The Science of Success (2007), Good Profit (2015), and Believe in People (2020)."
+  },
+  "biography": {
+    "error": "\n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n"
+  },
+  "business_philosophy": {
+    "error": "\n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n"
+  },
+  "expertise_areas": [],
+  "innovation_contributions": [],
+  "leadership_style": {},
+  "risk_management": {},
+  "quotes": [
+    {
+      "text": "My father wanted me to work as if I was the poorest person in the world.",
+      "source": "Wikipedia",
+      "context": "From biographical content"
+    },
+    {
+      "text": "overall concept is to minimize the role of government and to maximize the role of private economy and to maximize personal freedoms.",
+      "source": "Wikipedia",
+      "context": "From biographical content"
+    },
+    {
+      "text": "we could be facing the greatest loss of liberty and prosperity since the 1930s.",
+      "source": "Wikipedia",
+      "context": "From biographical content"
+    },
+    {
+      "text": "a huge debt of gratitude to the giants who created the Austrian School [of economics]. They developed principles that enabled me to gain an understanding of how the world works, and these ideas were a catalyst in the development of Market-Based Management.",
+      "source": "Wikipedia",
+      "context": "From biographical content"
+    },
+    {
+      "text": "the short-term infatuation with quarterly earnings on Wall Street restricts the earnings potential of Fortune 500 publicly traded firms.",
+      "source": "Wikipedia",
+      "context": "From biographical content"
+    },
+    {
+      "text": "feeding grounds for lawyers and lawsuits,",
+      "source": "Wikipedia",
+      "context": "From biographical content"
+    },
+    {
+      "text": "simply haven't been sufficiently exposed to the ideas of liberty.",
+      "source": "Wikipedia",
+      "context": "From biographical content"
+    },
+    {
+      "text": "of policies that threaten to erode our economic freedom and transfer vast sums of money to the state.",
+      "source": "Wikipedia",
+      "context": "From biographical content"
+    },
+    {
+      "text": "actively funding efforts to end federal marijuana prohibition.",
+      "source": "Wikipedia",
+      "context": "From biographical content"
+    },
+    {
+      "text": "The first thing we've got to get rid of is business welfare and entitlements.",
+      "source": "Wikipedia",
+      "context": "From biographical content"
+    }
+  ],
+  "collected_at": "2025-03-29T19:26:45.007361"
+}
