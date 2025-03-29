@@ -1,0 +1,22 @@
+{
+  "basic_info": {
+    "id": "christy_walton",
+    "name": "Christy Walton",
+    "net_worth": "$41.7\u00a0billion",
+    "source": "66",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Christy_Walton",
+    "summary": "Christy Ruth Walton (n\u00e9e Tallant; born February 8, 1949) is an American billionaire heiress and philanthropist. She is the widow of John T. Walton, who was one of the sons of the Walmart founder Sam Walton.\nIn June 2005, her husband died in a homebuilt ultralight plane crash, making her the main heir to his fortune of US$18.2 billion. Forbes listed Christy Walton as the richest woman in the world for several years. Her net worth was estimated to $41.7 billion in March 2015, the bulk of which came from her shares in Walmart, but also from First Solar, in which her husband had invested. In November 2015, an analysis of court documents by Bloomberg revealed that the bulk of her husband's wealth had been transferred to her son, Lukas Walton, resulting in an estimated net worth of approximately US$5 billion."
+  },
+  "biography": {
+    "error": "\n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n"
+  },
+  "business_philosophy": {
+    "error": "\n\nYou tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.\n\nYou can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. \n\nAlternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`\n\nA detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742\n"
+  },
+  "expertise_areas": [],
+  "innovation_contributions": [],
+  "leadership_style": {},
+  "risk_management": {},
+  "quotes": [],
+  "collected_at": "2025-03-29T19:26:55.289266"
+}
