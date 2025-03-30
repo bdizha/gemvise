@@ -10,6 +10,7 @@ GemVise is an autonomous agent system that brings historical figures and experts
 - [Feature Roadmap](https://github.com/bdizha/gemvise/wiki/Feature-Roadmap) - Current and planned features
 - [Contributing](https://github.com/bdizha/gemvise/wiki/Contributing) - Development guidelines
 - [Innovation](https://github.com/bdizha/gemvise/wiki/Innovation) - Technical innovations and research
+- [Philosophical Foundations](https://github.com/bdizha/gemvise/wiki/Philosophical-Foundations) - Core principles and influences
 
 ## Features
 
