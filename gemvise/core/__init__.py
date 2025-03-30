@@ -1,5 +1,7 @@
-"""Core module initialization."""
-from .gemvise import GemVise
-from .llm_router import CharacterLLMRouter
+"""Core GemVise functionality."""
 
-__all__ = ['GemVise', 'CharacterLLMRouter']
+from .gemvise import GemVise
+from .llm_router import LLMRouter
+from .gem_base import GemState, QuantumState
+
+__all__ = ['GemVise', 'LLMRouter', 'GemState', 'QuantumState']

@@ -1,6 +1,6 @@
 """Memory management for character interactions."""
 
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 import sqlite3
 from datetime import datetime
 import json
@@ -107,8 +107,8 @@ class MemoryManager:
         finally:
             conn.close()
             
-    def load_gem(self, name: str) -> Dict[str, Any]:
-        """Load a Gem's data from the database."""
+    def load_gem(self, name: str) -> Optional[Dict]:
+        """Load a Gem's data from storage."""
         conn = sqlite3.connect(self.db_path)
         c = conn.cursor()
         
@@ -119,21 +119,17 @@ class MemoryManager:
             ''', (name,))
             row = c.fetchone()
             
-            if not row:
-                return None
-                
-            return {
-                'name': name,
-                'facets': {
+            if row:
+                return {
                     'name': name,
                     'expertise': json.loads(row[0]),
                     'innovations': json.loads(row[1]),
                     'philosophy': row[2],
                     'leadership': row[3],
-                    'current_focus': row[4]
-                },
-                'quantum_state': json.loads(row[5])
-            }
+                    'current_focus': row[4],
+                    'quantum_state': json.loads(row[5])
+                }
+            return None
         finally:
             conn.close()
             
