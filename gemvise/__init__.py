@@ -1,14 +1,9 @@
-"""GemVise: A quantum-inspired gem transformation system."""
+"""GemVise: A quantum-inspired gem-based AI system."""
 
-from .core.gemvise import GemVise
-from .core.llm_router import LLMRouter
-from .core.gem_base import GemState, QuantumState
+from .core.gem_vise import GemVise
+from .core.gem_cutter import GemCutter
+from .models.gem import Gem, GemState, QuantumState
+from .crystal.manager import CrystalManager
 
-__version__ = '0.1.0'
-
-__all__ = [
-    'GemVise',
-    'LLMRouter',
-    'GemState',
-    'QuantumState'
-]
+__version__ = "0.1.0"
+__all__ = ['GemVise', 'GemCutter', 'Gem', 'GemState', 'QuantumState', 'CrystalManager']
