@@ -23,7 +23,7 @@ export default function Footer() {
         <div 
           className="w-full h-full" 
           style={{
-            backgroundImage: "url('/gradients/GV-Gradient-09.png')",
+            backgroundImage: "url('/gradients/GV-Gradient-03.png')",
             backgroundSize: 'contain',
             backgroundRepeat: 'repeat',
             backgroundPosition: 'center bottom',
