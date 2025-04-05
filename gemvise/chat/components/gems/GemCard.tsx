@@ -28,7 +28,7 @@ const GemCard = ({ id, name, expertise, imageUrl, description, onSelect }: GemCa
     >
       <div className="relative h-48 w-full mb-6">
         <Image
-          src={imageError ? '/gems/placeholder.svg' : imageUrl}
+          src={imageError ? '/shapes/GV-SHAPE.png' : imageUrl}
           alt={name}
           className="object-cover rounded-lg"
           fill

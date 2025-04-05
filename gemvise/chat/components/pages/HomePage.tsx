@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import LoginModal from '../auth/LoginModal';
-import GemCard from '../gems/GemCard';
+import GemList from '../gems/GemList';
+import Link from 'next/link';
 
 const featuredGems = [
   {
@@ -65,23 +66,13 @@ export default function HomePage() {
 
   return (
     <main className="relative min-h-screen w-full bg-stone-150 dark:bg-midnight-850">
-      {/* Header with Sign In Button */}
+      {/* Fixed header */}
       <div className="fixed top-0 z-30 flex w-full items-center justify-between gap-4 px-6 py-6 bg-stone-150/80 dark:bg-midnight-850/80 backdrop-blur-md">
         <div className="flex items-center gap-6">
-          <button
-            type="button"
-            className="relative flex items-center text-stone-900 dark:text-stone-100 bg-stone-100/80 dark:bg-midnight-700/80 hover:bg-stone-50 dark:hover:bg-midnight-600 active:bg-stone-200 dark:active:bg-midnight-800 text-sm justify-center min-h-10 min-w-10 px-3 py-2 gap-x-2 rounded-xl shadow-lg"
-          >
-            <span>Docs</span>
-          </button>
-          <button
-            type="button"
-            className="relative flex items-center text-stone-900 dark:text-stone-100 bg-stone-100/80 dark:bg-midnight-700/80 hover:bg-stone-50 dark:hover:bg-midnight-600 active:bg-stone-200 dark:active:bg-midnight-800 text-sm justify-center min-h-10 min-w-10 px-3 py-2 gap-x-2 rounded-xl shadow-lg"
-          >
-            <span>Blog</span>
-          </button>
-        </div>
-        <div className="flex items-center gap-6">
+          <Link href="/" className="flex items-center gap-2">
+            <Image src={theme === 'dark' ? '/icons/GV-LOGO-02-WOT.png' : '/icons/GV-LOGO-02-GOT-05.png'} alt="GemVise" width={32} height={32} />
+            <span className="text-lg font-semibold text-stone-900 dark:text-stone-100">GemVise</span>
+          </Link>
           <button
             type="button"
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -97,6 +88,8 @@ export default function HomePage() {
               </svg>
             )}
           </button>
+        </div>
+        <div className="flex items-center gap-4">
           <button
             type="button"
             className="relative flex items-center text-stone-900 dark:text-stone-100 bg-stone-100/80 dark:bg-midnight-700/80 hover:bg-stone-50 dark:hover:bg-midnight-600 active:bg-stone-200 dark:active:bg-midnight-800 text-sm justify-center min-h-10 min-w-10 px-3 py-2 gap-x-2 rounded-xl shadow-lg"
@@ -161,15 +154,7 @@ export default function HomePage() {
         <div className="mx-auto w-full px-6 xl:max-w-7xl py-24">
           {/* Gems Grid */}
           <section className="sm:pb-20 pb-16" aria-label="Featured Gems">
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-              {featuredGems.map((gem) => (
-                <GemCard
-                  key={gem.id}
-                  {...gem}
-                  onSelect={handleGemSelect}
-                />
-              ))}
-            </div>
+            <GemList gems={featuredGems} onSelect={handleGemSelect} />
           </section>
         </div>
       </div>
