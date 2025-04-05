@@ -28,8 +28,8 @@ export default function AboutPage() {
           backgroundRepeat: 'repeat'
         }}
       >
-        <div className="relative w-full h-full flex flex-col justify-between">
-          <div className="mx-auto w-full px-6 xl:max-w-7xl flex-1 flex flex-col">
+        <div className="relative w-full h-full flex items-center">
+          <div className="mx-auto w-full px-6 xl:max-w-7xl">
             {/* Gradient Background */}
             <div className="pointer-events-none absolute inset-0" style={{ opacity: 1 }}>
               <div 
@@ -58,60 +58,51 @@ export default function AboutPage() {
               />
             </div>
 
-            {/* Content */}
-            <div className="relative w-full flex-1 flex items-center justify-start z-20">
-              <div className="flex flex-col items-center gap-8 max-w-[900px] px-12 lg:px-0">
-                <div className="mono-tag flex items-center gap-2 text-sm">
-                  <span>[</span> <span>Our Mission</span> <span>]</span>
-                </div>
-                <div className="max-w-3xl text-balance inline-block py-2">
-                  <h1 className="text-[80px] leading-[80px] tracking-[-2px] font-normal max-w-[768px]">
-                    <span className="bg-gradient-to-r from-[rgba(255,255,255,0.2)] to-[rgb(255,255,255)] bg-clip-text text-transparent inline-block pb-2 pt-2">
-                    Spark the imagination
-                    </span>
-                  </h1>
-                </div>
-              </div>
-              <div className="flex flex-col items-center gap-8 max-w-[900px] px-12 lg:px-0">
-                <div className="w-full aspect-video bg-gradient-to-r from-grey-50 to-grey-100 dark:from-grey-900 dark:to-grey-800 flex items-center justify-center">
-                  <h1 className="text-4xl font-bold text-left"></h1>
-                </div>
-                <div className="flex flex-col items-center gap-8">
-                  <p className="text-md/5 text-left whitespace-pre-line lg:px-24">
-                    GemVise empowers individuals to unlock their quantum potential through AI-driven personal growth and collective intelligence networking.
-                    Join millions in discovering your unique gem profile and connecting with others through quantum entanglement.
-                  </p>
-                </div>
-                <div className="flex flex-col items-center gap-8 lg:px-12">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-                    <div className="flex flex-col gap-4 lg:p-6">
-                      <h5 className="text-lg font-semibold">Quantum Intelligence</h5>
-                      <p className="text-md/5 opacity-80">
-                        Experience our revolutionary system that maps your cognitive patterns into quantum states, creating a unique intelligence profile that evolves with you.
-                      </p>
+            {/* Story Section */}
+            <section className="py-16 sm:py-32">
+              <div className="mx-auto w-full px-6 xl:max-w-7xl">
+                <div className="space-y-12">
+                  <div>
+                    <div className="mono-tag flex items-center gap-2 text-sm">
+                      <span>[</span> <span>Our Story</span> <span>]</span>
                     </div>
-                    <div className="flex flex-col gap-4 lg:p-6">
-                      <h5 className="text-lg font-semibold">Gem Coherence</h5>
-                      <p className="text-md/5 opacity-80">
-                        Connect with others through quantum entanglement, fostering deep understanding and growth through shared experiences and collective wisdom.
-                      </p>
+                  </div>
+                  <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+                    <div className="max-w-xl">
+                      <h1 className="text-balance text-3xl md:text-4xl lg:text-5xl tracking-tight">Spark the imagination</h1>
                     </div>
-                    <div className="flex flex-col gap-4 lg:p-6">
-                      <h5 className="text-lg font-semibold">Adaptive Growth</h5>
-                      <p className="text-md/5 opacity-80">
-                        Receive personalized insights and recommendations powered by our quantum AI, helping you navigate your personal development journey.
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-4 lg:p-6">
-                      <h5 className="text-lg font-semibold">Global Network</h5>
-                      <p className="text-md/5 opacity-80">
-                        Join a worldwide community of growth-minded individuals, sharing knowledge and supporting each other's quantum evolution.
+                    <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-12">
+                      <p className="mt-3 w-full max-w-md flex-1 text-balance leading-6">
+                        GemVise is dedicated to unlocking human creativity through the power of AI. We empower people to connect, learn, tell stories, and explore new worlds through interactive AI characters.
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </section>
+
+            {/* Vision Section */}
+            <section className="py-16 sm:py-32">
+              <div className="mx-auto w-full px-6 xl:max-w-7xl">
+                <div className="space-y-12">
+                  <div>
+                    <div className="mono-tag flex items-center gap-2 text-sm">
+                      <span>[</span> <span>Our Vision</span> <span>]</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+                    <div className="max-w-xl">
+                      <h2 className="text-balance text-3xl md:text-4xl lg:text-5xl tracking-tight">Redefining social value</h2>
+                    </div>
+                    <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-12">
+                      <p className="mt-3 w-full max-w-md flex-1 text-balance leading-6">
+                        Millions engage with AI daily, and we believe the creators behind these engaging experiences deserve to be recognized and rewarded. Our platform is built not just for limitless entertainment, but for a future where digital creation has tangible value and seamlessly integrates into immersive virtual experiences.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
 
             <div className="relative flex items-end justify-between gap-6 py-10 z-10 lg:min-h-[160px]">
               <div>
@@ -121,7 +112,7 @@ export default function AboutPage() {
               </div>
               <div className="flex flex-col items-end gap-6 sm:gap-8 lg:gap-12 md:flex-row">
                 <div className="max-w-lg">
-                  AI's knowledge should be all-encompassing and as far-reaching as possible. We build AI specifically to advance human comprehension and capabilities.
+                  GemVise stands at the convergence of conversational AI, gaming, social connection, creative expression, and blockchain technology.
                 </div>
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <Link 
@@ -147,137 +138,152 @@ export default function AboutPage() {
           <div className="space-y-12">
             <div>
               <div className="mono-tag flex items-center gap-2 text-sm">
-                <span>[</span> <span>Our principles</span> <span>]</span>
+                <span>[</span> <span>Our Values</span> <span>]</span>
               </div>
             </div>
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-              <div className="max-w-xl space-y-12">
-                <h2 className="text-balance text-3xl md:text-4xl lg:text-5xl tracking-tight">At our core</h2>
+              <div className="max-w-xl">
+                <h2 className="text-balance text-3xl md:text-4xl lg:text-5xl tracking-tight">What Makes Us Unique</h2>
               </div>
-              <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:gap-12">
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-12">
                 <p className="mt-3 w-full max-w-md flex-1 text-balance leading-6">
-                  We're a focused and mighty team connected by our curiosity, commitment, and unwavering drive.
+                  We leverage state-of-the-art Large Language Models optimized for engaging, dynamic conversations, with a unique focus on creator empowerment.
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-3">
-            <div className="group relative px-0 py-10 h-full lg:p-8 flex flex-col from-secondary/10 via-transparent to-transparent border-t border-border lg:border-l lg:border-t-0">
-              <div className="size-10 text-primary [&>svg]:size-full mb-10 sm:mb-16">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" strokeWidth="1">
-                  <ellipse cx="12" cy="12" rx="4" ry="10.5" transform="rotate(-45 12 12)" stroke="currentColor" />
-                  <ellipse cx="4" cy="10.5" rx="4" ry="10.5" transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 22.253 7.40381)" stroke="currentColor" />
-                </svg>
-              </div>
-              <div className="max-w-sm">
-                <h3 className="text-xl">Reasoning from First Principles</h3>
-                <p className="mt-4 text-secondary">We challenge conventional thinking by breaking down problems to their fundamental truths, grounded in logic.</p>
-              </div>
+          <div className="grid lg:grid-cols-3 gap-8 mt-16">
+            <div className="flex flex-col gap-4">
+              <h3 className="text-xl font-semibold">Innovation</h3>
+              <p className="text-md/5 opacity-80">Pushing the boundaries of AI, interaction, and digital economies.</p>
             </div>
-
-            <div className="group relative px-0 py-10 h-full lg:p-8 flex flex-col from-secondary/10 via-transparent to-transparent border-t border-border lg:border-l lg:border-t-0">
-              <div className="size-10 text-primary [&>svg]:size-full mb-10 sm:mb-16">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" strokeWidth="1">
-                  <path d="M6.5 12.5L11.5 17.5M6.5 12.5L11.8349 6.83172C13.5356 5.02464 15.9071 4 18.3887 4H20V5.61135C20 8.09292 18.9754 10.4644 17.1683 12.1651L11.5 17.5M6.5 12.5L2 11L5.12132 7.87868C5.68393 7.31607 6.44699 7 7.24264 7H11M11.5 17.5L13 22L16.1213 18.8787C16.6839 18.3161 17 17.553 17 16.7574V13" stroke="currentColor" strokeLinecap="square" />
-                  <path d="M4.5 16.5C4.5 16.5 4 18 4 20C6 20 7.5 19.5 7.5 19.5" stroke="currentColor" />
-                </svg>
-              </div>
-              <div className="max-w-sm">
-                <h3 className="text-xl">No goal is too ambitious</h3>
-                <p className="mt-4 text-secondary">We embrace the most challenging obstacles by always pushing the limits of what's possible. We are motivated by what's unprecedented.</p>
-              </div>
+            <div className="flex flex-col gap-4">
+              <h3 className="text-xl font-semibold">Creativity</h3>
+              <p className="text-md/5 opacity-80">Providing powerful yet accessible tools for imaginative expression.</p>
             </div>
-
-            <div className="group relative px-0 py-10 h-full lg:p-8 flex flex-col from-secondary/10 via-transparent to-transparent border-t border-border lg:border-l lg:border-t-0">
-              <div className="size-10 text-primary [&>svg]:size-full mb-10 sm:mb-16">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" strokeWidth="1">
-                  <path d="M19.75 9H13V3.5L4.25 14.9219H11V20.5L19.75 9Z" stroke="currentColor" />
-                </svg>
-              </div>
-              <div className="max-w-sm">
-                <h3 className="text-xl">Move quickly and fix things</h3>
-                <p className="mt-4 text-secondary">Our approach to rapid development and iteration allows us to innovate at breakneck speeds. We're not interested in speed for speed's sake—we're here to solve real problems.</p>
-              </div>
+            <div className="flex flex-col gap-4">
+              <h3 className="text-xl font-semibold">Community</h3>
+              <p className="text-md/5 opacity-80">Fostering a supportive and collaborative environment for users and creators.</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Links Section */}
-      <section className="py-16 border-t border-border">
-        <div className="mx-auto w-full px-6 xl:max-w-7xl">
-          <div className="grid gap-8 md:grid-cols-2">
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Main Links</h3>
-              <ul className="space-y-2">
-                {mainLinks.map((link) => (
-                  <li key={link.name}>
-                    <Link 
-                      href={link.href}
-                      className="text-secondary hover:text-primary transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            <div className="flex flex-col gap-4">
+              <h3 className="text-xl font-semibold">Transparency</h3>
+              <p className="text-md/5 opacity-80">Building trust through clear communication and fair systems, especially regarding creator rewards.</p>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Legal</h3>
-              <ul className="space-y-2">
-                {legalLinks.map((link) => (
-                  <li key={link.name}>
-                    <Link 
-                      href={link.href}
-                      className="text-secondary hover:text-primary transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            <div className="flex flex-col gap-4">
+              <h3 className="text-xl font-semibold">Empowerment</h3>
+              <p className="text-md/5 opacity-80">Giving users control over their interactions and creators ownership & value for their work.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Team Section */}
-      <section className="w-full flex flex-col items-center">
-        <div className="max-w-[900px] flex flex-col items-center px-12 gap-8 lg:px-0">
-          <h3 className="text-xl text-center whitespace-pre-line">Join Our Quantum Vision</h3>
-          <div className="flex flex-col items-center md:px-24">
-            <p className="text-md whitespace-pre-line text-center">
-              Our team combines expertise in quantum mechanics, artificial intelligence, and human development to create transformative experiences. Join us in shaping the future of personal growth through quantum intelligence.
-            </p>
-          </div>
-          <div className="flex flex-col items-center">
-            <a href="/careers" className="bg-gradient-to-r from-grey-400 to-grey-900 text-white px-8 py-3 rounded-md hover:opacity-90 transition-opacity">
-              View Open Positions
-            </a>
+      <section className="py-16 sm:py-32">
+        <div className="mx-auto w-full px-6 xl:max-w-7xl space-y-16 sm:space-y-32">
+          <div className="space-y-12">
+            <div>
+              <div className="mono-tag flex items-center gap-2 text-sm">
+                <span>[</span> <span>Our Team</span> <span>]</span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+              <div className="max-w-xl">
+                <h2 className="text-balance text-3xl md:text-4xl lg:text-5xl tracking-tight">Deep Expertise</h2>
+              </div>
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-12">
+                <p className="mt-3 w-full max-w-md flex-1 text-balance leading-6">
+                  Our team comprises experts with deep experience in AI and Machine Learning, building global consumer products, scaling complex systems, and pioneering work in blockchain applications.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Values Section */}
+      <section className="py-16 sm:py-32">
+        <div className="mx-auto w-full px-6 xl:max-w-7xl">
+          <div className="space-y-12">
+            <div>
+              <div className="mono-tag flex items-center gap-2 text-sm">
+                <span>[</span> <span>Our Values</span> <span>]</span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+              <div className="max-w-xl">
+                <h2 className="text-balance text-3xl md:text-4xl lg:text-5xl tracking-tight">What Makes Us Unique</h2>
+              </div>
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-12">
+                <p className="mt-3 w-full max-w-md flex-1 text-balance leading-6">
+                  We leverage state-of-the-art Large Language Models optimized for engaging, dynamic conversations, with a unique focus on creator empowerment.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-8 mt-16">
+            <div className="flex flex-col gap-4">
+              <h3 className="text-xl font-semibold">Innovation</h3>
+              <p className="text-md/5 opacity-80">Pushing the boundaries of AI, interaction, and digital economies.</p>
+            </div>
+            <div className="flex flex-col gap-4">
+              <h3 className="text-xl font-semibold">Creativity</h3>
+              <p className="text-md/5 opacity-80">Providing powerful yet accessible tools for imaginative expression.</p>
+            </div>
+            <div className="flex flex-col gap-4">
+              <h3 className="text-xl font-semibold">Community</h3>
+              <p className="text-md/5 opacity-80">Fostering a supportive and collaborative environment for users and creators.</p>
+            </div>
+            <div className="flex flex-col gap-4">
+              <h3 className="text-xl font-semibold">Transparency</h3>
+              <p className="text-md/5 opacity-80">Building trust through clear communication and fair systems, especially regarding creator rewards.</p>
+            </div>
+            <div className="flex flex-col gap-4">
+              <h3 className="text-xl font-semibold">Empowerment</h3>
+              <p className="text-md/5 opacity-80">Giving users control over their interactions and creators ownership & value for their work.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-32">
+        <Link 
+          href="/explore"
+          className="relative isolate inline-flex items-center justify-center border text-base/6 uppercase font-mono tracking-widest shrink-0 focus:outline-none data-[focus]:outline data-[focus]:outline-2 data-[focus]:outline-offset-2 data-[focus]:outline-blue-500 data-[disabled]:opacity-50 [&>[data-slot=icon]]:-mx-0.5 [&>[data-slot=icon]]:my-0.5 [&>[data-slot=icon]]:shrink-0 [&>[data-slot=icon]]:sm:my-1 px-4 py-2 sm:text-sm [&>[data-slot=icon]]:size-5 [&>[data-slot=icon]]:sm:size-4 gap-x-3 bg-[--btn-bg] text-[--btn-text] border-[--btn-border] hover:bg-[--btn-hover] rounded-full [--btn-bg:transparent] [--btn-border:theme(colors.primary/25%)] [--btn-text:theme(colors.primary)] [--btn-hover:theme(colors.secondary/20%)]"
+        >
+          <span>Explore GemVise</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+            <path fillRule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z" clipRule="evenodd" />
+          </svg>
+        </Link>
+        <Link 
+          href="/careers"
+          className="relative isolate inline-flex items-center justify-center border text-base/6 uppercase font-mono tracking-widest shrink-0 focus:outline-none data-[focus]:outline data-[focus]:outline-2 data-[focus]:outline-offset-2 data-[focus]:outline-blue-500 data-[disabled]:opacity-50 [&>[data-slot=icon]]:-mx-0.5 [&>[data-slot=icon]]:my-0.5 [&>[data-slot=icon]]:shrink-0 [&>[data-slot=icon]]:sm:my-1 px-4 py-2 sm:text-sm [&>[data-slot=icon]]:size-5 [&>[data-slot=icon]]:sm:size-4 gap-x-3 bg-[--btn-bg] text-[--btn-text] border-[--btn-border] hover:bg-[--btn-hover] rounded-full [--btn-bg:transparent] [--btn-border:theme(colors.primary/25%)] [--btn-text:theme(colors.primary)] [--btn-hover:theme(colors.secondary/20%)]"
+        >
+          <span>View Open Roles</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+            <path fillRule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z" clipRule="evenodd" />
+          </svg>
+        </Link>
+      </div>
 
       {/* Location Section */}
-      <section className="w-full bg-gradient-to-r from-grey-50 to-grey-100 dark:from-grey-900 dark:to-grey-800">
+      <section className="w-full bg-gradient-to-r from-grey-50 to-grey-100 dark:from-grey-900 dark:to-grey-800 mt-32">
         <div className="w-full flex flex-col items-center">
-          <div className="max-w-[900px] flex flex-col items-center px-24 gap-8 mt-32 mb-20 lg:px-0">
-            <h3 className="text-4xl text-center align-left w-full whitespace-pre-line">
-              Based in Silicon Valley, with quantum entanglement reaching globally.
-            </h3>
+          <div className="max-w-[900px] flex flex-col items-center px-24 gap-8 py-20 lg:px-0">
+            <h3 className="text-4xl text-center align-left w-full whitespace-pre-line">Based in Silicon Valley, with quantum entanglement reaching globally.</h3>
           </div>
         </div>
       </section>
 
-      {/* Contact Information Section */}
-      <section className="w-full flex flex-col items-center mt-10 mb-40">
+      {/* Contact Section */}
+      <section className="w-full flex flex-col items-center mt-10 mb-20">
         <div className="max-w-[900px] flex flex-col items-center px-12 gap-8 lg:px-0">
           <p className="text-sm text-center whitespace-pre-line">
             <span>For partnership inquiries, contact </span>
-            <a href="mailto:partners@gemvise.com" className="text-grey-900 dark:text-grey-50 hover:underline">
-              partners@gemvise.com
-            </a>
+            <a href="mailto:partners@gemvise.ai" className="text-grey-900 dark:text-grey-50 hover:underline">partners@gemvise.ai</a>
           </p>
         </div>
       </section>
