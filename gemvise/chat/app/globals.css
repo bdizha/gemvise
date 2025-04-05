@@ -3,26 +3,34 @@
 @tailwind utilities;
 
 :root {
-  --background: 0 0% 100%;
-  --primary: 222.2 84% 4.9%;
-  --secondary: 215 20.2% 65.1%;
-  --card: 0 0% 98%;
-  --border: 214.3 31.8% 91.4%;
-  --btn-hover: 210 40% 96.1%;
+  --background: #FFFFFF;
+  --button-primary: #000000;
+  --button-primary-hover: #1A1A1A;
+  --button-secondary-hover: rgba(0, 0, 0, 0.05);
+  --button-ghost-hover: rgba(0, 0, 0, 0.05);
+  --toggle-border: rgba(0, 0, 0, 0.1);
+  --text-primary: #000000;
+  --text-secondary: #666666;
+  --ring: rgba(0, 0, 0, 0.3);
 }
 
-.dark {
-  --background: 222.2 84% 4.9%;
-  --primary: 210 40% 98%;
-  --secondary: 215 20.2% 65.1%;
-  --card: 222.2 47.4% 11.2%;
-  --border: 217.2 32.6% 17.5%;
-  --btn-hover: 217.2 32.6% 17.5%;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --button-primary: #FFFFFF;
+    --button-primary-hover: #E5E5E5;
+    --button-secondary-hover: rgba(255, 255, 255, 0.1);
+    --button-ghost-hover: rgba(255, 255, 255, 0.1);
+    --toggle-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #FFFFFF;
+    --text-secondary: #999999;
+    --ring: rgba(255, 255, 255, 0.3);
+  }
 }
 
 body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--primary));
+  color: var(--text-primary);
+  background: var(--background);
   min-height: 100vh;
   overflow-x: hidden;
   font-family: system-ui, -apple-system, sans-serif;
