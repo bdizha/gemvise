@@ -64,8 +64,16 @@ export default function AboutPage() {
                 <div className="mono-tag flex items-center gap-2 text-sm">
                   <span>[</span> <span>Our Mission</span> <span>]</span>
                 </div>
-                <div className="max-w-3xl text-balance text-primary text-4xl leading-[2.25rem] md:text-[5rem] md:leading-[5rem] tracking-tight inline-block py-2 md:from-primary/20 md:to-primary md:bg-clip-text md:text-transparent md:bg-gradient-to-r" style={{ opacity: 1 }}>
-                  Understand the Universe
+                <div className="max-w-3xl text-balance inline-block py-2">
+                  <h1 className="text-[80px] leading-[80px] tracking-[-2px] font-normal mt-16 max-w-[768px]">
+                    <span className="bg-gradient-to-r from-[rgba(255,255,255,0.2)] to-[rgb(255,255,255)] bg-clip-text text-transparent inline-block pb-2 pt-2">
+                      About GemVise
+                    </span>
+                    <br />
+                    <span className="bg-gradient-to-r from-[rgba(255,255,255,0.2)] to-[rgb(255,255,255)] bg-clip-text text-transparent inline-block pb-2 pt-2">
+                      Intelligence Network
+                    </span>
+                  </h1>
                 </div>
               </div>
             </div>

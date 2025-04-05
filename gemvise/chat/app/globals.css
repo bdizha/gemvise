@@ -3,33 +3,72 @@
 @tailwind utilities;
 
 :root {
-  --background: #FFFFFF;
-  --button-primary: #000000;
-  --button-primary-hover: #1A1A1A;
-  --button-secondary-hover: rgba(0, 0, 0, 0.05);
-  --button-ghost-hover: rgba(0, 0, 0, 0.05);
-  --toggle-border: rgba(0, 0, 0, 0.1);
-  --text-primary: #000000;
-  --text-secondary: #666666;
-  --ring: rgba(0, 0, 0, 0.3);
+  --color-grey-50: 243 246 249;  /* #f3f6f9 */
+  --color-grey-100: 249 246 243; /* #f9f6f3 */
+  --color-grey-200: 205 207 211; /* #cdcfd3 */
+  --color-grey-400: 143 148 151; /* #8f9497 */
+  --color-grey-900: 9 6 3;      /* #090603 */
+  
+  --color-jet: var(--color-grey-900);
+  --color-charcoal: var(--color-grey-900);
+  --color-umbra: var(--color-grey-900);
+  --color-ink: var(--color-grey-400);
+  --color-ash: var(--color-grey-400);
+  --color-steel: var(--color-grey-400);
+  --color-fog: var(--color-grey-400);
+  --color-pewter: var(--color-grey-200);
+  --color-dove: var(--color-grey-200);
+  --color-nimbus: var(--color-grey-50);
+  --color-ivory: var(--color-grey-100);
+  --color-white: 0 0% 100%;
+  
+  --color-midnight: 214 58.3% 9.4%;
+  --color-evenfall: 214 16.1% 28%;
+  --color-breeze: 214 48.9% 73.9%;
+  --color-dawn: 37 100% 76%;
+  --color-sunset: 22 100% 51.6%;
+  --color-dusk: 263 70% 50.4%;
+  --color-twilight: 255 92% 76%;
+  
+  --primary: var(--color-grey-900);
+  --primary-hover: var(--color-grey-400);
+  --secondary: var(--color-grey-400);
+  --secondary-hover: var(--color-grey-200);
+  --accent: var(--color-sunset);
+  --accent-hover: var(--color-dawn);
+  --background: var(--color-grey-50);
+  --background-hover: var(--color-grey-100);
+  --foreground: var(--color-grey-900);
+  --foreground-hover: var(--color-grey-400);
+  --card: var(--color-grey-100);
+  --border: var(--color-grey-200);
+  --input: var(--color-grey-50);
+  --scroll-size: 6px;
+  --scroll-track-color: var(--color-grey-50);
+  --scroll-thumb-color: var(--color-grey-200);
+  --radius: 0.5rem
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --button-primary: #FFFFFF;
-    --button-primary-hover: #E5E5E5;
-    --button-secondary-hover: rgba(255, 255, 255, 0.1);
-    --button-ghost-hover: rgba(255, 255, 255, 0.1);
-    --toggle-border: rgba(255, 255, 255, 0.1);
-    --text-primary: #FFFFFF;
-    --text-secondary: #999999;
-    --ring: rgba(255, 255, 255, 0.3);
-  }
+.dark {
+  --primary: var(--color-grey-50);
+  --primary-hover: var(--color-grey-100);
+  --secondary: var(--color-grey-400);
+  --secondary-hover: var(--color-grey-200);
+  --accent: var(--color-sunset);
+  --accent-hover: var(--color-dawn);
+  --background: var(--color-grey-900);
+  --background-hover: var(--color-grey-400);
+  --foreground: var(--color-grey-200);
+  --foreground-hover: var(--color-grey-50);
+  --card: var(--color-grey-900);
+  --border: var(--color-grey-400);
+  --input: var(--color-grey-400);
+  --scroll-track-color: var(--color-grey-900);
+  --scroll-thumb-color: var(--color-grey-400)
 }
 
 body {
-  color: var(--text-primary);
+  color: var(--foreground);
   background: var(--background);
   min-height: 100vh;
   overflow-x: hidden;
