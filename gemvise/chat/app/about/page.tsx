@@ -28,8 +28,8 @@ export default function AboutPage() {
           backgroundRepeat: 'repeat'
         }}
       >
-        <div className="relative w-full h-full">
-          <div className="mx-auto w-full px-6 xl:max-w-7xl flex h-full flex-col">
+        <div className="relative w-full h-full flex flex-col justify-between">
+          <div className="mx-auto w-full px-6 xl:max-w-7xl flex-1 flex flex-col">
             {/* Gradient Background */}
             <div className="pointer-events-none absolute inset-0" style={{ opacity: 1 }}>
               <div 
@@ -59,21 +59,56 @@ export default function AboutPage() {
             </div>
 
             {/* Content */}
-            <div className="relative w-full flex grow items-center justify-start z-20">
-              <div className="space-y-16">
+            <div className="relative w-full flex-1 flex items-center justify-start z-20">
+              <div className="flex flex-col items-center gap-8 max-w-[900px] px-12 lg:px-0">
                 <div className="mono-tag flex items-center gap-2 text-sm">
                   <span>[</span> <span>Our Mission</span> <span>]</span>
                 </div>
                 <div className="max-w-3xl text-balance inline-block py-2">
-                  <h1 className="text-[80px] leading-[80px] tracking-[-2px] font-normal mt-16 max-w-[768px]">
+                  <h1 className="text-[80px] leading-[80px] tracking-[-2px] font-normal max-w-[768px]">
                     <span className="bg-gradient-to-r from-[rgba(255,255,255,0.2)] to-[rgb(255,255,255)] bg-clip-text text-transparent inline-block pb-2 pt-2">
-                      About GemVise
-                    </span>
-                    <br />
-                    <span className="bg-gradient-to-r from-[rgba(255,255,255,0.2)] to-[rgb(255,255,255)] bg-clip-text text-transparent inline-block pb-2 pt-2">
-                      Intelligence Network
+                    Spark the imagination
                     </span>
                   </h1>
+                </div>
+              </div>
+              <div className="flex flex-col items-center gap-8 max-w-[900px] px-12 lg:px-0">
+                <div className="w-full aspect-video bg-gradient-to-r from-grey-50 to-grey-100 dark:from-grey-900 dark:to-grey-800 flex items-center justify-center">
+                  <h1 className="text-4xl font-bold text-left"></h1>
+                </div>
+                <div className="flex flex-col items-center gap-8">
+                  <p className="text-md/5 text-left whitespace-pre-line lg:px-24">
+                    GemVise empowers individuals to unlock their quantum potential through AI-driven personal growth and collective intelligence networking.
+                    Join millions in discovering your unique gem profile and connecting with others through quantum entanglement.
+                  </p>
+                </div>
+                <div className="flex flex-col items-center gap-8 lg:px-12">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                    <div className="flex flex-col gap-4 lg:p-6">
+                      <h5 className="text-lg font-semibold">Quantum Intelligence</h5>
+                      <p className="text-md/5 opacity-80">
+                        Experience our revolutionary system that maps your cognitive patterns into quantum states, creating a unique intelligence profile that evolves with you.
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-4 lg:p-6">
+                      <h5 className="text-lg font-semibold">Gem Coherence</h5>
+                      <p className="text-md/5 opacity-80">
+                        Connect with others through quantum entanglement, fostering deep understanding and growth through shared experiences and collective wisdom.
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-4 lg:p-6">
+                      <h5 className="text-lg font-semibold">Adaptive Growth</h5>
+                      <p className="text-md/5 opacity-80">
+                        Receive personalized insights and recommendations powered by our quantum AI, helping you navigate your personal development journey.
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-4 lg:p-6">
+                      <h5 className="text-lg font-semibold">Global Network</h5>
+                      <p className="text-md/5 opacity-80">
+                        Join a worldwide community of growth-minded individuals, sharing knowledge and supporting each other's quantum evolution.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -204,6 +239,46 @@ export default function AboutPage() {
               </ul>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="w-full flex flex-col items-center">
+        <div className="max-w-[900px] flex flex-col items-center px-12 gap-8 lg:px-0">
+          <h3 className="text-xl text-center whitespace-pre-line">Join Our Quantum Vision</h3>
+          <div className="flex flex-col items-center md:px-24">
+            <p className="text-md whitespace-pre-line text-center">
+              Our team combines expertise in quantum mechanics, artificial intelligence, and human development to create transformative experiences. Join us in shaping the future of personal growth through quantum intelligence.
+            </p>
+          </div>
+          <div className="flex flex-col items-center">
+            <a href="/careers" className="bg-gradient-to-r from-grey-400 to-grey-900 text-white px-8 py-3 rounded-md hover:opacity-90 transition-opacity">
+              View Open Positions
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Location Section */}
+      <section className="w-full bg-gradient-to-r from-grey-50 to-grey-100 dark:from-grey-900 dark:to-grey-800">
+        <div className="w-full flex flex-col items-center">
+          <div className="max-w-[900px] flex flex-col items-center px-24 gap-8 mt-32 mb-20 lg:px-0">
+            <h3 className="text-4xl text-center align-left w-full whitespace-pre-line">
+              Based in Silicon Valley, with quantum entanglement reaching globally.
+            </h3>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Information Section */}
+      <section className="w-full flex flex-col items-center mt-10 mb-40">
+        <div className="max-w-[900px] flex flex-col items-center px-12 gap-8 lg:px-0">
+          <p className="text-sm text-center whitespace-pre-line">
+            <span>For partnership inquiries, contact </span>
+            <a href="mailto:partners@gemvise.com" className="text-grey-900 dark:text-grey-50 hover:underline">
+              partners@gemvise.com
+            </a>
+          </p>
         </div>
       </section>
     </div>
