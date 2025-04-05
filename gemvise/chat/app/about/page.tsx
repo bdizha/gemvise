@@ -19,7 +19,15 @@ export default function AboutPage() {
   return (
     <div>
       {/* Hero Section */}
-      <div className="relative h-svh w-full border-b border-border pb-px overflow-hidden md:overflow-x-hidden">
+      <div 
+        className="relative h-svh w-full border-b border-border pb-px overflow-hidden md:overflow-x-hidden"
+        style={{
+          backgroundImage: "url('/gradients/GV-Gradient-03.png')",
+          backgroundSize: '100% 100%',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'repeat'
+        }}
+      >
         <div className="relative w-full h-full">
           <div className="mx-auto w-full px-6 xl:max-w-7xl flex h-full flex-col">
             {/* Gradient Background */}
@@ -27,25 +35,25 @@ export default function AboutPage() {
               <div 
                 className="pointer-events-none absolute left-1/2 top-[calc(50%-1px)] z-0 h-[120vw] w-[120vw] -translate-x-1/2 -translate-y-1/2 rounded-full"
                 style={{
-                  background: "conic-gradient(from 90deg at 55% 50%, rgb(248, 247, 245) 0deg, rgb(156, 184, 221) 4deg, rgba(81, 100, 132, 0.9) 8deg, rgba(81, 100, 132, 0.7) 10deg, rgba(81, 100, 132, 0.5) 12deg, rgba(81, 100, 132, 0.3) 18deg, rgba(81, 100, 132, 0.1) 24deg, rgba(6, 16, 43, 0.05) 45deg, rgba(6, 16, 43, 0) 90deg, rgba(255, 255, 255, 0) 360deg)"
+                  background: "conic-gradient(from 90deg at 55% 50%, #f9f6f3 0deg, #f3f6f9 4deg, rgba(143, 148, 151, 0.9) 8deg, rgba(143, 148, 151, 0.7) 10deg, rgba(205, 207, 211, 0.5) 12deg, rgba(205, 207, 211, 0.3) 18deg, rgba(143, 148, 151, 0.1) 24deg, rgba(9, 6, 3, 0.05) 45deg, rgba(9, 6, 3, 0) 90deg, rgba(249, 246, 243, 0) 360deg)"
                 }}
               />
               <div 
                 className="pointer-events-none absolute left-1/2 top-[calc(50%-1px)] z-0 h-[120vw] w-[120vw] -translate-x-1/2 -translate-y-1/2 rounded-full blur-lg [mask-image:radial-gradient(circle_at_60%_50%,transparent_0%,rgba(255,255,255,1)_20%)]"
                 style={{
-                  background: "conic-gradient(from 90deg at 55% 50%, rgb(248, 247, 245) 0deg, rgb(156, 184, 221) 4deg, rgba(81, 100, 132, 0.9) 8deg, rgba(81, 100, 132, 0.7) 10deg, rgba(81, 100, 132, 0.5) 12deg, rgba(81, 100, 132, 0.3) 18deg, rgba(81, 100, 132, 0.1) 24deg, rgba(6, 16, 43, 0.05) 45deg, rgba(6, 16, 43, 0) 90deg, rgba(255, 255, 255, 0) 360deg)"
+                  background: "conic-gradient(from 90deg at 55% 50%, #f9f6f3 0deg, #f3f6f9 4deg, rgba(143, 148, 151, 0.9) 8deg, rgba(143, 148, 151, 0.7) 10deg, rgba(205, 207, 211, 0.5) 12deg, rgba(205, 207, 211, 0.3) 18deg, rgba(143, 148, 151, 0.1) 24deg, rgba(9, 6, 3, 0.05) 45deg, rgba(9, 6, 3, 0) 90deg, rgba(249, 246, 243, 0) 360deg)"
                 }}
               />
               <div 
                 className="pointer-events-none absolute left-1/2 top-[calc(50%-1px)] z-0 h-[120vw] w-[120vw] -translate-x-1/2 -translate-y-1/2 rounded-full -scale-y-100"
                 style={{
-                  background: "conic-gradient(from 90deg at 55% 50%, rgb(248, 247, 245) 0deg, rgb(156, 184, 221) 4deg, rgba(81, 100, 132, 0.9) 8deg, rgba(81, 100, 132, 0.7) 10deg, rgba(81, 100, 132, 0.5) 12deg, rgba(81, 100, 132, 0.3) 18deg, rgba(81, 100, 132, 0.1) 24deg, rgba(6, 16, 43, 0.05) 45deg, rgba(6, 16, 43, 0) 90deg, rgba(255, 255, 255, 0) 360deg)"
+                  background: "conic-gradient(from 90deg at 55% 50%, #f9f6f3 0deg, #f3f6f9 4deg, rgba(143, 148, 151, 0.9) 8deg, rgba(143, 148, 151, 0.7) 10deg, rgba(205, 207, 211, 0.5) 12deg, rgba(205, 207, 211, 0.3) 18deg, rgba(143, 148, 151, 0.1) 24deg, rgba(9, 6, 3, 0.05) 45deg, rgba(9, 6, 3, 0) 90deg, rgba(249, 246, 243, 0) 360deg)"
                 }}
               />
               <div 
                 className="pointer-events-none absolute left-1/2 top-[calc(50%-1px)] z-0 h-[120vw] w-[120vw] -translate-x-1/2 -translate-y-1/2 rounded-full blur-lg [mask-image:radial-gradient(circle_at_60%_50%,transparent_0%,rgba(255,255,255,1)_20%)] -scale-y-100"
                 style={{
-                  background: "conic-gradient(from 90deg at 55% 50%, rgb(248, 247, 245) 0deg, rgb(156, 184, 221) 4deg, rgba(81, 100, 132, 0.9) 8deg, rgba(81, 100, 132, 0.7) 10deg, rgba(81, 100, 132, 0.5) 12deg, rgba(81, 100, 132, 0.3) 18deg, rgba(81, 100, 132, 0.1) 24deg, rgba(6, 16, 43, 0.05) 45deg, rgba(6, 16, 43, 0) 90deg, rgba(255, 255, 255, 0) 360deg)"
+                  background: "conic-gradient(from 90deg at 55% 50%, #f9f6f3 0deg, #f3f6f9 4deg, rgba(143, 148, 151, 0.9) 8deg, rgba(143, 148, 151, 0.7) 10deg, rgba(205, 207, 211, 0.5) 12deg, rgba(205, 207, 211, 0.3) 18deg, rgba(143, 148, 151, 0.1) 24deg, rgba(9, 6, 3, 0.05) 45deg, rgba(9, 6, 3, 0) 90deg, rgba(249, 246, 243, 0) 360deg)"
                 }}
               />
             </div>
