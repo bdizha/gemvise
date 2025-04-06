@@ -19,7 +19,7 @@ const legalLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative w-full mt-auto">
+    <footer className="relative w-full mt-auto font-geist">
       <div className="relative w-full overflow-hidden">
         {/* Modern conic gradient effect */}
         <div className="footer-gradient-container">
@@ -40,7 +40,7 @@ export default function Footer() {
                       <Link
                         key={link.name}
                         href={link.href}
-                        className="text-sm bg-clip-text text-transparent bg-gradient-to-r from-stone-700 to-stone-900 hover:from-stone-900 hover:to-stone-950 dark:from-stone-300 dark:to-stone-100 dark:hover:from-stone-100 dark:hover:to-white transition-all hover:underline"
+                        className="text-sm font-medium bg-clip-text text-transparent bg-gradient-to-r from-stone-700 to-stone-900 hover:from-stone-900 hover:to-stone-950 dark:from-stone-300 dark:to-stone-100 dark:hover:from-stone-100 dark:hover:to-white transition-all hover:underline"
                       >
                         {link.name}
                       </Link>
@@ -53,7 +53,7 @@ export default function Footer() {
                       <Link
                         key={link.name}
                         href={link.href}
-                        className="text-sm bg-clip-text text-transparent bg-gradient-to-r from-stone-600 to-stone-800 hover:from-stone-800 hover:to-stone-900 dark:from-stone-400 dark:to-stone-200 dark:hover:from-stone-200 dark:hover:to-white transition-all hover:underline"
+                        className="text-sm font-light bg-clip-text text-transparent bg-gradient-to-r from-stone-600 to-stone-800 hover:from-stone-800 hover:to-stone-900 dark:from-stone-400 dark:to-stone-200 dark:hover:from-stone-200 dark:hover:to-white transition-all hover:underline"
                       >
                         {link.name}
                       </Link>
@@ -69,7 +69,7 @@ export default function Footer() {
                     </svg>
                   </div>
                   <div className="flex flex-col items-end gap-6 sm:gap-8 lg:gap-12 md:flex-row">
-                    <div className="max-w-lg text-stone-700 dark:text-stone-300">
+                    <div className="max-w-lg text-stone-700 dark:text-stone-300 font-light tracking-wide">
                       GemVise: Crafting the future of AI character interaction. Bringing imagination to life through advanced technology, community collaboration, and creator empowerment.
                     </div>
                   </div>

@@ -42,8 +42,8 @@
     from 90deg at 35% -1% in lab, 
     rgb(255, 255, 255) 7.2deg, 
     rgb(99, 102, 241) 14.4deg, /* Primary color - indigo/purple */
-    rgba(17, 17, 17, 0) 36deg, 
-    rgba(17, 17, 17, 0) 342deg, 
+    rgba(17, 17, 17, 0.05) 36deg, /* Slightly visible */
+    rgba(17, 17, 17, 0.05) 342deg, /* Slightly visible */
     rgb(255, 255, 255) 360deg
   );
 }
@@ -53,33 +53,33 @@
   background: conic-gradient(
     from -90deg at 65% -1% in lab, 
     rgb(255, 255, 255) 0deg, 
-    rgba(17, 17, 17, 0) 18deg, 
-    rgba(17, 17, 17, 0) 324deg, 
+    rgba(17, 17, 17, 0.05) 18deg, /* Slightly visible */
+    rgba(17, 17, 17, 0.05) 324deg, /* Slightly visible */
     rgb(244, 63, 94) 345.6deg, /* Accent color - pink */
     rgb(255, 255, 255) 352.8deg
   );
 }
 
-/* Dark theme - conic gradients */
+/* Dark theme - conic gradients with very dark colors */
 .dark .footer-gradient-left {
   background: conic-gradient(
     from 90deg at 35% -1% in lab, 
-    rgb(30, 30, 30) 7.2deg, 
-    rgb(129, 140, 248) 14.4deg, /* Dark mode primary color - lighter indigo/purple */
-    rgba(17, 17, 17, 0) 36deg, 
-    rgba(17, 17, 17, 0) 342deg, 
-    rgb(30, 30, 30) 360deg
+    #030609 7.2deg, /* Very dark blue-black */
+    #818cf8 14.4deg, /* Dark theme primary - lighter indigo */
+    rgba(3, 6, 9, 0.2) 36deg, /* Slightly visible dark */
+    rgba(3, 6, 9, 0.2) 342deg, /* Slightly visible dark */
+    #030609 360deg
   );
 }
 
 .dark .footer-gradient-right {
   background: conic-gradient(
     from -90deg at 65% -1% in lab, 
-    rgb(30, 30, 30) 0deg, 
-    rgba(17, 17, 17, 0) 18deg, 
-    rgba(17, 17, 17, 0) 324deg, 
-    rgb(251, 113, 133) 345.6deg, /* Dark mode accent color - lighter pink */
-    rgb(30, 30, 30) 352.8deg
+    #030609 0deg, /* Very dark blue-black */
+    rgba(3, 6, 9, 0.2) 18deg, /* Slightly visible dark */
+    rgba(3, 6, 9, 0.2) 324deg, /* Slightly visible dark */
+    #fb7185 345.6deg, /* Dark theme accent - lighter pink */
+    #030609 352.8deg
   );
 }
 
@@ -98,9 +98,9 @@
 }
 
 .footer-gradient-image {
-  background-image: url('/gradients/named/GV-Gradient-Dark-Light.png');
+  background-image: url('/gradients/named/GV-Gradient-Pink-Purple-Pink.png');
 }
 
 .dark .footer-gradient-image {
-  background-image: url('/gradients/named/GV-Gradient-Light-Dark.png');
+  background-image: url('/gradients/named/GV-Gradient-Purple-Pink-Purple.png');
 }
