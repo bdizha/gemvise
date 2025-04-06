@@ -18,13 +18,13 @@ const ValuesGrid = ({ values }: { values: Array<{ title: string; description: st
 );
 
 const Section = (props: SectionProps) => {
-  const { variant = 'default' } = props;
+  const { variant = 'default', theme = 'dark', isHero = false } = props;
 
   switch (variant) {
     case 'gradient':
-      return <GradientSection {...props} />;
+      return <GradientSection {...props} isHero={isHero} />;
     case 'values':
-      if ('values' in props && props.values) {
+      if (props.values) {
         return (
           <DefaultSection {...props}>
             <ValuesGrid values={props.values} />

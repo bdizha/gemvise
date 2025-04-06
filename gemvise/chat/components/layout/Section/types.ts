@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { GradientTheme } from './GradientSection';
 
 export type SectionVariant = 'default' | 'gradient' | 'values';
 
@@ -20,4 +21,14 @@ interface ValuesSectionProps extends BaseSectionProps {
   values: Array<{ title: string; description: string }>;
 }
 
-export type SectionProps = DefaultSectionProps | ValuesSectionProps;
+export interface SectionProps {
+  variant?: SectionVariant;
+  title?: string;
+  description?: string;
+  tag?: string;
+  className?: string;
+  children?: ReactNode;
+  values?: Array<{ title: string; description: string }>;
+  theme?: GradientTheme;
+  isHero?: boolean;
+}

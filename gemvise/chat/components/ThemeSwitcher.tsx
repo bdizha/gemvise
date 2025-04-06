@@ -10,12 +10,22 @@ export default function ThemeSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      applyTheme(savedTheme);
-    }
-  }, []);
+    // Initialize theme from localStorage or system preference
+    const savedTheme = localStorage.getItem('theme') as Theme || 'system';
+    setTheme(savedTheme);
+    applyTheme(savedTheme);
+
+    // Add event listener for system preference changes
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = () => {
+      if (theme === 'system') {
+        applyTheme('system');
+      }
+    };
+    
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, [theme]);
 
   const applyTheme = (newTheme: Theme) => {
     const root = document.documentElement;
@@ -25,8 +35,10 @@ export default function ThemeSwitcher() {
 
     if (isDark) {
       root.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       root.classList.remove('dark');
+      document.documentElement.setAttribute('data-theme', 'light');
     }
 
     localStorage.setItem('theme', newTheme);
@@ -44,6 +56,7 @@ export default function ThemeSwitcher() {
         onClick={() => setIsOpen(!isOpen)}
         className="items-center justify-center gap-2 whitespace-nowrap text-sm font-medium leading-[normal] cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:-mx-0.5 text-primary hover:bg-button-ghost-hover h-10 w-10 rounded-full hidden sm:flex"
         type="button"
+        aria-label="Toggle theme"
       >
         <Image 
           src={theme === 'dark' ? '/moon.svg' : theme === 'light' ? '/sun.svg' : '/system.svg'} 
