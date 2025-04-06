@@ -8,6 +8,10 @@ const config: Config = {
   ],
   darkMode: 'class',
   theme: {
+    fontFamily: {
+      sans: ['var(--font-geist-sans)'],
+      mono: ['var(--font-geist-mono)'],
+    },
     extend: {
       colors: {
         background: 'var(--background)',

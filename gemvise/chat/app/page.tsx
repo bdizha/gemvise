@@ -6,38 +6,7 @@ import Link from 'next/link';
 import Section from '@/components/layout/Section';
 import type { SectionVariant } from '@/components/layout/Section/types';
 import LoginModal from '@/components/auth/LoginModal';
-import GemList from '@/components/gems/GemList';
-
-const featuredGems = [
-  {
-    id: '1',
-    name: 'Sherlock Holmes',
-    expertise: ['Detective', 'Logic', 'Observation'],
-    imageUrl: '/gems/sherlock.jpg',
-    description: 'The world\'s greatest detective, ready to solve mysteries and share deductive reasoning techniques.'
-  },
-  {
-    id: '2',
-    name: 'Jane Austen',
-    expertise: ['Literature', 'Social Commentary', 'Romance'],
-    imageUrl: '/gems/austen.jpg',
-    description: 'Witty and insightful author exploring relationships, society, and human nature.'
-  },
-  {
-    id: '3',
-    name: 'Leonardo da Vinci',
-    expertise: ['Art', 'Engineering', 'Innovation'],
-    imageUrl: '/gems/davinci.jpg',
-    description: 'Renaissance polymath sharing insights on creativity, innovation, and the intersection of art and science.'
-  },
-  {
-    id: '4',
-    name: 'Ada Lovelace',
-    expertise: ['Computing', 'Mathematics', 'Vision'],
-    imageUrl: '/gems/ada.jpg',
-    description: 'The world\'s first programmer, exploring the future of computing and human-machine collaboration.'
-  }
-];
+import GemList, { featuredGems } from '@/components/gems/GemList';
 
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -61,7 +30,7 @@ export default function Home() {
         <div className="text-center space-y-8">
           <div className="flex justify-center mb-8">
             <Image 
-              src="/logos/GV-NAME-WOT.png"
+              src="/logos/GV-NAME-GOT-08.png"
               alt="GemVise Logo"
               width={320}
               height={120}

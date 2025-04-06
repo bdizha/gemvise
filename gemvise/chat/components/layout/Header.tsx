@@ -12,7 +12,7 @@ export default function Header() {
       <div className="absolute flex flex-row items-center start-4">
         <Link href="/" className="ms-2 me-[0.5] rounded-lg focus:outline-none focus-visible:ring-1 focus-visible:ring-ring">
           <Image 
-            src={theme === 'light' ? '/icons/GV-LOGO-02-BOT.png' : '/icons/GV-LOGO-02-WOT.png'} 
+            src={theme === 'light' ? '/icons/GV-LOGO-02-BOT.png' : '/icons/GV-LOGO-02-WOT-GEM.png'} 
             alt="GemVise" 
             width={32} 
             height={32} 

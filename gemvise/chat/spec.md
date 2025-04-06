@@ -1,5 +1,32 @@
 # GemVise Specification
 
+## Technical Configuration
+
+### Typography
+- Primary Font: Geist Sans (`var(--font-geist-sans)`)
+- Monospace Font: Geist Mono (`var(--font-geist-mono)`)
+
+### Theme Configuration
+- Dark Mode: Enabled via 'class' strategy
+- Responsive Design: Custom breakpoint '@sm' at 640px
+
+### Color System
+- Background: `var(--background)`
+- Text:
+  - Primary: `var(--text-primary)`
+  - Secondary: `var(--text-secondary)`
+- Buttons:
+  - Primary: `var(--button-primary)`
+  - Primary Hover: `var(--button-primary-hover)`
+  - Secondary Hover: `var(--button-secondary-hover)`
+  - Ghost Hover: `var(--button-ghost-hover)`
+- UI Elements:
+  - Toggle Border: `var(--toggle-border)`
+  - Ring: `var(--ring)`
+  - Popover: `var(--background)`
+  - Popover Border: `var(--toggle-border)`
+  - Card Hover: `var(--button-ghost-hover)`
+
 ## UI Design References
 - Microsoft Copilot's squircle cards and gradient overlays
 - Character.ai's conversational interface and gem profiles
@@ -100,8 +127,6 @@
    ```
 
 ### Typography
-- Headers: Inter (var(--font-inter))
-- Monospace: JetBrains Mono (var(--font-mono))
 - Body: Inter with optimized line height
 
 ### Animations
