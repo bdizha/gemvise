@@ -1,13 +1,9 @@
-import { Inter } from 'next/font/google';
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
 import './globals.css';
 import Providers from './providers';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
 
 export const metadata = {
   title: 'GemVise - Unleash Your Potential',
@@ -16,14 +12,14 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className="min-h-screen overflow-x-hidden bg-background font-sans text-primary antialiased">
         <Providers>
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
+          <Header />
+          <div className="relative">
+            {children}
           </div>
+          <Footer />
         </Providers>
       </body>
     </html>

@@ -1,14 +1,24 @@
 'use client';
 
+import { researchPapers } from '@/data/research-papers';
+import ResearchCard from '@/components/research/ResearchCard';
+import Section from '@/components/layout/Section';
+
 export default function ResearchPage() {
   return (
-    <div className="min-h-screen bg-stone-150 dark:bg-midnight-850 py-24">
-      <div className="max-w-7xl mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-8">GemLabs Research</h1>
-        <p className="text-lg text-stone-600 dark:text-stone-400">
-          Exploring the frontiers of AI and human interaction.
-        </p>
-      </div>
-    </div>
+    <main className="min-h-screen bg-white dark:bg-black">
+      <Section
+        variant="gradient"
+        tag="GemLabs"
+        title="Research & Engineering"
+        description="Explore our technical publications on AI architecture, high-performance computing, and the foundations of the GemVerse."
+      >
+        <div className="mt-16 grid gap-8 md:grid-cols-2">
+          {researchPapers.map((paper) => (
+            <ResearchCard key={paper.id} paper={paper} />
+          ))}
+        </div>
+      </Section>
+    </main>
   );
 }
