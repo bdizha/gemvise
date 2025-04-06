@@ -3,35 +3,37 @@
 import { useState } from 'react';
 import LoginModal from '../auth/LoginModal';
 import GemList from '../gems/GemList';
+import Section from '../layout/Section';
+import type { SectionVariant } from '../layout/Section/types';
 
 const featuredGems = [
   {
     id: '1',
-    name: 'Marilyn Monroe',
-    expertise: ['Acting', 'Modeling', 'Singing'],
-    imageUrl: '/gems/marilyn.jpg',
-    description: 'An iconic figure in popular culture, known for her wit, charm, and enduring influence on entertainment and fashion.'
+    name: 'Sherlock Holmes',
+    expertise: ['Detective', 'Logic', 'Observation'],
+    imageUrl: '/gems/sherlock.jpg',
+    description: 'The world\'s greatest detective, ready to solve mysteries and share deductive reasoning techniques.'
   },
   {
     id: '2',
-    name: 'Albert Einstein',
-    expertise: ['Physics', 'Mathematics', 'Philosophy'],
-    imageUrl: '/gems/einstein.jpg',
-    description: 'Theoretical physicist who developed the theory of relativity, one of the pillars of modern physics.'
+    name: 'Jane Austen',
+    expertise: ['Literature', 'Social Commentary', 'Romance'],
+    imageUrl: '/gems/austen.jpg',
+    description: 'Witty and insightful author exploring relationships, society, and human nature.'
   },
   {
     id: '3',
     name: 'Leonardo da Vinci',
-    expertise: ['Art', 'Engineering', 'Science'],
+    expertise: ['Art', 'Engineering', 'Innovation'],
     imageUrl: '/gems/davinci.jpg',
-    description: 'Renaissance polymath whose areas of interest included invention, drawing, painting, sculpture, architecture, science, music, mathematics, engineering, literature, anatomy, geology, astronomy, botany, paleontology, and cartography.'
+    description: 'Renaissance polymath sharing insights on creativity, innovation, and the intersection of art and science.'
   },
   {
     id: '4',
-    name: 'Marie Curie',
-    expertise: ['Physics', 'Chemistry', 'Research'],
-    imageUrl: '/gems/curie.jpg',
-    description: 'Pioneer in research on radioactivity, the first woman to win a Nobel Prize, and the only person to win the Nobel Prize in two scientific fields.'
+    name: 'Ada Lovelace',
+    expertise: ['Computing', 'Mathematics', 'Vision'],
+    imageUrl: '/gems/ada.jpg',
+    description: 'The world\'s first programmer, exploring the future of computing and human-machine collaboration.'
   }
 ];
 
@@ -47,66 +49,114 @@ export default function HomePage() {
 
   return (
     <main className="relative min-h-screen w-full bg-stone-150 dark:bg-midnight-850">
-      {/* Background Gradient */}
-      <div className="absolute size-full">
-        <div className="fixed inset-0 overflow-hidden">
-          <div className="absolute size-full bg-stone-150 dark:bg-midnight-850 dark:bg-none" />
-          <div className="absolute size-full bg-gradient-discover-light dark:bg-gradient-discover-dark" />
-        </div>
-      </div>
-
       {/* Hero Section */}
-      <div className="relative h-screen w-full border-b border-border pb-px overflow-hidden">
-        <div className="relative w-full h-full">
-          <div className="mx-auto w-full px-6 xl:max-w-7xl flex h-full flex-col">
-            <div className="relative w-full flex grow items-center justify-start z-20">
-              <div className="space-y-16">
-                <div className="mono-tag flex items-center gap-2 text-sm">
-                  <span>[</span> <span>GemVise Intelligence Network</span> <span>]</span>
-                </div>
-                <div className="w-full h-[20svh] lg:h-[160px]">
-                  <div className="absolute inset-x-0 flex justify-center items-center z-10">
-                    <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl">
-                      <span className="gradient-text">Connect with</span>
-                      <br />
-                      <span className="gradient-text">Timeless Gems</span>
-                    </h1>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative flex items-end justify-between gap-6 py-10 z-10 lg:min-h-[160px]">
-              <div>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" data-slot="icon" className="size-6 my-2">
-                  <path fillRule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v16.19l6.22-6.22a.75.75 0 1 1 1.06 1.06l-7.5 7.5a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 1 1 1.06-1.06l6.22 6.22V3a.75.75 0 0 1 .75-.75Z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="flex flex-col items-end gap-6 sm:gap-8 lg:gap-12 md:flex-row">
-                <div className="max-w-lg">
-                  Engage with history's most brilliant minds! Draw inspiration from their wisdom, explore their revolutionary ideas, and discover timeless insights through enlightening conversations. 💎✨
-                </div>
-              </div>
-            </div>
+      <Section
+        variant={"gradient" as SectionVariant}
+        className="min-h-screen flex items-center justify-center"
+      >
+        <div className="text-center space-y-8">
+          <h1 className="text-5xl md:text-7xl font-bold">
+            Create. Interact.
+            <br />
+            <span className="gradient-text">Own Your Imagination.</span>
+          </h1>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto text-grey-600 dark:text-grey-400">
+            Dive into a universe of AI characters, craft your own unique personalities, connect with a vibrant community, and get rewarded for your creativity on the blockchain.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 pt-8">
+            <a href="/explore" className="bg-button-primary text-background hover:bg-button-primary-hover px-8 py-3 rounded-md">
+              Explore Creations
+            </a>
+            <a href="/create" className="bg-button-secondary text-primary hover:bg-button-secondary-hover px-8 py-3 rounded-md">
+              Start Creating
+            </a>
+            <a href="/rewards" className="text-primary hover:text-primary-hover px-8 py-3">
+              Learn About Creator Rewards
+            </a>
           </div>
         </div>
-      </div>
+      </Section>
+
+      {/* What is GemVise Section */}
+      <Section
+        variant={"default" as SectionVariant}
+        tag="What is GemVise?"
+        title="Where Imagination Meets Interaction & Ownership"
+        description="GemVise empowers you to bring any character imaginable to life through advanced AI. Engage in limitless conversations, co-create intricate stories, learn new things, or simply have fun. But GemVise is more than just chat – it's a platform built to recognize and reward the creators who fuel its universe."
+      >
+        {null}
+      </Section>
+
+      {/* Creation Section */}
+      <Section
+        variant={"gradient" as SectionVariant}
+        tag="Limitless Creation"
+        title="Create Your Perfect Character"
+        description="Not vibing with existing characters? Design your own! Customize everything from their voice and conversation style to their personality and expertise. Shape unique AI companions that reflect your vision and imagination."
+      >
+        <div className="flex justify-center mt-8">
+          <a href="/create" className="bg-button-primary text-background hover:bg-button-primary-hover px-8 py-3 rounded-md">
+            Start Creating
+          </a>
+        </div>
+      </Section>
+
+      {/* Blockchain Section */}
+      <Section
+        variant={"default" as SectionVariant}
+        tag="Creator Economy"
+        title="Get Rewarded for Your Genius"
+        description="We believe creators are the heart of GemVise. That's why we're integrating blockchain technology to ensure transparent, fair, and direct rewards for the creators whose characters captivate and engage our community. Build popular characters, contribute to the ecosystem, and earn real value for your imagination."
+      >
+        <div className="flex justify-center mt-8">
+          <a href="/rewards" className="bg-button-primary text-background hover:bg-button-primary-hover px-8 py-3 rounded-md">
+            Learn How Creator Rewards Work
+          </a>
+        </div>
+      </Section>
+
+      {/* GemVerse Section */}
+      <Section
+        variant={"gradient" as SectionVariant}
+        tag="Future Vision"
+        title="The Next Dimension: The GemVerse Awaits"
+        description="Imagine stepping into a vibrant virtual world alongside the characters you've created and love. Our vision extends beyond chat to the GemVerse – an immersive space where your AI companions come to life in 3D. Stay tuned as we build this next frontier of interaction."
+      >
+        {null}
+      </Section>
+
+      {/* Community Section */}
+      <Section
+        variant={"default" as SectionVariant}
+        tag="Join Us"
+        title="Connect, Collaborate, Co-Create"
+        description="GemVise is home to a passionate community of creators, storytellers, and explorers. Share your characters, discover new favourites, find collaborators, and build upon the collective imagination."
+      >
+        <div className="flex flex-wrap justify-center gap-4 mt-8">
+          <a href="https://discord.gg/gemvise" className="bg-button-secondary text-primary hover:bg-button-secondary-hover px-8 py-3 rounded-md">
+            Join our Discord
+          </a>
+          <a href="https://twitter.com/gemvise" className="bg-button-secondary text-primary hover:bg-button-secondary-hover px-8 py-3 rounded-md">
+            Follow us on X/Twitter
+          </a>
+        </div>
+      </Section>
 
       {/* Featured Gems Section */}
-      <div className="relative w-full bg-background">
-        <div className="mx-auto w-full px-6 xl:max-w-7xl py-24">
-          <section className="sm:pb-20 pb-16" aria-label="Featured Gems">
-            <h2 className="text-center text-2xl pb-9">Featured Gems</h2>
-            <GemList gems={featuredGems} onSelect={handleGemSelect} />
-          </section>
+      <Section
+        variant={"values" as SectionVariant}
+        tag="Featured Creations"
+        title="Meet Some of Our Stars"
+        description="Explore these popular characters and see what's possible with GemVise."
+      >
+        <div className="mt-12">
+          <GemList gems={featuredGems} onSelect={handleGemSelect} />
         </div>
-      </div>
+      </Section>
 
-      <LoginModal
-        isOpen={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
-        onAuthenticate={(authenticated) => setIsAuthenticated(authenticated)}
-      />
+      {showLoginModal && (
+        <LoginModal onClose={() => setShowLoginModal(false)} onLogin={() => setIsAuthenticated(true)} />
+      )}
     </main>
   );
 }

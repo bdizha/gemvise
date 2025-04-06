@@ -47,6 +47,10 @@
   --scroll-track-color: var(--color-grey-50);
   --scroll-thumb-color: var(--color-grey-200);
   --radius: 0.5rem
+  
+  /* Gradient text colors */
+  --text-gradient-start: rgba(0, 0, 0, 0.2);
+  --text-gradient-end: rgb(0, 0, 0);
 }
 
 .dark {
@@ -65,6 +69,23 @@
   --input: var(--color-grey-400);
   --scroll-track-color: var(--color-grey-900);
   --scroll-thumb-color: var(--color-grey-400)
+  
+  --text-gradient-start: rgba(255, 255, 255, 0.2);
+  --text-gradient-end: rgb(255, 255, 255);
+}
+
+@layer components {
+  .mono-tag {
+    @apply font-mono text-xs uppercase tracking-widest opacity-60;
+  }
+
+  .gradient-text {
+    @apply inline-block text-[80px] leading-[80px] tracking-[-2px] max-w-[768px] py-2;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, var(--text-gradient-start), var(--text-gradient-end));
+  }
 }
 
 body {
@@ -76,6 +97,5 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.gradient-text {
-  @apply bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent;
+@media (min-width: 80rem) {
 }
