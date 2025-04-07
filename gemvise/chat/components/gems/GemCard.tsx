@@ -18,10 +18,10 @@ const GemCard = ({ id, name, description, imageUrl, expertise }: GemCardProps) =
             {/* Avatar */}
             <div className="relative w-[90px] h-[114px] rounded-[14px] overflow-hidden shrink-0">
               <Image
-                src={imageUrl}
+                src="/gradients/mobile/GV-Gradient-08.png"
                 alt={name}
                 fill
-                className="object-cover object-center bg-card"
+                className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-200"
               />
             </div>
 
