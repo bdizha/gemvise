@@ -4,10 +4,25 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import GradientSection from '@/components/layout/Section/GradientSection';
-import ShapeTower from '@/components/shapes/ShapeTower'; // Import ShapeTower component
+import ShapeTower from '@/components/shapes/ShapeTower';
+import { CheckCircle, Sparkles, Zap, Activity, Compass, ChevronRight, ArrowRight, Star } from 'lucide-react';
 
 // Featured Gems by category
-const gemCategories = {
+interface GemData {
+  name: string;
+  description: string;
+  image: string;
+  expertise: string[];
+  energyLevel: number;
+  era: string;
+  chatCount: string;
+}
+
+type GemCategoriesType = {
+  [key: string]: GemData[];
+};
+
+const gemCategories: GemCategoriesType = {
   'World Leaders': [
     {
       name: 'Franklin D. Roosevelt',
@@ -155,180 +170,542 @@ const gemCategories = {
   ]
 };
 
-export default function HomePage() {
+const HomePage = () => {
+  const [activeGemCategory, setActiveGemCategory] = useState(Object.keys(gemCategories)[0]);
+  
   return (
-    <div className="flex flex-col justify-between px-4 sm:px-8 pt-6">
-      <div className="max-w-7xl self-center w-full">
-        {/* Header Section */}
-        <div className="pb-4 pr-2 z-30 bg-background">
-          <div className="flex justify-end items-end lg:justify-between pr-4">
-            <div className="hidden lg:flex flex-col gap-1">
-              <p className="text-muted-foreground">Welcome to</p>
-              <div className="text-xl flex flex-auto flex-col justify-center text-left ml-1">
-                <p>GemVise</p>
+    <div className="flex flex-col">
+      {/* Hero Section */}
+      <div className="relative h-svh w-full border-b border-border pb-px overflow-hidden md:overflow-x-hidden">
+        <div className="relative w-full h-full">
+          <div className="mx-auto w-full px-6 xl:max-w-7xl flex h-full flex-col">
+            {/* Background Gradient */}
+            <div className="absolute -inset-y-[25%] -right-24 flex w-[100vw] flex-col xl:-right-6 xl:w-[1200px]" 
+                 style={{
+                   maskImage: 'linear-gradient(to right, rgba(255, 255, 255, 0), rgb(255, 255, 255))',
+                   opacity: 1
+                 }}>
+              <div className="flex flex-col w-full h-full blur">
+                <div className="grow" 
+                     style={{background: 'conic-gradient(from 180deg at 99% 40% in lab, rgb(255, 255, 255) 18deg, rgb(156, 184, 221) 36deg, rgba(17, 17, 17, 0) 90deg, rgba(17, 17, 17, 0) 342deg, rgb(255, 255, 255) 360deg)'}}></div>
+                <div className="grow" 
+                     style={{background: 'conic-gradient(from 0deg at 99% 60% in lab, rgb(255, 255, 255) 0deg, rgba(17, 17, 17, 0) 18deg, rgba(17, 17, 17, 0) 270deg, rgb(156, 184, 221) 324deg, rgb(255, 255, 255) 342deg)'}}></div>
+              </div>
+              <canvas className="absolute inset-0 h-full w-full"></canvas>
+            </div>
+            
+            {/* Main Content Area */}
+            <div className="relative w-full flex grow items-center justify-start z-20">
+              <div className="w-full">
+                <div>
+                  {/* Logo and Search Section */}
+                  <div className="absolute inset-0 top-[25%] flex justify-center items-center">
+                    <div>
+                      {/* Logo */}
+                      <div style={{opacity: 1}}>
+                        <Image
+                          src="/logos/GV-NAME-GOT-08.png"
+                          alt="GemVise"
+                          width={400}
+                          height={150}
+                          className="max-w-screen sm:max-w-full xl:max-w-5xl pointer-events-none select-none"
+                          style={{
+                            color: 'transparent',
+                            maskImage: 'linear-gradient(30deg, rgba(255, 255, 255, 0) 15%, rgb(255, 255, 255), rgb(255, 255, 255))'
+                          }}
+                        />
+                      </div>
+                      
+                      {/* Search Input */}
+                      <div className="flex justify-center relative z-10 w-full mt-12" style={{opacity: 1}}>
+                        <div className="w-full max-w-xl">
+                          <form className="
+                            relative w-full items-center gap-3 bg-gradient-to-tr
+                            rounded-full p-px
+                            from-primary/5 to-primary/20
+                          ">
+                            <input 
+                              className="w-full h-14 lg:h-[68px] rounded-full border-none pl-6 pr-20 
+                              focus:outline-none focus:ring-2 focus:ring-white/50 
+                              bg-[#111] dark:bg-[#111] text-primary placeholder:text-primary/50"
+                              placeholder="Find your perfect gem..."
+                              type="text"
+                            />
+                            <div className="absolute inset-y-2 right-2 lg:right-4 flex items-center">
+                              <button 
+                                aria-label="Search for gems" 
+                                type="submit"
+                                className="relative isolate inline-flex items-center justify-center border rounded-full aspect-square px-3.5 py-1.5 sm:text-sm gap-x-2
+                                bg-[--btn-bg] text-[--btn-text] border-[--btn-border] hover:bg-[--btn-hover] hover:border-[--btn-hover]
+                                [--btn-bg:theme(colors.primary)] [--btn-border:theme(colors.primary)] [--btn-text:theme(colors.background)] [--btn-hover:theme(colors.primary/80%)]
+                                opacity-50"
+                              >
+                                <span className="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden" aria-hidden="true"></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="!size-4">
+                                  <path fillRule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clipRule="evenodd"></path>
+                                </svg>
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             
-            {/* Search Bar */}
-            <div className="flex justify-end ml-6 gap-3">
-              <div className="relative h-10 w-64 md:w-96">
-                <div className="absolute z-40 flex gap-2 w-full max-w-3xl border-spacing-1 border-divider flex-row self-center items-center rounded-full bg-surface-elevation-1 p-4 placeholder:text-placeholder">
-                  <button className="group relative inline-flex items-center justify-center" type="button" aria-label="Search">
-                    <svg viewBox="0 0 24 24" fill="none" height="1.25em" className="ml-1">
-                      <path d="m20 20-3.95-3.95M18 11a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" stroke="currentColor" strokeLinecap="round" strokeWidth="2"/>
-                    </svg>
-                  </button>
-                  <input 
-                    type="text"
-                    className="w-full h-full bg-transparent border-none outline-none"
-                    placeholder="Search for Gems"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Featured Section */}
-        <div className="w-full">
-          <div className="rounded-2xl overflow-hidden relative min-h-[400px] mb-12 bg-gradient-to-br from-blue-500/5 via-purple-500/10 to-pink-500/5">
-            <div className="absolute inset-0">
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-violet-500/20 to-purple-500/20 animate-gradient"></div>
-              <div className="absolute inset-0 backdrop-blur-[2px]"></div>
-            </div>
-            <div className="absolute inset-0 bg-grid-white/[0.02]"></div>
-            <div className="relative z-10 p-12 flex flex-col justify-center h-full max-w-3xl">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-violet-400 to-purple-400">
-                Discover Historical Legends
-              </h1>
-              <p className="text-xl text-white/80 mb-8 max-w-2xl">
-                Engage with the most influential figures from the 1940s to 1970s
-              </p>
-              <div className="flex gap-4">
-                <button className="px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 text-white hover:from-blue-600 hover:to-violet-600 transition-all duration-300">
-                  Start Exploring
-                </button>
-                <button className="px-6 py-3 rounded-full border border-white/20 text-white hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
-                  Learn More
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Category Sections */}
-          {Object.entries(gemCategories).map(([category, gems]) => (
-            <div key={category} className="mb-12">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold">{category}</h2>
-                <button className="text-blue-500 hover:text-blue-600 transition-colors">
-                  View All
-                </button>
+            {/* Bottom Area with CTA Buttons */}
+            <div className="relative flex items-end justify-between gap-6 py-10 z-10 lg:min-h-[160px]">
+              {/* Down Arrow */}
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-6 my-2 text-primary">
+                  <path fillRule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v16.19l6.22-6.22a.75.75 0 1 1 1.06 1.06l-7.5 7.5a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 1 1 1.06-1.06l6.22 6.22V3a.75.75 0 0 1 .75-.75Z" clipRule="evenodd"></path>
+                </svg>
               </div>
               
-              {/* Carousel */}
-              <div className="relative">
-                <div className="overflow-x-auto pb-4 hide-scrollbar">
-                  <div className="flex gap-4">
-                    {gems.map((gem, index) => (
-                      <Link href={`/chat/${gem.name.toLowerCase().replace(/\s+/g, '-')}`} key={`${category}-${index}`} 
-                            className="flex-none w-[300px]">
-                        <div className="group h-[400px] bg-card hover:bg-accent rounded-xl overflow-hidden transition-all duration-200 hover:shadow-lg hover:scale-[1.02] relative">
-                          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
-                          <Image
-                            src={gem.image}
-                            alt={gem.name}
-                            width={300}
-                            height={400}
-                            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-200"
-                          />
-                          <div className="absolute bottom-0 left-0 right-0 p-6">
-                            <div className="flex items-center gap-2 mb-2">
-                              <span className="px-2 py-1 rounded-full bg-blue-500/20 text-blue-500 text-sm">
-                                {gem.era}
-                              </span>
-                              <div className="flex items-center gap-1">
-                                <span className="w-2 h-2 rounded-full" 
-                                      style={{backgroundColor: `hsl(${gem.energyLevel}, 100%, 50%)`}}></span>
-                                <span className="text-sm text-white/90">{gem.energyLevel}%</span>
-                              </div>
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-2">{gem.name}</h3>
-                            <p className="text-white/80 text-sm line-clamp-2 mb-3">{gem.description}</p>
-                            <div className="flex flex-wrap gap-2">
-                              {gem.expertise.map((skill, idx) => (
-                                <span key={idx} className="px-2 py-1 rounded-full bg-white/10 text-white/90 text-xs">
-                                  {skill}
-                                </span>
-                              ))}
-                            </div>
-                            <div className="flex items-center gap-3 mt-4">
-                              <div className="flex items-center gap-1">
-                                <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-white/60">
-                                  <path d="M21.5 12c0-5-3.694-8-9.5-8s-9.5 3-9.5 8c0 1.294.894 3.49 1.037 3.83l.037.092c.098.266.49 1.66-1.074 3.722 2.111 1 4.353-.644 4.353-.644 1.551.815 3.397 1 5.147 1 5.806 0 9.5-3 9.5-8Z" 
-                                        stroke="currentColor" strokeLinecap="square" strokeLinejoin="round" strokeWidth="2"/>
-                                </svg>
-                                <span className="text-sm text-white/60">{gem.chatCount}</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </Link>
-                    ))}
+              {/* CTA Buttons and Text */}
+              <div className="flex flex-col items-end gap-6 sm:gap-8 lg:gap-12 md:flex-row">
+                {/* Descriptive Text */}
+                <div className="max-w-lg">
+                  <div className="hidden sm:block">
+                    Explore historical wisdom through our quantum-powered gems, offering unique insights and perspectives.
                   </div>
+                </div>
+                
+                {/* CTA Buttons */}
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <a className="relative isolate inline-flex items-center justify-center border uppercase font-mono tracking-widest shrink-0 
+                     px-4 py-2 sm:text-sm gap-x-3 rounded-full 
+                     bg-[--btn-bg] text-[--btn-text] border-[--btn-border] hover:bg-[--btn-hover]
+                     [--btn-bg:transparent] [--btn-border:theme(colors.primary/25%)] [--btn-text:theme(colors.primary)] [--btn-hover:theme(colors.secondary/20%)]
+                     hidden lg:flex"
+                     href="/create">
+                    <span className="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden" aria-hidden="true"></span>
+                    <span>Create Gem</span>
+                  </a>
+                  <a className="relative isolate inline-flex items-center justify-center border uppercase font-mono tracking-widest shrink-0 
+                     px-4 py-2 sm:text-sm gap-x-3 rounded-full 
+                     bg-[--btn-bg] text-[--btn-text] border-[--btn-border] hover:bg-[--btn-hover]
+                     [--btn-bg:transparent] [--btn-border:theme(colors.primary/25%)] [--btn-text:theme(colors.primary)] [--btn-hover:theme(colors.secondary/20%)]"
+                     href="/gems">
+                    <span className="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden" aria-hidden="true"></span>
+                    <span>Explore Gems</span>
+                  </a>
                 </div>
               </div>
             </div>
-          ))}
-
-          {/* Create Character Section */}
-          <GradientSection theme="pink">
-            <div className="w-full flex flex-col items-center justify-center">
-              <div className="w-full flex justify-center">
-                <div className="w-[600px] h-[250px] relative">
-                  <div className="absolute" style={{ opacity: 1, top: 80, left: 150, transform: 'none' }}>
-                    <Image alt="zeus" src="/_next/static/media/zeus.ad885461.webp" width={15} height={15} className="rounded-full" />
-                  </div>
-                  <div className="absolute" style={{ opacity: 1, top: 90, left: 50, transform: 'none' }}>
-                    <svg viewBox="0 0 24 24" fill="none" height={32} width={32} className="text-accent">
-                      <path d="M16 8a1 1 0 1 0-2 0c0 2.309-.51 3.742-1.384 4.616S10.309 14 8 14a1 1 0 1 0 0 2c2.309 0 3.742.51 4.616 1.384S14 19.692 14 22a1 1 0 1 0 2 0c0-2.308.51-3.742 1.384-4.616S19.692 16 22 16a1 1 0 1 0 0-2c-2.308 0-3.742-.51-4.616-1.384S16 10.309 16 8M7.5 2a1 1 0 0 0-2 0c0 1.44-.32 2.25-.785 2.715C4.249 5.18 3.44 5.5 2 5.5a1 1 0 0 0 0 2c1.44 0 2.25.32 2.715.785C5.18 8.751 5.5 9.56 5.5 11a1 1 0 1 0 2 0c0-1.44.32-2.25.785-2.715C8.751 7.82 9.56 7.5 11 7.5a1 1 0 1 0 0-2c-1.44 0-2.25-.32-2.715-.785C7.82 4.249 7.5 3.44 7.5 2" fill="currentColor" />
-                    </svg>
-                  </div>
-                  {/* ... [rest of the floating elements] ... */}
-                  <div className="flex flex-row items-center">
-                    <div className="absolute" style={{ opacity: 1, top: 125, left: 184, transform: 'none' }}>
-                      <Image alt="philosopher" src="/_next/static/media/philosopher.2733e35b.webp" width={75} height={75} className="opacity-50 rounded-spacing-s" priority />
-                    </div>
-                    <div className="absolute z-10" style={{ opacity: 1, top: 100, left: 240, transform: 'none' }}>
-                      <Image alt="zeus" src="/_next/static/media/zeus.ad885461.webp" width={125} height={125} className="rounded-spacing-s" priority />
-                    </div>
-                    <div className="absolute" style={{ opacity: 1, top: 125, left: 340, transform: 'none' }}>
-                      <Image alt="noblewoman" src="/_next/static/media/noblewoman.18e59535.webp" width={75} height={75} className="opacity-50 rounded-spacing-s" priority />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="my-spacing-xl max-w-[480px] w-full flex flex-col gap-spacing-s items-center">
-                <p className="text-display">Create a Character</p>
-                <p className="text-muted-foreground flex text-center text-md">
-                  Not vibing with any Characters? Create one of your own! Customize things like their voice, conversation starts, their tone, and more!
-                </p>
-                <Link href="/character/new" className="z-0 group relative inline-flex items-center justify-center box-border appearance-none select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 hover:bg-primary/90 px-unit-4 min-w-unit-20 h-unit-10 text-md gap-unit-2 rounded-md [&>svg]:max-w-[theme(spacing.unit-8)] data-[pressed=true]:scale-[0.97] transition-transform-colors-opacity motion-reduce:transition-none bg-primary text-primary-foreground data-[hover=true]:opacity-hover">
-                  <svg viewBox="0 0 24 24" fill="none" height={16} width={16} aria-hidden="true" focusable={false} tabIndex={-1}>
-                    <path d="M16 8a1 1 0 1 0-2 0c0 2.309-.51 3.742-1.384 4.616S10.309 14 8 14a1 1 0 1 0 0 2c2.309 0 3.742.51 4.616 1.384S14 19.692 14 22a1 1 0 1 0 2 0c0-2.308.51-3.742 1.384-4.616S19.692 16 22 16a1 1 0 1 0 0-2c-2.308 0-3.742-.51-4.616-1.384S16 10.309 16 8M7.5 2a1 1 0 0 0-2 0c0 1.44-.32 2.25-.785 2.715C4.249 5.18 3.44 5.5 2 5.5a1 1 0 0 0 0 2c1.44 0 2.25.32 2.715.785C5.18 8.751 5.5 9.56 5.5 11a1 1 0 1 0 2 0c0-1.44.32-2.25.785-2.715C8.751 7.82 9.56 7.5 11 7.5a1 1 0 1 0 0-2c-1.44 0-2.25-.32-2.715-.785C7.82 4.249 7.5 3.44 7.5 2" fill="currentColor" />
-                  </svg>
-                  Create a Character
-                </Link>
-              </div>
-            </div>
-          </GradientSection>
-
-          {/* Footer Shape Tower */}
-          <div className="w-full flex justify-center py-32">
-            <ShapeTower baseWidth={300} baseHeight={300} className="opacity-50" />
           </div>
         </div>
       </div>
+      
+      {/* Featured Gems Section */}
+      <section className="w-full py-24 bg-card/5">
+        <div className="mx-auto w-full px-6 xl:max-w-7xl">
+          <div className="mb-12">
+            <div className="mono-tag flex items-center gap-2 text-sm mb-6">
+              <span>[</span>
+              <span>Featured collections</span>
+              <span>]</span>
+            </div>
+            <h2 className="text-balance text-3xl md:text-4xl tracking-tight font-semibold">
+              Explore Gem Collections
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mt-4">
+              Connect with the ideas and insights from extraordinary minds across history
+            </p>
+          </div>
+          
+          {/* Category Tabs */}
+          <div className="flex flex-wrap gap-3 mb-8 border-b border-border">
+            {Object.keys(gemCategories).map((category) => (
+              <button
+                key={category}
+                className={`px-4 py-2 rounded-t-lg text-sm font-medium transition-colors relative ${
+                  activeGemCategory === category 
+                    ? 'border-b-2 border-primary text-primary' 
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+                onClick={() => setActiveGemCategory(category)}
+              >
+                {category}
+                {activeGemCategory === category && (
+                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></span>
+                )}
+              </button>
+            ))}
+          </div>
+          
+          {/* GemCards Slider */}
+          <div className="relative">
+            {/* Navigation Buttons */}
+            <button 
+              className="absolute -left-4 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md text-primary hover:bg-background border border-border/30 hover:border-primary/30 transition-colors"
+              aria-label="Previous"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            
+            <button 
+              className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md text-primary hover:bg-background border border-border/30 hover:border-primary/30 transition-colors"
+              aria-label="Next"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            
+            {/* Cards Slider */}
+            <div className="overflow-x-scroll hide-scrollbar pb-4">
+              <div className="flex gap-4 min-w-max">
+                {/* Expand the current category to show 16 cards by repeating them if necessary */}
+                {[...gemCategories[activeGemCategory], ...gemCategories[activeGemCategory]]
+                  .slice(0, 16)
+                  .map((gem, index) => (
+                  <div key={index} className="w-[270px] flex-shrink-0">
+                    <Link href={`/gems/${gem.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                      <div className="group h-[320px] bg-card hover:bg-card/80 rounded-xl overflow-hidden transition-all duration-200 hover:shadow-lg relative border border-border/60">
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10"></div>
+                        <Image
+                          src={'/gradients/mobile/GV-Gradient-06.png'}
+                          alt={gem.name}
+                          width={300}
+                          height={400}
+                          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute top-3 right-3 z-20 bg-black/60 backdrop-blur-sm rounded-full px-2 py-0.5">
+                          <div className="flex items-center gap-1">
+                            <Star size={14} className="text-yellow-400" />
+                            <span className="text-xs text-white">{gem.energyLevel}%</span>
+                          </div>
+                        </div>
+                        <div className="absolute bottom-0 left-0 right-0 p-5 z-20">
+                          <div className="flex flex-col">
+                            <p className="text-white text-lg font-medium mb-1">{gem.name}</p>
+                            <p className="text-white/80 text-xs line-clamp-2">{gem.description}</p>
+                            <div className="flex gap-2 mt-3">
+                              {gem.expertise && gem.expertise.slice(0, 2).map((exp: string, idx: number) => (
+                                <span key={idx} className="text-xs bg-white/20 text-white px-2 py-0.5 rounded-full">
+                                  {exp}
+                                </span>
+                              ))}
+                              {gem.expertise && gem.expertise.length > 2 && (
+                                <span className="text-xs bg-white/20 text-white px-2 py-0.5 rounded-full">
+                                  +{gem.expertise.length - 2}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+          <div className="flex justify-center mt-12">
+            <Link href="/gems">
+              <button className="inline-flex items-center justify-center text-base/6 uppercase font-mono tracking-widest shrink-0 
+                               focus:outline-none px-6 py-3 sm:text-sm gap-x-2 
+                               bg-primary text-background hover:bg-primary/80 rounded-full">
+                View All Gems <ChevronRight className="ml-1 h-4 w-4" />
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Create Character Section */}
+      <GradientSection theme="pink">
+        <div className="container mx-auto px-4 py-20">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+            <div className="flex-1">
+              <h2 className="text-3xl font-bold mb-4">Create Your Character</h2>
+              <p className="text-lg mb-6">
+                Bring to life historical figures and remarkable minds with our advanced character creator.
+              </p>
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center">
+                  <span className="mr-3 text-primary"><CheckCircle size={20} /></span>
+                  <span>Detailed personality profiles</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-3 text-primary"><CheckCircle size={20} /></span>
+                  <span>Historical accuracy and depth</span>
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-3 text-primary"><CheckCircle size={20} /></span>
+                  <span>Interactive conversations</span>
+                </li>
+              </ul>
+              <Link href="/create" className="btn btn-primary">
+                Start Creating
+              </Link>
+            </div>
+            
+            <div className="flex-1">
+              <div className="w-full h-[350px] relative">
+                <div className="absolute" style={{ opacity: 1, top: 80, left: 150 }}>
+                  <Image alt="gradient element" src="/gradients/mobile/GV-Gradient-05.png" width={15} height={15} className="rounded-full" />
+                </div>
+                <div className="absolute" style={{ opacity: 1, top: 90, left: 50 }}>
+                  <svg viewBox="0 0 24 24" fill="none" height={32} width={32} className="text-accent">
+                    <path d="M16 8a1 1 0 1 0-2 0c0 2.309-.51 3.742-1.384 4.616S10.309 14 8 14a1 1 0 1 0 0 2c2.309 0 3.742.51 4.616 1.384S14 19.692 14 22a1 1 0 1 0 2 0c0-2.308.51-3.742 1.384-4.616S19.692 16 22 16a1 1 0 1 0 0-2c-2.308 0-3.742-.51-4.616-1.384S16 10.309 16 8M7.5 2a1 1 0 0 0-2 0c0 1.44-.32 2.25-.785 2.715C4.249 5.18 3.44 5.5 2 5.5a1 1 0 0 0 0 2c1.44 0 2.25.32 2.715.785C5.18 8.751 5.5 9.56 5.5 11a1 1 0 1 0 2 0c0-1.44.32-2.25.785-2.715C8.751 7.82 9.56 7.5 11 7.5a1 1 0 1 0 0-2c-1.44 0-2.25-.32-2.715-.785C7.82 4.249 7.5 3.44 7.5 2" fill="currentColor" />
+                  </svg>
+                </div>
+                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className="w-[250px] h-[250px] bg-card rounded-xl shadow-lg overflow-hidden relative">
+                    <Image alt="Create character" src="/gradients/mobile/GV-Gradient-04.png" fill style={{ objectFit: 'cover' }} />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-white text-center p-4">
+                        <Sparkles className="h-12 w-12 mx-auto mb-4" />
+                        <span className="text-lg font-medium">Create Now</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </GradientSection>
+
+      {/* Quantum Technology Section */}
+      <section className="w-full py-24 bg-background">
+        <div className="mx-auto w-full px-6 xl:max-w-7xl">
+          <div className="mb-12">
+            <div className="mono-tag flex items-center gap-2 text-sm mb-6">
+              <span>[</span>
+              <span>Quantum technology</span>
+              <span>]</span>
+            </div>
+            <h2 className="text-balance text-3xl md:text-4xl tracking-tight font-semibold">
+              Advanced Gem Mechanics
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mt-4">
+              Our advanced gem system uses quantum principles to create more realistic and insightful character interactions
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="bg-card/5 p-8 rounded-xl hover:shadow-md transition-all border border-border/30">
+              <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                <Zap size={24} className="text-primary" />
+              </div>
+              <h3 className="text-xl font-medium mb-3">Quantum Coherence</h3>
+              <p className="text-muted-foreground">Maintains consistency between a gem's vision and their message for a more cohesive experience.</p>
+            </div>
+            
+            <div className="bg-card/5 p-8 rounded-xl hover:shadow-md transition-all border border-border/30">
+              <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                <Activity size={24} className="text-primary" />
+              </div>
+              <h3 className="text-xl font-medium mb-3">Energy Simulation</h3>
+              <p className="text-muted-foreground">Dynamically adjusts the activity and impact level of each gem based on context and interaction.</p>
+            </div>
+            
+            <div className="bg-card/5 p-8 rounded-xl hover:shadow-md transition-all border border-border/30">
+              <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                <Compass size={24} className="text-primary" />
+              </div>
+              <h3 className="text-xl font-medium mb-3">Phase Tracking</h3>
+              <p className="text-muted-foreground">Represents the journey and evolution stage of each gem's development and insight generation.</p>
+            </div>
+            
+            <div className="bg-card/5 p-8 rounded-xl hover:shadow-md transition-all border border-border/30">
+              <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                <svg viewBox="0 0 24 24" fill="none" height={24} width={24} className="text-primary">
+                  <path d="M13 16.9c0-.1.8-9.1 8-8.9m-14.3 10c4.9-15 18.3-8.4 8.9 6.2M5.5 8.2a11 11 0 018.4-8c3.2-.6 6.5.3 8.9 2.4" 
+                        stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-medium mb-3">Gem Entanglement</h3>
+              <p className="text-muted-foreground">Creates meaningful connections between different gems based on their quantum states.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Additional Gems Slider - Historical Innovators */}
+      <section className="w-full py-24 bg-card/5 border-t border-border/30">
+        <div className="mx-auto w-full px-6 xl:max-w-7xl">
+          <div className="mb-12">
+            <div className="mono-tag flex items-center gap-2 text-sm mb-6">
+              <span>[</span>
+              <span>Historical innovators</span>
+              <span>]</span>
+            </div>
+            <h2 className="text-balance text-3xl md:text-4xl tracking-tight font-semibold">
+              Explore Innovation Across Time
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mt-4">
+              Interact with the greatest innovators throughout history and understand their groundbreaking ideas
+            </p>
+          </div>
+          
+          {/* GemCards Slider */}
+          <div className="relative">
+            {/* Navigation Buttons */}
+            <button 
+              className="absolute -left-4 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md text-primary hover:bg-background border border-border/30 hover:border-primary/30 transition-colors"
+              aria-label="Previous"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            
+            <button 
+              className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md text-primary hover:bg-background border border-border/30 hover:border-primary/30 transition-colors"
+              aria-label="Next"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            
+            {/* Cards Slider */}
+            <div className="overflow-x-scroll hide-scrollbar pb-4">
+              <div className="flex gap-4 min-w-max">
+                {[...gemCategories['Innovators & Thinkers'], ...gemCategories['Innovators & Thinkers']]
+                  .slice(0, 16)
+                  .map((gem, index) => (
+                  <div key={index} className="w-[270px] flex-shrink-0">
+                    <Link href={`/gems/${gem.name.toLowerCase().replace(/\s+/g, '-')}`}>
+                      <div className="group h-[320px] bg-card hover:bg-card/80 rounded-xl overflow-hidden transition-all duration-200 hover:shadow-lg relative border border-border/60">
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10"></div>
+                        <Image
+                          src={'/gradients/mobile/GV-Gradient-05.png'}
+                          alt={gem.name}
+                          width={300}
+                          height={400}
+                          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute top-3 right-3 z-20 bg-black/60 backdrop-blur-sm rounded-full px-2 py-0.5">
+                          <div className="flex items-center gap-1">
+                            <Star size={14} className="text-yellow-400" />
+                            <span className="text-xs text-white">{gem.energyLevel}%</span>
+                          </div>
+                        </div>
+                        <div className="absolute bottom-0 left-0 right-0 p-5 z-20">
+                          <div className="flex flex-col">
+                            <p className="text-white text-lg font-medium mb-1">{gem.name}</p>
+                            <p className="text-white/80 text-xs line-clamp-2">{gem.description}</p>
+                            <div className="flex gap-2 mt-3">
+                              {gem.expertise && gem.expertise.slice(0, 2).map((exp: string, idx: number) => (
+                                <span key={idx} className="text-xs bg-white/20 text-white px-2 py-0.5 rounded-full">
+                                  {exp}
+                                </span>
+                              ))}
+                              {gem.expertise && gem.expertise.length > 2 && (
+                                <span className="text-xs bg-white/20 text-white px-2 py-0.5 rounded-full">
+                                  +{gem.expertise.length - 2}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Shape Tower Section */}
+      <section className="w-full py-32 bg-gradient-to-b from-background to-card/5 border-t border-border/30">
+        <div className="mx-auto w-full px-6 xl:max-w-7xl">
+          <div className="flex flex-col items-center justify-center">
+            <div className="mono-tag flex items-center gap-2 text-sm mb-6">
+              <span>[</span>
+              <span>Begin your journey</span>
+              <span>]</span>
+            </div>
+            <h2 className="text-3xl font-semibold mb-2 text-center">Start Your Journey</h2>
+            <p className="text-lg text-muted-foreground mb-12 text-center max-w-2xl">
+              Explore a world of ideas and insights through our collection of gems
+            </p>
+            
+            <div className="w-full flex justify-center">
+              <ShapeTower />
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Footer with x.ai style */}
+      <footer className="w-full relative overflow-hidden border-t border-border bg-background">
+        <div className="absolute inset-0 opacity-10">
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'radial-gradient(circle at top right, rgba(156, 184, 221, 0.3), transparent 80%)'
+          }}></div>
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'radial-gradient(circle at bottom left, rgba(156, 184, 221, 0.2), transparent 70%)'
+          }}></div>
+        </div>
+        
+        <div className="mx-auto w-full px-6 xl:max-w-7xl py-16 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+            <div className="col-span-1 md:col-span-2">
+              <div className="mono-tag flex items-center gap-2 text-sm mb-4">
+                <span>[</span>
+                <span>GemVise</span>
+                <span>]</span>
+              </div>
+              <p className="text-muted-foreground mb-6 max-w-md">
+                Connect with the wisdom and insights of historical figures through our advanced quantum-powered gem system.
+              </p>
+              <div className="flex space-x-4">
+                <a href="#" className="w-10 h-10 rounded-full bg-card/20 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-card/40 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-card/20 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-card/40 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-card/20 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-card/40 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                </a>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="mono-tag mb-4">Features</h4>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Quantum Coherence</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Energy Simulation</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Phase Tracking</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Gem Entanglement</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="mono-tag mb-4">Resources</h4>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Documentation</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">API</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Terms of Service</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-sm text-muted-foreground mb-4 md:mb-0">
+              &copy; {new Date().getFullYear()} GemVise. All rights reserved.
+            </p>
+            <div className="flex space-x-6">
+              <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Privacy</a>
+              <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Terms</a>
+              <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
-}
+};
+
+export default HomePage;

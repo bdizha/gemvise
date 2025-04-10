@@ -141,7 +141,28 @@
 
 /* Theme-specific gradient classes */
 .section-gradient {
-  background-image: url('/gradients/named/GV-Gradient-Light-Dark.png');
+  background: conic-gradient(
+    from 90deg at 50% 50%,
+    var(--color-background-light) 0deg,
+    var(--color-primary-light) 72deg,
+    var(--color-accent-light) 144deg,
+    var(--color-background-light) 216deg,
+    var(--color-primary-light) 288deg,
+    var(--color-background-light) 360deg
+  );
+}
+
+/* Dark theme variant */
+.dark .section-gradient {
+  background: conic-gradient(
+    from 90deg at 50% 50%,
+    var(--color-background-dark) 0deg,
+    var(--color-primary-dark) 72deg,
+    var(--color-accent-dark) 144deg,
+    var(--color-background-dark) 216deg,
+    var(--color-primary-dark) 288deg,
+    var(--color-background-dark) 360deg
+  );
 }
 
 /* Light theme */
@@ -175,4 +196,59 @@
 /* Blurred variants */
 .section-gradient-blur {
   background-image: url('/gradients/named/GV-Gradient-Light-Dark.png');
+}
+
+/* Custom Animations for Quantum Effects */
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wave-1 {
+  0%, 100% {
+    height: 3px;
+  }
+  50% {
+    height: 10px;
+  }
+}
+
+@keyframes wave-2 {
+  0%, 100% {
+    height: 4px;
+  }
+  50% {
+    height: 12px;
+  }
+}
+
+@keyframes wave-3 {
+  0%, 100% {
+    height: 5px;
+  }
+  50% {
+    height: 15px;
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-wave-1 {
+  animation: wave-1 2s ease-in-out infinite;
+}
+
+.animate-wave-2 {
+  animation: wave-2 1.8s ease-in-out infinite;
+  animation-delay: 0.2s;
+}
+
+.animate-wave-3 {
+  animation: wave-3 1.6s ease-in-out infinite;
+  animation-delay: 0.4s;
 }

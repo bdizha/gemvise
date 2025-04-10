@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="300px" viewBox="0 0 800 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>GemVise Outline</title>
+    <g stroke="currentColor" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <!-- G -->
+        <path d="M120,80 C90,80 65,105 65,135 C65,165 90,190 120,190 C150,190 175,165 175,135 L175,125 L120,125"></path>
+        <!-- e -->
+        <path d="M200,140 L260,140 C260,165 240,190 220,190 C200,190 180,165 180,140 C180,115 200,90 220,90 C240,90 255,110 260,125"></path>
+        <!-- m -->
+        <path d="M280,90 L280,190 M280,130 C280,110 290,90 310,90 C330,90 340,110 340,130 L340,190 M340,130 C340,110 350,90 370,90 C390,90 400,110 400,130 L400,190"></path>
+        <!-- V -->
+        <path d="M420,90 L450,190 L480,90"></path>
+        <!-- i -->
+        <path d="M500,90 L500,190"></path>
+        <!-- s -->
+        <path d="M550,90 C530,90 520,105 520,120 C520,135 530,140 550,150 C570,160 580,165 580,180 C580,195 570,190 550,190 C530,190 520,175 520,160"></path>
+        <!-- e -->
+        <path d="M600,140 L660,140 C660,165 640,190 620,190 C600,190 580,165 580,140 C580,115 600,90 620,90 C640,90 655,110 660,125"></path>
+        
+        <!-- Diamond shapes for gems -->
+        <path d="M180,220 L200,240 L180,260 L160,240 Z"></path>
+        <path d="M520,220 L540,240 L520,260 L500,240 Z"></path>
+    </g>
+</svg>

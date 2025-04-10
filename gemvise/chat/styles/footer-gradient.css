@@ -60,26 +60,26 @@
   );
 }
 
-/* Dark theme - conic gradients with very dark colors */
+/* Dark theme - conic gradients with global variables */
 .dark .footer-gradient-left {
   background: conic-gradient(
     from 90deg at 35% -1% in lab, 
-    #030609 7.2deg, /* Very dark blue-black */
-    #818cf8 14.4deg, /* Dark theme primary - lighter indigo */
-    rgba(3, 6, 9, 0.2) 36deg, /* Slightly visible dark */
-    rgba(3, 6, 9, 0.2) 342deg, /* Slightly visible dark */
-    #030609 360deg
+    var(--color-background) 7.2deg,
+    var(--color-primary) 14.4deg,
+    rgba(var(--color-background-rgb), 0.2) 36deg,
+    rgba(var(--color-background-rgb), 0.2) 342deg,
+    var(--color-background) 360deg
   );
 }
 
 .dark .footer-gradient-right {
   background: conic-gradient(
     from -90deg at 65% -1% in lab, 
-    #030609 0deg, /* Very dark blue-black */
-    rgba(3, 6, 9, 0.2) 18deg, /* Slightly visible dark */
-    rgba(3, 6, 9, 0.2) 324deg, /* Slightly visible dark */
-    #fb7185 345.6deg, /* Dark theme accent - lighter pink */
-    #030609 352.8deg
+    var(--color-background) 0deg,
+    rgba(var(--color-background-rgb), 0.2) 18deg,
+    rgba(var(--color-background-rgb), 0.2) 324deg,
+    var(--color-accent) 345.6deg,
+    var(--color-background) 352.8deg
   );
 }
 
