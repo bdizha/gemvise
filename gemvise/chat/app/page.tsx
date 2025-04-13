@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import { type FC } from 'react';
 import { useRouter } from 'next/navigation';
 import { type Gem } from '@/types/gems';
 import GemCard from '@/components/gems/GemCard';
@@ -48,7 +48,7 @@ const mockGems: Gem[] = [
   }
 ];
 
-const Page: React.FC = () => {
+const Page: FC = () => {
   const router = useRouter();
 
   const handleGemClick = (gemId: string) => {

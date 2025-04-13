@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import { type FC } from 'react';
 import Section from '@/components/layout/Section';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
@@ -32,7 +32,7 @@ const values = [
   }
 ];
 
-export default function AboutPage() {
+const AboutPage: FC = () => {
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#232f3e] to-[#0f1111]">
       {/* Story Section */}
@@ -122,4 +122,6 @@ export default function AboutPage() {
       </Section>
     </main>
   );
-}
+};
+
+export default AboutPage;

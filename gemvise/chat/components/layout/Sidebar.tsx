@@ -1,96 +1,50 @@
 'use client';
 
 import { type FC } from 'react';
-import clsx from 'clsx';
-import { Home, Settings, Sparkles } from 'lucide-react';
+import Link from 'next/link';
 import { Logo } from '@/components/shared/Logo';
-import Button from '@/components/ui/Button';
-import { useRouter } from 'next/navigation';
+import { HomeIcon, InformationCircleIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
 interface SidebarProps {
   isOpen: boolean;
-  className?: string;
 }
 
-const Sidebar: FC<SidebarProps> = ({ isOpen, className }) => {
-  const router = useRouter();
-
+const Sidebar: FC<SidebarProps> = ({ isOpen }) => {
   return (
     <aside
-      className={clsx(
-        'fixed left-0 top-0 z-40 h-screen w-64 border-r border-[#d5d9d9] dark:border-[#3f4b58] bg-white dark:bg-[#232f3e] transition-transform duration-200',
-        isOpen ? 'translate-x-0' : '-translate-x-full',
-        className
-      )}
-      data-testid="sidebar"
+      className={`fixed left-0 top-0 z-40 h-screen w-64 transform bg-gradient-dark-light bg-cover bg-center transition-transform duration-300 ${
+        isOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}
     >
-      <div className="flex h-16 items-center justify-start border-b border-[#d5d9d9] dark:border-[#3f4b58] px-6">
+      <div className="flex h-16 items-center px-4">
         <Logo variant="header" />
       </div>
 
-      <nav className="flex flex-col gap-2 p-4">
-        <Button 
-          variant="ghost" 
-          size="lg" 
-          onClick={() => router.push('/')}
-          className="h-[60px] justify-start items-start px-2.5 py-2 gap-3 rounded-lg hover:bg-[#f7fafa] dark:hover:bg-[#2f3f4f]"
+      <nav className="mt-4 space-y-2 px-2">
+        <Link
+          href="/"
+          className="flex h-[48px] items-center rounded-2xl px-4 text-white hover:bg-gradient-pink-purple hover:bg-cover hover:bg-center"
         >
-          <span className="flex w-full items-center gap-3">
-            <span className="relative flex h-10 w-10 items-center justify-center bg-gradient-to-r from-[#ff9900] to-[#ffac31] text-white rounded-lg">
-              <Home className="h-6 w-6" />
-            </span>
-            <span className="flex flex-1 flex-col items-start">
-              <span className="h-6 w-full text-start text-base font-medium text-[#0f1111] dark:text-white">Home</span>
-              <span className="w-full text-start text-[#5f6b7a] text-xs">Your personal dashboard</span>
-            </span>
-          </span>
-        </Button>
+          <HomeIcon className="mr-3 h-6 w-6" />
+          <span>Home</span>
+        </Link>
 
-        <Button 
-          variant="ghost" 
-          size="lg" 
-          onClick={() => router.push('/explore')}
-          className="h-[60px] justify-start items-start px-2.5 py-2 gap-3 rounded-lg hover:bg-[#f7fafa] dark:hover:bg-[#2f3f4f]"
+        <Link
+          href="/about"
+          className="flex h-[48px] items-center rounded-2xl px-4 text-white hover:bg-gradient-purple-pink hover:bg-cover hover:bg-center"
         >
-          <span className="flex w-full items-center gap-3">
-            <span className="relative flex h-10 w-10 items-center justify-center bg-gradient-to-r from-[#ff9900] to-[#ffac31] text-white rounded-lg">
-              <Sparkles className="h-6 w-6" />
-            </span>
-            <span className="flex flex-1 flex-col items-start">
-              <span className="h-6 w-full text-start text-base font-medium text-[#0f1111] dark:text-white">Explore</span>
-              <span className="w-full text-start text-[#5f6b7a] text-xs">Discover new gems</span>
-            </span>
-          </span>
-        </Button>
+          <InformationCircleIcon className="mr-3 h-6 w-6" />
+          <span>About</span>
+        </Link>
 
-        <Button 
-          variant="ghost" 
-          size="lg" 
-          onClick={() => router.push('/settings')}
-          className="h-[60px] justify-start items-start px-2.5 py-2 gap-3 rounded-lg hover:bg-[#f7fafa] dark:hover:bg-[#2f3f4f]"
+        <Link
+          href="/gems"
+          className="flex h-[48px] items-center rounded-2xl px-4 text-white hover:bg-gradient-pink-purple-pink hover:bg-cover hover:bg-center"
         >
-          <span className="flex w-full items-center gap-3">
-            <span className="relative flex h-10 w-10 items-center justify-center bg-gradient-to-r from-[#ff9900] to-[#ffac31] text-white rounded-lg">
-              <Settings className="h-6 w-6" />
-            </span>
-            <span className="flex flex-1 flex-col items-start">
-              <span className="h-6 w-full text-start text-base font-medium text-[#0f1111] dark:text-white">Settings</span>
-              <span className="w-full text-start text-[#5f6b7a] text-xs">Customize your experience</span>
-            </span>
-          </span>
-        </Button>
+          <SparklesIcon className="mr-3 h-6 w-6" />
+          <span>Gems</span>
+        </Link>
       </nav>
-
-      <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#d5d9d9] dark:border-[#3f4b58] bg-[#f7fafa] dark:bg-[#2f3f4f]">
-        <Button 
-          variant="primary" 
-          size="lg" 
-          onClick={() => router.push('/create')}
-          className="w-full bg-gradient-to-r from-[#ff9900] to-[#ffac31] text-[#0f1111] hover:from-[#ffac31] hover:to-[#ffbd62]"
-        >
-          Create a Gem
-        </Button>
-      </div>
     </aside>
   );
 };
