@@ -1,91 +1,76 @@
-import Link from 'next/link';
+'use client';
+
+import React from 'react';
 import Image from 'next/image';
-import { MessagesSquare, Star } from 'lucide-react';
+import Link from 'next/link';
+import Card from '@/components/ui/Card';
 
 interface GemCardProps {
-  id: string;
-  name: string;
-  description: string;
-  imageUrl: string;
-  expertise: string[];
-  chatCount?: string;
-  energyLevel?: number;
+  gem?: {
+    id?: string;
+    name?: string;
+    description?: string;
+    image?: string;
+    category?: string;
+    followers?: number;
+    expertise?: string[];
+    chatCount?: string | number;
+    energyLevel?: number;
+  };
+  onClick?: () => void;
 }
 
-const GemCard = ({ 
-  id, 
-  name, 
-  description, 
-  imageUrl, 
-  expertise, 
-  chatCount = '100k',
-  energyLevel = 85
-}: GemCardProps) => {
+const GemCard: React.FC<GemCardProps> = ({ gem = {}, onClick }) => {
+  const {
+    id = '',
+    name = 'Untitled Gem',
+    description = 'No description available',
+    category = 'General',
+    followers = 0,
+    chatCount = 0,
+  } = gem;
+
+  const chatCountNum = typeof chatCount === 'string' ? parseInt(chatCount, 10) : chatCount;
+
   return (
-    <Link href={`/chat/${id}`} className="block">
-      <div className="group/card h-[180px] bg-card hover:bg-accent/10 rounded-xl relative w-full transition-all duration-300 hover:shadow-lg border border-muted">
-        <div className="w-full h-full p-5 flex flex-col gap-2">
-          <div className="flex flex-row h-full space-x-4 w-full">
-            {/* Avatar */}
-            <div className="relative w-[100px] h-[140px] rounded-xl overflow-hidden shrink-0">
-              <Image
-                src={imageUrl || `/gradients/mobile/GV-Gradient-08.png?v=1`}
-                alt={name}
-                fill
-                className="object-cover w-full h-full group-hover/card:scale-105 transition-transform duration-300"
-              />
-              {/* Energy level indicator */}
-              <div className="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm rounded-full px-2 py-0.5">
-                <div className="flex items-center gap-1">
-                  <Star size={12} className="text-yellow-400" />
-                  <span className="text-xs text-white">{energyLevel}%</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="overflow-auto h-full flex flex-col justify-between w-full">
-              <div>
-                <p className="mb-1 text-lg font-semibold leading-tight line-clamp-1 text-ellipsis overflow-hidden">
-                  {name}
-                </p>
-                <div className="text-muted-foreground text-sm truncate mb-2">
-                  Created by GemVise
-                </div>
-                <p className="text-foreground/80 line-clamp-3 text-sm text-ellipsis overflow-hidden whitespace-normal">
-                  {description}
-                </p>
-              </div>
-
-              {/* Bottom metadata */}
-              <div className="w-full flex flex-row justify-between items-center pt-2 border-t border-muted/50">
-                <div className="flex flex-row gap-3">
-                  <div className="flex items-center gap-1">
-                    <MessagesSquare size={14} className="text-muted-foreground" />
-                    <p className="text-xs text-muted-foreground">
-                      {chatCount}
-                    </p>
-                  </div>
-                  
-                  {expertise && expertise.length > 0 && (
-                    <div className="flex gap-1">
-                      <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
-                        {expertise[0]}
-                      </span>
-                      {expertise.length > 1 && (
-                        <span className="text-xs text-muted-foreground bg-muted px-2 py-0.5 rounded-full">
-                          +{expertise.length - 1}
-                        </span>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
+    <Card
+      className="relative overflow-hidden cursor-pointer h-[300px] group"
+      onClick={onClick}
+      data-testid="discover-card"
+      style={{
+        borderRadius: '28px',
+        backgroundImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url(/gradients/mobile/GV-Gradient-04.png)',
+        backgroundSize: 'cover'
+      }}
+    >
+      <div className="relative h-full flex flex-col justify-end p-6 text-white">
+        <div className="mb-6">
+          <Image
+            src="/gradients/mobile/GV-Gradient-01.png"
+            alt={name}
+            width={80}
+            height={80}
+            className="rounded-full"
+          />
+        </div>
+        <h3 className="text-2xl font-bold text-white">{name}</h3>
+        <p className="mt-2 text-white/90">{description}</p>
+        <div className="mt-4 flex items-center space-x-2">
+          {category && (
+            <>
+              <span className="text-sm text-white/80">{category}</span>
+              <span className="text-sm text-white/80">•</span>
+            </>
+          )}
+          {followers > 0 && (
+            <span className="text-sm text-white/80">{followers} followers</span>
+          )}
+          {chatCountNum > 0 && (
+            <span className="text-sm text-white/80">{chatCount} chats</span>
+          )}
         </div>
       </div>
-    </Link>
+    </Card>
   );
 };
 

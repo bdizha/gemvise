@@ -11,15 +11,23 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // Check if current path is chat route
+  const isChatRoute = () => {
+    if (typeof window !== 'undefined') {
+      return window.location.pathname.startsWith('/chat/');
+    }
+    return false;
+  };
+
   return (
     <html lang="en" suppressHydrationWarning className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body className="min-h-screen overflow-x-hidden bg-background font-sans text-primary antialiased">
         <Providers>
-          <Header />
-          <div className="relative">
+          {!isChatRoute() && <Header />}
+          <div className={`relative ${isChatRoute() ? 'h-screen' : ''}`}>
             {children}
           </div>
-          <Footer />
+          {!isChatRoute() && <Footer />}
         </Providers>
       </body>
     </html>

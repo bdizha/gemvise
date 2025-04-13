@@ -1,74 +1,140 @@
 'use client';
 
-import { useTheme } from 'next-themes';
-import Image from 'next/image';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
+import Modal from '@/components/ui/Modal';
 
-export default function Header() {
+interface HeaderProps {
+  onToggleSidebar: () => void;
+  showLogo: boolean;
+}
+
+const Header = ({ onToggleSidebar, showLogo }: HeaderProps): JSX.Element => {
   const { theme, setTheme } = useTheme();
+  const [isActionsOpen, setIsActionsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const handleSearchSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSearchOpen(false);
+    await new Promise(resolve => setTimeout(resolve, 0)); // Ensure state update is processed
+  };
 
   return (
-    <div className="fixed top-0 z-30 flex w-full items-center justify-between gap-4 p-8 bg-stone-150/80 dark:bg-midnight-850/80 backdrop-blur-md">
-      <div className="absolute flex flex-row items-center start-4">
-        <Link href="/" className="ms-2 me-[0.5] rounded-lg focus:outline-none focus-visible:ring-1 focus-visible:ring-ring">
-          <Image 
-            src={theme === 'light' ? '/icons/GV-LOGO-02-BOT.png' : '/icons/GV-LOGO-02-WOT-GEM.png'} 
-            alt="GemVise" 
-            width={32} 
-            height={32} 
-          />
-        </Link>
-      </div>
-
-      <div className="grow justify-center hidden max-w-[50%] @[640px]/nav:flex">
-        {/* Center section - empty for now */}
-      </div>
-
-      <div className="absolute flex flex-row items-center gap-2 ml-auto end-4">
-        <button 
-          className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium leading-[normal] cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:-mx-0.5 text-primary hover:bg-button-ghost-hover h-10 w-10 rounded-full p-2"
-          type="button"
-          aria-label="History"
+    <header className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800" data-testid="header">
+      <div className="flex items-center space-x-4">
+        <button
+          onClick={onToggleSidebar}
+          className="h-10 w-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 flex items-center justify-center"
+          aria-label="Toggle sidebar"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="stroke-[2]">
-            <path d="M3 5L19 5" stroke="currentColor" strokeLinecap="square" strokeLinejoin="round"/>
-            <path d="M3 12H7" stroke="currentColor" strokeLinecap="square" strokeLinejoin="round"/>
-            <circle cx="16" cy="15" r="4" stroke="currentColor"/>
-            <path d="M19 18L21 20" stroke="currentColor" strokeLinecap="square"/>
-            <path d="M3 19H7" stroke="currentColor" strokeLinecap="square" strokeLinejoin="round"/>
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-
-        <div className="flex flex-row items-center gap-2 px-2">
-          <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium leading-[normal] cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:-mx-0.5 text-primary hover:bg-button-ghost-hover h-10 w-10 rounded-full"
-            type="button"
-          >
-            {theme === 'dark' ? (
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
-                <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
-              </svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
-                <path fillRule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clipRule="evenodd" />
-              </svg>
-            )}
-          </button>
-
-          <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:-mx-0.5 bg-button-primary text-background hover:bg-button-primary-hover rounded-full py-2 h-8 px-3 text-sm" type="button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user">
-              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-            <div>Sign up</div>
-          </button>
-
-          <button className="items-center justify-center gap-2 whitespace-nowrap font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:-mx-0.5 rounded-full py-2 hidden @sm:flex h-8 px-3 text-sm text-primary bg-transparent ring-1 ring-inset ring-toggle-border hover:bg-button-secondary-hover hover:border-text-secondary" type="button">
-            <div>Sign in</div>
-          </button>
+        <div 
+          className={`transition-opacity duration-200 ${showLogo ? 'opacity-100' : 'opacity-0'}`}
+          data-testid="header-logo"
+        >
+          <Link href="/" className="flex items-center space-x-2">
+            <Image src="/logo.svg" alt="GemVise" width={32} height={32} />
+            <span className="text-xl font-bold">GemVise</span>
+          </Link>
         </div>
       </div>
-    </div>
+      
+      <div className="flex items-center space-x-2">
+        <button
+          onClick={() => setIsSearchOpen(true)}
+          className="h-10 w-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 flex items-center justify-center"
+          aria-label="Search"
+        >
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+        <button
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          className="h-10 w-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 flex items-center justify-center"
+          aria-label="Toggle theme"
+        >
+          {theme === 'dark' ? (
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          ) : (
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          )}
+        </button>
+        <button
+          onClick={() => setIsActionsOpen(true)}
+          className="h-10 w-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 flex items-center justify-center"
+          aria-label="History"
+        >
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </button>
+        <button
+          onClick={() => setIsActionsOpen(true)}
+          className="h-10 w-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 flex items-center justify-center"
+          aria-label="Settings"
+        >
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </button>
+      </div>
+
+      <Modal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)}>
+        <Modal.Header>Search Experts</Modal.Header>
+        <Modal.Content>
+          <form onSubmit={handleSearchSubmit} className="flex items-center space-x-2">
+            <input
+              type="text"
+              placeholder="Search experts..."
+              className="flex-1 p-2 rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+              autoFocus
+            />
+            <button
+              type="submit"
+              className="px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary/90"
+            >
+              Search
+            </button>
+          </form>
+        </Modal.Content>
+      </Modal>
+
+      <Modal isOpen={isActionsOpen} onClose={() => setIsActionsOpen(false)}>
+        <Modal.Header>Settings</Modal.Header>
+        <Modal.Content>
+          <div className="space-y-4">
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="flex items-center space-x-2 w-full p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
+              {theme === 'dark' ? (
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              )}
+              <span>Toggle Theme</span>
+            </button>
+          </div>
+        </Modal.Content>
+      </Modal>
+    </header>
   );
-}
+};
+
+export default Header;

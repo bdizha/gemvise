@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import GradientSection from '@/components/layout/Section/GradientSection';
 import ShapeTower from '@/components/shapes/ShapeTower';
 import { CheckCircle, Sparkles, Zap, Activity, Compass, ChevronRight, ArrowRight, Star } from 'lucide-react';
+import GemGrid from '@/components/gems/GemGrid';
 
 // Featured Gems by category
 interface GemData {
@@ -23,149 +24,207 @@ type GemCategoriesType = {
 };
 
 const gemCategories: GemCategoriesType = {
-  'World Leaders': [
+  'Business & Finance': [
     {
-      name: 'Franklin D. Roosevelt',
-      description: '32nd U.S. President who led through the Great Depression and WWII, known for New Deal programs and fireside chats',
+      name: 'Warren Buffett',
+      description: 'Investor and CEO of Berkshire Hathaway, known for value investing and frugal lifestyle',
       image: '/icons/GV-LOGO-02-GOT-01.png',
-      expertise: ['Leadership', 'Politics', 'Economics'],
+      expertise: ['Investing', 'Finance', 'Leadership'],
       energyLevel: 95,
-      era: '1940s',
+      era: '1980s',
       chatCount: '156.7k'
     },
     {
-      name: 'Winston Churchill',
-      description: 'British Prime Minister who rallied the UK against Nazi Germany during WWII with iconic speeches',
+      name: 'Bill Gates',
+      description: 'Co-founder of Microsoft and philanthropist, known for his business acumen and charitable efforts',
       image: '/icons/GV-LOGO-02-GOT-02.png',
-      expertise: ['Leadership', 'Oratory', 'Writing'],
+      expertise: ['Technology', 'Philanthropy', 'Leadership'],
       energyLevel: 98,
-      era: '1940s',
+      era: '1990s',
       chatCount: '189.3k'
     },
     {
-      name: 'John F. Kennedy',
-      description: '35th U.S. President, known for his charisma and handling of the Cuban Missile Crisis',
+      name: 'Elon Musk',
+      description: 'Entrepreneur and business magnate, known for his innovative ventures and ambitious goals',
       image: '/icons/GV-LOGO-02-GOT-03.png',
-      expertise: ['Leadership', 'Foreign Policy', 'Public Speaking'],
+      expertise: ['Entrepreneurship', 'Innovation', 'Leadership'],
       energyLevel: 96,
-      era: '1960s',
+      era: '2000s',
       chatCount: '201.4k'
     }
   ],
-  'Artists & Musicians': [
+  'Technology': [
     {
-      name: 'Duke Ellington',
-      description: 'Legendary jazz composer and bandleader who shaped American music',
+      name: 'Steve Jobs',
+      description: 'Co-founder of Apple, known for his innovative designs and visionary leadership',
       image: '/icons/GV-LOGO-02-GOT-04.png',
-      expertise: ['Jazz', 'Composition', 'Piano'],
+      expertise: ['Design', 'Innovation', 'Leadership'],
       energyLevel: 94,
-      era: '1940s',
+      era: '1980s',
       chatCount: '145.2k'
     },
     {
-      name: 'Bob Dylan',
-      description: 'Influential songwriter whose songs became anthems for civil rights and anti-war movements',
+      name: 'Mark Zuckerberg',
+      description: 'Co-founder and CEO of Meta, known for his entrepreneurial spirit and technological advancements',
       image: '/icons/GV-LOGO-02-GOT-05.png',
-      expertise: ['Songwriting', 'Folk Music', 'Poetry'],
+      expertise: ['Technology', 'Entrepreneurship', 'Leadership'],
       energyLevel: 92,
-      era: '1960s',
+      era: '2000s',
       chatCount: '178.9k'
     },
     {
-      name: 'David Bowie',
-      description: 'Revolutionary musician known for reinvention and innovative sound',
+      name: 'Sundar Pichai',
+      description: 'CEO of Alphabet and Google, known for his technical expertise and leadership',
       image: '/icons/GV-LOGO-02-GOT-06.png',
-      expertise: ['Music', 'Performance', 'Innovation'],
+      expertise: ['Technology', 'Leadership', 'Innovation'],
       energyLevel: 97,
-      era: '1970s',
+      era: '2010s',
       chatCount: '198.5k'
     }
   ],
-  'Cultural Icons': [
+  'Arts & Design': [
     {
-      name: 'Martin Luther King Jr.',
-      description: 'Civil rights leader who changed America through nonviolent resistance',
+      name: 'Pablo Picasso',
+      description: 'Spanish artist, known for his pioneering work in Cubism and artistic innovations',
       image: '/icons/GV-LOGO-02-GOT-07.png',
-      expertise: ['Civil Rights', 'Leadership', 'Oratory'],
+      expertise: ['Art', 'Design', 'Innovation'],
       energyLevel: 99,
-      era: '1960s',
+      era: '1900s',
       chatCount: '234.6k'
     },
     {
-      name: 'Muhammad Ali',
-      description: 'Boxing champion and cultural icon who stood up for his beliefs',
+      name: 'Frida Kahlo',
+      description: 'Mexican artist, known for her self-portraits and depiction of Mexican culture',
       image: '/icons/GV-LOGO-02-GOT-08.png',
-      expertise: ['Boxing', 'Activism', 'Public Speaking'],
+      expertise: ['Art', 'Culture', 'Self-Expression'],
       energyLevel: 98,
-      era: '1960s',
+      era: '1930s',
       chatCount: '212.3k'
     },
     {
       name: 'Andy Warhol',
-      description: 'Pop art pioneer who transformed modern art and celebrity culture',
+      description: 'American artist, known for his work in Pop Art and experimental filmmaking',
       image: '/icons/GV-LOGO-02-GOT-09.png',
-      expertise: ['Art', 'Film', 'Photography'],
+      expertise: ['Art', 'Design', 'Pop Culture'],
       energyLevel: 91,
-      era: '1970s',
+      era: '1960s',
       chatCount: '167.8k'
     }
   ],
-  'Innovators & Thinkers': [
+  'Health & Wellness': [
     {
-      name: 'Albert Einstein',
-      description: 'Theoretical physicist who revolutionized our understanding of space and time',
+      name: 'Hippocrates',
+      description: 'Ancient Greek physician, known as the father of medicine',
       image: '/icons/GV-LOGO-02-GOT-10.png',
-      expertise: ['Physics', 'Mathematics', 'Philosophy'],
+      expertise: ['Medicine', 'Health', 'Wellness'],
       energyLevel: 93,
-      era: '1940s',
+      era: '400 BCE',
       chatCount: '245.1k'
     },
     {
-      name: 'Marshall McLuhan',
-      description: 'Media theorist who predicted the global village and internet age',
+      name: 'Florence Nightingale',
+      description: 'British social reformer and statistician, known as the founder of modern nursing',
       image: '/icons/GV-LOGO-02-GOT-11.png',
-      expertise: ['Media Theory', 'Communication', 'Philosophy'],
+      expertise: ['Nursing', 'Healthcare', 'Statistics'],
       energyLevel: 90,
-      era: '1960s',
+      era: '1800s',
       chatCount: '134.7k'
     },
     {
-      name: 'Timothy Leary',
-      description: 'Psychologist and counterculture icon who advocated for consciousness expansion',
+      name: 'Jane Goodall',
+      description: 'British primatologist and anthropologist, known for her groundbreaking research on chimpanzees',
       image: '/icons/GV-LOGO-02-GOT-12.png',
-      expertise: ['Psychology', 'Philosophy', 'Consciousness'],
+      expertise: ['Primatology', 'Anthropology', 'Conservation'],
       energyLevel: 95,
-      era: '1970s',
+      era: '1960s',
       chatCount: '156.9k'
     }
   ],
-  'Entertainment Legends': [
+  'Science & Research': [
     {
-      name: 'Frank Sinatra',
-      description: 'Iconic singer and actor who defined American entertainment',
+      name: 'Isaac Newton',
+      description: 'English mathematician and physicist, known for his laws of motion and universal gravitation',
       image: '/icons/GV-LOGO-02-GOT-13.png',
-      expertise: ['Music', 'Acting', 'Entertainment'],
+      expertise: ['Physics', 'Mathematics', 'Astronomy'],
       energyLevel: 96,
-      era: '1940s',
+      era: '1600s',
       chatCount: '189.4k'
     },
     {
-      name: 'Elvis Presley',
-      description: 'The King of Rock and Roll who revolutionized popular music',
+      name: 'Marie Curie',
+      description: 'Polish-born physicist and chemist, known for her pioneering work on radioactivity',
       image: '/icons/GV-LOGO-02-GOT-14.png',
-      expertise: ['Music', 'Performance', 'Cultural Icon'],
+      expertise: ['Physics', 'Chemistry', 'Radioactivity'],
       energyLevel: 97,
-      era: '1960s',
+      era: '1900s',
       chatCount: '223.5k'
     },
     {
-      name: 'George Carlin',
-      description: 'Revolutionary comedian and social critic who changed stand-up comedy',
+      name: 'Stephen Hawking',
+      description: 'British theoretical physicist and cosmologist, known for his work on black holes and cosmology',
       image: '/icons/GV-LOGO-02-GOT-15.png',
-      expertise: ['Comedy', 'Social Commentary', 'Writing'],
+      expertise: ['Physics', 'Cosmology', 'Black Holes'],
       energyLevel: 94,
       era: '1970s',
       chatCount: '178.2k'
+    }
+  ],
+  'Leadership': [
+    {
+      name: 'Abraham Lincoln',
+      description: '16th U.S. President, known for his leadership during the American Civil War and abolition of slavery',
+      image: '/icons/GV-LOGO-02-GOT-16.png',
+      expertise: ['Leadership', 'Politics', 'History'],
+      energyLevel: 95,
+      era: '1800s',
+      chatCount: '156.7k'
+    },
+    {
+      name: 'Nelson Mandela',
+      description: 'South African anti-apartheid revolutionary and politician, known for his leadership and fight against racism',
+      image: '/icons/GV-LOGO-02-GOT-17.png',
+      expertise: ['Leadership', 'Politics', 'Social Justice'],
+      energyLevel: 98,
+      era: '1900s',
+      chatCount: '189.3k'
+    },
+    {
+      name: 'Malala Yousafzai',
+      description: 'Pakistani activist for female education and Nobel laureate, known for her advocacy and survival of a Taliban assassination attempt',
+      image: '/icons/GV-LOGO-02-GOT-18.png',
+      expertise: ['Leadership', 'Education', 'Activism'],
+      energyLevel: 96,
+      era: '2000s',
+      chatCount: '201.4k'
+    }
+  ],
+  'Innovation': [
+    {
+      name: 'Steve Wozniak',
+      description: 'Co-founder of Apple, known for his innovative designs and engineering expertise',
+      image: '/icons/GV-LOGO-02-GOT-19.png',
+      expertise: ['Innovation', 'Design', 'Engineering'],
+      energyLevel: 94,
+      era: '1970s',
+      chatCount: '145.2k'
+    },
+    {
+      name: 'Elon Musk',
+      description: 'Entrepreneur and business magnate, known for his innovative ventures and ambitious goals',
+      image: '/icons/GV-LOGO-02-GOT-20.png',
+      expertise: ['Innovation', 'Entrepreneurship', 'Leadership'],
+      energyLevel: 92,
+      era: '2000s',
+      chatCount: '178.9k'
+    },
+    {
+      name: 'Reid Hoffman',
+      description: 'Co-founder of LinkedIn, known for his entrepreneurial spirit and innovative approaches to business',
+      image: '/icons/GV-LOGO-02-GOT-21.png',
+      expertise: ['Innovation', 'Entrepreneurship', 'Leadership'],
+      energyLevel: 97,
+      era: '2000s',
+      chatCount: '198.5k'
     }
   ]
 };
@@ -173,6 +232,11 @@ const gemCategories: GemCategoriesType = {
 const HomePage = () => {
   const [activeGemCategory, setActiveGemCategory] = useState(Object.keys(gemCategories)[0]);
   
+  const buttonClasses = "relative inline-flex items-center justify-center text-base/6 font-medium transition-all duration-200 ease-in rounded-full px-6 py-3 hover:scale-[1.02] active:scale-[0.98]";
+  const primaryButtonClasses = `${buttonClasses} bg-primary text-background hover:bg-primary/90`;
+  const secondaryButtonClasses = `${buttonClasses} border border-border/30 bg-card/5 hover:bg-card/10`;
+  const tabClasses = "relative inline-flex items-center justify-center text-base/6 font-medium transition-all duration-200 ease-in rounded-full px-4 py-2 min-w-32";
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -228,17 +292,14 @@ const HomePage = () => {
                               className="w-full h-14 lg:h-[68px] rounded-full border-none pl-6 pr-20 
                               focus:outline-none focus:ring-2 focus:ring-white/50 
                               bg-[#111] dark:bg-[#111] text-primary placeholder:text-primary/50"
-                              placeholder="Find your perfect gem..."
+                              placeholder="Search for experts by name or expertise..."
                               type="text"
                             />
                             <div className="absolute inset-y-2 right-2 lg:right-4 flex items-center">
                               <button 
                                 aria-label="Search for gems" 
                                 type="submit"
-                                className="relative isolate inline-flex items-center justify-center border rounded-full aspect-square px-3.5 py-1.5 sm:text-sm gap-x-2
-                                bg-[--btn-bg] text-[--btn-text] border-[--btn-border] hover:bg-[--btn-hover] hover:border-[--btn-hover]
-                                [--btn-bg:theme(colors.primary)] [--btn-border:theme(colors.primary)] [--btn-text:theme(colors.background)] [--btn-hover:theme(colors.primary/80%)]
-                                opacity-50"
+                                className={primaryButtonClasses}
                               >
                                 <span className="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden" aria-hidden="true"></span>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="!size-4">
@@ -269,28 +330,19 @@ const HomePage = () => {
                 {/* Descriptive Text */}
                 <div className="max-w-lg">
                   <div className="hidden sm:block">
-                    Explore historical wisdom through our quantum-powered gems, offering unique insights and perspectives.
+                    Connect with world-class experts through AI and gain valuable insights from their years of experience.
                   </div>
                 </div>
                 
                 {/* CTA Buttons */}
                 <div className="flex flex-col gap-3 sm:flex-row">
-                  <a className="relative isolate inline-flex items-center justify-center border uppercase font-mono tracking-widest shrink-0 
-                     px-4 py-2 sm:text-sm gap-x-3 rounded-full 
-                     bg-[--btn-bg] text-[--btn-text] border-[--btn-border] hover:bg-[--btn-hover]
-                     [--btn-bg:transparent] [--btn-border:theme(colors.primary/25%)] [--btn-text:theme(colors.primary)] [--btn-hover:theme(colors.secondary/20%)]
-                     hidden lg:flex"
-                     href="/create">
+                  <a className={primaryButtonClasses} href="/create">
                     <span className="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden" aria-hidden="true"></span>
-                    <span>Create Gem</span>
+                    <span>Create Expert Profile</span>
                   </a>
-                  <a className="relative isolate inline-flex items-center justify-center border uppercase font-mono tracking-widest shrink-0 
-                     px-4 py-2 sm:text-sm gap-x-3 rounded-full 
-                     bg-[--btn-bg] text-[--btn-text] border-[--btn-border] hover:bg-[--btn-hover]
-                     [--btn-bg:transparent] [--btn-border:theme(colors.primary/25%)] [--btn-text:theme(colors.primary)] [--btn-hover:theme(colors.secondary/20%)]"
-                     href="/gems">
+                  <a className={secondaryButtonClasses} href="/experts">
                     <span className="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden" aria-hidden="true"></span>
-                    <span>Explore Gems</span>
+                    <span>Explore Experts</span>
                   </a>
                 </div>
               </div>
@@ -299,146 +351,95 @@ const HomePage = () => {
         </div>
       </div>
       
-      {/* Featured Gems Section */}
+      {/* Featured Experts Section */}
       <section className="w-full py-24 bg-card/5">
         <div className="mx-auto w-full px-6 xl:max-w-7xl">
           <div className="mb-12">
             <div className="mono-tag flex items-center gap-2 text-sm mb-6">
               <span>[</span>
-              <span>Featured collections</span>
+              <span>Featured Experts</span>
               <span>]</span>
             </div>
             <h2 className="text-balance text-3xl md:text-4xl tracking-tight font-semibold">
-              Explore Gem Collections
+              Connect with World-Class Experts
             </h2>
             <p className="text-muted-foreground max-w-2xl mt-4">
-              Connect with the ideas and insights from extraordinary minds across history
+              Have meaningful conversations with AI versions of industry leaders, visionaries, and creators.
             </p>
           </div>
           
-          {/* Category Tabs */}
-          <div className="flex flex-wrap gap-3 mb-8 border-b border-border">
-            {Object.keys(gemCategories).map((category) => (
-              <button
-                key={category}
-                className={`px-4 py-2 rounded-t-lg text-sm font-medium transition-colors relative ${
-                  activeGemCategory === category 
-                    ? 'border-b-2 border-primary text-primary' 
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-                onClick={() => setActiveGemCategory(category)}
-              >
-                {category}
-                {activeGemCategory === category && (
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary"></span>
-                )}
-              </button>
-            ))}
-          </div>
-          
-          {/* GemCards Slider */}
-          <div className="relative">
-            {/* Navigation Buttons */}
-            <button 
-              className="absolute -left-4 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md text-primary hover:bg-background border border-border/30 hover:border-primary/30 transition-colors"
-              aria-label="Previous"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="m15 18-6-6 6-6"/></svg>
-            </button>
-            
-            <button 
-              className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md text-primary hover:bg-background border border-border/30 hover:border-primary/30 transition-colors"
-              aria-label="Next"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="m9 18 6-6-6-6"/></svg>
-            </button>
-            
-            {/* Cards Slider */}
-            <div className="overflow-x-scroll hide-scrollbar pb-4">
-              <div className="flex gap-4 min-w-max">
-                {/* Expand the current category to show 16 cards by repeating them if necessary */}
-                {[...gemCategories[activeGemCategory], ...gemCategories[activeGemCategory]]
-                  .slice(0, 16)
-                  .map((gem, index) => (
-                  <div key={index} className="w-[270px] flex-shrink-0">
-                    <Link href={`/gems/${gem.name.toLowerCase().replace(/\s+/g, '-')}`}>
-                      <div className="group h-[320px] bg-card hover:bg-card/80 rounded-xl overflow-hidden transition-all duration-200 hover:shadow-lg relative border border-border/60">
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10"></div>
-                        <Image
-                          src={'/gradients/mobile/GV-Gradient-06.png'}
-                          alt={gem.name}
-                          width={300}
-                          height={400}
-                          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute top-3 right-3 z-20 bg-black/60 backdrop-blur-sm rounded-full px-2 py-0.5">
-                          <div className="flex items-center gap-1">
-                            <Star size={14} className="text-yellow-400" />
-                            <span className="text-xs text-white">{gem.energyLevel}%</span>
-                          </div>
-                        </div>
-                        <div className="absolute bottom-0 left-0 right-0 p-5 z-20">
-                          <div className="flex flex-col">
-                            <p className="text-white text-lg font-medium mb-1">{gem.name}</p>
-                            <p className="text-white/80 text-xs line-clamp-2">{gem.description}</p>
-                            <div className="flex gap-2 mt-3">
-                              {gem.expertise && gem.expertise.slice(0, 2).map((exp: string, idx: number) => (
-                                <span key={idx} className="text-xs bg-white/20 text-white px-2 py-0.5 rounded-full">
-                                  {exp}
-                                </span>
-                              ))}
-                              {gem.expertise && gem.expertise.length > 2 && (
-                                <span className="text-xs bg-white/20 text-white px-2 py-0.5 rounded-full">
-                                  +{gem.expertise.length - 2}
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          
-          <div className="flex justify-center mt-12">
-            <Link href="/gems">
-              <button className="inline-flex items-center justify-center text-base/6 uppercase font-mono tracking-widest shrink-0 
-                               focus:outline-none px-6 py-3 sm:text-sm gap-x-2 
-                               bg-primary text-background hover:bg-primary/80 rounded-full">
-                View All Gems <ChevronRight className="ml-1 h-4 w-4" />
-              </button>
-            </Link>
-          </div>
+          <GemGrid 
+            gems={Object.values(gemCategories).flat()}
+            variant="featured"
+            showHeader
+            title="Featured Experts"
+            className="px-8"
+          />
         </div>
       </section>
 
-      {/* Create Character Section */}
+      {/* Categories Section */}
+      <section className="pb-20">
+        <div className="px-8 mb-8">
+          <h2 className="text-3xl font-bold mb-6">Browse by Expertise</h2>
+          <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-4">
+            {Object.keys(gemCategories).map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveGemCategory(category)}
+                className={`${tabClasses} ${
+                  activeGemCategory === category
+                    ? 'bg-primary text-white'
+                    : 'bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <GemGrid 
+          gems={gemCategories[activeGemCategory]}
+          variant="scroll"
+          maxItems={16}
+          repeatInScroll={true}
+          className="px-8"
+        />
+
+        <div className="flex justify-center mt-12">
+          <Link href="/experts">
+            <button className={primaryButtonClasses}>
+              View All Experts <ChevronRight className="ml-1 h-4 w-4" />
+            </button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Create Expert Profile Section */}
       <GradientSection theme="pink">
         <div className="container mx-auto px-4 py-20">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="flex-1">
-              <h2 className="text-3xl font-bold mb-4">Create Your Character</h2>
+              <h2 className="text-3xl font-bold mb-4">Create Your Expert Profile</h2>
               <p className="text-lg mb-6">
-                Bring to life historical figures and remarkable minds with our advanced character creator.
+                Share your knowledge and expertise with the world through our advanced AI-powered expert system.
               </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center">
                   <span className="mr-3 text-primary"><CheckCircle size={20} /></span>
-                  <span>Detailed personality profiles</span>
+                  <span>Detailed expert profiles</span>
                 </li>
                 <li className="flex items-center">
                   <span className="mr-3 text-primary"><CheckCircle size={20} /></span>
-                  <span>Historical accuracy and depth</span>
+                  <span>Advanced knowledge sharing</span>
                 </li>
                 <li className="flex items-center">
                   <span className="mr-3 text-primary"><CheckCircle size={20} /></span>
                   <span>Interactive conversations</span>
                 </li>
               </ul>
-              <Link href="/create" className="btn btn-primary">
+              <Link href="/create" className={primaryButtonClasses}>
                 Start Creating
               </Link>
             </div>
@@ -450,12 +451,12 @@ const HomePage = () => {
                 </div>
                 <div className="absolute" style={{ opacity: 1, top: 90, left: 50 }}>
                   <svg viewBox="0 0 24 24" fill="none" height={32} width={32} className="text-accent">
-                    <path d="M16 8a1 1 0 1 0-2 0c0 2.309-.51 3.742-1.384 4.616S10.309 14 8 14a1 1 0 1 0 0 2c2.309 0 3.742.51 4.616 1.384S14 19.692 14 22a1 1 0 1 0 2 0c0-2.308.51-3.742 1.384-4.616S19.692 16 22 16a1 1 0 1 0 0-2c-2.308 0-3.742-.51-4.616-1.384S16 10.309 16 8M7.5 2a1 1 0 0 0-2 0c0 1.44-.32 2.25-.785 2.715C4.249 5.18 3.44 5.5 2 5.5a1 1 0 0 0 0 2c1.44 0 2.25.32 2.715.785C5.18 8.751 5.5 9.56 5.5 11a1 1 0 1 0 2 0c0-1.44.32-2.25.785-2.715C8.751 7.82 9.56 7.5 11 7.5a1 1 0 1 0 0-2c-1.44 0-2.25-.32-2.715-.785C7.82 4.249 7.5 3.44 7.5 2" fill="currentColor" />
+                    <path d="M16 8a1 1 0 1 0-2 0c0 2.309-.51 3.742-1.384 4.616S10.309 14 8 14a1 1 0 1 0 0 2c2.309 0 3.742.51 4.616 1.384S14 19.692 14 22a1 1 0 1 0 2 0c0-2.308.51-3.742 1.384-4.616S19.692 16 22 16a1 1 0 1 0 0-2c-2.308 0-3.742-.51-4.616-1.384S16 10.309 16 8" fill="currentColor" />
                   </svg>
                 </div>
                 <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
                   <div className="w-[250px] h-[250px] bg-card rounded-xl shadow-lg overflow-hidden relative">
-                    <Image alt="Create character" src="/gradients/mobile/GV-Gradient-04.png" fill style={{ objectFit: 'cover' }} />
+                    <Image alt="Create expert profile" src="/gradients/mobile/GV-Gradient-04.png" fill style={{ objectFit: 'cover' }} />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-white text-center p-4">
                         <Sparkles className="h-12 w-12 mx-auto mb-4" />
@@ -480,10 +481,10 @@ const HomePage = () => {
               <span>]</span>
             </div>
             <h2 className="text-balance text-3xl md:text-4xl tracking-tight font-semibold">
-              Advanced Gem Mechanics
+              Advanced Expert Mechanics
             </h2>
             <p className="text-muted-foreground max-w-2xl mt-4">
-              Our advanced gem system uses quantum principles to create more realistic and insightful character interactions
+              Our advanced expert system uses quantum principles to create more realistic and insightful expert interactions
             </p>
           </div>
           
@@ -493,7 +494,7 @@ const HomePage = () => {
                 <Zap size={24} className="text-primary" />
               </div>
               <h3 className="text-xl font-medium mb-3">Quantum Coherence</h3>
-              <p className="text-muted-foreground">Maintains consistency between a gem's vision and their message for a more cohesive experience.</p>
+              <p className="text-muted-foreground">Maintains consistency between an expert's vision and their message for a more cohesive experience.</p>
             </div>
             
             <div className="bg-card/5 p-8 rounded-xl hover:shadow-md transition-all border border-border/30">
@@ -501,7 +502,7 @@ const HomePage = () => {
                 <Activity size={24} className="text-primary" />
               </div>
               <h3 className="text-xl font-medium mb-3">Energy Simulation</h3>
-              <p className="text-muted-foreground">Dynamically adjusts the activity and impact level of each gem based on context and interaction.</p>
+              <p className="text-muted-foreground">Dynamically adjusts the activity and impact level of each expert based on context and interaction.</p>
             </div>
             
             <div className="bg-card/5 p-8 rounded-xl hover:shadow-md transition-all border border-border/30">
@@ -509,7 +510,7 @@ const HomePage = () => {
                 <Compass size={24} className="text-primary" />
               </div>
               <h3 className="text-xl font-medium mb-3">Phase Tracking</h3>
-              <p className="text-muted-foreground">Represents the journey and evolution stage of each gem's development and insight generation.</p>
+              <p className="text-muted-foreground">Represents the journey and evolution stage of each expert's development and insight generation.</p>
             </div>
             
             <div className="bg-card/5 p-8 rounded-xl hover:shadow-md transition-all border border-border/30">
@@ -519,95 +520,36 @@ const HomePage = () => {
                         stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <h3 className="text-xl font-medium mb-3">Gem Entanglement</h3>
-              <p className="text-muted-foreground">Creates meaningful connections between different gems based on their quantum states.</p>
+              <h3 className="text-xl font-medium mb-3">Expert Entanglement</h3>
+              <p className="text-muted-foreground">Creates meaningful connections between different experts based on their quantum states.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Additional Gems Slider - Historical Innovators */}
+      {/* Additional Experts Slider - Business & Finance */}
       <section className="w-full py-24 bg-card/5 border-t border-border/30">
         <div className="mx-auto w-full px-6 xl:max-w-7xl">
           <div className="mb-12">
             <div className="mono-tag flex items-center gap-2 text-sm mb-6">
               <span>[</span>
-              <span>Historical innovators</span>
+              <span>Business & Finance</span>
               <span>]</span>
             </div>
             <h2 className="text-balance text-3xl md:text-4xl tracking-tight font-semibold">
-              Explore Innovation Across Time
+              Explore Expertise in Business & Finance
             </h2>
             <p className="text-muted-foreground max-w-2xl mt-4">
-              Interact with the greatest innovators throughout history and understand their groundbreaking ideas
+              Interact with leading experts in business and finance and gain valuable insights from their years of experience
             </p>
           </div>
           
-          {/* GemCards Slider */}
-          <div className="relative">
-            {/* Navigation Buttons */}
-            <button 
-              className="absolute -left-4 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md text-primary hover:bg-background border border-border/30 hover:border-primary/30 transition-colors"
-              aria-label="Previous"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="m15 18-6-6 6-6"/></svg>
-            </button>
-            
-            <button 
-              className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-10 w-10 h-10 bg-background/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md text-primary hover:bg-background border border-border/30 hover:border-primary/30 transition-colors"
-              aria-label="Next"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="m9 18 6-6-6-6"/></svg>
-            </button>
-            
-            {/* Cards Slider */}
-            <div className="overflow-x-scroll hide-scrollbar pb-4">
-              <div className="flex gap-4 min-w-max">
-                {[...gemCategories['Innovators & Thinkers'], ...gemCategories['Innovators & Thinkers']]
-                  .slice(0, 16)
-                  .map((gem, index) => (
-                  <div key={index} className="w-[270px] flex-shrink-0">
-                    <Link href={`/gems/${gem.name.toLowerCase().replace(/\s+/g, '-')}`}>
-                      <div className="group h-[320px] bg-card hover:bg-card/80 rounded-xl overflow-hidden transition-all duration-200 hover:shadow-lg relative border border-border/60">
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10"></div>
-                        <Image
-                          src={'/gradients/mobile/GV-Gradient-05.png'}
-                          alt={gem.name}
-                          width={300}
-                          height={400}
-                          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute top-3 right-3 z-20 bg-black/60 backdrop-blur-sm rounded-full px-2 py-0.5">
-                          <div className="flex items-center gap-1">
-                            <Star size={14} className="text-yellow-400" />
-                            <span className="text-xs text-white">{gem.energyLevel}%</span>
-                          </div>
-                        </div>
-                        <div className="absolute bottom-0 left-0 right-0 p-5 z-20">
-                          <div className="flex flex-col">
-                            <p className="text-white text-lg font-medium mb-1">{gem.name}</p>
-                            <p className="text-white/80 text-xs line-clamp-2">{gem.description}</p>
-                            <div className="flex gap-2 mt-3">
-                              {gem.expertise && gem.expertise.slice(0, 2).map((exp: string, idx: number) => (
-                                <span key={idx} className="text-xs bg-white/20 text-white px-2 py-0.5 rounded-full">
-                                  {exp}
-                                </span>
-                              ))}
-                              {gem.expertise && gem.expertise.length > 2 && (
-                                <span className="text-xs bg-white/20 text-white px-2 py-0.5 rounded-full">
-                                  +{gem.expertise.length - 2}
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <GemGrid 
+            gems={gemCategories['Business & Finance']}
+            variant="scroll"
+            maxItems={16}
+            className="px-8"
+          />
         </div>
       </section>
 
@@ -622,7 +564,7 @@ const HomePage = () => {
             </div>
             <h2 className="text-3xl font-semibold mb-2 text-center">Start Your Journey</h2>
             <p className="text-lg text-muted-foreground mb-12 text-center max-w-2xl">
-              Explore a world of ideas and insights through our collection of gems
+              Explore a world of expertise and insights through our collection of experts
             </p>
             
             <div className="w-full flex justify-center">
@@ -656,7 +598,7 @@ const HomePage = () => {
                 <span>]</span>
               </div>
               <p className="text-muted-foreground mb-6 max-w-md">
-                Connect with the wisdom and insights of historical figures through our advanced quantum-powered gem system.
+                Connect with the wisdom and insights of experts through our advanced quantum-powered expert system.
               </p>
               <div className="flex space-x-4">
                 <a href="#" className="w-10 h-10 rounded-full bg-card/20 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-card/40 transition-colors">
@@ -677,7 +619,7 @@ const HomePage = () => {
                 <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Quantum Coherence</a></li>
                 <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Energy Simulation</a></li>
                 <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Phase Tracking</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Gem Entanglement</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Expert Entanglement</a></li>
               </ul>
             </div>
             
