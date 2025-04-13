@@ -53,6 +53,7 @@ const config: Config = {
       },
       backgroundImage: {
         'gradient-dark-light': "url('/gradients/named/GV-Gradient-Dark-Light.png')",
+        'gradient-dark-light-dark': "url('/gradients/named/GV-Gradient-Dark-Light-Dark.png')",
         'gradient-purple-pink': "url('/gradients/named/GV-Gradient-Purple-Pink.png')",
         'gradient-pink-purple': "url('/gradients/named/GV-Gradient-Pink-Purple.png')",
         'gradient-purple-pink-purple': "url('/gradients/named/GV-Gradient-Purple-Pink-Purple.png')",
