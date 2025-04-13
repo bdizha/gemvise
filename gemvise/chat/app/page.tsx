@@ -11,8 +11,8 @@ const expertCards: SliderCardProps[] = [
   {
     title: "Warren Buffett on Value Investing & Wealth Building",
     description: "Learn investment strategies and wisdom from the Oracle of Omaha.",
-    imageSrc: "/gradients/dark-light-dark.png",
-    status: "featured",
+    imageSrc: "/gradients/GV-Gradient-01.png",
+    status: "Featured",
     href: "/expert/warren-buffett",
     buttonText: "Start Learning",
     videoSrc: "/experts/warren-buffett-preview.mp4"
@@ -20,32 +20,32 @@ const expertCards: SliderCardProps[] = [
   {
     title: "Master Culinary Arts with Gordon Ramsay",
     description: "Master culinary techniques and recipes with personalized guidance.",
-    imageSrc: "/gradients/dark-light-dark.png",
-    status: "popular",
+    imageSrc: "/gradients/GV-Gradient-02.png",
+    status: "Popular",
     href: "/expert/gordon-ramsay",
     buttonText: "Start Cooking"
   },
   {
     title: "Innovation & Technology with Elon Musk",
     description: "Explore technology, innovation, and entrepreneurship through the lens of a visionary.",
-    imageSrc: "/gradients/dark-light-dark.png",
-    status: "trending",
+    imageSrc: "/gradients/GV-Gradient-03.png",
+    status: "Trending",
     href: "/expert/elon-musk",
     buttonText: "Explore Ideas"
   },
   {
     title: "Life Design & Organization with Marie Kondo",
     description: "Transform your space and life with the KonMari method.",
-    imageSrc: "/gradients/dark-light-dark.png",
-    status: "available",
+    imageSrc: "/gradients/GV-Gradient-04.png",
+    status: "Available",
     href: "/expert/marie-kondo",
     buttonText: "Start Organizing"
   },
   {
     title: "Leadership & Public Service with Michelle Obama",
     description: "Learn about leadership, public service, and personal growth from the former First Lady.",
-    imageSrc: "/gradients/dark-light-dark.png",
-    status: "featured",
+    imageSrc: "/gradients/GV-Gradient-05.png",
+    status: "Featured",
     href: "/expert/michelle-obama",
     buttonText: "Learn More"
   }
@@ -59,7 +59,6 @@ const mockGems: Gem[] = [
     description: 'Learn value investing from the Oracle of Omaha',
     category: 'Finance',
     imageUrl: '/experts/warren-buffett.jpg',
-    gradient: 'bg-gradient-to-r from-[#333] to-[#666] to-[#333]',
     expertise: ['Value Investing', 'Business Analysis', 'Market Strategy'],
     followers: 1000000,
     chatCount: 50000
@@ -71,7 +70,6 @@ const mockGems: Gem[] = [
     description: 'Master the art of tidying up and organizing',
     category: 'Lifestyle',
     imageUrl: '/experts/marie-kondo.jpg',
-    gradient: 'bg-gradient-to-r from-[#333] to-[#666] to-[#333]',
     expertise: ['Organization', 'Minimalism', 'Home Design'],
     followers: 500000,
     chatCount: 25000
@@ -83,7 +81,6 @@ const mockGems: Gem[] = [
     description: 'Master the art of cooking with a world-renowned chef.',
     category: 'Cooking',
     imageUrl: '/gradients/mobile/GV-Gradient-03.png',
-    gradient: 'bg-gradient-to-r from-[#333] to-[#666] to-[#333]',
     expertise: ['Culinary Arts', 'Restaurant Management', 'Food Critique'],
     followers: 750000,
     chatCount: 35000

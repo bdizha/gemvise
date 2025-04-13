@@ -25,19 +25,16 @@ const SliderCard: React.FC<SliderCardProps> = ({
   videoSrc
 }) => (
   <div 
-    className="flex flex-col w-[490px] md:w-[350px] text-left md:block bg-white dark:bg-[#232f3e] p-[12px] pb-[30px] md:pb-[20px] rounded-[60px] md:rounded-[40px] mb-[35px] mr-[40px] md:mr-[30px] shrink-0 border border-[#d5d9d9] dark:border-[#3f4b58]"
-    style={{
-      boxShadow: '0px 1px 1px 0px rgba(0, 0, 0, 0.08)'
-    }}
+    className="flex flex-col w-[490px] md:w-[350px] text-left md:block bg-gradient-to-br from-[#232f3e] via-white to-[#232f3e] dark:from-[#232f3e] dark:via-[#3f4b58] dark:to-[#232f3e] p-[12px] pb-[30px] md:pb-[20px] rounded-[60px] md:rounded-[40px] mb-[35px] mr-[40px] md:mr-[30px] shrink-0 hover:shadow-lg transition-shadow duration-300"
   >
     <div className="w-full md:relative">
       <div className="block relative text-0 mb-[30px] md:mb-[16px] rounded-t-[46px] rounded-b-[32px] md:rounded-[32px] overflow-hidden">
-        <div className="relative w-full aspect-[473/187] md:aspect-[350/187] bg-gradient-to-br from-[#232f3e] via-white to-[#232f3e]">
+        <div className="relative w-full aspect-[473/187] md:aspect-[350/187]">
           <Image
             src={imageSrc}
             alt={title}
             fill
-            className="w-full h-full object-cover mix-blend-overlay"
+            className="w-full h-full object-cover mix-blend-multiply dark:mix-blend-soft-light"
             loading="lazy"
           />
           {videoSrc && (
@@ -50,7 +47,7 @@ const SliderCard: React.FC<SliderCardProps> = ({
                     preload="none"
                     playsInline
                     src={videoSrc}
-                    className="mix-blend-overlay"
+                    className="mix-blend-multiply dark:mix-blend-soft-light"
                   />
                 </div>
                 <div className="absolute inset-0">
@@ -58,7 +55,7 @@ const SliderCard: React.FC<SliderCardProps> = ({
                     src={imageSrc}
                     alt={title}
                     fill
-                    className="object-cover transform transition-all duration-250 ease-in-out z-0 group-hover:opacity-0 mix-blend-overlay"
+                    className="object-cover transform transition-all duration-250 ease-in-out z-0 group-hover:opacity-0 mix-blend-multiply dark:mix-blend-soft-light"
                     loading="lazy"
                   />
                 </div>
@@ -71,7 +68,7 @@ const SliderCard: React.FC<SliderCardProps> = ({
 
     <div className="flex-grow flex flex-col w-full md:w-full md:px-[20px] px-[22px] md:pt-[24px]">
       <div className="mb-[10px]">
-        <span className="underline uppercase font-[600] text-[14px] underline-offset-[0.1em] md:text-[12px] mb-[0.5em] text-[#ff9900] dark:text-[#ff9900] tracking-[0.02em]">
+        <span className="font-[600] text-[14px] md:text-[12px] mb-[0.5em] text-[#ff9900] dark:text-[#ff9900] tracking-[0.02em]">
           {status}
         </span>
       </div>

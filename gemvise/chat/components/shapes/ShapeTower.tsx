@@ -1,56 +1,94 @@
+import { type FC } from 'react';
 import Image from 'next/image';
-import { FC } from 'react';
+
+export type ShapeVariant = 
+  | 'dark-light-dark'
+  | 'dark-light'
+  | 'light-dark'
+  | 'pink-purple-pink'
+  | 'pink-purple'
+  | 'purple-pink-purple'
+  | 'purple-pink';
 
 interface ShapeTowerProps {
-  levels?: number;
-  baseWidth?: number;
-  baseHeight?: number;
-  scaleRatio?: number;
+  variant?: ShapeVariant;
   className?: string;
 }
 
-const ShapeTower: FC<ShapeTowerProps> = ({
-  levels = 3,
-  baseWidth = 64,
-  baseHeight = 64,
-  scaleRatio = 0.64,
+const getIconPath = (variant: ShapeVariant) => {
+  const iconMap = {
+    'dark-light-dark': '/icons/ICON-DARK-LIGHT-DARK.png',
+    'dark-light': '/icons/ICON-DARK-LIGHT.png',
+    'light-dark': '/icons/ICON-LIGHT-DARK-LIGHT.png',
+    'pink-purple-pink': '/icons/ICON-PINK-PURPLE-PINK.png',
+    'pink-purple': '/icons/ICON-PINK-PURPLE.png',
+    'purple-pink-purple': '/icons/ICON-PURPLE-PINK-PURPLE.png',
+    'purple-pink': '/icons/ICON-PURPLE-PINK.png'
+  };
+  return iconMap[variant];
+};
+
+const getGradientPath = (variant: ShapeVariant) => {
+  const gradientMap = {
+    'dark-light-dark': '/gradients/named/GV-Gradient-Dark-Light-Dark.png',
+    'dark-light': '/gradients/named/GV-Gradient-Dark-Light.png',
+    'light-dark': '/gradients/named/GV-Gradient-Light-Dark.png',
+    'pink-purple-pink': '/gradients/named/GV-Gradient-Pink-Purple-Pink.png',
+    'pink-purple': '/gradients/named/GV-Gradient-Pink-Purple.png',
+    'purple-pink-purple': '/gradients/named/GV-Gradient-Purple-Pink-Purple.png',
+    'purple-pink': '/gradients/named/GV-Gradient-Purple-Pink.png'
+  };
+  return gradientMap[variant];
+};
+
+const ShapeTower: FC<ShapeTowerProps> = ({ 
+  variant = 'dark-light-dark',
   className = ''
 }) => {
-  const shapes = Array.from({ length: levels }, (_, index) => {
-    const scale = Math.pow(scaleRatio, index);
-    const width = baseWidth * scale;
-    const height = baseHeight * scale;
-    
-    return {
-      width,
-      height,
-      scale
-    };
-  });
+  const iconPath = getIconPath(variant);
+  const gradientPath = getGradientPath(variant);
 
   return (
-    <div className={`relative flex flex-col items-center justify-center p-8 ${className}`} style={{ height: baseHeight, width: baseWidth }}>
-      {shapes.map((shape, index) => (
-        <div
-          key={index}
-          className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
-          style={{
-            zIndex: levels - index,
-            width: shape.width,
-            height: shape.height,
-            transform: `translate(-50%, -50%) ${index % 2 === 1 ? 'scaleX(-1)' : ''}`
-          }}
-        >
-          <Image
-            src="/icons/GV-LOGO-02-WOT.png"
-            alt={`Tower level ${index + 1}`}
-            width={shape.width}
-            height={shape.height}
-            className="w-auto h-auto"
-            priority
-          />
-        </div>
-      ))}
+    <div className={`relative w-full h-full ${className}`}>
+      {/* Background Square */}
+      <div className="absolute inset-0 rounded-2xl overflow-hidden">
+        <Image
+          src={gradientPath}
+          alt=""
+          fill
+          className="object-cover"
+          loading="lazy"
+        />
+      </div>
+
+      {/* Tower Elements */}
+      <div className="relative w-full h-full">
+        {Array.from({ length: 12 }).map((_, index) => {
+          const scale = Math.pow(0.9, index);
+          const opacity = 1 - (index * 0.05);
+          
+          return (
+            <div
+              key={index}
+              className="absolute inset-0 flex items-center justify-center"
+              style={{
+                transform: `scale(${scale})`,
+                opacity
+              }}
+            >
+              <div className="relative w-full h-full">
+                <Image
+                  src={iconPath}
+                  alt=""
+                  fill
+                  className="object-contain"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
