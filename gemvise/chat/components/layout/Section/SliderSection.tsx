@@ -139,12 +139,12 @@ const SliderSection: React.FC<SliderSectionProps> = ({ title, cards }) => {
   };
 
   return (
-    <section className="block px-6 pt-[130px] md:pt-[80px] md:px-0">
+    <section className="block">
       <div className="max-w-[1920px] mx-auto">
         <div className="relative">
           <div className="md:px-[20px]">
             <nav className="flex items-center justify-between relative w-full mb-[50px] md:mb-[30px]">
-              <h2 className="font-sans text-[32px] md:pr-0 mb-[10px] md:text-left">
+              <h2 className="font-sans text-[32px] md:pr-0 mb-[10px] md:text-left text-[#0f1111] dark:text-white">
                 {title}
               </h2>
               <div className="space-x-[10px] flex items-center text-0 md:hidden">

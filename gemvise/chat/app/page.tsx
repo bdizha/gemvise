@@ -98,7 +98,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#F4EFED]">
+    <main>
       <SliderSection
         title="Featured Experts"
         cards={expertCards}
