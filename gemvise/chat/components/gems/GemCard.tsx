@@ -1,76 +1,56 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import Card from '@/components/ui/Card';
+import type { GemCardProps } from '@/types/gems';
 
-interface GemCardProps {
-  gem?: {
-    id?: string;
-    name?: string;
-    description?: string;
-    image?: string;
-    category?: string;
-    followers?: number;
-    expertise?: string[];
-    chatCount?: string | number;
-    energyLevel?: number;
+const GemCard: React.FC<GemCardProps> = ({ gem, onClick }) => {
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    onClick(gem.id);
   };
-  onClick?: () => void;
-}
-
-const GemCard: React.FC<GemCardProps> = ({ gem = {}, onClick }) => {
-  const {
-    id = '',
-    name = 'Untitled Gem',
-    description = 'No description available',
-    category = 'General',
-    followers = 0,
-    chatCount = 0,
-  } = gem;
-
-  const chatCountNum = typeof chatCount === 'string' ? parseInt(chatCount, 10) : chatCount;
 
   return (
-    <Card
-      className="relative overflow-hidden cursor-pointer h-[300px] group"
-      onClick={onClick}
-      data-testid="discover-card"
-      style={{
-        borderRadius: '28px',
-        backgroundImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url(/gradients/mobile/GV-Gradient-04.png)',
-        backgroundSize: 'cover'
-      }}
+    <div
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer transform transition-transform duration-200 hover:scale-105"
+      onClick={handleClick}
+      data-testid="gem-card"
     >
-      <div className="relative h-full flex flex-col justify-end p-6 text-white">
-        <div className="mb-6">
-          <Image
-            src="/gradients/mobile/GV-Gradient-01.png"
-            alt={name}
-            width={80}
-            height={80}
-            className="rounded-full"
-          />
-        </div>
-        <h3 className="text-2xl font-bold text-white">{name}</h3>
-        <p className="mt-2 text-white/90">{description}</p>
-        <div className="mt-4 flex items-center space-x-2">
-          {category && (
-            <>
-              <span className="text-sm text-white/80">{category}</span>
-              <span className="text-sm text-white/80">•</span>
-            </>
-          )}
-          {followers > 0 && (
-            <span className="text-sm text-white/80">{followers} followers</span>
-          )}
-          {chatCountNum > 0 && (
-            <span className="text-sm text-white/80">{chatCount} chats</span>
-          )}
+      <div className="relative h-48">
+        <img
+          src={gem.imageUrl}
+          alt={gem.name}
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        <div className="absolute bottom-4 left-4 text-white">
+          <h3 className="text-xl font-bold">{gem.name}</h3>
+          <p className="text-sm opacity-90">{gem.title}</p>
         </div>
       </div>
-    </Card>
+      <div className="p-4">
+        <p className="text-gray-600 dark:text-gray-300 text-sm">{gem.description}</p>
+        <div className="mt-4 flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+          <div className="flex items-center space-x-2">
+            <span>{gem.followers?.toLocaleString() ?? 0} followers</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <span>{gem.chatCount?.toLocaleString() ?? 0} chats</span>
+          </div>
+        </div>
+        {gem.expertise && gem.expertise.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {gem.expertise.map((skill) => (
+              <span
+                key={skill}
+                className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 
