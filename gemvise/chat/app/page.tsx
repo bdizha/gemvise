@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import * as React from 'react';
 import { useRouter } from 'next/navigation';
 
 interface Gem {
@@ -51,7 +51,7 @@ const mockGems: Gem[] = [
   }
 ];
 
-export default function Page() {
+export default function Page(): JSX.Element {
   const router = useRouter();
 
   const handleGemClick = (gemId: string) => {
@@ -59,32 +59,34 @@ export default function Page() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">Featured Gems</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {mockGems.map((gem) => (
-          <div
-            key={gem.id}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow duration-200"
-            onClick={() => handleGemClick(gem.id)}
-          >
-            <div className="relative h-40 mb-4">
-              <img
-                src={gem.imageUrl}
-                alt={gem.name}
-                className="w-full h-full object-cover rounded-lg"
-              />
+    <main className="min-h-screen">
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-2xl font-bold mb-6">Featured Gems</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {mockGems.map((gem) => (
+            <div
+              key={gem.id}
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-shadow duration-200"
+              onClick={() => handleGemClick(gem.id)}
+            >
+              <div className="relative h-40 mb-4">
+                <img
+                  src={gem.imageUrl}
+                  alt={gem.name}
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              </div>
+              <h2 className="text-xl font-semibold mb-2">{gem.name}</h2>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{gem.title}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{gem.description}</p>
+              <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400">
+                <span>{gem.followers.toLocaleString()} followers</span>
+                <span>{gem.chatCount.toLocaleString()} chats</span>
+              </div>
             </div>
-            <h2 className="text-xl font-semibold mb-2">{gem.name}</h2>
-            <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{gem.title}</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">{gem.description}</p>
-            <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400">
-              <span>{gem.followers.toLocaleString()} followers</span>
-              <span>{gem.chatCount.toLocaleString()} chats</span>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

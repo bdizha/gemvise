@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import Image from 'next/image';
+import { useTheme } from 'next-themes';
 
 // Import gems data
 const gems = [
@@ -30,6 +31,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, className }) => {
   const pathname = usePathname();
   const isMobile = useMediaQuery('(max-width: 768px)');
+  const { theme } = useTheme();
 
   return (
     <aside 
@@ -45,7 +47,22 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, className }) => {
           data-testid="sidebar-logo"
         >
           <Link href="/" className="flex items-center space-x-2">
-            <Image src="/logo.svg" alt="GemVise" width={32} height={32} />
+              <Image
+                src={theme === 'light' ? '/icons/ICON-DARK.png' : '/icons/ICON-WHITE.png'}
+                alt="GemVise Icon"
+                width={32}
+                height={32}
+                priority
+                className="object-contain"
+              />
+              <Image
+                src={theme === 'light' ? '/logos/LOGO-DARK.png' : '/logos/LOGO-WHITE.png'}
+                alt="GemVise Logo"
+                width={32}
+                height={25}
+                priority
+                className="object-contain"
+              />
             <span className="text-xl font-bold">GemVise</span>
           </Link>
         </div>
