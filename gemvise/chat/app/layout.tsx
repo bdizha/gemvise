@@ -18,7 +18,7 @@ const RootLayout = ({
 }) => {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${GeistSans.className} ${GeistMono.className}`}>
+      <body className={GeistSans.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ClientLayout>
             {children}

@@ -1,7 +1,8 @@
 'use client';
 
 import { type FC } from 'react';
-import Section from '@/components/layout/Section';
+import DefaultSection from '@/components/layout/Section/DefaultSection';
+import GradientSection from '@/components/layout/Section/GradientSection';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 
@@ -36,31 +37,27 @@ const AboutPage: FC = () => {
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#232f3e] to-[#0f1111]">
       {/* Story Section */}
-      <Section
-        variant="gradient"
-        className="py-20"
+      <GradientSection
         tag="Our Story"
         title="Shaping the Next Era of Interaction, Creativity, and Ownership"
         description="GemVise is pioneering a new frontier where imagination meets technology, empowering creators to build and own unique AI experiences."
+        className="py-20"
       />
 
       {/* Vision Section */}
-      <Section
-        variant="default"
-        className="py-20"
+      <DefaultSection
         tag="Our Vision"
         title="Beyond Chat: Building the GemVerse"
         description="We're creating more than just a platform - we're building a future where digital creation has tangible value. Our vision extends to the GemVerse, an immersive virtual world where AI companions come to life in ways never before possible."
+        className="py-20"
       />
 
       {/* Values Section */}
-      <Section
-        variant="values"
-        className="py-20"
+      <DefaultSection
         tag="Our Values"
         title="What Drives Us Forward"
         description="We believe in a future where creativity is recognized, rewarded, and brought to life through cutting-edge technology."
-        values={values}
+        className="py-20"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {values.map((value, index) => (
@@ -73,15 +70,14 @@ const AboutPage: FC = () => {
             </Card>
           ))}
         </div>
-      </Section>
+      </DefaultSection>
 
       {/* Team Section */}
-      <Section
-        variant="gradient"
-        className="py-20"
+      <GradientSection
         tag="Join Our Team"
         title="Shape the Future With Us"
         description="We're looking for passionate innovators who want to push the boundaries of AI interaction, blockchain integration, and virtual world development."
+        className="py-20"
       >
         <div className="flex justify-center mt-8">
           <Button 
@@ -93,24 +89,22 @@ const AboutPage: FC = () => {
             View Open Positions
           </Button>
         </div>
-      </Section>
+      </GradientSection>
 
       {/* Location Section */}
-      <Section
-        variant="gradient"
-        className="py-20"
+      <GradientSection
         tag="Our Location"
         title="Silicon Valley & Beyond"
         description="Headquartered in the heart of innovation, with a distributed team of experts working globally to bring the GemVerse to life."
+        className="py-20"
       />
 
       {/* Contact Section */}
-      <Section
-        variant="default"
-        className="py-20"
+      <DefaultSection
         tag="Connect With Us"
         title="Join Our Community"
         description="Be part of a passionate community of creators, storytellers, and explorers shaping the future of interactive entertainment."
+        className="py-20"
       >
         <div className="flex justify-center gap-6 mt-8">
           <a href="https://discord.gg/gemvise" className="text-[#d5d9d9] hover:text-[#ff9900] transition-colors">Discord</a>
@@ -119,7 +113,7 @@ const AboutPage: FC = () => {
           <span className="text-[#5f6b7a]">•</span>
           <a href="mailto:hello@gemvise.com" className="text-[#d5d9d9] hover:text-[#ff9900] transition-colors">Email</a>
         </div>
-      </Section>
+      </DefaultSection>
     </main>
   );
 };
