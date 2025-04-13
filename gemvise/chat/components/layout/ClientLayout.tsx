@@ -16,14 +16,22 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header onToggleSidebar={handleToggleSidebar} showLogo={!isSidebarOpen} />
-      <div className="flex-1 flex">
-        <Sidebar isOpen={isSidebarOpen} />
-        <main className={`flex-1 transition-all duration-200 ${isSidebarOpen ? 'ml-64' : 'ml-0'}`}>
+    <div className="min-h-screen bg-background">
+      <Header onToggleSidebar={handleToggleSidebar} showLogo={!isSidebarOpen} sidebarOpen={isSidebarOpen} />
+      <Sidebar isOpen={isSidebarOpen} />
+      <main 
+        className={`
+          min-h-[calc(100vh-4rem)]
+          pt-16 
+          transition-all 
+          duration-200 
+          ${isSidebarOpen ? 'lg:pl-64' : 'lg:pl-0'}
+        `}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {children}
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 };

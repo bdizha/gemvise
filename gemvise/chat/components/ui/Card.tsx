@@ -13,10 +13,10 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={clsx(
-          'rounded-2xl bg-background p-6 shadow-lg transition-all duration-200',
-          'dark:bg-background-dark dark:border-border-dark',
-          interactive && 'hover:shadow-xl hover:-translate-y-2 cursor-pointer',
-          gradient && 'bg-gradient-to-br from-primary to-secondary text-white',
+          'rounded-lg bg-white border border-[#d5d9d9] p-4 shadow-sm transition-all duration-200',
+          'dark:bg-[#232f3e] dark:border-[#3f4b58] dark:text-white',
+          interactive && 'hover:shadow-md hover:border-[#0972d3] cursor-pointer',
+          gradient && 'bg-gradient-to-br from-[#ff9900] to-[#ffac31] text-[#0f1111]',
           className
         )}
         style={{ fontFamily: 'var(--font-primary)' }}
@@ -29,64 +29,69 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
   }
 );
 
-const CardHeader = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={clsx('p-6 -mx-6 -mt-6 mb-6 border-b border-gray-200 dark:border-gray-800 rounded-t-2xl', className)}
-        style={{ fontFamily: 'var(--font-primary)' }}
-        data-testid="card-header"
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
-
-const CardContent = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={clsx('p-6 -mx-6', className)}
-        style={{ fontFamily: 'var(--font-primary)' }}
-        data-testid="card-content"
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
-
-const CardFooter = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={clsx('p-6 -mx-6 -mb-6 mt-6 border-t border-gray-200 dark:border-gray-800 rounded-b-2xl', className)}
-        style={{ fontFamily: 'var(--font-primary)' }}
-        data-testid="card-footer"
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
-
 Card.displayName = 'Card';
+
+interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={clsx('mb-4 text-lg font-semibold', className)}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
 CardHeader.displayName = 'CardHeader';
+
+interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <div ref={ref} className={clsx('text-sm', className)} {...props}>
+        {children}
+      </div>
+    );
+  }
+);
+
 CardContent.displayName = 'CardContent';
+
+interface CardFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={clsx('mt-4 text-sm text-[#5f6b7a]', className)}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
 CardFooter.displayName = 'CardFooter';
 
-type CardComponent = typeof Card & {
+interface CardComponent extends React.ForwardRefExoticComponent<CardProps> {
   Header: typeof CardHeader;
   Content: typeof CardContent;
   Footer: typeof CardFooter;
-};
+}
 
 const CardWithComponents = Card as CardComponent;
 CardWithComponents.Header = CardHeader;

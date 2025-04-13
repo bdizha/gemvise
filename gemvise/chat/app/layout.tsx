@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import './globals.css';

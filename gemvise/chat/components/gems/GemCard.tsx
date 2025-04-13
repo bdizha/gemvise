@@ -1,54 +1,35 @@
 'use client';
 
-import React from 'react';
+import { type FC } from 'react';
+import Link from 'next/link';
+import ShapeTower from '@/components/shapes/ShapeTower';
 import type { GemCardProps } from '@/types/gems';
 
-const GemCard: React.FC<GemCardProps> = ({ gem, onClick }) => {
+const GemCard: FC<GemCardProps> = ({ gem, onClick }) => {
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    onClick(gem.id);
+    onClick?.(e);
   };
 
   return (
-    <div
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer transform transition-transform duration-200 hover:scale-105"
+    <div 
+      className="group relative h-[280px] rounded-3xl shadow-lg overflow-hidden cursor-pointer transform transition-transform duration-200 hover:scale-105"
       onClick={handleClick}
       data-testid="gem-card"
     >
-      <div className="relative h-48">
-        <img
-          src={gem.imageUrl}
-          alt={gem.name}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-        <div className="absolute bottom-4 left-4 text-white">
-          <h3 className="text-xl font-bold">{gem.name}</h3>
-          <p className="text-sm opacity-90">{gem.title}</p>
-        </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
+      <div className={`absolute inset-0 ${gem.gradient} opacity-90`} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32">
+        <ShapeTower className="w-full h-full text-white/90" />
       </div>
-      <div className="p-4">
-        <p className="text-gray-600 dark:text-gray-300 text-sm">{gem.description}</p>
-        <div className="mt-4 flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
-          <div className="flex items-center space-x-2">
-            <span>{gem.followers?.toLocaleString() ?? 0} followers</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <span>{gem.chatCount?.toLocaleString() ?? 0} chats</span>
-          </div>
+      <div className="absolute inset-x-0 bottom-0 p-6">
+        <div className="space-y-2">
+          <h3 className="font-semibold text-lg text-white line-clamp-1">
+            {gem.name}
+          </h3>
+          <p className="text-sm text-white/90 line-clamp-2">
+            {gem.description}
+          </p>
         </div>
-        {gem.expertise && gem.expertise.length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {gem.expertise.map((skill) => (
-              <span
-                key={skill}
-                className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded-full"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   );

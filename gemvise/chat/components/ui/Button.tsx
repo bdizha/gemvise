@@ -1,44 +1,47 @@
-import React, { useEffect, useRef } from 'react';
+'use client';
+
+import { forwardRef, useRef, type ButtonHTMLAttributes } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-full font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 relative overflow-hidden',
+  'relative flex items-center justify-center text-sm font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none',
   {
     variants: {
       variant: {
-        primary: 'bg-primary text-white hover:bg-primary/90 disabled:bg-primary/50',
-        secondary: 'bg-secondary text-white hover:bg-secondary/90 disabled:bg-secondary/50',
-        outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground disabled:bg-background/50',
-        ghost: 'bg-transparent hover:bg-accent hover:text-accent-foreground disabled:bg-transparent',
-        gradient: 'text-white bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 disabled:opacity-50',
+        default: 'bg-white text-[#232f3e] border border-[#d5d9d9] hover:bg-[#f7fafa] focus:ring-[#0972d3] shadow-sm',
+        primary: 'bg-gradient-to-r from-[#ff9900] to-[#ffac31] text-[#0f1111] hover:from-[#ffac31] hover:to-[#ffbd62] focus:ring-[#0972d3] shadow-sm',
+        secondary: 'bg-[#232f3e] text-white hover:bg-[#2f3f4f] focus:ring-[#0972d3] shadow-sm',
+        ghost: 'bg-transparent text-[#0f1111] dark:text-white hover:bg-[#f7fafa] dark:hover:bg-[#2f3f4f] focus:ring-[#0972d3]',
+        link: 'text-[#0972d3] hover:underline focus:ring-[#0972d3] bg-transparent',
+        icon: 'relative flex h-10 w-10 items-center justify-center rounded-lg bg-transparent text-[#0f1111] dark:text-white hover:bg-[#f7fafa] dark:hover:bg-[#2f3f4f] transition-colors'
       },
       size: {
-        sm: 'h-8 px-3 text-sm',
-        md: 'h-10 px-4',
-        lg: 'h-12 px-6 text-lg',
-      },
+        default: 'h-10 px-4 py-2 rounded-lg',
+        sm: 'h-8 px-3 rounded-md text-xs',
+        lg: 'h-12 px-6 rounded-lg text-base',
+        icon: 'h-10 w-10 rounded-lg'
+      }
     },
     defaultVariants: {
-      variant: 'primary',
-      size: 'md',
-    },
+      variant: 'default',
+      size: 'default'
+    }
   }
 );
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
   isLoading?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', isLoading, children, onClick, disabled, ...props }, ref) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, isLoading, asChild = false, children, onClick, disabled, ...props }, ref) => {
     const buttonRef = useRef<HTMLButtonElement>(null);
 
     const createRipple = (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (disabled) return;
-      
       const button = event.currentTarget;
       const ripple = document.createElement('span');
       const rect = button.getBoundingClientRect();
@@ -49,10 +52,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ripple.style.width = ripple.style.height = `${size}px`;
       ripple.style.left = `${x}px`;
       ripple.style.top = `${y}px`;
-      ripple.className = 'absolute rounded-full bg-white/20 animate-ripple';
+      ripple.className = 'ripple';
 
       button.appendChild(ripple);
-      setTimeout(() => ripple.remove(), 1000);
+
+      setTimeout(() => {
+        ripple.remove();
+      }, 600);
     };
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -62,43 +68,27 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       }
     };
 
+    const Comp = asChild ? 'span' : 'button';
+
     return (
-      <button
-        ref={buttonRef}
+      <Comp
         className={clsx(
-          buttonVariants({ variant, size, className }),
-          'font-primary',
-          isLoading && 'opacity-50 cursor-not-allowed',
-          disabled && 'cursor-not-allowed'
+          buttonVariants({ variant, size, className })
         )}
+        ref={ref}
         onClick={handleClick}
         disabled={disabled || isLoading}
         {...props}
       >
-        {isLoading && (
-          <svg
-            className="animate-spin -ml-1 mr-2 h-4 w-4"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-            />
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            />
-          </svg>
-        )}
-        {children}
-      </button>
+        {isLoading ? (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+          </div>
+        ) : null}
+        <span className={clsx('flex items-center gap-2', { 'opacity-0': isLoading })}>
+          {children}
+        </span>
+      </Comp>
     );
   }
 );

@@ -1,109 +1,95 @@
 'use client';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { type FC } from 'react';
 import clsx from 'clsx';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
-import Image from 'next/image';
-import { useTheme } from 'next-themes';
-
-// Import gems data
-const gems = [
-  { name: 'FDR', href: '/chat/fdr', icon: '🎩' },
-  { name: 'Churchill', href: '/chat/churchill', icon: '🎭' },
-  { name: 'Einstein', href: '/chat/einstein', icon: '🧠' },
-  { name: 'Turing', href: '/chat/turing', icon: '💻' },
-  { name: 'JFK', href: '/chat/jfk', icon: '🌟' },
-  { name: 'Sinatra', href: '/chat/sinatra', icon: '🎵' },
-];
-
-const categories = [
-  { name: 'New Chat', href: '/chat/new', icon: '💬' },
-  { name: 'Previous Chats', href: '/chat/history', icon: '📝' },
-];
+import { Home, Settings, Sparkles } from 'lucide-react';
+import { Logo } from '@/components/shared/Logo';
+import Button from '@/components/ui/Button';
+import { useRouter } from 'next/navigation';
 
 interface SidebarProps {
   isOpen: boolean;
   className?: string;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, className }) => {
-  const pathname = usePathname();
-  const isMobile = useMediaQuery('(max-width: 768px)');
-  const { theme } = useTheme();
+const Sidebar: FC<SidebarProps> = ({ isOpen, className }) => {
+  const router = useRouter();
 
   return (
-    <aside 
+    <aside
       className={clsx(
-        'fixed left-0 top-0 h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transition-all duration-200 overflow-hidden',
+        'fixed left-0 top-0 z-40 h-screen w-64 border-r border-[#d5d9d9] dark:border-[#3f4b58] bg-white dark:bg-[#232f3e] transition-transform duration-200',
+        isOpen ? 'translate-x-0' : '-translate-x-full',
         className
       )}
       data-testid="sidebar"
     >
-      <div className="p-4">
-        <div 
-          className={`transition-opacity duration-200 ${!isOpen ? 'opacity-0' : 'opacity-100'}`}
-          data-testid="sidebar-logo"
+      <div className="flex h-16 items-center justify-start border-b border-[#d5d9d9] dark:border-[#3f4b58] px-6">
+        <Logo variant="header" />
+      </div>
+
+      <nav className="flex flex-col gap-2 p-4">
+        <Button 
+          variant="ghost" 
+          size="lg" 
+          onClick={() => router.push('/')}
+          className="h-[60px] justify-start items-start px-2.5 py-2 gap-3 rounded-lg hover:bg-[#f7fafa] dark:hover:bg-[#2f3f4f]"
         >
-          <Link href="/" className="flex items-center space-x-2">
-              <Image
-                src={theme === 'light' ? '/icons/ICON-DARK.png' : '/icons/ICON-WHITE.png'}
-                alt="GemVise Icon"
-                width={32}
-                height={32}
-                priority
-                className="object-contain"
-              />
-              <Image
-                src={theme === 'light' ? '/logos/LOGO-DARK.png' : '/logos/LOGO-WHITE.png'}
-                alt="GemVise Logo"
-                width={32}
-                height={25}
-                priority
-                className="object-contain"
-              />
-            <span className="text-xl font-bold">GemVise</span>
-          </Link>
-        </div>
+          <span className="flex w-full items-center gap-3">
+            <span className="relative flex h-10 w-10 items-center justify-center bg-gradient-to-r from-[#ff9900] to-[#ffac31] text-white rounded-lg">
+              <Home className="h-6 w-6" />
+            </span>
+            <span className="flex flex-1 flex-col items-start">
+              <span className="h-6 w-full text-start text-base font-medium text-[#0f1111] dark:text-white">Home</span>
+              <span className="w-full text-start text-[#5f6b7a] text-xs">Your personal dashboard</span>
+            </span>
+          </span>
+        </Button>
 
-        <nav className="mt-8 space-y-1">
-          {gems.map((gem) => (
-            <Link
-              key={gem.href}
-              href={gem.href}
-              className={clsx(
-                'flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors duration-200',
-                pathname === gem.href
-                  ? 'bg-primary text-white'
-                  : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-              )}
-            >
-              <span>{gem.icon}</span>
-              <span>{gem.name}</span>
-            </Link>
-          ))}
-        </nav>
+        <Button 
+          variant="ghost" 
+          size="lg" 
+          onClick={() => router.push('/explore')}
+          className="h-[60px] justify-start items-start px-2.5 py-2 gap-3 rounded-lg hover:bg-[#f7fafa] dark:hover:bg-[#2f3f4f]"
+        >
+          <span className="flex w-full items-center gap-3">
+            <span className="relative flex h-10 w-10 items-center justify-center bg-gradient-to-r from-[#ff9900] to-[#ffac31] text-white rounded-lg">
+              <Sparkles className="h-6 w-6" />
+            </span>
+            <span className="flex flex-1 flex-col items-start">
+              <span className="h-6 w-full text-start text-base font-medium text-[#0f1111] dark:text-white">Explore</span>
+              <span className="w-full text-start text-[#5f6b7a] text-xs">Discover new gems</span>
+            </span>
+          </span>
+        </Button>
 
-        <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
-          <nav className="space-y-1">
-            {categories.map((category) => (
-              <Link
-                key={category.href}
-                href={category.href}
-                className={clsx(
-                  'flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors duration-200',
-                  pathname === category.href
-                    ? 'bg-primary text-white'
-                    : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-                )}
-              >
-                <span>{category.icon}</span>
-                <span>{category.name}</span>
-              </Link>
-            ))}
-          </nav>
-        </div>
+        <Button 
+          variant="ghost" 
+          size="lg" 
+          onClick={() => router.push('/settings')}
+          className="h-[60px] justify-start items-start px-2.5 py-2 gap-3 rounded-lg hover:bg-[#f7fafa] dark:hover:bg-[#2f3f4f]"
+        >
+          <span className="flex w-full items-center gap-3">
+            <span className="relative flex h-10 w-10 items-center justify-center bg-gradient-to-r from-[#ff9900] to-[#ffac31] text-white rounded-lg">
+              <Settings className="h-6 w-6" />
+            </span>
+            <span className="flex flex-1 flex-col items-start">
+              <span className="h-6 w-full text-start text-base font-medium text-[#0f1111] dark:text-white">Settings</span>
+              <span className="w-full text-start text-[#5f6b7a] text-xs">Customize your experience</span>
+            </span>
+          </span>
+        </Button>
+      </nav>
+
+      <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#d5d9d9] dark:border-[#3f4b58] bg-[#f7fafa] dark:bg-[#2f3f4f]">
+        <Button 
+          variant="primary" 
+          size="lg" 
+          onClick={() => router.push('/create')}
+          className="w-full bg-gradient-to-r from-[#ff9900] to-[#ffac31] text-[#0f1111] hover:from-[#ffac31] hover:to-[#ffbd62]"
+        >
+          Create a Gem
+        </Button>
       </div>
     </aside>
   );
