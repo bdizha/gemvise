@@ -15,40 +15,39 @@ const config: Config = {
     },
     extend: {
       colors: {
-        violet: {
-          light: '#BA55D3', // Medium Orchid
-          DEFAULT: '#8A2BE2', // Blue Violet
-          dark: '#9400D3', // Dark Violet
-          deep: '#4B0082', // Indigo
+        primary: {
+          DEFAULT: '#ff9900', // AWS Orange
+          hover: '#ffac31',
+          active: '#e88b00',
+          text: '#ffffff',
         },
-        pink: {
-          light: '#FFC0CB', // Pink
-          DEFAULT: '#FF69B4', // Hot Pink
-          dark: '#FF1493', // Deep Pink
+        background: {
+          light: '#ffffff',
+          dark: '#232f3e',
+          hover: {
+            light: '#f7fafa',
+            dark: '#2f3f4f',
+          },
         },
-        grey: {
-          100: '#FFFFFF', // White
-          200: '#D3D3D3', // Light Gray
-          300: '#C0C0C0', // Silver
-          400: '#A9A9A9', // Dark Gray
-          500: '#808080', // Gray
-          600: '#696969', // Dim Gray
-          700: '#4A4A4A', // Very Dark Gray
-          800: '#36454F', // Slate Gray
-          900: '#1C1C1C', // Very Dark Gray
-          950: '#000000', // Black
+        border: {
+          light: '#d5d9d9',
+          dark: '#3f4b58',
         },
-        background: 'var(--background)',
-        'button-primary': 'var(--button-primary)',
-        'button-primary-hover': 'var(--button-primary-hover)',
-        'button-secondary-hover': 'var(--button-secondary-hover)',
-        'button-ghost-hover': 'var(--button-ghost-hover)',
-        'toggle-border': 'var(--toggle-border)',
-        'text-primary': 'var(--text-primary)',
-        'text-secondary': 'var(--text-secondary)',
-        ring: 'var(--ring)',
-        popover: 'var(--background)',
-        'popover-border': 'var(--toggle-border)',
+        text: {
+          light: '#0f1111',
+          dark: '#ffffff',
+          muted: '#5f6b7a',
+        },
+        // Theme variables
+        'theme-background': 'var(--background)',
+        'theme-foreground': 'var(--foreground)',
+        'theme-primary': 'var(--primary)',
+        'theme-primary-foreground': 'var(--primary-foreground)',
+        'theme-accent': 'var(--accent)',
+        'theme-muted': 'var(--muted-foreground)',
+        'theme-surface': 'var(--surface-elevation-1)',
+        'theme-scrim': 'var(--scrim-8)',
+        'theme-hero': 'var(--hero-transparent)',
         'card-hover': 'var(--button-ghost-hover)',
       },
       backgroundImage: {
@@ -102,16 +101,24 @@ const config: Config = {
         '.dark .text-gradient-pink-purple': {
           opacity: '0.8',
         },
+        '.text-gradient-purple-pink-dark': {
+          background: `linear-gradient(to right, #8A2BE2, #FF69B4)`,
+          '-webkit-background-clip': 'text',
+          '-webkit-text-fill-color': 'transparent',
+          'background-clip': 'text',
+          'color': 'transparent',
+        },
+        '.text-gradient-pink-purple-dark': {
+          background: `linear-gradient(to right, #FF69B4, #8A2BE2)`,
+          '-webkit-background-clip': 'text',
+          '-webkit-text-fill-color': 'transparent',
+          'background-clip': 'text',
+          'color': 'transparent',
+        },
       };
       addUtilities(newUtilities);
       
-      // Reset default border styles
-      addBase({
-        '*': {
-          'border-style': 'none',
-          'border-color': 'transparent',
-        },
-      });
+      // Border styles are handled in globals.css
     }),
   ],
 };

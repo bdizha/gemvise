@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import '@/styles/footer-gradient.css';
+
 
 const mainLinks = [
   { name: 'Discover', href: '/discover' },
