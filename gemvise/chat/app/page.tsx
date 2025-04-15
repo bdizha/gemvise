@@ -44,7 +44,8 @@ const expertCards: SliderCardProps[] = [
   {
     title: "Leadership & Public Service with Michelle Obama",
     description: "Learn about leadership, public service, and personal growth from the former First Lady.",
-    imageSrc: "/gradients/GV-Gradient-05.png",
+    imageSrc: "/gradients/named/GV-Gradient-Purple-Pink.png",
+    gradient: 'bg-gradient-to-r from-violet-DEFAULT to-pink-DEFAULT',
     status: "Featured",
     href: "/expert/michelle-obama",
     buttonText: "Learn More"
@@ -58,7 +59,8 @@ const mockGems: Gem[] = [
     title: 'Investment Expert',
     description: 'Learn value investing from the Oracle of Omaha',
     category: 'Finance',
-    imageUrl: '/experts/warren-buffett.jpg',
+    imageUrl: '/gradients/named/GV-Gradient-Purple-Pink.png',
+    gradient: 'bg-gradient-to-r from-violet-DEFAULT to-pink-DEFAULT',
     expertise: ['Value Investing', 'Business Analysis', 'Market Strategy'],
     followers: 1000000,
     chatCount: 50000
@@ -69,7 +71,8 @@ const mockGems: Gem[] = [
     title: 'Organization Expert',
     description: 'Master the art of tidying up and organizing',
     category: 'Lifestyle',
-    imageUrl: '/experts/marie-kondo.jpg',
+    imageUrl: '/gradients/named/GV-Gradient-Pink-Purple.png',
+    gradient: 'bg-gradient-to-r from-pink-DEFAULT to-violet-DEFAULT',
     expertise: ['Organization', 'Minimalism', 'Home Design'],
     followers: 500000,
     chatCount: 25000
@@ -80,7 +83,8 @@ const mockGems: Gem[] = [
     title: 'Celebrity Chef',
     description: 'Master the art of cooking with a world-renowned chef.',
     category: 'Cooking',
-    imageUrl: '/gradients/mobile/GV-Gradient-03.png',
+    imageUrl: '/gradients/named/GV-Gradient-Purple-Pink-Purple.png',
+    gradient: 'bg-gradient-to-r from-violet-DEFAULT via-pink-DEFAULT to-violet-DEFAULT',
     expertise: ['Culinary Arts', 'Restaurant Management', 'Food Critique'],
     followers: 750000,
     chatCount: 35000

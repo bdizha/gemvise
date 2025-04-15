@@ -30,17 +30,21 @@ export interface Gem {
    */
   imageUrl: string;
   /**
-   * Expertise associated with the Gem.
+   * Tailwind CSS gradient class for the Gem's background.
    */
-  expertise: string[];
+  gradient: string;
   /**
-   * Number of followers for the Gem.
+   * List of expertise areas.
    */
-  followers: number;
+  expertise?: string[];
   /**
-   * Number of chats for the Gem.
+   * Number of followers.
    */
-  chatCount: number;
+  followers?: number;
+  /**
+   * Number of chat interactions.
+   */
+  chatCount?: number;
 }
 
 /**
@@ -48,11 +52,11 @@ export interface Gem {
  */
 export interface GemCardProps {
   /**
-   * The Gem entity to display.
+   * The Gem to display.
    */
   gem: Gem;
   /**
-   * Optional click handler for the GemCard.
+   * Click handler for the card.
    */
   onClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }

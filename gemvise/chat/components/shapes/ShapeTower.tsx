@@ -17,13 +17,13 @@ interface ShapeTowerProps {
 
 const getIconPath = (variant: ShapeVariant) => {
   const iconMap = {
-    'dark-light-dark': '/icons/ICON-DARK-LIGHT-DARK.png',
-    'dark-light': '/icons/ICON-DARK-LIGHT.png',
-    'light-dark': '/icons/ICON-LIGHT-DARK-LIGHT.png',
-    'pink-purple-pink': '/icons/ICON-PINK-PURPLE-PINK.png',
-    'pink-purple': '/icons/ICON-PINK-PURPLE.png',
-    'purple-pink-purple': '/icons/ICON-PURPLE-PINK-PURPLE.png',
-    'purple-pink': '/icons/ICON-PURPLE-PINK.png'
+    'dark-light-dark': '/icons/ICON-LIGHT-DARK-LIGHT.png',
+    'dark-light': '/icons/ICON-LIGHT-DARK.png',
+    'light-dark': '/icons/ICON-DARK-LIGHT.png',
+    'pink-purple-pink': '/icons/ICON-PURPLE-PINK-PURPLE.png',
+    'pink-purple': '/icons/ICON-PURPLE-PINK.png',
+    'purple-pink-purple': '/icons/ICON-PINK-PURPLE-PINK.png',
+    'purple-pink': '/icons/ICON-PINK-PURPLE.png'
   };
   return iconMap[variant];
 };
@@ -51,38 +51,43 @@ const ShapeTower: FC<ShapeTowerProps> = ({
   return (
     <div className={`relative w-full h-full ${className}`}>
       {/* Background Square */}
-      <div className="absolute inset-0 rounded-2xl overflow-hidden">
+      <div className="absolute inset-0 rounded-xl overflow-hidden">
         <Image
           src={gradientPath}
           alt=""
           fill
           className="object-cover"
           loading="lazy"
+          sizes="100vw"
         />
       </div>
 
       {/* Tower Elements */}
-      <div className="relative w-full h-full">
-        {Array.from({ length: 12 }).map((_, index) => {
-          const scale = Math.pow(0.9, index);
-          const opacity = 1 - (index * 0.05);
+      <div className="absolute inset-0">
+        {Array.from({ length: 16 }).map((_, index) => {
+          const scale = Math.pow(0.8, index); 
+          const opacity = 1 - (index * 0.04); 
+          const rotate = index % 2 === 0 ? 'group-hover:animate-rotate-360' : 'group-hover:animate-rotate-negative-360';
+          const delay = `${index * 50}ms`;
           
           return (
             <div
               key={index}
-              className="absolute inset-0 flex items-center justify-center"
+              className="absolute inset-0"
               style={{
                 transform: `scale(${scale})`,
-                opacity
+                opacity,
+                transitionDelay: delay
               }}
             >
-              <div className="relative w-full h-full">
+              <div className={`w-full h-full ${rotate} transition-transform duration-500`}> 
                 <Image
                   src={iconPath}
                   alt=""
                   fill
                   className="object-contain"
                   loading="lazy"
+                  sizes="100vw"
                 />
               </div>
             </div>
