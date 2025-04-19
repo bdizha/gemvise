@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import GemCard from './GemCard';
 import type { Gem } from '@/types/gems';
 
-type SliderVariant = 'pyramid' | 'concave';
+
 type TableLayout = '2-rows-2-3' | '1-row-2-cols';
 
 type GemGridProps = {
@@ -12,32 +12,11 @@ type GemGridProps = {
   onGemClick?: (gem: Gem) => void;
   className?: string;
 } & (
-  | { type: 'slider'; variant: SliderVariant; visibleCount: number; currentIndex: number }
+  | { type: 'slider'; visibleCount: number; currentIndex: number }
   | { type: 'table'; layout: TableLayout }
 );
 
-const getSliderStyles = (index: number, currentIndex: number, total: number, variant: SliderVariant) => {
-  const offset = index - currentIndex;
-  const isCenter = offset === 0;
-  
-  if (variant === 'pyramid') {
-    return {
-      scale: isCenter ? 1 : 0.8 - Math.abs(offset) * 0.1,
-      y: Math.abs(offset) * 40,
-      zIndex: total - Math.abs(offset),
-      opacity: 1 - Math.abs(offset) * 0.2
-    };
-  }
-  
-  // Concave layout
-  return {
-    scale: isCenter ? 1 : 0.9,
-    x: offset * 120,
-    rotateY: offset * -25,
-    zIndex: total - Math.abs(offset),
-    opacity: 1 - Math.abs(offset) * 0.2
-  };
-};
+
 
 const getTableLayout = (layout: TableLayout) => {
   switch (layout) {
@@ -61,31 +40,37 @@ export default function GemGrid({
   ...props
 }: GemGridProps) {
   if (type === 'slider') {
-    const { variant, visibleCount, currentIndex } = props as { variant: SliderVariant; visibleCount: number; currentIndex: number };
-    const displayGems = gems.slice(
-      Math.max(0, currentIndex - Math.floor(visibleCount / 2)),
-      Math.min(gems.length, currentIndex + Math.ceil(visibleCount / 2))
-    );
+    const { visibleCount, currentIndex } = props as { visibleCount: number; currentIndex: number };
+    // Calculate visible range and indices
+    const totalVisible = Math.min(visibleCount, gems.length);
+    const halfVisible = Math.floor(totalVisible / 2);
+    const startIndex = Math.max(0, currentIndex - halfVisible);
+    const endIndex = Math.min(gems.length, startIndex + totalVisible);
+    const displayGems = gems.slice(startIndex, endIndex);
+
+    // Container width calculation
+    const containerWidth = 320 * 3; // Show 3 cards at a time
 
     return (
-      <div className={`relative h-[400px] flex items-center justify-center ${className}`}>
-        <div className="relative w-full h-full">
-          {displayGems.map((gem, index) => {
-            const styles = getSliderStyles(index, Math.floor(visibleCount / 2), visibleCount, variant);
-            
-            return (
+      <div className={`relative h-[400px] w-full ${className}`}>
+        <div className="relative w-full h-full max-w-7xl mx-auto px-4 overflow-hidden">
+          <div className="flex gap-6 transition-transform duration-300" 
+               style={{ 
+                 transform: `translateX(calc(-${currentIndex * 340}px))`,
+                 width: `${gems.length * 340}px`
+               }}>
+            {gems.map((gem) => (
               <motion.div
                 key={gem.id}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80"
-                initial={false}
-                animate={styles}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                onClick={() => onGemClick?.(gem)}
+                className="flex-shrink-0 w-[320px]"
               >
                 <GemCard gem={gem} onClick={() => onGemClick?.(gem)} />
               </motion.div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -94,13 +79,14 @@ export default function GemGrid({
   // Table layout
   const { layout } = props as { layout: TableLayout };
   return (
-    <div className={`${getTableLayout(layout)} ${className}`}>
+    <div className={`w-full max-w-7xl mx-auto px-4 grid gap-6 ${getTableLayout(layout)} ${className}`}>
       {gems.map((gem) => (
         <motion.div
           key={gem.id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          className="w-full"
         >
           <GemCard gem={gem} onClick={() => onGemClick?.(gem)} />
         </motion.div>

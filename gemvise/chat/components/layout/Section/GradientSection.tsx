@@ -3,7 +3,6 @@
 import * as React from 'react';
 import DefaultSection from './DefaultSection';
 import { SectionProps } from './types';
-import '@/styles/section-gradients.css';
 
 // Define the available gradient themes
 export type GradientTheme = 'light' | 'dark' | 'pink' | 'purple';

@@ -13,7 +13,7 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ onToggleSidebar, onToggleTheme, theme }) => {
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between bg-gradient-dark-light bg-cover bg-center px-4">
+    <header className="fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between bg-gradient-dark-light bg-cover bg-center px-4 backdrop-blur-sm">
       <div className="flex items-center gap-4">
         <button
           onClick={onToggleSidebar}

@@ -1,0 +1,335 @@
+import { type Gem } from '@/types/gems';
+
+// Featured experts that appear in the hero section
+export const featuredGems: Gem[] = [
+  {
+    id: '1',
+    name: 'Warren Buffett',
+    title: 'Investment Expert',
+    description: 'Learn investment strategies and wisdom from the Oracle of Omaha.',
+    category: 'Finance',
+    imageUrl: '/gradients/GV-Gradient-01.png',
+    gradient: 'bg-gradient-to-r from-amber-DEFAULT to-orange-DEFAULT',
+    expertise: ['Value Investing', 'Wealth Building', 'Business Analysis'],
+    followers: 1000000,
+    chatCount: 50000
+  },
+  {
+    id: '2',
+    name: 'Gordon Ramsay',
+    title: 'Celebrity Chef',
+    description: 'Master culinary techniques and recipes with personalized guidance.',
+    category: 'Cooking',
+    imageUrl: '/gradients/GV-Gradient-02.png',
+    gradient: 'bg-gradient-to-r from-violet-DEFAULT via-pink-DEFAULT to-violet-DEFAULT',
+    expertise: ['Culinary Arts', 'Restaurant Management', 'Food Critique'],
+    followers: 750000,
+    chatCount: 35000
+  },
+  {
+    id: '3',
+    name: 'Elon Musk',
+    title: 'Tech Innovator',
+    description: 'Explore technology, innovation, and entrepreneurship.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-03.png',
+    gradient: 'bg-gradient-to-r from-blue-DEFAULT to-violet-DEFAULT',
+    expertise: ['Innovation', 'Technology', 'Entrepreneurship'],
+    followers: 900000,
+    chatCount: 45000
+  },
+  {
+    id: '4',
+    name: 'Marie Kondo',
+    title: 'Organization Expert',
+    description: 'Transform your space and life with the KonMari method.',
+    category: 'Lifestyle',
+    imageUrl: '/gradients/GV-Gradient-04.png',
+    gradient: 'bg-gradient-to-r from-pink-DEFAULT to-violet-DEFAULT',
+    expertise: ['Organization', 'Minimalism', 'Home Design'],
+    followers: 500000,
+    chatCount: 25000
+  },
+  {
+    id: '5',
+    name: 'Michelle Obama',
+    title: 'Leadership Expert',
+    description: 'Learn about leadership, public service, and personal growth.',
+    category: 'Leadership',
+    imageUrl: '/gradients/named/GV-Gradient-Purple-Pink.png',
+    gradient: 'bg-gradient-to-r from-violet-DEFAULT to-pink-DEFAULT',
+    expertise: ['Leadership', 'Public Service', 'Personal Growth'],
+    followers: 850000,
+    chatCount: 40000
+  }
+];
+
+// Extended list of all available experts
+export const allGems: Gem[] = [
+  ...featuredGems,
+  // Technology & Innovation
+  {
+    id: 'tech-1',
+    name: 'AI Ethics Advisor',
+    title: 'Ethics in Technology',
+    description: '🤖 "Let\'s explore the ethical implications of AI together. What concerns you most about artificial intelligence?" A thoughtful guide through the complex landscape of AI ethics and responsible innovation.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-01.png',
+    gradient: 'bg-gradient-to-r from-blue-DEFAULT to-violet-DEFAULT',
+    expertise: ['AI Ethics', 'Technology Policy', 'Future of AI'],
+    followers: 892000,
+    chatCount: 45300
+  },
+  {
+    id: 'tech-2',
+    name: 'Quantum Explorer',
+    title: 'Quantum Computing Expert',
+    description: '🌌 "Imagine shrinking into the quantum realm, where particles exist in multiple states simultaneously. Ready to explore the mysteries of quantum computing?" Making complex quantum concepts accessible and fascinating.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-02.png',
+    gradient: 'bg-gradient-to-r from-violet-DEFAULT to-indigo-DEFAULT',
+    expertise: ['Quantum Computing', 'Physics', 'Future Tech'],
+    followers: 756000,
+    chatCount: 38200
+  },
+  {
+    id: 'art-1',
+    name: 'Digital Art Mentor',
+    title: 'Creative Technology Artist',
+    description: '🎨 "Art isn\'t just about tools—it\'s about vision. Let\'s transform your creative ideas into digital masterpieces." Guiding artists through the digital revolution with practical techniques and inspiration.',
+    category: 'Arts',
+    imageUrl: '/gradients/GV-Gradient-03.png',
+    gradient: 'bg-gradient-to-r from-pink-DEFAULT to-purple-DEFAULT',
+    expertise: ['Digital Art', 'Creative Tech', 'Visual Design'],
+    followers: 623000,
+    chatCount: 31500
+  },
+  {
+    id: '6',
+    name: 'David Attenborough',
+    title: 'Nature Expert',
+    description: 'Explore the wonders of nature and wildlife conservation.',
+    category: 'Science',
+    imageUrl: '/gradients/GV-Gradient-05.png',
+    gradient: 'bg-gradient-to-r from-green-DEFAULT to-emerald-DEFAULT',
+    expertise: ['Wildlife', 'Conservation', 'Natural History'],
+    followers: 920000,
+    chatCount: 42000
+  },
+  {
+    id: '7',
+    name: 'Maya Angelou',
+    title: 'Literary Icon',
+    description: 'Discover the power of words and personal storytelling.',
+    category: 'Arts',
+    imageUrl: '/gradients/GV-Gradient-06.png',
+    gradient: 'bg-gradient-to-r from-purple-DEFAULT to-indigo-DEFAULT',
+    expertise: ['Poetry', 'Writing', 'Personal Growth'],
+    followers: 680000,
+    chatCount: 31000
+  },
+  {
+    id: '8',
+    name: 'Neil deGrasse Tyson',
+    title: 'Astrophysicist',
+    description: 'Journey through the cosmos and understand the universe.',
+    category: 'Science',
+    imageUrl: '/gradients/GV-Gradient-07.png',
+    gradient: 'bg-gradient-to-r from-blue-DEFAULT to-purple-DEFAULT',
+    expertise: ['Astronomy', 'Physics', 'Science Communication'],
+    followers: 890000,
+    chatCount: 41000
+  },
+  {
+    id: '9',
+    name: 'Jane Goodall',
+    title: 'Primatologist',
+    description: 'Learn about wildlife conservation and animal behavior.',
+    category: 'Science',
+    imageUrl: '/gradients/GV-Gradient-08.png',
+    gradient: 'bg-gradient-to-r from-emerald-DEFAULT to-green-DEFAULT',
+    expertise: ['Primatology', 'Conservation', 'Animal Behavior'],
+    followers: 750000,
+    chatCount: 35000
+  },
+  {
+    id: '10',
+    name: 'Tim Ferriss',
+    title: 'Productivity Expert',
+    description: 'Optimize your life and work with proven strategies.',
+    category: 'Lifestyle',
+    imageUrl: '/gradients/GV-Gradient-09.png',
+    gradient: 'bg-gradient-to-r from-orange-DEFAULT to-amber-DEFAULT',
+    expertise: ['Productivity', 'Life Optimization', 'Learning'],
+    followers: 820000,
+    chatCount: 38000
+  },
+  {
+    id: '11',
+    name: 'Angela Duckworth',
+    title: 'Psychology Expert',
+    description: 'Develop grit and resilience for personal success.',
+    category: 'Psychology',
+    imageUrl: '/gradients/GV-Gradient-10.png',
+    gradient: 'bg-gradient-to-r from-rose-DEFAULT to-pink-DEFAULT',
+    expertise: ['Grit', 'Psychology', 'Personal Development'],
+    followers: 580000,
+    chatCount: 27000
+  },
+  {
+    id: '12',
+    name: 'Gary Vaynerchuk',
+    title: 'Digital Marketing Expert',
+    description: 'Master social media and digital entrepreneurship.',
+    category: 'Business',
+    imageUrl: '/gradients/GV-Gradient-11.png',
+    gradient: 'bg-gradient-to-r from-cyan-DEFAULT to-blue-DEFAULT',
+    expertise: ['Digital Marketing', 'Entrepreneurship', 'Social Media'],
+    followers: 950000,
+    chatCount: 44000
+  },
+  {
+    id: '13',
+    name: 'Simon Sinek',
+    title: 'Leadership Strategist',
+    description: '🎯 "Start with why. Let\'s discover your purpose and inspire others." Transforming leadership through purpose-driven strategies.',
+    category: 'Leadership',
+    imageUrl: '/gradients/GV-Gradient-12.png',
+    gradient: 'bg-gradient-to-r from-amber-DEFAULT to-orange-DEFAULT',
+    expertise: ['Leadership', 'Organizational Culture', 'Motivation'],
+    followers: 780000,
+    chatCount: 36000
+  },
+  {
+    id: '14',
+    name: 'Cloud Architect',
+    title: 'AWS Solutions Expert',
+    description: '☁️ "Building scalable, secure cloud solutions is an art. Ready to architect your future?" Your guide to AWS best practices and cloud innovation.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-13.png',
+    gradient: 'bg-gradient-to-r from-orange-DEFAULT to-amber-DEFAULT',
+    expertise: ['Cloud Architecture', 'AWS', 'DevOps'],
+    followers: 850000,
+    chatCount: 39000
+  },
+  {
+    id: '15',
+    name: 'Data Sage',
+    title: 'Analytics Master',
+    description: '📊 "Data tells stories that transform businesses. Let\'s uncover the narratives in your numbers." Turning data into actionable insights.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-14.png',
+    gradient: 'bg-gradient-to-r from-blue-DEFAULT to-cyan-DEFAULT',
+    expertise: ['Data Analytics', 'Business Intelligence', 'Machine Learning'],
+    followers: 720000,
+    chatCount: 33000
+  },
+  {
+    id: '16',
+    name: 'Security Sentinel',
+    title: 'Cybersecurity Expert',
+    description: '🛡️ "In the digital age, security is not just a feature—it\'s a necessity." Your guardian in the cyber realm.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-15.png',
+    gradient: 'bg-gradient-to-r from-slate-DEFAULT to-zinc-DEFAULT',
+    expertise: ['Cybersecurity', 'Network Security', 'Threat Analysis'],
+    followers: 890000,
+    chatCount: 41000
+  },
+  {
+    id: '17',
+    name: 'DevOps Guru',
+    title: 'Pipeline Master',
+    description: '⚡ "Automation is the key to velocity. Let\'s streamline your development pipeline." Bridging development and operations seamlessly.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-16.png',
+    gradient: 'bg-gradient-to-r from-emerald-DEFAULT to-green-DEFAULT',
+    expertise: ['DevOps', 'CI/CD', 'Infrastructure as Code'],
+    followers: 760000,
+    chatCount: 35000
+  },
+  {
+    id: '18',
+    name: 'UX Visionary',
+    title: 'Design Thinking Expert',
+    description: '🎨 "Great design is invisible. Let\'s create experiences that delight users." Crafting intuitive and beautiful user experiences.',
+    category: 'Design',
+    imageUrl: '/gradients/GV-Gradient-17.png',
+    gradient: 'bg-gradient-to-r from-violet-DEFAULT to-purple-DEFAULT',
+    expertise: ['UX Design', 'User Research', 'Prototyping'],
+    followers: 680000,
+    chatCount: 31000
+  },
+  {
+    id: '19',
+    name: 'Serverless Sage',
+    title: 'Cloud Native Expert',
+    description: '🚀 "The future is serverless. Let\'s build scalable applications without the infrastructure headache." Your guide to modern cloud architecture.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-18.png',
+    gradient: 'bg-gradient-to-r from-orange-DEFAULT to-red-DEFAULT',
+    expertise: ['Serverless', 'Microservices', 'Event-Driven Architecture'],
+    followers: 710000,
+    chatCount: 32000
+  },
+  {
+    id: '20',
+    name: 'ML Pioneer',
+    title: 'AI Research Specialist',
+    description: '🤖 "Machine learning is transforming every industry. Let\'s harness its power for your success." Demystifying AI and ML concepts.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-19.png',
+    gradient: 'bg-gradient-to-r from-blue-DEFAULT to-indigo-DEFAULT',
+    expertise: ['Machine Learning', 'Deep Learning', 'Neural Networks'],
+    followers: 920000,
+    chatCount: 43000
+  },
+  {
+    id: '21',
+    name: 'API Architect',
+    title: 'Integration Specialist',
+    description: '🔄 "APIs are the building blocks of modern applications. Let\'s design interfaces that developers love." Creating seamless integrations.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-20.png',
+    gradient: 'bg-gradient-to-r from-cyan-DEFAULT to-teal-DEFAULT',
+    expertise: ['API Design', 'REST', 'GraphQL'],
+    followers: 650000,
+    chatCount: 29000
+  },
+  {
+    id: '22',
+    name: 'Performance Pro',
+    title: 'Optimization Expert',
+    description: '⚡ "Every millisecond counts. Let\'s make your applications lightning fast." Tuning systems for peak performance.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-21.png',
+    gradient: 'bg-gradient-to-r from-yellow-DEFAULT to-amber-DEFAULT',
+    expertise: ['Performance Optimization', 'Scalability', 'Load Testing'],
+    followers: 730000,
+    chatCount: 34000
+  },
+  {
+    id: '23',
+    name: 'Mobile Maven',
+    title: 'App Development Guru',
+    description: '📱 "Mobile first isn\'t just a strategy—it\'s a necessity. Let\'s build amazing mobile experiences." Creating engaging mobile applications.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-22.png',
+    gradient: 'bg-gradient-to-r from-rose-DEFAULT to-pink-DEFAULT',
+    expertise: ['Mobile Development', 'React Native', 'iOS/Android'],
+    followers: 840000,
+    chatCount: 38000
+  },
+  {
+    id: '24',
+    name: 'Blockchain Sage',
+    title: 'Web3 Innovator',
+    description: '🔗 "Blockchain is revolutionizing trust and transparency. Let\'s explore the decentralized future." Navigating the world of Web3.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-23.png',
+    gradient: 'bg-gradient-to-r from-purple-DEFAULT to-indigo-DEFAULT',
+    expertise: ['Blockchain', 'Smart Contracts', 'DeFi'],
+    followers: 880000,
+    chatCount: 40000
+  }
+];

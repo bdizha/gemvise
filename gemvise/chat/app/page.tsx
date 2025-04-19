@@ -1,14 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { type Gem } from '@/types/gems';
 import GemGrid from '@/components/gems/GemGrid';
+import GemList from '@/components/gems/GemList';
 import Button from '@/components/ui/Button';
+import { featuredGems, allGems } from '@/mocks/gems';
 
 // Sample images for the carousel
-const carouselImages = [
+const carouselContent = [
   {
     src: '/icons/GV-LOGO-02-GOT-06.png',
     alt: 'GemVise AI Experts',
@@ -26,120 +28,29 @@ const carouselImages = [
   }
 ];
 
-const featuredGems: Gem[] = [
-  {
-    id: '1',
-    name: 'Warren Buffett',
-    title: 'Investment Expert',
-    description: 'Learn investment strategies and wisdom from the Oracle of Omaha.',
-    category: 'Finance',
-    imageUrl: '/gradients/GV-Gradient-01.png',
-    gradient: 'bg-gradient-to-r from-amber-DEFAULT to-orange-DEFAULT',
-    expertise: ['Value Investing', 'Wealth Building', 'Business Analysis'],
-    followers: 1000000,
-    chatCount: 50000
-  },
-  {
-    id: '2',
-    name: 'Gordon Ramsay',
-    title: 'Celebrity Chef',
-    description: 'Master culinary techniques and recipes with personalized guidance.',
-    category: 'Cooking',
-    imageUrl: '/gradients/GV-Gradient-02.png',
-    gradient: 'bg-gradient-to-r from-violet-DEFAULT via-pink-DEFAULT to-violet-DEFAULT',
-    expertise: ['Culinary Arts', 'Restaurant Management', 'Food Critique'],
-    followers: 750000,
-    chatCount: 35000
-  },
-  {
-    id: '3',
-    name: 'Elon Musk',
-    title: 'Tech Innovator',
-    description: 'Explore technology, innovation, and entrepreneurship.',
-    category: 'Technology',
-    imageUrl: '/gradients/GV-Gradient-03.png',
-    gradient: 'bg-gradient-to-r from-blue-DEFAULT to-violet-DEFAULT',
-    expertise: ['Innovation', 'Technology', 'Entrepreneurship'],
-    followers: 900000,
-    chatCount: 45000
-  },
-  {
-    id: '4',
-    name: 'Marie Kondo',
-    title: 'Organization Expert',
-    description: 'Transform your space and life with the KonMari method.',
-    category: 'Lifestyle',
-    imageUrl: '/gradients/GV-Gradient-04.png',
-    gradient: 'bg-gradient-to-r from-pink-DEFAULT to-violet-DEFAULT',
-    expertise: ['Organization', 'Minimalism', 'Home Design'],
-    followers: 500000,
-    chatCount: 25000
-  },
-  {
-    id: '5',
-    name: 'Michelle Obama',
-    title: 'Leadership Expert',
-    description: 'Learn about leadership, public service, and personal growth.',
-    category: 'Leadership',
-    imageUrl: '/gradients/named/GV-Gradient-Purple-Pink.png',
-    gradient: 'bg-gradient-to-r from-violet-DEFAULT to-pink-DEFAULT',
-    expertise: ['Leadership', 'Public Service', 'Personal Growth'],
-    followers: 850000,
-    chatCount: 40000
-  }
-];
 
-const mockGems: Gem[] = [
-  {
-    id: '1',
-    name: 'Warren Buffett',
-    title: 'Investment Expert',
-    description: 'Learn value investing from the Oracle of Omaha',
-    category: 'Finance',
-    imageUrl: '/gradients/named/GV-Gradient-Purple-Pink.png',
-    gradient: 'bg-gradient-to-r from-violet-DEFAULT to-pink-DEFAULT',
-    expertise: ['Value Investing', 'Business Analysis', 'Market Strategy'],
-    followers: 1000000,
-    chatCount: 50000
-  },
-  {
-    id: '2',
-    name: 'Marie Kondo',
-    title: 'Organization Expert',
-    description: 'Master the art of tidying up and organizing',
-    category: 'Lifestyle',
-    imageUrl: '/gradients/named/GV-Gradient-Pink-Purple.png',
-    gradient: 'bg-gradient-to-r from-pink-DEFAULT to-violet-DEFAULT',
-    expertise: ['Organization', 'Minimalism', 'Home Design'],
-    followers: 500000,
-    chatCount: 25000
-  },
-  {
-    id: '3',
-    name: 'Gordon Ramsay',
-    title: 'Celebrity Chef',
-    description: 'Master the art of cooking with a world-renowned chef.',
-    category: 'Cooking',
-    imageUrl: '/gradients/named/GV-Gradient-Purple-Pink-Purple.png',
-    gradient: 'bg-gradient-to-r from-violet-DEFAULT via-pink-DEFAULT to-violet-DEFAULT',
-    expertise: ['Culinary Arts', 'Restaurant Management', 'Food Critique'],
-    followers: 750000,
-    chatCount: 35000
-  }
-];
+
 
 export default function Home() {
   const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [currentGemIndex, setCurrentGemIndex] = useState(2); // Center gem in slider
   const [query, setQuery] = useState('');
+  const [categoryIndices, setCategoryIndices] = useState<Record<string, number>>({});
+
+  // Auto-advance slides every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 5000);
+    return () => clearInterval(interval);
+  }, [currentSlide]);
+
+
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    setCurrentSlide((prev) => (prev + 1) % carouselContent.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+    setCurrentSlide((prev) => (prev - 1 + carouselContent.length) % carouselContent.length);
   };
 
   const handleGemClick = (gem: Gem) => {
@@ -156,27 +67,21 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <div className="relative h-svh w-full border-b border-border pb-px overflow-hidden md:overflow-x-hidden rounded-[60px] md:rounded-[40px]">
-        <div className="relative w-full h-full rounded-[60px] md:rounded-[40px] overflow-hidden">
-          <Image
-            src="/gradients/named/GV-Gradient-Purple-Pink-Purple.png"
-            alt="Background Gradient"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div 
-            className="mx-auto w-full px-6 xl:max-w-7xl flex h-full flex-col relative">
-            <div className="flex flex-col md:flex-row items-center justify-center min-h-[calc(100vh-80px)] gap-12 py-16 relative z-10">
+      <div className="relative aspect-square md:aspect-[2/1] w-full border-b border-border pb-px overflow-hidden md:overflow-x-hidden">
+        <div className="relative w-full h-full overflow-hidden">
+          <div className="absolute inset-0 transition-all duration-500 ease-in-out section-gradient-light-dark opacity-50 blur-[30px]" />
+          <div className="absolute inset-0 bg-black/70" />
+          <div className="mx-auto w-full px-6 xl:max-w-7xl flex h-full flex-col relative">
+            <div className="flex flex-col md:flex-row items-center justify-center h-full gap-8 py-12 relative z-10">
               {/* Left Content */}
               <div className="flex-1 text-center text-white relative z-10">
-                <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
+                <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
                   Connect with AI-Powered Expert Personas
                 </h1>
-                <p className="text-lg md:text-xl text-white/80 mb-8">
+                <p className="text-base md:text-lg text-white/80 mb-6">
                   Experience interactive learning through dynamic conversations with AI versions of world-renowned experts.
                 </p>
-                <form onSubmit={handleSearch} className="flex gap-4 max-w-md mx-auto relative z-10 backdrop-blur-sm bg-white/10 p-4 rounded-2xl border border-white/20 shadow-xl">
+                <form onSubmit={handleSearch} className="flex gap-4 max-w-md mx-auto relative z-10 backdrop-blur-sm bg-white/10 p-3 rounded-2xl border border-white/20 shadow-xl">
                   <input
                     type="text"
                     value={query}
@@ -189,18 +94,18 @@ export default function Home() {
               </div>
               
               {/* Right Content - Logo Carousel */}
-              <div className="flex-1 relative w-full max-w-lg z-10">
+              <div className="flex-1 relative w-full max-w-md z-10">
                 <div className="absolute inset-0 bg-gradient-to-r from-violet-DEFAULT/20 via-pink-DEFAULT/20 to-violet-DEFAULT/20 blur-3xl rounded-full transform rotate-12" />
                 <div className="relative aspect-square">
                   <Image
-                    src={carouselImages[currentSlide].src}
-                    alt={carouselImages[currentSlide].alt}
+                    src={carouselContent[currentSlide].src}
+                    alt={carouselContent[currentSlide].alt}
                     fill
                     className="object-contain"
                   />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 text-center mb-4">
-                  <p className="text-lg font-medium mb-2">{carouselImages[currentSlide].description}</p>
+                  <p className="text-lg font-medium mb-2 text-white">{carouselContent[currentSlide].description}</p>
                   <div className="flex justify-center gap-2">
                     <button onClick={prevSlide} className="p-2 rounded-full hover:bg-accent">
                       ←
@@ -216,33 +121,118 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Featured Experts - Slider Layout */}
-      <section className="py-16 bg-muted/30">
-        <div className="container">
-          <h2 className="text-3xl font-bold mb-8">Featured Experts</h2>
-          <GemGrid
-            type="slider"
-            variant="pyramid"
-            gems={featuredGems}
-            visibleCount={5}
-            currentIndex={currentGemIndex}
-            onGemClick={handleGemClick}
-          />
+      {/* Featured Experts Section */}
+      <section className="py-12 px-6">
+        <div className="mx-auto xl:max-w-7xl">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold">Featured Experts</h2>
+            <div className="flex gap-2">
+              <button 
+                onClick={() => setCategoryIndices(prev => ({
+                  ...prev,
+                  featured: Math.max(0, (prev.featured || 0) - 1)
+                }))}
+                className="p-2 rounded-full hover:bg-surface-elevation-1"
+                disabled={(categoryIndices.featured || 0) === 0}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                </svg>
+              </button>
+              <button 
+                onClick={() => setCategoryIndices(prev => ({
+                  ...prev,
+                  featured: Math.min(featuredGems.length - 1, (prev.featured || 0) + 1)
+                }))}
+                className="p-2 rounded-full hover:bg-surface-elevation-1"
+                disabled={(categoryIndices.featured || 0) >= allGems.length - 3}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div id="featured-grid" className="overflow-x-auto scrollbar-hide">
+            <GemGrid 
+              type="slider" 
+
+              visibleCount={3}
+              currentIndex={categoryIndices['featured'] || 0}
+              gems={allGems} 
+              onGemClick={handleGemClick} 
+            />
+          </div>
         </div>
       </section>
 
-      {/* Popular Categories - Table Layout */}
-      <section className="py-16">
-        <div className="container">
-          <h2 className="text-3xl font-bold mb-8">Popular Categories</h2>
-          <GemGrid
-            type="table"
-            layout="2-rows-2-3"
-            gems={featuredGems.slice(0, 5)}
-            onGemClick={handleGemClick}
-          />
-        </div>
-      </section>
+      {/* Category Sections */}
+      {[
+        { 
+          id: 'finance',
+          title: 'Finance & Investment', 
+          gems: allGems.filter((g: Gem) => g.category === 'Finance')
+        },
+        { 
+          id: 'lifestyle',
+          title: 'Lifestyle & Organization', 
+          gems: allGems.filter((g: Gem) => g.category === 'Lifestyle')
+        },
+        { 
+          id: 'cooking',
+          title: 'Cooking & Culinary Arts', 
+          gems: allGems.filter((g: Gem) => g.category === 'Cooking')
+        },
+      ].map((category) => {
+        const currentIndex = categoryIndices[category.id] || 0;
+        
+        return (
+          <section key={category.id} className="py-12 px-6">
+            <div className="mx-auto xl:max-w-7xl">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold">{category.title}</h2>
+                <div className="flex gap-2">
+                  <button 
+                    onClick={() => setCategoryIndices(prev => ({
+                      ...prev,
+                      [category.id]: Math.max(0, (prev[category.id] || 0) - 1)
+                    }))}
+                    className="p-2 rounded-full hover:bg-surface-elevation-1"
+                    disabled={currentIndex <= 0}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                    </svg>
+                  </button>
+                  <button 
+                    onClick={() => setCategoryIndices(prev => ({
+                      ...prev,
+                      [category.id]: Math.min(category.gems.length - 1, (prev[category.id] || 0) + 1)
+                    }))}
+                    className="p-2 rounded-full hover:bg-surface-elevation-1"
+                    disabled={currentIndex >= category.gems.length - 3}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div className="overflow-hidden">
+                <GemGrid 
+                  type="slider"
+
+                  visibleCount={3}
+                  currentIndex={currentIndex}
+                  gems={category.gems}
+                  onGemClick={handleGemClick}
+                  className="py-8"
+                />
+              </div>
+            </div>
+          </section>
+        );
+      })}
     </div>
   );
 }

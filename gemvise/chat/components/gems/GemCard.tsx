@@ -25,7 +25,7 @@ const GemCard: FC<GemCardProps> = ({ gem, onClick }) => {
 
   return (
     <div 
-      className="relative w-full h-[280px] rounded-[32px] overflow-hidden cursor-pointer transform transition-all duration-300 group hover:scale-[1.02]" 
+      className="relative w-full h-[320px] rounded-[32px] overflow-hidden cursor-pointer transform transition-all duration-300 group hover:scale-[1.02] shadow-lg border border-border/10" 
       onClick={handleClick}
       data-testid="gem-card"
     >
@@ -35,13 +35,13 @@ const GemCard: FC<GemCardProps> = ({ gem, onClick }) => {
           className="w-full h-full" 
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
-      <div className="absolute inset-x-0 bottom-0 p-4 space-y-2">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
+      <div className="absolute inset-x-0 bottom-0 p-6 space-y-3 backdrop-blur-sm bg-black/10">
         <div className="space-y-1">
-          <h3 className="font-semibold text-lg text-white line-clamp-1">
+          <h3 className="font-semibold text-xl text-white line-clamp-1">
             {gem.name}
           </h3>
-          <p className="text-sm text-white/90 line-clamp-2">
+          <p className="text-base text-white/90 line-clamp-2 leading-relaxed">
             {gem.description}
           </p>
         </div>
@@ -50,7 +50,7 @@ const GemCard: FC<GemCardProps> = ({ gem, onClick }) => {
             {gem.expertise.slice(0, 3).map((skill) => (
               <span
                 key={skill}
-                className="px-2 py-1 text-xs rounded-full bg-white/10 text-white/90"
+                className="px-3 py-1.5 text-sm font-medium rounded-full bg-white/10 text-white/90 hover:bg-white/20 transition-colors"
               >
                 {skill}
               </span>
