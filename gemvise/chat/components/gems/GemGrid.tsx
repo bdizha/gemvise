@@ -39,7 +39,8 @@ const getTableLayout = (layout: TableLayout) => {
   }
 };
 
-const GemGrid: FC<GemGridProps> = ({ gems, type, className = '', onGemClick, layout = '2-rows-2-3' }) => {
+const GemGrid: FC<GemGridProps> = ({ gems = [], type, className = '', onGemClick, layout = '2-rows-2-3' }) => {
+  if (!gems?.length) return null;
   if (type === 'slider') {
     return (
       <div className={`relative h-[440px] w-full ${className}`}>
@@ -78,9 +79,9 @@ const GemGrid: FC<GemGridProps> = ({ gems, type, className = '', onGemClick, lay
 
   // Table layout
   return (
-    <div className={`w-full max-w-7xl mx-auto px-4 grid gap-6 ${getTableLayout(layout)} ${className}`}>
+    <div className={`w-full ${className}`}>
       {gems.map((gem) => (
-        <div key={gem.id} className="flex-shrink-0 w-[320px]">
+        <div key={gem.id} className="h-full w-full">
           <GemCard gem={gem} onClick={() => onGemClick?.(gem)} />
         </div>
       ))}

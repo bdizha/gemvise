@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
 import { GradientTheme } from './GradientSection';
+import { type Gem } from '@/types/gems';
 
-export type SectionVariant = 'default' | 'gradient' | 'values';
+export type SectionVariant = 'default' | 'gradient' | 'hero' | 'featured' | 'category' | 'values';
 
 interface BaseSectionProps {
   variant?: SectionVariant;
@@ -31,4 +32,13 @@ export interface SectionProps {
   values?: Array<{ title: string; description: string }>;
   theme?: GradientTheme;
   isHero?: boolean;
+  gems?: Gem[];
+  onGemClick?: (gem: Gem) => void;
+  currentSlide?: number;
+  carouselContent?: Array<{
+    src: string;
+    alt: string;
+    description: string;
+  }>;
+  onSearch?: (query: string) => void;
 }

@@ -5,6 +5,7 @@ import ShapeTower, { type ShapeVariant } from '@/components/shapes/ShapeTower';
 import type { GemCardProps } from '@/types/gems';
 
 const GemCard: FC<GemCardProps> = ({ gem, onClick }) => {
+  if (!gem) return null;
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     onClick?.(e);
   };
@@ -31,7 +32,7 @@ const GemCard: FC<GemCardProps> = ({ gem, onClick }) => {
     >
       <div className="absolute inset-0 overflow-hidden">
         <ShapeTower 
-          variant={getShapeVariant(gem.category)} 
+          variant={getShapeVariant(gem?.category || 'default')} 
           className="w-full h-full" 
         />
       </div>

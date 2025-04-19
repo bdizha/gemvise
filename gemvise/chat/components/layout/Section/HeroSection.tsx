@@ -1,18 +1,90 @@
 import React from 'react';
+import { type SectionProps } from './types';
 
-interface HeroSectionProps {
-  children: React.ReactNode;
+interface HeroSectionProps extends SectionProps {
+  carouselContent?: { src: string; alt: string; description: string }[];
+  onSearch?: (value: string) => void;
 }
 
-const HeroSection = ({ children }: HeroSectionProps) => {
+const HeroSection = (props: HeroSectionProps) => {
+  const { carouselContent, onSearch, children } = props;
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+
+  const nextSlide = () => {
+    if (!carouselContent) return;
+    setCurrentSlide((prev) => (prev + 1) % carouselContent.length);
+  };
+
+  const prevSlide = () => {
+    if (!carouselContent) return;
+    setCurrentSlide((prev) => (prev - 1 + carouselContent.length) % carouselContent.length);
+  };
+
+  // Auto-advance slides every 5 seconds
+  React.useEffect(() => {
+    if (!carouselContent) return;
+    const interval = setInterval(nextSlide, 5000);
+    return () => clearInterval(interval);
+  }, [currentSlide, carouselContent]);
+
   return (
-    <section className="block font-sans pt-[85px] md:pt-[36px]">
-      <div className="px-6 pb-[50px] md:pb-[60px]">
-        <div className="max-w-[1400px] mx-auto flex items-stretch justify-between flex-wrap md:block">
-          {children}
+    <div className="relative min-h-[600px] w-full">
+      <div className="relative w-full h-full overflow-hidden rounded-2xl">
+        <div className="absolute inset-0 transition-all duration-500 ease-in-out section-gradient-light-dark opacity-50 blur-[30px]" />
+        <div className="absolute inset-0 bg-black/70" />
+        <div className="mx-auto w-full px-6 xl:max-w-7xl flex h-full flex-col relative">
+          <div className="flex flex-col md:flex-row items-center justify-center h-full gap-8 py-12 relative z-10">
+            <div className="flex-1 text-center text-white relative z-10">
+              {carouselContent ? (
+                <div className="relative">
+                  <div className="transition-opacity duration-500">
+                    <img
+                      src={carouselContent[currentSlide].src}
+                      alt={carouselContent[currentSlide].alt}
+                      className="w-full h-64 object-cover rounded-lg"
+                    />
+                    <p className="mt-4 text-lg text-white/80">
+                      {carouselContent[currentSlide].description}
+                    </p>
+                  </div>
+                  <button
+                    onClick={prevSlide}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 p-2 bg-black/50 text-white rounded-full"
+                  >
+                    ←
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 p-2 bg-black/50 text-white rounded-full"
+                  >
+                    →
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
+                    Connect with AI-Powered Expert Personas
+                  </h1>
+                  <p className="text-base md:text-lg text-white/80 mb-6">
+                    Experience interactive learning through dynamic conversations with AI versions of world-renowned experts.
+                  </p>
+                </>
+              )}
+              <form onSubmit={(e) => e.preventDefault()} className="flex gap-4 max-w-md mx-auto relative z-10 backdrop-blur-sm bg-white/10 p-3 rounded-2xl border border-white/20 shadow-xl mt-6">
+                <input
+                  type="text"
+                  onChange={(e) => onSearch?.(e.target.value)}
+                  placeholder="Search for an expert..."
+                  className="flex-1 px-4 py-2 rounded-lg border border-border bg-background text-theme-foreground"
+                />
+                <button type="submit" className="px-4 py-2 bg-theme-surface text-theme-foreground rounded-lg hover:bg-theme-surface/80">Search</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+      {children}
+    </div>
   );
 };
 

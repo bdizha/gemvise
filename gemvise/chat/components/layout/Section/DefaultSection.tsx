@@ -8,7 +8,7 @@ type DefaultSectionProps = Omit<SectionProps, 'variant'>;
 const DefaultSection: React.FC<DefaultSectionProps> = ({ tag, title, description, className = '', children }) => {
   return (
     <div className={`relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8 lg:py-40 ${className}`}>
-      <div className="mx-auto max-w-2xl lg:mx-0">
+      <div className="w-full">
         {tag && (
           <p className="text-base font-semibold leading-7 text-grey-600 dark:text-grey-400">
             {tag}

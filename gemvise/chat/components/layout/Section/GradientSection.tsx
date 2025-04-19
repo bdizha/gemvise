@@ -35,16 +35,9 @@ const GradientSection = (props: GradientSectionProps) => {
       />
 
       {/* Content */}
-      <DefaultSection
-        title={title}
-        description={description}
-        tag={tag}
-        className={`relative z-10 ${className}`}
-      >
-        <section className="relative z-10">
-          {children}
-        </section>
-      </DefaultSection>
+      <div className="relative z-10">
+        {children}
+      </div>
     </div>
   );
 };

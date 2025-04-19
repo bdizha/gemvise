@@ -1,10 +1,8 @@
 'use client';
 
 import { type FC } from 'react';
-import DefaultSection from '@/components/layout/Section/DefaultSection';
-import GradientSection from '@/components/layout/Section/GradientSection';
+import Section from '@/components/layout/Section';
 import Button from '@/components/ui/Button';
-import Card from '@/components/ui/Card';
 
 const values = [
   {
@@ -35,9 +33,10 @@ const values = [
 
 const AboutPage: FC = () => {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#232f3e] to-[#0f1111]">
+    <main className="min-h-screen bg-background">
       {/* Story Section */}
-      <GradientSection
+      <Section
+        variant="gradient"
         tag="Our Story"
         title="Shaping the Next Era of Interaction, Creativity, and Ownership"
         description="GemVise is pioneering a new frontier where imagination meets technology, empowering creators to build and own unique AI experiences."
@@ -45,7 +44,8 @@ const AboutPage: FC = () => {
       />
 
       {/* Vision Section */}
-      <DefaultSection
+      <Section
+        variant="default"
         tag="Our Vision"
         title="Beyond Chat: Building the GemVerse"
         description="We're creating more than just a platform - we're building a future where digital creation has tangible value. Our vision extends to the GemVerse, an immersive virtual world where AI companions come to life in ways never before possible."
@@ -53,27 +53,18 @@ const AboutPage: FC = () => {
       />
 
       {/* Values Section */}
-      <DefaultSection
+      <Section
+        variant="values"
         tag="Our Values"
         title="What Drives Us Forward"
         description="We believe in a future where creativity is recognized, rewarded, and brought to life through cutting-edge technology."
+        values={values}
         className="py-20"
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {values.map((value, index) => (
-            <Card 
-              key={index}
-              className="bg-white/10 backdrop-blur-md border border-[#d5d9d9] hover:border-[#ff9900] transition-all p-6"
-            >
-              <h3 className="text-xl font-bold text-white mb-3">{value.title}</h3>
-              <p className="text-[#d5d9d9]">{value.description}</p>
-            </Card>
-          ))}
-        </div>
-      </DefaultSection>
+      />
 
       {/* Team Section */}
-      <GradientSection
+      <Section
+        variant="gradient"
         tag="Join Our Team"
         title="Shape the Future With Us"
         description="We're looking for passionate innovators who want to push the boundaries of AI interaction, blockchain integration, and virtual world development."
@@ -83,16 +74,16 @@ const AboutPage: FC = () => {
           <Button 
             variant="primary"
             size="lg"
-            className="bg-[#ff9900] hover:bg-[#ff9900]/90 text-[#0f1111]"
             onClick={() => window.location.href = '/careers'}
           >
             View Open Positions
           </Button>
         </div>
-      </GradientSection>
+      </Section>
 
       {/* Location Section */}
-      <GradientSection
+      <Section
+        variant="gradient"
         tag="Our Location"
         title="Silicon Valley & Beyond"
         description="Headquartered in the heart of innovation, with a distributed team of experts working globally to bring the GemVerse to life."
@@ -100,20 +91,21 @@ const AboutPage: FC = () => {
       />
 
       {/* Contact Section */}
-      <DefaultSection
+      <Section
+        variant="default"
         tag="Connect With Us"
         title="Join Our Community"
         description="Be part of a passionate community of creators, storytellers, and explorers shaping the future of interactive entertainment."
         className="py-20"
       >
         <div className="flex justify-center gap-6 mt-8">
-          <a href="https://discord.gg/gemvise" className="text-[#d5d9d9] hover:text-[#ff9900] transition-colors">Discord</a>
-          <span className="text-[#5f6b7a]">•</span>
-          <a href="https://twitter.com/gemvise" className="text-[#d5d9d9] hover:text-[#ff9900] transition-colors">Twitter</a>
-          <span className="text-[#5f6b7a]">•</span>
-          <a href="mailto:hello@gemvise.com" className="text-[#d5d9d9] hover:text-[#ff9900] transition-colors">Email</a>
+          <a href="https://discord.gg/gemvise" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Discord</a>
+          <span className="text-theme-foreground/50">•</span>
+          <a href="https://twitter.com/gemvise" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Twitter</a>
+          <span className="text-theme-foreground/50">•</span>
+          <a href="mailto:hello@gemvise.com" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Email</a>
         </div>
-      </DefaultSection>
+      </Section>
     </main>
   );
 };

@@ -36,7 +36,7 @@ export interface Gem {
   /**
    * List of expertise areas.
    */
-  expertise?: string[];
+  expertise: string[];
   /**
    * Number of followers.
    */

@@ -1,9 +1,12 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 import DefaultSection from './DefaultSection';
 import GradientSection from './GradientSection';
-import { SectionProps } from './types';
+import HeroSection from './HeroSection';
+import FeaturedSection from './FeaturedGems';
+import CategorySection from './CategorySection';
+import { type SectionProps } from './types';
 
 // Values grid component - reused by both default and values variants
 const ValuesGrid = ({ values }: { values: Array<{ title: string; description: string }> }) => (
@@ -22,20 +25,42 @@ const Section = (props: SectionProps) => {
 
   switch (variant) {
     case 'gradient':
-      return <GradientSection {...props} isHero={isHero} />;
+      return (
+        <DefaultSection {...props} theme={theme}>
+          <GradientSection {...props} isHero={isHero} />
+        </DefaultSection>
+      );
+    case 'hero':
+      return (
+        <DefaultSection {...props} theme={theme}>
+          <HeroSection {...props} />
+        </DefaultSection>
+      );
+    case 'featured':
+      return (
+        <DefaultSection {...props} theme={theme}>
+          <FeaturedSection gems={props.gems || []} onGemClick={(gem) => props.onGemClick?.(gem)} />
+          {props.children}
+        </DefaultSection>
+      );
+    case 'category':
+      return (
+        <DefaultSection {...props} theme={theme}>
+          <CategorySection name={props.title || ''} gems={props.gems || []} onGemClick={(gem) => props.onGemClick?.(gem)} />
+          {props.children}
+        </DefaultSection>
+      );
     case 'values':
-      if (props.values) {
-        return (
-          <DefaultSection {...props}>
-            <ValuesGrid values={props.values} />
-            {props.children}
-          </DefaultSection>
-        );
-      }
-      return <DefaultSection {...props} />;
+      return (
+        <DefaultSection {...props} theme={theme}>
+          <ValuesGrid values={props.values || []} />
+          {props.children}
+        </DefaultSection>
+      );
     default:
-      return <DefaultSection {...props} />;
+      return <DefaultSection {...props} theme={theme} />;
   }
 };
 
 export default Section;
+

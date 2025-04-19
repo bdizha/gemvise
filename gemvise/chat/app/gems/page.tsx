@@ -2,8 +2,10 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import GemGrid from '@/components/gems/GemGrid';
 import { getAllGems } from '@/data/gems';
+import Section from '@/components/layout/Section';
+import GemGrid from '@/components/gems/GemGrid';
+import Tabs from '@/components/ui/Tabs';
 
 export default function GemsPage() {
   const [quantumState, setQuantumState] = useState({
@@ -13,58 +15,48 @@ export default function GemsPage() {
     uncertainty: 0.15
   });
 
-  const categories = [
-    'All Gems',
-    'Leaders',
-    'Scientists',
-    'Artists',
-    'Philosophers',
-    'Innovators'
+  const tabs = [
+    { id: 'featured', label: 'Featured' },
+    { id: 'business', label: 'Business & Leadership' },
+    { id: 'science', label: 'Science & Technology' },
+    { id: 'arts', label: 'Arts & Culture' },
+    { id: 'philosophy', label: 'Philosophy & Wisdom' },
+    { id: 'innovation', label: 'Innovation & Future' },
   ];
+
+  const [selectedTab, setSelectedTab] = useState(tabs[0].id);
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header section */}
-      <div className="relative py-16 px-8 mb-12 bg-gradient-to-br from-primary/5 to-primary/10">
-        <h1 className="text-4xl font-bold mb-4">Explore Gems</h1>
-        <p className="text-lg text-muted-foreground max-w-2xl">
-          Discover and interact with historical figures who have shaped our world
-        </p>
-      </div>
-
-      {/* Filters section */}
-      <div className="mb-8 px-8">
-        <div className="flex flex-wrap gap-4">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className="px-4 py-2 rounded-full text-sm font-medium text-primary hover:bg-primary/10"
-            >
-              {category}
-            </button>
-          ))}
+      <Section
+        variant="hero"
+        theme="dark"
+        title="Transform Your Experience"
+        description="Connect with AI-powered expert personas for real-time, personalized insights. Engage in dynamic conversations with thought leaders and innovators who are shaping our future."
+      >
+        <div className="mt-8 container mx-auto px-4 sm:px-6 lg:px-8">
+          <Tabs
+            tabs={tabs}
+            activeTab={selectedTab}
+            onChange={setSelectedTab}
+          />
         </div>
-      </div>
+      </Section>
 
-      {/* Gems Grid */}
-      <GemGrid 
-        gems={getAllGems()}
-        variant="grid"
-        className="px-8 pb-20"
-      />
-
-      {/* Quantum State Indicator */}
-      <div className="fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-xl bg-black/20 backdrop-blur-md p-2">
-        {Object.entries(quantumState).map(([key, value]) => (
-          <div key={key} className="flex items-center gap-1">
-            <div 
-              className="h-2 w-12 rounded-full bg-gradient-to-r from-blue-300 to-blue-600 overflow-hidden"
-              style={{ clipPath: `inset(0 ${100 - value * 100}% 0 0)` }}
-            />
-            <span className="text-xs text-foreground-600">{key[0].toUpperCase()}</span>
-          </div>
-        ))}
-      </div>
+      <Section
+        variant="default"
+        theme="light"
+        title="Explore Our Gems"
+        description="Discover a curated collection of AI-powered expert personas, each bringing unique insights and perspectives."
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <GemGrid 
+            gems={getAllGems()}
+            type="grid"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr w-full"
+          />
+        </div>
+      </Section>
     </div>
   );
 }
