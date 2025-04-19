@@ -2,6 +2,8 @@ import * as React from 'react';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
 import './globals.css';
+import '@/styles/layout.css';
+import '@/styles/swiper.css';
 import Footer from '@/components/layout/Footer';
 import { ThemeProvider } from 'next-themes';
 import ClientLayout from '@/components/layout/ClientLayout';

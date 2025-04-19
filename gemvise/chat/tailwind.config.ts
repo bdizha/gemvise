@@ -2,6 +2,7 @@ import type { Config } from 'tailwindcss';
 import plugin from 'tailwindcss/plugin';
 
 const config: Config = {
+
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -14,6 +15,20 @@ const config: Config = {
       mono: ['var(--font-geist-mono)'],
     },
     extend: {
+      keyframes: {
+        'rotate-360': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        'rotate-negative-360': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(-360deg)' },
+        },
+      },
+      animation: {
+        'rotate-360': 'rotate-360 8s linear infinite',
+        'rotate-negative-360': 'rotate-negative-360 8s linear infinite',
+      },
       colors: {
         primary: {
           DEFAULT: '#ff9900', // AWS Orange
@@ -71,6 +86,16 @@ const config: Config = {
   },
   plugins: [
     plugin(({ addUtilities, addBase }) => {
+      // Add scrollbar-hide utility
+      addUtilities({
+        '.scrollbar-hide': {
+          '-ms-overflow-style': 'none',
+          'scrollbar-width': 'none',
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        },
+      });
       addBase({
         '*': {
           '@apply border-transparent': {},

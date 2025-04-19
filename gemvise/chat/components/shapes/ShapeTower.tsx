@@ -65,10 +65,10 @@ const ShapeTower: FC<ShapeTowerProps> = ({
       {/* Tower Elements */}
       <div className="absolute inset-0">
         {Array.from({ length: 16 }).map((_, index) => {
-          const scale = Math.pow(0.8, index); 
-          const opacity = 1 - (index * 0.04); 
+          const scale = Math.pow(0.85, index); 
+          const opacity = 1 - (index * 0.03); 
           const rotate = index % 2 === 0 ? 'group-hover:animate-rotate-360' : 'group-hover:animate-rotate-negative-360';
-          const delay = `${index * 50}ms`;
+          const delay = `${index * 25}ms`;
           
           return (
             <div

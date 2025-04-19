@@ -15,7 +15,7 @@ export const Logo = ({ variant = 'header', showText = true }: LogoProps): JSX.El
   
   const containerClasses = {
     header: 'flex items-center gap-2',
-    sidebar: 'flex items-center space-x-2',
+    sidebar: 'flex items-center space-x-2 lg:hidden', // Hide on large screens
     footer: 'flex items-center gap-2'
   };
 
