@@ -1,22 +1,29 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { type FC } from 'react';
+import { type Gem } from '@/types/gems';
 import GemCard from './GemCard';
-import type { Gem } from '@/types/gems';
 
+// Import Swiper and modules
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, FreeMode } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/free-mode';
+import '@/styles/swiper.css';
 
 type TableLayout = '2-rows-2-3' | '1-row-2-cols';
 
-type GemGridProps = {
+interface GemGridProps {
   gems: Gem[];
-  onGemClick?: (gem: Gem) => void;
+  type?: 'grid' | 'slider';
   className?: string;
-} & (
-  | { type: 'slider'; visibleCount: number; currentIndex: number }
-  | { type: 'table'; layout: TableLayout }
-);
-
-
+  onGemClick?: (gem: Gem) => void;
+  layout?: TableLayout;
+}
 
 const getTableLayout = (layout: TableLayout) => {
   switch (layout) {
@@ -32,65 +39,53 @@ const getTableLayout = (layout: TableLayout) => {
   }
 };
 
-export default function GemGrid({
-  gems,
-  type,
-  className = '',
-  onGemClick,
-  ...props
-}: GemGridProps) {
+const GemGrid: FC<GemGridProps> = ({ gems, type, className = '', onGemClick, layout = '2-rows-2-3' }) => {
   if (type === 'slider') {
-    const { visibleCount, currentIndex } = props as { visibleCount: number; currentIndex: number };
-    // Calculate visible range and indices
-    const totalVisible = Math.min(visibleCount, gems.length);
-    const halfVisible = Math.floor(totalVisible / 2);
-    const startIndex = Math.max(0, currentIndex - halfVisible);
-    const endIndex = Math.min(gems.length, startIndex + totalVisible);
-    const displayGems = gems.slice(startIndex, endIndex);
-
-    // Container width calculation
-    const containerWidth = 320 * 3; // Show 3 cards at a time
-
     return (
       <div className={`relative h-[400px] w-full ${className}`}>
-        <div className="relative w-full h-full max-w-7xl mx-auto px-4 overflow-hidden">
-          <div className="flex gap-6 transition-transform duration-300" 
-               style={{ 
-                 transform: `translateX(calc(-${currentIndex * 340}px))`,
-                 width: `${gems.length * 340}px`
-               }}>
-            {gems.map((gem) => (
-              <motion.div
-                key={gem.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                className="flex-shrink-0 w-[320px]"
-              >
-                <GemCard gem={gem} onClick={() => onGemClick?.(gem)} />
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        <Swiper
+          modules={[Navigation, Pagination, FreeMode]}
+          navigation
+          pagination={{ clickable: true }}
+          spaceBetween={30}
+          slidesPerView="auto"
+          loop
+          speed={600}
+          grabCursor
+          freeMode={{
+            enabled: true,
+            sticky: false,
+            momentum: true,
+            momentumRatio: 0.8,
+          }}
+          className="h-full max-w-7xl mx-auto px-4"
+          breakpoints={{
+            320: { slidesPerView: "auto", spaceBetween: 16 },
+            640: { slidesPerView: "auto", spaceBetween: 20 },
+            1024: { slidesPerView: "auto", spaceBetween: 24 },
+            1280: { slidesPerView: "auto", spaceBetween: 24 },
+          }}
+        >
+          {gems.map((gem) => (
+            <SwiperSlide key={gem.id}>
+              <GemCard gem={gem} onClick={() => onGemClick?.(gem)} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     );
   }
 
   // Table layout
-  const { layout } = props as { layout: TableLayout };
   return (
     <div className={`w-full max-w-7xl mx-auto px-4 grid gap-6 ${getTableLayout(layout)} ${className}`}>
       {gems.map((gem) => (
-        <motion.div
-          key={gem.id}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="w-full"
-        >
+        <div key={gem.id} className="flex-shrink-0 w-[320px]">
           <GemCard gem={gem} onClick={() => onGemClick?.(gem)} />
-        </motion.div>
+        </div>
       ))}
     </div>
   );
-}
+};
+
+export default GemGrid;

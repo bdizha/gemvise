@@ -67,9 +67,132 @@ export const featuredGems: Gem[] = [
 // Extended list of all available experts
 export const allGems: Gem[] = [
   ...featuredGems,
+  // Finance & Investment
+  {
+    id: 'finance-1',
+    name: 'Ray Dalio',
+    title: 'Investment Strategist',
+    description: 'Learn principles for navigating both markets and life successfully.',
+    category: 'Finance',
+    imageUrl: '/gradients/GV-Gradient-01.png',
+    gradient: 'bg-gradient-to-r from-amber-DEFAULT to-orange-DEFAULT',
+    expertise: ['Macro Investing', 'Risk Management', 'Economic Principles'],
+    followers: 850000,
+    chatCount: 42000
+  },
+  {
+    id: 'finance-2',
+    name: 'Robert Kiyosaki',
+    title: 'Financial Education Expert',
+    description: 'Master financial literacy and build lasting wealth.',
+    category: 'Finance',
+    imageUrl: '/gradients/GV-Gradient-02.png',
+    gradient: 'bg-gradient-to-r from-amber-DEFAULT to-orange-DEFAULT',
+    expertise: ['Financial Literacy', 'Real Estate', 'Business Development'],
+    followers: 720000,
+    chatCount: 36000
+  },
+  // Cooking & Culinary Arts
+  {
+    id: 'cooking-1',
+    name: 'Julia Child',
+    title: 'Culinary Legend',
+    description: 'Master the art of French cooking and culinary fundamentals.',
+    category: 'Cooking',
+    imageUrl: '/gradients/GV-Gradient-03.png',
+    gradient: 'bg-gradient-to-r from-violet-DEFAULT to-pink-DEFAULT',
+    expertise: ['French Cuisine', 'Cooking Techniques', 'Recipe Development'],
+    followers: 680000,
+    chatCount: 34000
+  },
+  {
+    id: 'cooking-2',
+    name: 'Massimo Bottura',
+    title: 'Innovation Chef',
+    description: 'Explore modern Italian cuisine and culinary innovation.',
+    category: 'Cooking',
+    imageUrl: '/gradients/GV-Gradient-04.png',
+    gradient: 'bg-gradient-to-r from-violet-DEFAULT to-pink-DEFAULT',
+    expertise: ['Italian Cuisine', 'Modern Techniques', 'Sustainability'],
+    followers: 590000,
+    chatCount: 29000
+  },
+  {
+    id: 'cooking-3',
+    name: 'Dominique Ansel',
+    title: 'Pastry Innovator',
+    description: 'Learn the art of pastry and creative dessert making.',
+    category: 'Cooking',
+    imageUrl: '/gradients/GV-Gradient-05.png',
+    gradient: 'bg-gradient-to-r from-violet-DEFAULT to-pink-DEFAULT',
+    expertise: ['Pastry Arts', 'Dessert Innovation', 'Bakery Business'],
+    followers: 520000,
+    chatCount: 26000
+  },
+  // Lifestyle & Organization
+  {
+    id: 'lifestyle-1',
+    name: 'Martha Stewart',
+    title: 'Lifestyle Maven',
+    description: 'Transform your home and life with expert tips on entertaining, cooking, and decorating.',
+    category: 'Lifestyle',
+    imageUrl: '/gradients/GV-Gradient-04.png',
+    gradient: 'bg-gradient-to-r from-pink-DEFAULT to-violet-DEFAULT',
+    expertise: ['Home Decor', 'Entertaining', 'DIY Projects'],
+    followers: 820000,
+    chatCount: 38000
+  },
+  {
+    id: 'lifestyle-2',
+    name: 'Gretchen Rubin',
+    title: 'Happiness Expert',
+    description: 'Discover practical strategies for building better habits and a happier life.',
+    category: 'Lifestyle',
+    imageUrl: '/gradients/GV-Gradient-05.png',
+    gradient: 'bg-gradient-to-r from-pink-DEFAULT to-violet-DEFAULT',
+    expertise: ['Habit Formation', 'Personal Development', 'Happiness Research'],
+    followers: 450000,
+    chatCount: 28000
+  },
+  {
+    id: 'lifestyle-3',
+    name: 'Peter Walsh',
+    title: 'Decluttering Expert',
+    description: 'Learn professional organizing techniques to declutter your space and mind.',
+    category: 'Lifestyle',
+    imageUrl: '/gradients/GV-Gradient-06.png',
+    gradient: 'bg-gradient-to-r from-pink-DEFAULT to-violet-DEFAULT',
+    expertise: ['Space Organization', 'Decluttering', 'Time Management'],
+    followers: 380000,
+    chatCount: 22000
+  },
   // Technology & Innovation
   {
     id: 'tech-1',
+    name: 'Steve Wozniak',
+    title: 'Tech Pioneer',
+    description: 'Dive deep into computer engineering and innovation principles.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-07.png',
+    gradient: 'bg-gradient-to-r from-blue-DEFAULT to-violet-DEFAULT',
+    expertise: ['Computer Engineering', 'Innovation', 'Tech Education'],
+    followers: 780000,
+    chatCount: 39000
+  },
+  {
+    id: 'tech-2',
+    name: 'Tim Berners-Lee',
+    title: 'Web Pioneer',
+    description: 'Understand the foundations and future of the World Wide Web.',
+    category: 'Technology',
+    imageUrl: '/gradients/GV-Gradient-08.png',
+    gradient: 'bg-gradient-to-r from-blue-DEFAULT to-violet-DEFAULT',
+    expertise: ['Web Standards', 'Internet Architecture', 'Digital Rights'],
+    followers: 650000,
+    chatCount: 32500
+  },
+  {
+    id: 'tech-3',
     name: 'AI Ethics Advisor',
     title: 'Ethics in Technology',
     description: '🤖 "Let\'s explore the ethical implications of AI together. What concerns you most about artificial intelligence?" A thoughtful guide through the complex landscape of AI ethics and responsible innovation.',
@@ -302,11 +425,59 @@ export const allGems: Gem[] = [
     title: 'Optimization Expert',
     description: '⚡ "Every millisecond counts. Let\'s make your applications lightning fast." Tuning systems for peak performance.',
     category: 'Technology',
-    imageUrl: '/gradients/GV-Gradient-21.png',
-    gradient: 'bg-gradient-to-r from-yellow-DEFAULT to-amber-DEFAULT',
-    expertise: ['Performance Optimization', 'Scalability', 'Load Testing'],
-    followers: 730000,
-    chatCount: 34000
+    imageUrl: '/gradients/GV-Gradient-03.png',
+    gradient: 'bg-gradient-to-r from-blue-DEFAULT to-violet-DEFAULT',
+    expertise: ['Performance Optimization', 'System Architecture', 'Benchmarking'],
+    followers: 623000,
+    chatCount: 31500
+  },
+  {
+    id: 'science-1',
+    name: 'Brian Cox',
+    title: 'Physics Explorer',
+    description: 'Uncover the mysteries of quantum mechanics and the cosmos.',
+    category: 'Science',
+    imageUrl: '/gradients/GV-Gradient-09.png',
+    gradient: 'bg-gradient-to-r from-green-DEFAULT to-emerald-DEFAULT',
+    expertise: ['Particle Physics', 'Cosmology', 'Science Communication'],
+    followers: 710000,
+    chatCount: 35500
+  },
+  {
+    id: 'science-2',
+    name: 'Richard Dawkins',
+    title: 'Evolutionary Biologist',
+    description: 'Explore the wonders of evolution and natural selection.',
+    category: 'Science',
+    imageUrl: '/gradients/GV-Gradient-10.png',
+    gradient: 'bg-gradient-to-r from-green-DEFAULT to-emerald-DEFAULT',
+    expertise: ['Evolution', 'Biology', 'Science Education'],
+    followers: 820000,
+    chatCount: 41000
+  },
+  {
+    id: 'arts-1',
+    name: 'Marina Abramović',
+    title: 'Performance Artist',
+    description: 'Explore the boundaries of art and human connection.',
+    category: 'Arts',
+    imageUrl: '/gradients/GV-Gradient-11.png',
+    gradient: 'bg-gradient-to-r from-purple-DEFAULT to-indigo-DEFAULT',
+    expertise: ['Performance Art', 'Contemporary Art', 'Art Theory'],
+    followers: 580000,
+    chatCount: 29000
+  },
+  {
+    id: 'arts-2',
+    name: 'Hans Zimmer',
+    title: 'Film Composer',
+    description: 'Learn the art of musical storytelling and composition.',
+    category: 'Arts',
+    imageUrl: '/gradients/GV-Gradient-12.png',
+    gradient: 'bg-gradient-to-r from-purple-DEFAULT to-indigo-DEFAULT',
+    expertise: ['Film Scoring', 'Music Composition', 'Sound Design'],
+    followers: 690000,
+    chatCount: 34500
   },
   {
     id: '23',

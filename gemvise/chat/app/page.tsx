@@ -28,22 +28,15 @@ const carouselContent = [
   }
 ];
 
-
-
-
 export default function Home() {
   const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [query, setQuery] = useState('');
-  const [categoryIndices, setCategoryIndices] = useState<Record<string, number>>({});
 
   // Auto-advance slides every 5 seconds
   useEffect(() => {
     const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, [currentSlide]);
-
-
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % carouselContent.length);
@@ -57,11 +50,12 @@ export default function Home() {
     router.push(`/chat/${gem.id}`);
   };
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (query.trim()) {
-      router.push(`/search?q=${encodeURIComponent(query)}`);
-    }
+  const handleSearch = (searchQuery: string) => {
+    if (!searchQuery) return;
+
+    const searchParams = new URLSearchParams();
+    searchParams.set('q', searchQuery);
+    router.push(`/search?${searchParams.toString()}`);
   };
 
   return (
@@ -81,11 +75,10 @@ export default function Home() {
                 <p className="text-base md:text-lg text-white/80 mb-6">
                   Experience interactive learning through dynamic conversations with AI versions of world-renowned experts.
                 </p>
-                <form onSubmit={handleSearch} className="flex gap-4 max-w-md mx-auto relative z-10 backdrop-blur-sm bg-white/10 p-3 rounded-2xl border border-white/20 shadow-xl">
+                <form onSubmit={(e) => e.preventDefault()} className="flex gap-4 max-w-md mx-auto relative z-10 backdrop-blur-sm bg-white/10 p-3 rounded-2xl border border-white/20 shadow-xl">
                   <input
                     type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                    onChange={(e) => handleSearch(e.target.value)}
                     placeholder="Search for an expert..."
                     className="flex-1 px-4 py-2 rounded-lg border border-border bg-background"
                   />
@@ -124,41 +117,12 @@ export default function Home() {
       {/* Featured Experts Section */}
       <section className="py-12 px-6">
         <div className="mx-auto xl:max-w-7xl">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold">Featured Experts</h2>
-            <div className="flex gap-2">
-              <button 
-                onClick={() => setCategoryIndices(prev => ({
-                  ...prev,
-                  featured: Math.max(0, (prev.featured || 0) - 1)
-                }))}
-                className="p-2 rounded-full hover:bg-surface-elevation-1"
-                disabled={(categoryIndices.featured || 0) === 0}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                </svg>
-              </button>
-              <button 
-                onClick={() => setCategoryIndices(prev => ({
-                  ...prev,
-                  featured: Math.min(featuredGems.length - 1, (prev.featured || 0) + 1)
-                }))}
-                className="p-2 rounded-full hover:bg-surface-elevation-1"
-                disabled={(categoryIndices.featured || 0) >= allGems.length - 3}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                </svg>
-              </button>
-            </div>
-          </div>
+          <h2 className="text-2xl font-bold mb-4">Featured Gems</h2>
           <div id="featured-grid" className="overflow-x-auto scrollbar-hide">
             <GemGrid 
               type="slider" 
 
-              visibleCount={3}
-              currentIndex={categoryIndices['featured'] || 0}
+
               gems={allGems} 
               onGemClick={handleGemClick} 
             />
@@ -170,60 +134,29 @@ export default function Home() {
       {[
         { 
           id: 'finance',
-          title: 'Finance & Investment', 
+          name: 'Finance & Investment', 
           gems: allGems.filter((g: Gem) => g.category === 'Finance')
         },
         { 
           id: 'lifestyle',
-          title: 'Lifestyle & Organization', 
+          name: 'Lifestyle & Organization', 
           gems: allGems.filter((g: Gem) => g.category === 'Lifestyle')
         },
         { 
           id: 'cooking',
-          title: 'Cooking & Culinary Arts', 
+          name: 'Cooking & Culinary Arts', 
           gems: allGems.filter((g: Gem) => g.category === 'Cooking')
         },
       ].map((category) => {
-        const currentIndex = categoryIndices[category.id] || 0;
-        
         return (
           <section key={category.id} className="py-12 px-6">
             <div className="mx-auto xl:max-w-7xl">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold">{category.title}</h2>
-                <div className="flex gap-2">
-                  <button 
-                    onClick={() => setCategoryIndices(prev => ({
-                      ...prev,
-                      [category.id]: Math.max(0, (prev[category.id] || 0) - 1)
-                    }))}
-                    className="p-2 rounded-full hover:bg-surface-elevation-1"
-                    disabled={currentIndex <= 0}
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                    </svg>
-                  </button>
-                  <button 
-                    onClick={() => setCategoryIndices(prev => ({
-                      ...prev,
-                      [category.id]: Math.min(category.gems.length - 1, (prev[category.id] || 0) + 1)
-                    }))}
-                    className="p-2 rounded-full hover:bg-surface-elevation-1"
-                    disabled={currentIndex >= category.gems.length - 3}
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
+              <h2 className="text-2xl font-bold mb-4">{category.name}</h2>
               <div className="overflow-hidden">
                 <GemGrid 
                   type="slider"
 
-                  visibleCount={3}
-                  currentIndex={currentIndex}
+
                   gems={category.gems}
                   onGemClick={handleGemClick}
                   className="py-8"
