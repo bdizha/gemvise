@@ -6,7 +6,7 @@
 
 .swiper-slide {
   width: 320px !important;
-  height: auto;
+  height: 360px !important;
   transition: all 0.3s ease;
 }
 

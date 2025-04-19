@@ -42,7 +42,7 @@ const getTableLayout = (layout: TableLayout) => {
 const GemGrid: FC<GemGridProps> = ({ gems, type, className = '', onGemClick, layout = '2-rows-2-3' }) => {
   if (type === 'slider') {
     return (
-      <div className={`relative h-[400px] w-full ${className}`}>
+      <div className={`relative h-[440px] w-full ${className}`}>
         <Swiper
           modules={[Navigation, Pagination, FreeMode]}
           navigation
@@ -58,7 +58,7 @@ const GemGrid: FC<GemGridProps> = ({ gems, type, className = '', onGemClick, lay
             momentum: true,
             momentumRatio: 0.8,
           }}
-          className="h-full max-w-7xl mx-auto px-4"
+          className="h-full max-w-7xl mx-auto px-4 py-10"
           breakpoints={{
             320: { slidesPerView: "auto", spaceBetween: 16 },
             640: { slidesPerView: "auto", spaceBetween: 20 },
