@@ -5,6 +5,10 @@ import * as React from 'react';
 interface Tab {
   id: string;
   label: string;
+  gradient?: {
+    default: string;
+    alternate: string;
+  };
 }
 
 interface TabsProps {
@@ -31,15 +35,23 @@ const Tabs: React.FC<TabsProps> = ({
           key={tab.id}
           onClick={() => handleClick(tab.id)}
           className={`
-            px-4 py-2 rounded-full text-sm font-medium 
-            transition-colors duration-200
-            ${activeTab === tab.id 
-              ? 'bg-surface-elevation-2 text-theme-foreground' 
-              : 'bg-surface-elevation-1 hover:bg-surface-elevation-2 text-theme-foreground/80'
-            }
+            relative px-4 py-2 rounded-full text-sm font-medium 
+            transition-all duration-200 overflow-hidden
+            border border-white/10 backdrop-blur-sm
+            ${activeTab === tab.id ? 'text-white shadow-lg' : 'text-white/80 hover:text-white'}
           `}
         >
-          {tab.label}
+          <div className={`
+            absolute inset-0 transition-opacity duration-200
+            ${tab.gradient?.default || 'bg-gradient-light-dark'}
+            ${activeTab === tab.id ? 'opacity-100' : 'opacity-50 hover:opacity-80'}
+          `} />
+          <div className={`
+            absolute inset-0 transition-opacity duration-200
+            ${tab.gradient?.alternate || 'bg-gradient-dark-light'}
+            ${activeTab === tab.id ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'}
+          `} />
+          <span className="relative z-10">{tab.label}</span>
         </button>
       ))}
     </div>

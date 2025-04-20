@@ -36,9 +36,9 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
       <nav className="mt-4 space-y-2 px-2 flex flex-col items-start">
         <Link href="/" className="w-full">
           <button
-            className={`flex h-[48px] w-full items-center gap-3 rounded-2xl px-4 text-theme-foreground transition-all duration-300 ${pathname === '/' 
-              ? 'section-gradient-light-dark bg-cover bg-center' 
-              : 'bg-theme-surface hover:section-gradient-light-dark-light hover:bg-cover hover:bg-center focus:outline-none'}`}
+            className={`flex h-[48px] w-full items-center gap-3 rounded-[36px] px-4 text-theme-foreground transition-all duration-300 ${pathname === '/' 
+              ? 'bg-gradient-light-dark bg-cover bg-center' 
+              : 'bg-theme-surface hover:bg-gradient-light-dark-light hover:bg-cover hover:bg-center focus:outline-none'}`}
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-theme-surface bg-cover bg-center transition-all duration-300 hover:bg-gradient-pink-purple">
               <HomeIcon className="h-5 w-5 text-theme-foreground" />
@@ -49,9 +49,9 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
 
         <Link href="/about" className="w-full">
           <button
-            className={`flex h-[48px] w-full items-center gap-3 rounded-2xl px-4 text-theme-foreground transition-all duration-300 ${pathname === '/about' 
-              ? 'section-gradient-light-dark bg-cover bg-center' 
-              : 'bg-theme-surface hover:section-gradient-light-dark-light hover:bg-cover hover:bg-center focus:outline-none'}`}
+            className={`flex h-[48px] w-full items-center gap-3 rounded-[36px] px-4 text-theme-foreground transition-all duration-300 ${pathname === '/about' 
+              ? 'bg-gradient-light-dark bg-cover bg-center' 
+              : 'bg-theme-surface hover:bg-gradient-light-dark-light hover:bg-cover hover:bg-center focus:outline-none'}`}
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-theme-surface bg-cover bg-center transition-all duration-300 hover:bg-gradient-pink-purple">
               <InformationCircleIcon className="h-5 w-5 text-theme-foreground" />
@@ -62,9 +62,9 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
 
         <Link href="/gems" className="w-full">
           <button
-            className={`flex h-[48px] w-full items-center gap-3 rounded-2xl px-4 text-theme-foreground transition-all duration-300 ${pathname === '/gems' 
-              ? 'section-gradient-light-dark bg-cover bg-center' 
-              : 'bg-theme-surface hover:section-gradient-light-dark-light hover:bg-cover hover:bg-center focus:outline-none'}`}
+            className={`flex h-[48px] w-full items-center gap-3 rounded-[36px] px-4 text-theme-foreground transition-all duration-300 ${pathname === '/gems' 
+              ? 'bg-gradient-light-dark bg-cover bg-center' 
+              : 'bg-theme-surface hover:bg-gradient-light-dark-light hover:bg-cover hover:bg-center focus:outline-none'}`}
           >
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-theme-surface bg-cover bg-center transition-all duration-300 hover:bg-gradient-pink-purple">
               <SparklesIcon className="h-5 w-5 text-theme-foreground" />

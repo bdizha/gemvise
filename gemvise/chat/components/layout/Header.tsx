@@ -17,7 +17,7 @@ const Header: FC<HeaderProps> = ({ onToggleSidebar, onToggleTheme, theme }) => {
       <div className="flex items-center gap-4">
         <button
           onClick={onToggleSidebar}
-          className="flex h-[48px] w-[48px] items-center justify-center rounded-2xl hover:bg-gradient-purple-pink hover:bg-cover hover:bg-center focus:outline-none transition-colors duration-300"
+          className="flex h-[48px] w-[48px] items-center justify-center rounded-[36px] hover:bg-gradient-purple-pink hover:bg-cover hover:bg-center focus:outline-none transition-colors duration-300"
         >
           <Bars3Icon className="h-6 w-6 text-theme-foreground" />
         </button>
@@ -27,7 +27,7 @@ const Header: FC<HeaderProps> = ({ onToggleSidebar, onToggleTheme, theme }) => {
       <div className="flex items-center gap-4">
         <button
           onClick={onToggleTheme}
-          className="flex h-[48px] w-[48px] items-center justify-center rounded-2xl bg-theme-surface hover:bg-gradient-pink-purple hover:bg-cover hover:bg-center focus:outline-none transition-all duration-300"
+          className="flex h-[48px] w-[48px] items-center justify-center rounded-[36px] bg-theme-surface hover:bg-gradient-pink-purple hover:bg-cover hover:bg-center focus:outline-none transition-all duration-300"
         >
           {theme === 'dark' ? (
             <SunIcon className="h-6 w-6 text-theme-foreground" />
@@ -38,7 +38,7 @@ const Header: FC<HeaderProps> = ({ onToggleSidebar, onToggleTheme, theme }) => {
 
         <Link
           href="/sign-in"
-          className="flex h-[48px] items-center justify-center rounded-2xl bg-gradient-purple-pink-purple bg-cover bg-center px-6 text-white hover:bg-gradient-pink-purple-pink focus:outline-none transition-all duration-300 font-medium"
+          className="flex h-[48px] items-center justify-center rounded-[36px] bg-gradient-purple-pink-purple bg-cover bg-center px-6 text-white hover:bg-gradient-pink-purple-pink focus:outline-none transition-all duration-300 font-medium"
         >
           Sign In
         </Link>

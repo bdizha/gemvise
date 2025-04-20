@@ -82,14 +82,14 @@ The GemCollector architecture continues to evolve, with ongoing research in:
 * Expanded quantum state models for more nuanced character evolution
 * Cross-character relationship modeling
 
-This research represents a fundamental advancement in how AI characters are created, stored, and evolved, laying the groundwork for the rich tapestry of personalities that will populate the GemVerse.`,
+This research represents a fundamental advancement in how AI characters are created, stored, and evolved, laying the groundwork for the rich tapestry of personalities that will populate the Gemium.`,
     tags: ['GemCollector', 'AICharacters', 'MultiSourceData', 'StyleTransformation', 'QuantumState'],
     slug: 'gem-collector-architecture',
     imageUrl: '/research/gem-collector.webp'
   },
   {
     id: 'blockchain-ownership-model',
-    title: 'Blockchain Ownership in the GemVerse: Technical Foundations',
+    title: 'Blockchain Ownership in the Gemium: Technical Foundations',
     date: '2025-05-02',
     author: 'Dr. Marcus Wong & Dr. Elena Petrov, GemVise Research',
     readingTime: '16 min',
@@ -137,14 +137,14 @@ The blockchain ownership layer seamlessly integrates with our GemCollector syste
 
 ## Future of Digital Ownership
 
-This architecture represents the first step toward a comprehensive ownership model for the GemVerse, where:
+This architecture represents the first step toward a comprehensive ownership model for the Gemium, where:
 * Creators maintain rights across virtual environments
 * Collaborative creation is fairly attributed and compensated
 * Digital entities maintain consistent identity with verifiable provenance
 * Economic value flows naturally to innovation and creativity
 
 The GemVise blockchain ownership model establishes a new paradigm for digital creation - one where imagination is not just expressed but truly owned.`,
-    tags: ['Blockchain', 'DigitalOwnership', 'SmartContracts', 'CreatorEconomics', 'GemVerse'],
+    tags: ['Blockchain', 'DigitalOwnership', 'SmartContracts', 'CreatorEconomics', 'Gemium'],
     slug: 'blockchain-ownership-model',
     imageUrl: '/research/blockchain-ownership.webp'
   },
@@ -207,7 +207,7 @@ Ongoing work focuses on:
 * Collaborative memory formation between characters
 * Decentralized memory verification protocols
 
-The GemVise memory management system represents a fundamental advancement in how AI constructs maintain persistent identities, enabling the rich, evolving characters that will populate the GemVerse.`,
+The GemVise memory management system represents a fundamental advancement in how AI constructs maintain persistent identities, enabling the rich, evolving characters that will populate the Gemium.`,
     tags: ['MemoryManagement', 'AIConstructs', 'Persistence', 'SQLite', 'BlockchainVerification'],
     slug: 'memory-management-system',
     imageUrl: '/research/memory-management.webp'
@@ -251,7 +251,7 @@ We identified the need for a declarative method, moving from "prompt engineering
 
 ## Conclusion
 
-\`Construct Weaver\` is more than a templating tool; it's a foundational component for architecting the complex AI entities that will inhabit the GemVise platform and the future GemVerse. By shifting from ad-hoc engineering to structured design, we enable the creation of more sophisticated, reliable, and verifiable AI Constructs at scale.`,
+\`Construct Weaver\` is more than a templating tool; it's a foundational component for architecting the complex AI entities that will inhabit the GemVise platform and the future Gemium. By shifting from ad-hoc engineering to structured design, we enable the creation of more sophisticated, reliable, and verifiable AI Constructs at scale.`,
     tags: ['AIArchitecture', 'ConstructDesign', 'InteractionProtocols', 'Blockchain', 'Scalability'],
     slug: 'architecting-interaction',
     imageUrl: '/research/construct-weaver.webp'
@@ -269,7 +269,7 @@ We identified the need for a declarative method, moving from "prompt engineering
       totalParts: 2
     },
     content: `
-The GemVise vision—a universe populated by millions of persistent, interactive AI Constructs with blockchain-verified ownership, ultimately coexisting within the GemVerse—imposes extreme demands on the underlying computational substrate. Standard LLM inference approaches are insufficient. We require foundational engineering breakthroughs to achieve the necessary scale, efficiency, and speed.
+The GemVise vision—a universe populated by millions of persistent, interactive AI Constructs with blockchain-verified ownership, ultimately coexisting within the Gemium—imposes extreme demands on the underlying computational substrate. Standard LLM inference approaches are insufficient. We require foundational engineering breakthroughs to achieve the necessary scale, efficiency, and speed.
 
 ## Challenge: Beyond Simple Inference
 
@@ -302,7 +302,7 @@ These optimizations allow us to:
 * Support vastly larger numbers of concurrent AI Constructs
 * Maintain low-latency interaction
 * Efficiently manage blockchain synchronization
-* Build the computational substrate for the GemVerse`,
+* Build the computational substrate for the Gemium`,
     tags: ['HPC', 'AIInference', 'GPU', 'CUDA', 'Quantization', 'Scalability'],
     slug: 'engineering-the-substrate-part-2',
     imageUrl: '/research/computational-velocity.webp'
@@ -346,13 +346,13 @@ Building a platform for millions of persistent AI Constructs requires rethinking
 * Sub-millisecond state retrieval
 * Blockchain verification in constant time
 
-## Impact on GemVerse Development
+## Impact on Gemium Development
 
 These memory architecture innovations are crucial for:
 * Scaling to millions of Constructs
 * Ensuring state consistency
 * Enabling complex emergent behaviors
-* Supporting the GemVerse vision`,
+* Supporting the Gemium vision`,
     tags: ['MemoryArchitecture', 'AIInference', 'Caching', 'Blockchain', 'Scalability'],
     slug: 'engineering-the-substrate-part-1',
     imageUrl: '/research/memory-architecture.webp'
@@ -386,7 +386,7 @@ Our quantum-inspired state representation includes:
    * Defines interaction dynamics
    * Enables emergent behaviors
 
-## Applications in GemVerse
+## Applications in Gemium
 
 This quantum framework enables:
 * More sophisticated AI behaviors
@@ -401,7 +401,7 @@ Ongoing research focuses on:
 * Multi-construct entanglement
 * Blockchain-quantum interfaces
 
-The quantum state representation is a cornerstone of the GemVise platform, enabling the rich, nuanced AI Constructs that will populate the GemVerse.`,
+The quantum state representation is a cornerstone of the GemVise platform, enabling the rich, nuanced AI Constructs that will populate the Gemium.`,
     tags: ['QuantumComputing', 'AITheory', 'StateRepresentation', 'Blockchain'],
     slug: 'quantum-state-representation',
     imageUrl: '/research/quantum-state.webp'

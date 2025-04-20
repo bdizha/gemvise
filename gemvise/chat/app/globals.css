@@ -143,55 +143,79 @@
   display: none;
 }
 /* Section Gradient Classes */
-.section-gradient-header {
+.bg-gradient-header {
   background-image: url('/gradients/named/GV-GRADIENT-HEADER.png');
 }
 
-.section-gradient-footer {
+.bg-gradient-footer {
   background-image: url('/gradients/named/GV-Gradient-FOOTER.png');
 }
 
 /* Light Theme Gradients */
 :root {
-  .section-gradient-light-dark {
+  .bg-gradient-light-dark {
     background-image: url('/gradients/named/GV-Gradient-Light-Dark.png');
-  }
+    background-size: cover; 
+    background-position: center;
+  } 
 
-  .section-gradient-light-dark-light {
+  .bg-gradient-light-dark-light {
     background-image: url('/gradients/named/GV-Gradient-Light-Dark-Light.png');
+    background-size: cover; 
+    background-position: center;
   }
 }
 
 /* Dark Theme Gradients */
 .dark {
-  .section-gradient-dark-light {
+  .bg-gradient-dark-light {
     background-image: url('/gradients/named/GV-Gradient-Dark-Light.png');
+    background-size: cover;
+    background-position: center;
   }
 
-  .section-gradient-dark-light-dark {
+  .bg-gradient-dark-light-dark {
     background-image: url('/gradients/named/GV-Gradient-Dark-Light-Dark.png');
+    background-size: cover;
+    background-position: center;
   }
 
-  .section-gradient-dark-light-dark-long {
+  .bg-gradient-dark-light-dark-long {
     background-image: url('/gradients/named/GV-Gradient-Dark-Light-Dark-Long.png');
+    background-size: cover;
+    background-position: center;
   }
 }
 
 /* Pink-Purple Gradients */
-.section-gradient-pink-purple {
+.bg-gradient-pink-purple {
   background-image: url('/gradients/named/GV-Gradient-Pink-Purple.png');
+  background-size: cover;
+  background-position: center;
 }
 
-.section-gradient-pink-purple-pink {
+.bg-gradient-pink-purple-pink {
   background-image: url('/gradients/named/GV-Gradient-Pink-Purple-Pink.png');
+  background-size: cover;
+  background-position: center;
 }
 
-.section-gradient-purple-pink {
+.bg-gradient-purple-pink {
   background-image: url('/gradients/named/GV-Gradient-Purple-Pink.png');
+  background-size: cover;
+  background-position: center;
 }
 
-.section-gradient-purple-pink-purple {
+.bg-gradient-purple-pink-purple {
   background-image: url('/gradients/named/GV-Gradient-Purple-Pink-Purple.png');
+  background-size: cover;
+  background-position: center;
+}
+
+/* General gradient settings */
+[class*='bg-gradient-'] {
+  background-size: cover;
+  background-position: center;
 }
 
 /* Animations */

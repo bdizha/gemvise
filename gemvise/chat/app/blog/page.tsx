@@ -1,6 +1,6 @@
 import { blogPosts } from '@/data/blog-posts';
 import BlogCard from '@/components/blog/BlogCard';
-import Section from '@/components/layout/Section';
+import Section from '@/components/layout/Section/Section';
 
 export default function BlogPage() {
   return (
@@ -9,7 +9,7 @@ export default function BlogPage() {
         variant="gradient"
         tag="Luminus"
         title="Insights from the Edge of Innovation"
-        description="Explore our latest developments, technical deep dives, and vision for the future of AI interaction and the GemVerse."
+        description="Explore our latest developments, technical deep dives, and vision for the future of AI interaction and the Gemium."
       >
         <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {blogPosts.map((post) => (

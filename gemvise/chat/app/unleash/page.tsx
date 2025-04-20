@@ -1,6 +1,6 @@
 'use client';
 
-import Section from '@/components/layout/Section';
+import Section from '@/components/layout/Section/Section';
 import type { SectionVariant } from '@/components/layout/Section/types';
 
 const creationTools = [
@@ -49,7 +49,7 @@ export default function UnleashPage() {
         variant={"gradient" as SectionVariant}
         tag="Create & Earn"
         title="Unleash Your Creative Potential"
-        description="Turn your imagination into interactive experiences with GemVise's powerful character creation tools. Plus, learn how your creations can participate in our unique blockchain-powered reward system."
+        description="Turn your imagination into interactive experiences with Gemvise's powerful character creation tools. Plus, learn how your creations can participate in our unique blockchain-powered reward system."
       >
         <div className="flex justify-center mt-8">
           <button className="bg-button-primary text-background hover:bg-button-primary-hover px-8 py-3 rounded-md">

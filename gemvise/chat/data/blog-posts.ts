@@ -17,7 +17,7 @@ export const blogPosts: BlogPost[] = [
     date: '2025-04-06',
     author: 'GemVise Team',
     excerpt: 'At GemVise, we are architecting the foundational layers for the future of interaction. Simple text-based dialogue is merely the first step.',
-    content: `At GemVise, we are architecting the foundational layers for the future of interaction. Simple text-based dialogue is merely the first step. To enable truly complex AI entities and pave the way for the GemVerse, we must expand the bandwidth of interaction.
+    content: `At GemVise, we are architecting the foundational layers for the future of interaction. Simple text-based dialogue is merely the first step. To enable truly complex AI entities and pave the way for the Gemium, we must expand the bandwidth of interaction.
 
 Today, we announce the integration of visual data streams into the GemVise platform. This allows Architects (our creators) to define AI Constructs capable of processing and responding to visual input, and crucially, generating visual output as part of their interaction protocol.
 
@@ -25,12 +25,12 @@ Today, we announce the integration of visual data streams into the GemVise platf
 
 1. **Richer State Representation:** Visual data allows AI Constructs to perceive and model aspects of reality or abstract concepts inaccessible through text alone. This increases the depth and complexity of their internal state.
 2. **Enhanced Interaction Protocols:** Enables new forms of communication and problem-solving, moving beyond purely linguistic exchange. Constructs can now demonstrate, illustrate, and interact visually.
-3. **Foundation for the GemVerse:** A necessary prerequisite for immersive environments where AI entities require visual perception and expression to exist and interact meaningfully.
+3. **Foundation for the Gemium:** A necessary prerequisite for immersive environments where AI entities require visual perception and expression to exist and interact meaningfully.
 
 This isn't just about adding features; it's about systematically increasing the dimensionality of AI interaction. Architects can now define constructs with visual capabilities, register these enhanced architectures on the blockchain, and explore entirely new emergent behaviors within the GemVise ecosystem.
 
 We move quickly to build the necessary infrastructure. Explore these new capabilities and continue pushing the boundaries of what's possible.`,
-    tags: ['Architecture', 'AIInteraction', 'GemVerse', 'Blockchain'],
+    tags: ['Architecture', 'AIInteraction', 'Gemium', 'Blockchain'],
     slug: 'expanding-interaction-bandwidth',
     imageUrl: '/blog/visual-data-streams.webp'
   },
@@ -50,10 +50,10 @@ Today, we share insights into key optimizations within our core inference and in
 
 3. **Blockchain Synchronization Layer:** A high-performance caching and synchronization system ensures interaction data relevant to creator ownership and ecosystem metrics is reliably propagated to our blockchain layer with minimal performance impact on real-time interaction, achieving 99.9% cache hit rates.
 
-These optimizations are not merely incremental gains. They are fundamental architectural decisions enabling the GemVise vision. By driving down the resource cost per interaction cycle, we lay the groundwork for the exponential growth of the ecosystem and the eventual deployment of the GemVerse. If serving this traffic via standard commercial APIs were even possible, the cost would be prohibitive – at least 15-20X higher.
+These optimizations are not merely incremental gains. They are fundamental architectural decisions enabling the GemVise vision. By driving down the resource cost per interaction cycle, we lay the groundwork for the exponential growth of the ecosystem and the eventual deployment of the Gemium. If serving this traffic via standard commercial APIs were even possible, the cost would be prohibitive – at least 15-20X higher.
 
 We are building the engine required for a new universe of interaction. This is just the beginning. Join us in solving these hard problems.`,
-    tags: ['Infrastructure', 'Scalability', 'AI', 'Blockchain', 'DistributedSystems', 'GemVerse'],
+    tags: ['Infrastructure', 'Scalability', 'AI', 'Blockchain', 'DistributedSystems', 'Gemium'],
     slug: 'building-the-substrate',
     imageUrl: '/blog/hyperscale.webp'
   },
@@ -75,7 +75,7 @@ Our approach focuses on defining the fundamental interaction boundaries and syst
 
 4. **Transparent Moderation Principles:** While we enable broad creative freedom, clear, publicly stated principles govern interactions that violate fundamental platform integrity or legal requirements. Moderation actions are logged and auditable where feasible.
 
-We are not building a free-for-all, but a robust, high-integrity environment where complex interactions can occur within defined, understandable parameters. This principled approach is essential for fostering trust, encouraging high-quality creation, and ensuring the long-term viability of the GemVise ecosystem and the future GemVerse. The stability of the substrate enables the freedom to build upon it.`,
+We are not building a free-for-all, but a robust, high-integrity environment where complex interactions can occur within defined, understandable parameters. This principled approach is essential for fostering trust, encouraging high-quality creation, and ensuring the long-term viability of the GemVise ecosystem and the future Gemium. The stability of the substrate enables the freedom to build upon it.`,
     tags: ['PlatformIntegrity', 'AISafety', 'Blockchain', 'Trust', 'Principles'],
     slug: 'architecting-stability',
     imageUrl: '/blog/platform-stability.webp'

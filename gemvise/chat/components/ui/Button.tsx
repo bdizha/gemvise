@@ -5,22 +5,22 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
 
 const buttonVariants = cva(
-  'relative flex items-center justify-center text-sm font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none',
+  'relative flex items-center justify-center text-sm font-medium transition-all duration-[0.4s] ease-out-cubic focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none shadow-[0px_0.5px_3px_0px_rgba(0,0,0,0.20)]',
   {
     variants: {
       variant: {
-        default: 'bg-white text-[#232f3e] border border-[#d5d9d9] hover:bg-[#f7fafa] focus:ring-[#0972d3] shadow-sm',
-        primary: 'bg-gradient-to-r from-[#ff9900] to-[#ffac31] text-[#0f1111] hover:from-[#ffac31] hover:to-[#ffbd62] focus:ring-[#0972d3] shadow-sm',
-        secondary: 'bg-[#232f3e] text-white hover:bg-[#2f3f4f] focus:ring-[#0972d3] shadow-sm',
+        default: 'bg-[#1D1B1A] text-[#F4EFED] border border-solid hover:bg-[#ffffff] hover:text-[#1D1B1A] focus:ring-[#0972d3]',
+        primary: 'bg-[#1D1B1A] text-[#F4EFED] border border-solid hover:bg-[#ffffff] hover:text-[#1D1B1A] focus:ring-[#0972d3]',
+        secondary: 'bg-[#1D1B1A] text-[#F4EFED] border border-solid hover:bg-[#ffffff] hover:text-[#1D1B1A] focus:ring-[#0972d3]',
         ghost: 'bg-transparent text-[#0f1111] dark:text-white hover:bg-[#f7fafa] dark:hover:bg-[#2f3f4f] focus:ring-[#0972d3]',
         link: 'text-[#0972d3] hover:underline focus:ring-[#0972d3] bg-transparent',
         icon: 'relative flex h-10 w-10 items-center justify-center rounded-lg bg-transparent text-[#0f1111] dark:text-white hover:bg-[#f7fafa] dark:hover:bg-[#2f3f4f] transition-colors'
       },
       size: {
-        default: 'h-10 px-4 py-2 rounded-lg',
-        sm: 'h-8 px-3 rounded-md text-xs',
-        lg: 'h-12 px-6 rounded-lg text-base',
-        icon: 'h-10 w-10 rounded-lg'
+        default: 'h-[56px] px-6 rounded-[24px] text-[17px]',
+        sm: 'h-[48px] px-5 rounded-[20px] text-[15px]',
+        lg: 'h-[64px] px-7 rounded-[28px] text-[19px]',
+        icon: 'h-[56px] w-[56px] rounded-[24px] text-[17px]'
       }
     },
     defaultVariants: {

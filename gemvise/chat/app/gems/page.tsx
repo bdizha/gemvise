@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { getAllGems } from '@/data/gems';
-import Section from '@/components/layout/Section';
+import Section from '@/components/layout/Section/Section';
 import GemGrid from '@/components/gems/GemGrid';
 import Tabs from '@/components/ui/Tabs';
 
@@ -16,12 +16,54 @@ export default function GemsPage() {
   });
 
   const tabs = [
-    { id: 'featured', label: 'Featured' },
-    { id: 'business', label: 'Business & Leadership' },
-    { id: 'science', label: 'Science & Technology' },
-    { id: 'arts', label: 'Arts & Culture' },
-    { id: 'philosophy', label: 'Philosophy & Wisdom' },
-    { id: 'innovation', label: 'Innovation & Future' },
+    { 
+      id: 'featured', 
+      label: 'Featured',
+      gradient: {
+        default: 'bg-gradient-dark-light',
+        alternate: 'bg-gradient-light-dark'
+      }
+    },
+    { 
+      id: 'business', 
+      label: 'Business & Leadership',
+      gradient: {
+        default: 'bg-gradient-light-dark',
+        alternate: 'bg-gradient-dark-light'
+      }
+    },
+    { 
+      id: 'science', 
+      label: 'Science & Technology',
+      gradient: {
+        default: 'bg-gradient-dark-light-dark',
+        alternate: 'bg-gradient-light-dark-light'
+      }
+    },
+    { 
+      id: 'arts', 
+      label: 'Arts & Culture',
+      gradient: {
+        default: 'bg-gradient-pink-purple',
+        alternate: 'bg-gradient-purple-pink'
+      }
+    },
+    { 
+      id: 'philosophy', 
+      label: 'Philosophy & Wisdom',
+      gradient: {
+        default: 'bg-gradient-purple-pink-purple',
+        alternate: 'bg-gradient-pink-purple-pink'
+      }
+    },
+    { 
+      id: 'innovation', 
+      label: 'Innovation & Future',
+      gradient: {
+        default: 'bg-gradient-dark-light-dark-long',
+        alternate: 'bg-gradient-light-dark-light'
+      }
+    },
   ];
 
   const [selectedTab, setSelectedTab] = useState(tabs[0].id);
@@ -32,7 +74,7 @@ export default function GemsPage() {
         variant="hero"
         theme="dark"
         title="Transform Your Experience"
-        description="Connect with AI-powered expert personas for real-time, personalized insights. Engage in dynamic conversations with thought leaders and innovators who are shaping our future."
+        description="Connect, discover and create for real-time, personalized insights. Engage in dynamic conversations with thought leaders and innovators who are shaping our future."
       >
         <div className="mt-8 container mx-auto px-4 sm:px-6 lg:px-8">
           <Tabs

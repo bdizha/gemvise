@@ -7,6 +7,19 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: 'var(--primary)',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        accent: 'var(--accent)',
+        'surface-elevation-1': 'var(--surface-elevation-1)',
+        'scrim-8': 'var(--scrim-8)',
+        'hero-transparent': 'var(--hero-transparent)',
+        'muted-foreground': 'var(--muted-foreground)',
+        neutral: {
+          900: 'var(--background)'
+        }
+      },
       keyframes: {
         'rotate-360': {
           'from': { transform: 'rotate(0deg)' },

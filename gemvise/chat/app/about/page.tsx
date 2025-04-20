@@ -1,33 +1,21 @@
 'use client';
 
 import { type FC } from 'react';
-import Section from '@/components/layout/Section';
+import Section from '@/components/layout/Section/Section';
 import Button from '@/components/ui/Button';
 
 const values = [
   {
-    title: "Innovation",
-    description: "Pioneering the future of AI interaction and creator economies through blockchain technology."
+    title: "Authentic Expertise",
+    description: "Creating meaningful AI conversations with real experts, thought leaders, and creators that deliver genuine value and insights."
   },
   {
-    title: "Community",
-    description: "Building a vibrant ecosystem where creators, storytellers, and explorers come together to shape the future."
+    title: "Interactive Learning",
+    description: "Enabling direct, personalized learning through dynamic conversations that adapt to each user's needs and interests."
   },
   {
-    title: "Transparency",
-    description: "Ensuring fair, direct rewards for creators through blockchain-powered engagement tracking."
-  },
-  {
-    title: "Empowerment",
-    description: "Giving creators the tools and incentives to bring their imagination to life and earn from their creativity."
-  },
-  {
-    title: "Quality",
-    description: "Delivering cutting-edge AI technology with beautiful, intuitive interfaces for seamless interaction."
-  },
-  {
-    title: "Vision",
-    description: "Working towards the GemVerse - an immersive virtual world where AI characters truly come alive."
+    title: "Creator Empowerment",
+    description: "Providing a platform for experts to share their knowledge and connect with audiences in new, innovative ways through AI."
   }
 ];
 
@@ -36,28 +24,41 @@ const AboutPage: FC = () => {
     <main className="min-h-screen bg-background">
       {/* Story Section */}
       <Section
-        variant="gradient"
-        tag="Our Story"
-        title="Shaping the Next Era of Interaction, Creativity, and Ownership"
-        description="GemVise is pioneering a new frontier where imagination meets technology, empowering creators to build and own unique AI experiences."
-        className="py-20"
-      />
-
-      {/* Vision Section */}
-      <Section
         variant="default"
-        tag="Our Vision"
-        title="Beyond Chat: Building the GemVerse"
-        description="We're creating more than just a platform - we're building a future where digital creation has tangible value. Our vision extends to the GemVerse, an immersive virtual world where AI companions come to life in ways never before possible."
+        gradient="dark-light-dark"
+        tag="Our Mission"
+        title="Spark the human imagination"
+        description="Gemvise is pioneering a new frontier where imagination meets technology. By seamlessly blending human creativity with AI responsiveness, we're empowering creators to build, own, and evolve unique AI experiences that adapt and grow with every conversation."
         className="py-20"
       />
 
       {/* Values Section */}
       <Section
         variant="values"
+        gradient="light-dark-light"
         tag="Our Values"
-        title="What Drives Us Forward"
-        description="We believe in a future where creativity is recognized, rewarded, and brought to life through cutting-edge technology."
+        title="Making sense. Making value"
+        description="At Gemvise, our values shape everything we do. They guide our decisions, inspire our innovations, and define our relationships with creators and users."
+        values={values}
+      />
+
+      {/* Vision Section */}
+      <Section
+        variant="default"
+        gradient="purple-pink-purple"
+        tag="Our Vision"
+        title="Build the future of possibilities"
+        description="We're creating more than just a platform - we're building a future where digital creation has tangible value. Our vision extends to the Gemium, an immersive virtual world where AI companions come to life in ways never before possible."
+        className="py-20"
+      />
+
+      {/* Values Section */}
+      <Section
+        variant="values"
+        gradient="light-dark-light"
+        tag="Our Values"
+        title="Making sense. Making value"
+        description="At Gemvise, our values shape everything we do. They guide our decisions, inspire our innovations, and define our relationships with creators and users."
         values={values}
         className="py-20"
       />
@@ -86,24 +87,43 @@ const AboutPage: FC = () => {
         variant="gradient"
         tag="Our Location"
         title="Silicon Valley & Beyond"
-        description="Headquartered in the heart of innovation, with a distributed team of experts working globally to bring the GemVerse to life."
+        description="Headquartered in the heart of innovation, with a distributed team of experts working globally to bring the Gemium to life."
         className="py-20"
       />
+
+      {/* Future Section */}
+      <Section
+        variant="default"
+        gradient="pink-purple-pink"
+        tag="The Future"
+        title="Join Us in Building Tomorrow"
+        description="The future of digital interaction is being shaped right now. Be part of this revolutionary journey as we create new possibilities for connection, creativity, and commerce."
+        className="py-20"
+      >
+        <div className="flex justify-center gap-6 mt-8">
+          <a href="https://discord.gg/Gemvise" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Discord</a>
+          <span className="text-theme-foreground/50">•</span>
+          <a href="https://twitter.com/Gemvise" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Twitter</a>
+          <span className="text-theme-foreground/50">•</span>
+          <a href="mailto:hello@Gemvise.com" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Email</a>
+        </div>
+      </Section>
 
       {/* Contact Section */}
       <Section
         variant="default"
-        tag="Connect With Us"
-        title="Join Our Community"
-        description="Be part of a passionate community of creators, storytellers, and explorers shaping the future of interactive entertainment."
+        gradient="dark-light-dark-long"
+        tag="Get in Touch"
+        title="Let's Build Together"
+        description="Have questions or ideas? We'd love to hear from you. Reach out through any of these channels."
         className="py-20"
       >
         <div className="flex justify-center gap-6 mt-8">
-          <a href="https://discord.gg/gemvise" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Discord</a>
+          <a href="https://discord.gg/Gemvise" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Discord</a>
           <span className="text-theme-foreground/50">•</span>
-          <a href="https://twitter.com/gemvise" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Twitter</a>
+          <a href="https://twitter.com/Gemvise" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Twitter</a>
           <span className="text-theme-foreground/50">•</span>
-          <a href="mailto:hello@gemvise.com" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Email</a>
+          <a href="mailto:hello@Gemvise.com" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Email</a>
         </div>
       </Section>
     </main>

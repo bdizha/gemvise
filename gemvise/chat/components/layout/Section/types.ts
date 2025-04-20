@@ -2,7 +2,13 @@ import { ReactNode } from 'react';
 import { GradientTheme } from './GradientSection';
 import { type Gem } from '@/types/gems';
 
-export type SectionVariant = 'default' | 'gradient' | 'hero' | 'featured' | 'category' | 'values';
+export type SectionVariant = 'default' | 'gradient' | 'hero' | 'featured' | 'category' | 'values' | 'benefits';
+
+interface Benefit {
+  emoji: string;
+  title: string;
+  description: string;
+}
 
 interface BaseSectionProps {
   variant?: SectionVariant;
@@ -11,6 +17,8 @@ interface BaseSectionProps {
   description: string;
   className?: string;
   children?: ReactNode;
+  gradient?: GradientTheme;
+  benefits?: Benefit[];
 }
 
 interface DefaultSectionProps extends BaseSectionProps {
@@ -22,7 +30,15 @@ interface ValuesSectionProps extends BaseSectionProps {
   values: Array<{ title: string; description: string }>;
 }
 
-export interface SectionProps {
+export interface GemCard {
+  id: string;
+  title: string;
+  subtitle: string;
+  imageUrl: string;
+  href: string;
+}
+
+export interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: SectionVariant;
   title?: string;
   description?: string;

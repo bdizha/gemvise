@@ -68,7 +68,7 @@ export default function ThemeSwitcher() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 z-50 rounded-2xl bg-popover border border-popover-border text-primary backdrop-blur-md p-1 min-w-36 space-y-0.5">
+        <div className="absolute right-0 mt-2 z-50 rounded-[36px] bg-popover border border-popover-border text-primary backdrop-blur-md p-1 min-w-36 space-y-0.5">
           <div className="w-full px-1 pt-1 pb-1">
             <div className="flex items-stretch w-full gap-2 justify-stretch">
               <button

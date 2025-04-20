@@ -1,6 +1,6 @@
 'use client';
 
-import Section from '@/components/layout/Section';
+import Section from '@/components/layout/Section/Section';
 import type { SectionVariant } from '@/components/layout/Section/types';
 import Image from 'next/image';
 
@@ -8,7 +8,7 @@ const benefits = [
   {
     emoji: '🩺',
     title: 'Comprehensive Health Coverage',
-    description: 'Top-notch health, dental, and vision insurance for you and your family, with a significant portion of the premium covered by GemVise.'
+    description: 'Top-notch health, dental, and vision insurance for you and your family, with a significant portion of the premium covered by Gemvise.'
   },
   {
     emoji: '💰',
@@ -38,7 +38,7 @@ const whyGemvise = [
   },
   {
     title: 'Shape a New Medium',
-    description: 'Contribute to building not just an app, but a foundational platform for future interactive entertainment and virtual world experiences (the GemVerse).'
+    description: 'Contribute to building not just an app, but a foundational platform for future interactive entertainment and virtual world experiences (the Gemium).'
   },
   {
     title: 'Collaborative Culture',
@@ -57,7 +57,7 @@ export default function CareersPage() {
       <Section
         variant={"gradient" as SectionVariant}
         title="Build the Future of Interactive Entertainment & Creator Economies"
-        description="At GemVise, we're pioneering the next generation of human-computer interaction. We blend cutting-edge AI with the power of blockchain to create not just engaging experiences, but sustainable ecosystems that reward creativity."
+        description="At Gemvise, we're pioneering the next generation of human-computer interaction. We blend cutting-edge AI with the power of blockchain to create not just engaging experiences, but sustainable ecosystems that reward creativity."
       >
         <div className="flex justify-center mt-8">
           <button className="bg-button-primary text-background hover:bg-button-primary-hover px-8 py-3 rounded-md">
@@ -66,10 +66,10 @@ export default function CareersPage() {
         </div>
       </Section>
 
-      {/* Why GemVise Section */}
+      {/* Why Gemvise Section */}
       <Section
         variant={"values" as SectionVariant}
-        title="Why GemVise?"
+        title="Why Gemvise?"
         description="Join us in shaping the future of AI interaction and creator economies"
         values={whyGemvise}
       />
@@ -101,7 +101,7 @@ export default function CareersPage() {
             View Open Positions
           </button>
           <button className="border border-button-primary text-button-primary hover:bg-button-primary hover:text-background px-8 py-3 rounded-md">
-            Learn More About GemVise
+            Learn More About Gemvise
           </button>
         </div>
       </Section>

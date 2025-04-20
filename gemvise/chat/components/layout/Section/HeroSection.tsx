@@ -1,89 +1,101 @@
-import React from 'react';
-import { type SectionProps } from './types';
+import React, { useState } from 'react';
+import { type SectionProps, type GemCard } from './types';
+import DefaultSection from './DefaultSection';
 
 interface HeroSectionProps extends SectionProps {
-  carouselContent?: { src: string; alt: string; description: string }[];
   onSearch?: (value: string) => void;
+  trendingGems?: GemCard[];
+  popularGems?: GemCard[];
+  discoverGems?: GemCard[];
 }
 
 const HeroSection = (props: HeroSectionProps) => {
-  const { carouselContent, onSearch, children } = props;
-  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const { onSearch, trendingGems = [], popularGems = [], discoverGems = [], ...rest } = props;
+  const [activeTab, setActiveTab] = useState<'trending' | 'popular' | 'discover'>('trending');
 
-  const nextSlide = () => {
-    if (!carouselContent) return;
-    setCurrentSlide((prev) => (prev + 1) % carouselContent.length);
-  };
-
-  const prevSlide = () => {
-    if (!carouselContent) return;
-    setCurrentSlide((prev) => (prev - 1 + carouselContent.length) % carouselContent.length);
-  };
-
-  // Auto-advance slides every 5 seconds
-  React.useEffect(() => {
-    if (!carouselContent) return;
-    const interval = setInterval(nextSlide, 5000);
-    return () => clearInterval(interval);
-  }, [currentSlide, carouselContent]);
+  const tabs = [
+    { id: 'trending', label: 'Trending', items: trendingGems },
+    { id: 'popular', label: 'Popular', items: popularGems },
+    { id: 'discover', label: 'Discover', items: discoverGems },
+  ];
 
   return (
-    <div className="relative min-h-[600px] w-full">
-      <div className="relative w-full h-full overflow-hidden rounded-2xl">
-        <div className="absolute inset-0 transition-all duration-500 ease-in-out section-gradient-light-dark opacity-50 blur-[30px]" />
-        <div className="absolute inset-0 bg-black/70" />
-        <div className="mx-auto w-full px-6 xl:max-w-7xl flex h-full flex-col relative">
-          <div className="flex flex-col md:flex-row items-center justify-center h-full gap-8 py-12 relative z-10">
-            <div className="flex-1 text-center text-white relative z-10">
-              {carouselContent ? (
-                <div className="relative">
-                  <div className="transition-opacity duration-500">
-                    <img
-                      src={carouselContent[currentSlide].src}
-                      alt={carouselContent[currentSlide].alt}
-                      className="w-full h-64 object-cover rounded-lg"
-                    />
-                    <p className="mt-4 text-lg text-white/80">
-                      {carouselContent[currentSlide].description}
-                    </p>
-                  </div>
-                  <button
-                    onClick={prevSlide}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 p-2 bg-black/50 text-white rounded-full"
-                  >
-                    ←
-                  </button>
-                  <button
-                    onClick={nextSlide}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 p-2 bg-black/50 text-white rounded-full"
-                  >
-                    →
-                  </button>
-                </div>
-              ) : (
-                <>
-                  <h1 className="text-3xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-                    Connect with AI-Powered Expert Personas
-                  </h1>
-                  <p className="text-base md:text-lg text-white/80 mb-6">
-                    Experience interactive learning through dynamic conversations with AI versions of world-renowned experts.
-                  </p>
-                </>
-              )}
-              <form onSubmit={(e) => e.preventDefault()} className="flex gap-4 max-w-md mx-auto relative z-10 backdrop-blur-sm bg-white/10 p-3 rounded-2xl border border-white/20 shadow-xl mt-6">
-                <input
-                  type="text"
-                  onChange={(e) => onSearch?.(e.target.value)}
-                  placeholder="Search for an expert..."
-                  className="flex-1 px-4 py-2 rounded-lg border border-border bg-background text-theme-foreground"
-                />
-                <button type="submit" className="px-4 py-2 bg-theme-surface text-theme-foreground rounded-lg hover:bg-theme-surface/80">Search</button>
-              </form>
+    <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto px-4">
+      {/* Main content (2/3) */}
+      <div className="lg:w-2/3">
+        <div className="bg-gradient-dark-light rounded-[36px] p-16 backdrop-blur">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-white">
+            {props.title}
+          </h1>
+          <div className="w-full h-[20svh] lg:h-[160px]">
+            <div className="absolute inset-x-0 flex justify-center items-center z-10">
+           
             </div>
+            <form className="relative w-full items-center gap-3 bg-[#1f242a] rounded-full p-px from-primary/5 to-primary/20" onSubmit={(e) => {
+                  e.preventDefault();
+                  const input = e.currentTarget.querySelector('input');
+                  if (input && onSearch) onSearch(input.value);
+                }}>
+                  <input
+                    type="text"
+                    placeholder="Create your gem..."
+                    className="w-full h-14 lg:h-[68px] rounded-full border-none pl-6 pr-20 focus:outline-none focus:ring-2 focus:ring-white/50 bg-gradient-light-dark text-primary placeholder:text-primary/50 focus:bg-background hover:bg-white/20"
+                    onChange={(e) => onSearch?.(e.target.value)}
+                  />
+                  <div className="absolute inset-y-2 right-2 lg:right-4 flex items-center">
+                    <button 
+                      type="submit" 
+                      className="relative isolate inline-flex items-center justify-center border text-base/6 uppercase font-mono tracking-widest shrink-0 focus:outline-none aspect-square px-3.5 py-1.5 sm:text-sm gap-x-2 bg-primary text-background hover:bg-primary/80 rounded-full"
+                    >
+                      <span className="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden" aria-hidden="true"></span>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="!size-4">
+                        <path fillRule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clipRule="evenodd"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </form>
           </div>
         </div>
       </div>
-      {children}
+
+      {/* Tabs and Gems (1/3) */}
+      <div className="lg:w-1/3">
+        <div className="flex gap-2 mb-4">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id as typeof activeTab)}
+              className={`px-6 py-4 rounded-[32px] text-sm font-medium transition-colors ${activeTab === tab.id ? 'bg-gradient-pink-purple-pink text-white' : 'bg-gradient-light-dark text-white/70 hover:bg-white/20'}`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="space-y-2">
+          {tabs.find(tab => tab.id === activeTab)?.items.map((gem) => (
+            <a
+              key={gem.id}
+              href={gem.href}
+              className="min-w-[200px] flex flex-row gap-2 p-3 items-center bg-gradient-light-dark bg-surface-elevation-1 hover:bg-gradient-light-dark rounded-[24px] transition-colors"
+            >
+              <span className="relative flex h-[54px] w-[54px] overflow-hidden rounded-full shrink-0">
+                <img
+                  src={gem.imageUrl}
+                  alt={gem.title}
+                  width={54}
+                  height={54}
+                  className="object-cover object-center bg-card"
+                />
+              </span>
+              <div className="flex flex-col">
+                <p className="line-clamp-1 text-ellipsis text-white">{gem.title}</p>
+                <p className="line-clamp-1 text-ellipsis text-white/60 text-sm">{gem.subtitle}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

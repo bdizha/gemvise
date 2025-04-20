@@ -7,27 +7,27 @@ import Image from 'next/image';
 const carouselImages = [
   {
     src: '/icons/GV-LOGO-02-GOT-06.png',
-    alt: 'GemVise Quantum State Visualization',
+    alt: 'Gemvise Quantum State Visualization',
     description: 'Experience advanced quantum state visualization'
   },
   {
     src: '/icons/GV-LOGO-02-GOT-07.png',
-    alt: 'GemVise Energy Flow System',
+    alt: 'Gemvise Energy Flow System',
     description: 'Harness the power of energy flow systems'
   },
   {
     src: '/icons/GV-LOGO-02-GOT-08.png',
-    alt: 'GemVise Neural Network',
+    alt: 'Gemvise Neural Network',
     description: 'Create sophisticated neural networks'
   },
   {
     src: '/icons/GV-LOGO-02-GOT-05.png',
-    alt: 'GemVise Data Processing',
+    alt: 'Gemvise Data Processing',
     description: 'Process complex data structures efficiently'
   },
   {
     src: '/icons/GV-LOGO-02-GOT-04.png',
-    alt: 'GemVise AI Integration',
+    alt: 'Gemvise AI Integration',
     description: 'Seamlessly integrate advanced AI capabilities'
   }
 ];
@@ -162,7 +162,7 @@ export default function CreatePage() {
               <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                 <div className="max-w-xl space-y-12">
                   <h2 className="text-balance text-3xl md:text-4xl lg:text-5xl tracking-tight">
-                    Create powerful AI gems with GemVise
+                    Create powerful AI gems with Gemvise
                   </h2>
                 </div>
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:gap-12">
@@ -227,7 +227,7 @@ export default function CreatePage() {
             
             {/* Image Carousel */}
             <div className="relative w-full mt-8">
-              <div className="overflow-hidden rounded-2xl aspect-video relative">
+              <div className="overflow-hidden rounded-[36px] aspect-video relative">
                 <div className="relative w-full h-full">
                   {carouselImages.map((image, index) => (
                     <div

@@ -3,26 +3,92 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { type Gem } from '@/types/gems';
-import Section from '@/components/layout/Section';
+import Section from '@/components/layout/Section/Section';
 import { featuredGems, allGems } from '@/mocks/gems';
 
 // Sample images for the carousel
 const carouselContent = [
   {
     src: '/icons/GV-LOGO-02-GOT-06.png',
-    alt: 'GemVise AI Experts',
-    description: 'Connect with AI-powered expert personas'
+    alt: 'Gemvise AI Experts',
+    description: 'Connect, discover and create'
   },
   {
     src: '/icons/GV-LOGO-02-GOT-07.png',
-    alt: 'GemVise Knowledge Network',
+    alt: 'Gemvise Knowledge Network',
     description: 'Access a network of specialized knowledge'
   },
   {
     src: '/icons/GV-LOGO-02-GOT-08.png',
-    alt: 'GemVise Interactive Learning',
+    alt: 'Gemvise Interactive Learning',
     description: 'Learn through dynamic conversations'
   }
+];
+
+const trendingGems = [
+  {
+    id: 'tim-ferriss',
+    title: 'Learn Languages & Life Hacks',
+    subtitle: 'with Tim Ferriss',
+    imageUrl: '/experts/tim-ferriss.jpg',
+    href: '/chat/tim-ferriss'
+  },
+  {
+    id: 'gary-vee',
+    title: 'Digital Marketing & Entrepreneurship',
+    subtitle: 'with Gary Vaynerchuk',
+    imageUrl: '/experts/gary-vee.jpg',
+    href: '/chat/gary-vee'
+  }
+];
+
+const popularGems = [
+  {
+    id: 'warren-buffett',
+    title: 'Investment Strategies',
+    subtitle: 'with Warren Buffett',
+    imageUrl: '/experts/warren-buffett.jpg',
+    href: '/chat/warren-buffett'
+  },
+  {
+    id: 'michelle-obama',
+    title: 'Leadership & Empowerment',
+    subtitle: 'with Michelle Obama',
+    imageUrl: '/experts/michelle-obama.jpg',
+    href: '/chat/michelle-obama'
+  },
+  {
+    id: 'warren-buffett',
+    title: 'Investment Strategies',
+    subtitle: 'with Warren Buffett',
+    imageUrl: '/experts/warren-buffett.jpg',
+    href: '/chat/warren-buffett'
+  },
+  {
+    id: 'michelle-obama',
+    title: 'Leadership & Empowerment',
+    subtitle: 'with Michelle Obama',
+    imageUrl: '/experts/michelle-obama.jpg',
+    href: '/chat/michelle-obama'
+  }
+];
+
+const discoverGems = [
+  {
+    id: 'elon-musk',
+    title: 'Tech & Innovation',
+    subtitle: 'with Elon Musk',
+    imageUrl: '/experts/elon-musk.jpg',
+    href: '/chat/elon-musk'
+  },
+  {
+    id: 'gordon-ramsay',
+    title: 'Culinary Excellence',
+    subtitle: 'with Gordon Ramsay',
+    imageUrl: '/experts/gordon-ramsay.jpg',
+    href: '/chat/gordon-ramsay'
+  },
+  
 ];
 
 export default function Home() {
@@ -44,11 +110,14 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       <Section 
         variant="hero"
-        carouselContent={carouselContent}
-        onSearch={handleSearch}
-        title="Connect with AI-Powered Expert Personas"
+        title="Connect, discover and create"
         description="Experience interactive learning through dynamic conversations with world-renowned experts"
-        theme="dark"
+        theme="dark-light"
+        trendingGems={trendingGems}
+        popularGems={popularGems}
+        discoverGems={discoverGems}
+        onSearch={handleSearch}
+        carouselContent={carouselContent}
       />
       <Section 
         variant="featured"
@@ -56,7 +125,7 @@ export default function Home() {
         description="Discover curated conversations with leading experts across various fields"
         gems={featuredGems}
         onGemClick={handleGemClick}
-        theme="light"
+        theme="dark-light"
         className="py-20"
       />
       {/* Category Sections */}
@@ -73,7 +142,7 @@ export default function Home() {
           gems={gems}
           onGemClick={handleGemClick}
           className="py-20"
-          theme="light"
+          theme="dark-light"
         />
       ))}
     </div>
