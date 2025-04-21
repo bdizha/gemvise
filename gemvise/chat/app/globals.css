@@ -68,21 +68,25 @@
 /* Components */
 
 /* Gradient Text */
-.gradientText {
+[class*='text-gradient-'] {
   background-clip: text;
   -webkit-background-clip: text;
-  background-image: linear-gradient(to right, var(--text-gradient-start), var(--text-gradient-end));
   color: transparent;
   display: inline-block;
-  font-family: var(--font-geist-sans);
-  font-size: 80px;
-  letter-spacing: -2px;
-  line-height: 80px;
-  max-width: 768px;
-  padding: 8px 0;
-  text-wrap: balance;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.text-gradient-dark-light {
+  background-image: linear-gradient(to right, var(--background), var(--foreground));
+}
+
+.text-gradient-pink-purple {
+  background-image: linear-gradient(to right, var(--primary), var(--accent));
+}
+
+.text-gradient-purple-pink {
+  background-image: linear-gradient(to right, var(--accent), var(--primary));
 }
 
 /* Footer Gradient */

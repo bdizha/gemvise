@@ -5,7 +5,7 @@ import DefaultSection from './DefaultSection';
 import GradientSection from './GradientSection';
 import HeroSection from './HeroSection';
 import FeaturedSection from './FeaturedGems';
-import CategorySection from './CategorySection';
+import SliderSection from './SliderSection';
 import { type SectionProps, type SectionVariant, type GemCard } from './types';
 import { type GradientTheme } from './GradientSection';
 import ValuesSection from './ValuesSection';
@@ -31,17 +31,17 @@ const ValuesGrid = ({ values }: { values: Array<{ title: string; description: st
 );
 
 const Section: React.FC<ExtendedSectionProps & { gradient?: GradientTheme }> = (props) => {
-  const { variant = 'default', theme = 'dark-light', isHero = false, title, description, tag, className = '', gradient = 'light-dark-light' } = props;
+  const { variant = 'default', theme = 'dark-light', title, description, tag, className = '', gradient = 'light-dark-light' } = props;
 
   const content = (
     <div className="w-full relative z-10">
-      {variant !== 'hero' && (<>
-        {tag && <p className="text-sm font-semibold leading-6 text-white/70">{tag}</p>}
-        <h2 className="mt-2 text-3xl font-bold tracking-tight text-white/80 sm:text-5xl max-w-[50%] lg:max-w-[50%]">{title}</h2>
-        {description && <p className="mt-4 text-base leading-7 text-white/60 max-w-[50%] lg:max-w-[50%]">{description}</p>}
-      <h2 className="mt-2 text-3xl font-bold tracking-tight text-white/80 sm:text-5xl max-w-[50%] lg:max-w-[50%]">{title}</h2>
-      {description && <p className="mt-4 text-base leading-7 text-white/60 max-w-[50%] lg:max-w-[50%]">{description}</p>}
-      </>)}
+      {variant !== 'hero' && variant !== 'slider' && (
+        <>
+          {tag && <p className="text-sm font-semibold leading-6 text-white/70">{tag}</p>}
+          <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-5xl max-w-[50%] lg:max-w-[50%] text-gradient-purple-pink">{title}</h2>
+          {description && <p className="mt-4 text-base leading-7 text-white/60 max-w-[50%] lg:max-w-[50%]">{description}</p>}
+        </>
+      )}
       {(() => {
         switch (variant) {
           case 'hero':
@@ -57,12 +57,20 @@ const Section: React.FC<ExtendedSectionProps & { gradient?: GradientTheme }> = (
           {props.children}
         </DefaultSection>
       );
-    case 'category':
+    case 'slider':
       return (
-        <DefaultSection {...props} theme={theme}>
-          <CategorySection name={props.title || ''} gems={props.gems || []} onGemClick={(gem) => props.onGemClick?.(gem)} />
-          {props.children}
-        </DefaultSection>
+        <SliderSection 
+            title={props.title || ''} 
+            cards={props.gems?.map(gem => ({
+              title: gem.title,
+              description: gem.description || 'No description available',
+              imageSrc: gem.imageUrl,
+              status: gem.category || 'General',
+              href: '#',
+              buttonText: 'Chat Now',
+              onClick: () => props.onGemClick?.(gem)
+            })) || []} 
+          />
       );
     case 'values':
       return (
@@ -71,8 +79,13 @@ const Section: React.FC<ExtendedSectionProps & { gradient?: GradientTheme }> = (
           {props.children}
         </DefaultSection>
       );
-          default:
-            return null;
+         
+      default:
+            return (
+              <DefaultSection {...props} gradient={gradient}>
+                {props.children}
+              </DefaultSection>
+            );
         }
       })()}
     </div>
@@ -81,7 +94,7 @@ const Section: React.FC<ExtendedSectionProps & { gradient?: GradientTheme }> = (
   return (
     <div className={`relative w-full px-16 pt-40 pb-40 overflow-hidden rounded-[56px] mb-16 ${className}`}>
       <div className='mx-auto max-w-[1074px]'>
-        <div className={`absolute inset-0 transition-opacity duration-500 ease-in-out bg-gradient-dark-light bg-no-repeat bg-cover bg-center`} />
+        <div className={`absolute inset-0 transition-opacity duration-500 ease-in-out bg-gradient-${gradient} bg-no-repeat bg-cover bg-center`} />
         {content}
       </div>
     </div>

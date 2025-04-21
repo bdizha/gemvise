@@ -1,15 +1,11 @@
 'use client';
 
-import GemCard from './GemCard';
+import Card from './Card';
 import Image from 'next/image';
 
-interface Gem {
-  id: string;
-  name: string;
-  expertise: string[];
-  imageUrl: string;
-  description: string;
-}
+import { type Gem } from '@/types/gems';
+
+
 
 interface GemListProps {
   gems: Gem[];
@@ -18,48 +14,83 @@ interface GemListProps {
   title?: string;
 }
 
-const featuredGems = [
+const featuredGems: Gem[] = [
   {
     id: 'einstein',
     name: 'Albert Einstein',
+    title: 'The Physics Genius',
+    subtitle: 'Revolutionizing Our Understanding of Space and Time',
     expertise: ['Physics', 'Mathematics', 'Philosophy'],
     imageUrl: '/shapes/GV-SHAPE.png',
-    description: 'Revolutionary physicist who reshaped our understanding of space, time, and the universe. Explore profound insights and scientific breakthroughs!'
+    description: 'Revolutionary physicist who reshaped our understanding of space, time, and the universe. Explore profound insights and scientific breakthroughs!',
+    category: 'Science',
+    gradient: 'dark-light'
   },
   {
     id: 'tesla',
     name: 'Nikola Tesla',
+    title: 'The Master of Electricity',
+    subtitle: 'Pioneering the Future of Energy',
     expertise: ['Electrical Engineering', 'Innovation', 'Energy'],
     imageUrl: '/shapes/GV-SHAPE.png',
-    description: 'Brilliant inventor who illuminated the world with AC power. Discuss innovation, energy, and the future of technology!'
+    description: 'Brilliant inventor who illuminated the world with AC power. Discuss innovation, energy, and the future of technology!',
+    category: 'Technology',
+    gradient: 'dark-light'
   },
   {
     id: 'curie',
     name: 'Marie Curie',
+    title: 'The Radioactivity Pioneer',
+    subtitle: 'Breaking Barriers in Science',
     expertise: ['Chemistry', 'Physics', 'Research'],
     imageUrl: '/shapes/GV-SHAPE.png',
-    description: 'Pioneer in radioactivity research, first woman to win a Nobel Prize. Explore persistence, discovery, and scientific excellence!'
+    description: 'Pioneer in radioactivity research, first woman to win a Nobel Prize. Explore persistence, discovery, and scientific excellence!',
+    category: 'Science',
+    gradient: 'dark-light'
   },
   {
     id: 'da-vinci',
     name: 'Leonardo da Vinci',
+    title: 'The Renaissance Master',
+    subtitle: 'Where Art Meets Science',
     expertise: ['Art', 'Engineering', 'Anatomy'],
     imageUrl: '/shapes/GV-SHAPE.png',
-    description: 'Renaissance polymath spanning art and science. Delve into creativity, innovation, and multidisciplinary mastery!'
+    description: 'Renaissance polymath spanning art and science. Delve into creativity, innovation, and multidisciplinary mastery!',
+    category: 'Art',
+    gradient: 'dark-light'
   },
   {
     id: 'turing',
     name: 'Alan Turing',
+    title: 'The Computer Science Pioneer',
+    subtitle: 'Breaking the Code of Computing',
     expertise: ['Computer Science', 'Mathematics', 'Cryptography'],
     imageUrl: '/shapes/GV-SHAPE.png',
-    description: 'Father of computer science and artificial intelligence, played a pivotal role in breaking the Enigma code.'
+    description: 'Father of computer science and artificial intelligence. Explore computational thinking and the foundations of modern technology!',
+    category: 'Technology',
+    gradient: 'dark-light'
+  },
+  {
+    id: 'darwin',
+    name: 'Charles Darwin',
+    title: 'The Evolution Pioneer',
+    subtitle: 'Understanding Life Through Natural Selection',
+    expertise: ['Biology', 'Evolution', 'Natural History'],
+    imageUrl: '/shapes/GV-SHAPE.png',
+    description: 'Naturalist who revolutionized our understanding of life through evolution. Discuss natural selection, adaptation, and biodiversity!',
+    category: 'Science',
+    gradient: 'dark-light'
   },
   {
     id: 'hawking',
     name: 'Stephen Hawking',
+    title: 'The Cosmology Master',
+    subtitle: 'Unraveling the Mysteries of the Universe',
     expertise: ['Cosmology', 'Physics', 'Black Holes'],
     imageUrl: '/shapes/GV-SHAPE.png',
-    description: 'Theoretical physicist who made groundbreaking contributions to our understanding of black holes and the universe.'
+    description: 'Theoretical physicist who made groundbreaking contributions to our understanding of black holes and the universe.',
+    category: 'Science',
+    gradient: 'dark-light'
   }
 ];
 
@@ -127,9 +158,10 @@ export default function GemList({ gems = featuredGems, onSelect, showHeader = tr
         
         {/* Regular Gem Cards */}
         {gems.slice(1).map((gem) => (
-          <GemCard
+          <Card
             key={gem.id}
-            {...gem}
+            gem={gem}
+            onClick={() => onSelect?.(gem.id)}
           />
         ))}
       </div>

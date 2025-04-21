@@ -12,7 +12,7 @@ export interface Gem {
   /**
    * Name of the Gem.
    */
-  name: string;
+  name?: string;
   /**
    * Title of the Gem.
    */
@@ -20,11 +20,11 @@ export interface Gem {
   /**
    * Description of the Gem.
    */
-  description: string;
+  description?: string;
   /**
    * Category of the Gem.
    */
-  category: string;
+  category?: string;
   /**
    * URL of the Gem's image.
    */
@@ -32,11 +32,11 @@ export interface Gem {
   /**
    * Tailwind CSS gradient class for the Gem's background.
    */
-  gradient: string;
+  gradient?: string;
   /**
    * List of expertise areas.
    */
-  expertise: string[];
+  expertise?: string[];
   /**
    * Number of followers.
    */
@@ -45,6 +45,14 @@ export interface Gem {
    * Number of chat interactions.
    */
   chatCount?: number;
+  /**
+   * Subtitle for the Gem.
+   */
+  subtitle?: string;
+  /**
+   * URL to navigate to when the Gem is clicked.
+   */
+  href?: string;
 }
 
 /**

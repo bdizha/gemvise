@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { type Gem } from '@/types/gems';
-import Section from '@/components/layout/Section/Section';
+import Section from '@/components/layout/Section';
 import { featuredGems, allGems } from '@/mocks/gems';
 
 // Sample images for the carousel
@@ -111,37 +111,32 @@ export default function Home() {
       <Section 
         variant="hero"
         title="Connect, discover and create"
-        description="Experience interactive learning through dynamic conversations with world-renowned experts"
+        description="Experience interactive story telling with AI personas"
         theme="dark-light"
-        trendingGems={trendingGems}
-        popularGems={popularGems}
-        discoverGems={discoverGems}
+        trending={trendingGems}
+        popular={popularGems}
+        discover={discoverGems}
         onSearch={handleSearch}
         carouselContent={carouselContent}
       />
-      <Section 
-        variant="featured"
-        title="Featured Experts"
-        description="Discover curated conversations with leading experts across various fields"
-        gems={featuredGems}
-        onGemClick={handleGemClick}
-        theme="dark-light"
-        className="py-20"
-      />
       {/* Category Sections */}
       {Object.entries({
-        Technology: allGems.filter(gem => gem?.category === 'Technology'),
-        Finance: allGems.filter(gem => gem?.category === 'Finance'),
-        Business: allGems.filter(gem => gem?.category === 'Business')
+        'Latest News': allGems.filter(gem => gem?.category === 'Latest News'),
+        'Companion': allGems.filter(gem => gem?.category === 'Companion'),
+        'Unhinged Comedian': allGems.filter(gem => gem?.category === 'Unhinged Comedian'),
+        'Loyal Friend': allGems.filter(gem => gem?.category === 'Loyal Friend'),
+        'Homework Helper': allGems.filter(gem => gem?.category === 'Homework Helper'),
+        'Not a Doctor': allGems.filter(gem => gem?.category === 'Not a Doctor'),
+        'Not a Therapist': allGems.filter(gem => gem?.category === 'Not a Therapist')
       }).filter(([_, gems]) => gems.length > 0).map(([category, gems]: [string, Gem[]]) => (
         <Section
           key={category}
-          variant="category"
+          variant="slider"
           title={category}
-          description="Explore insights and conversations with our experts in this field"
+          description={`Explore conversations with our ${category.toLowerCase()} experts`}
           gems={gems}
           onGemClick={handleGemClick}
-          className="py-20"
+          className="py-12 lg:py-16"
           theme="dark-light"
         />
       ))}

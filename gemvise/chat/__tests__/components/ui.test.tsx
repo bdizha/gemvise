@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import { ThemeProvider } from 'next-themes';
 import Header from '@/components/layout/Header';
 import { type Gem } from '@/types/gems';
-import GemCard from '@/components/gems/GemCard';
+import Card from '@/components/ui/card/Card';
 
 // Mock next/image since it's not available in test environment
 jest.mock('next/image', () => ({
@@ -17,10 +17,12 @@ jest.mock('next/image', () => ({
 const mockGem: Gem = {
   id: '1',
   name: 'Test Gem',
+  title: 'Test Title',
+  subtitle: 'Test Subtitle',
   description: 'A test gem',
   category: 'Test Category',
   imageUrl: '/test-image.jpg',
-  gradient: 'bg-gradient-to-r from-blue-500 to-purple-500',
+  gradient: 'dark-light',
   expertise: ['Testing'],
   followers: 100,
   chatCount: 50
@@ -29,14 +31,15 @@ const mockGem: Gem = {
 describe('UI Components', () => {
   describe('Header', () => {
     const mockToggleSidebar = jest.fn();
+    const mockToggleTheme = jest.fn();
 
     it('renders header with logo shown', () => {
       render(
         <ThemeProvider attribute="class">
           <Header 
-            onToggleSidebar={mockToggleSidebar} 
-            showLogo={true} 
-            sidebarOpen={false}
+            onToggleSidebar={mockToggleSidebar}
+            onToggleTheme={mockToggleTheme}
+            theme="light"
           />
         </ThemeProvider>
       );
@@ -47,9 +50,9 @@ describe('UI Components', () => {
       render(
         <ThemeProvider attribute="class">
           <Header 
-            onToggleSidebar={mockToggleSidebar} 
-            showLogo={true} 
-            sidebarOpen={false}
+            onToggleSidebar={mockToggleSidebar}
+            onToggleTheme={mockToggleTheme}
+            theme="light"
           />
         </ThemeProvider>
       );
@@ -60,8 +63,11 @@ describe('UI Components', () => {
       expect(screen.getByPlaceholderText('Search experts...')).toBeInTheDocument();
       
       // Submit search form
-      const form = screen.getByPlaceholderText('Search experts...').closest('form');
-      fireEvent.submit(form!);
+      const searchInput = screen.getByPlaceholderText('Search experts...');
+      const form = searchInput?.closest('form');
+      if (form) {
+        fireEvent.submit(form);
+      }
       await waitFor(() => {
         expect(screen.queryByPlaceholderText('Search experts...')).not.toBeInTheDocument();
       });
@@ -81,9 +87,9 @@ describe('UI Components', () => {
       render(
         <ThemeProvider attribute="class">
           <Header 
-            onToggleSidebar={mockToggleSidebar} 
-            showLogo={true} 
-            sidebarOpen={false}
+            onToggleSidebar={mockToggleSidebar}
+            onToggleTheme={mockToggleTheme}
+            theme="light"
           />
         </ThemeProvider>
       );
@@ -100,9 +106,9 @@ describe('UI Components', () => {
       render(
         <ThemeProvider attribute="class">
           <Header 
-            onToggleSidebar={mockToggleSidebar} 
-            showLogo={true} 
-            sidebarOpen={false}
+            onToggleSidebar={mockToggleSidebar}
+            onToggleTheme={mockToggleTheme}
+            theme="light"
           />
         </ThemeProvider>
       );
@@ -111,35 +117,35 @@ describe('UI Components', () => {
     });
   });
 
-  describe('GemCard', () => {
+  describe('Card', () => {
     const mockClick = jest.fn();
 
     it('renders gem card with correct content', () => {
       render(
-        <GemCard 
+        <Card 
           gem={mockGem} 
           onClick={mockClick}
         />
       );
 
-      expect(screen.getByText(mockGem.name)).toBeInTheDocument();
-      expect(screen.getByText(mockGem.description)).toBeInTheDocument();
+      expect(screen.getByText(mockGem.name || '')).toBeInTheDocument();
+      expect(screen.getByText(mockGem.description || '')).toBeInTheDocument();
     });
 
     it('handles click events', () => {
       render(
-        <GemCard 
+        <Card 
           gem={mockGem} 
           onClick={mockClick}
         />
       );
 
-      fireEvent.click(screen.getByTestId('gem-card'));
+      fireEvent.click(screen.getByTestId('discover-card'));
       expect(mockClick).toHaveBeenCalled();
     });
 
     it('renders without white borders', () => {
-      render(<GemCard gem={mockGem} />);
+      render(<Card gem={mockGem} />);
       const card = screen.getByTestId('discover-card');
       
       const styles = window.getComputedStyle(card);
@@ -148,18 +154,22 @@ describe('UI Components', () => {
     });
 
     it('renders gem information correctly', () => {
-      render(<GemCard gem={mockGem} />);
+      render(<Card gem={mockGem} />);
 
-      expect(screen.getByText(mockGem.name)).toBeInTheDocument();
-      expect(screen.getByText(mockGem.description)).toBeInTheDocument();
-      expect(screen.getByText(mockGem.category)).toBeInTheDocument();
-      expect(screen.getByText(`${mockGem.followers} followers`)).toBeInTheDocument();
+      expect(screen.getByText(mockGem.name || '')).toBeInTheDocument();
+      expect(screen.getByText(mockGem.description || '')).toBeInTheDocument();
+      if (mockGem.category) {
+        expect(screen.getByText(mockGem.category)).toBeInTheDocument();
+      }
+      if (mockGem.followers) {
+        expect(screen.getByText(`${mockGem.followers} followers`)).toBeInTheDocument();
+      }
     });
 
     it('ensures text is readable with gradient overlay', () => {
-      render(<GemCard gem={mockGem} />);
+      render(<Card gem={mockGem} />);
 
-      const title = screen.getByText(mockGem.name);
+      const title = screen.getByText(mockGem.name || '');
       expect(title).toHaveClass('text-white');
 
       const card = screen.getByTestId('discover-card');
@@ -169,7 +179,7 @@ describe('UI Components', () => {
     });
 
     it('maintains consistent border radius', () => {
-      render(<GemCard gem={mockGem} />);
+      render(<Card gem={mockGem} />);
       const card = screen.getByTestId('discover-card');
       
       expect(card).toHaveStyle({

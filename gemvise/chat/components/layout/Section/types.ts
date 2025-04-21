@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { GradientTheme } from './GradientSection';
 import { type Gem } from '@/types/gems';
 
-export type SectionVariant = 'default' | 'gradient' | 'hero' | 'featured' | 'category' | 'values' | 'benefits';
+export type SectionVariant = 'default' | 'gradient' | 'hero' | 'featured' | 'slider' | 'values' | 'benefits';
 
 interface Benefit {
   emoji: string;
@@ -39,9 +39,12 @@ export interface GemCard {
 }
 
 export interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
+  trending?: GemCard[];
+  popular?: GemCard[];
+  discover?: GemCard[];
   variant?: SectionVariant;
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   tag?: string;
   className?: string;
   children?: ReactNode;

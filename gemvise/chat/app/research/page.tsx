@@ -2,7 +2,7 @@
 
 import { researchPapers } from '@/data/research-papers';
 import ResearchCard from '@/components/research/ResearchCard';
-import Section from '@/components/layout/Section/Section';
+import Section from '@/components/layout/Section';
 
 export default function ResearchPage() {
   return (

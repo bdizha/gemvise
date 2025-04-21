@@ -1,7 +1,7 @@
 'use client';
 
 import { type FC } from 'react';
-import Section from '@/components/layout/Section/Section';
+import Section from '@/components/layout/Section';
 import Button from '@/components/ui/Button';
 
 const values = [
@@ -30,16 +30,6 @@ const AboutPage: FC = () => {
         title="Spark the human imagination"
         description="Gemvise is pioneering a new frontier where imagination meets technology. By seamlessly blending human creativity with AI responsiveness, we're empowering creators to build, own, and evolve unique AI experiences that adapt and grow with every conversation."
         className="py-20"
-      />
-
-      {/* Values Section */}
-      <Section
-        variant="values"
-        gradient="light-dark-light"
-        tag="Our Values"
-        title="Making sense. Making value"
-        description="At Gemvise, our values shape everything we do. They guide our decisions, inspire our innovations, and define our relationships with creators and users."
-        values={values}
       />
 
       {/* Vision Section */}
@@ -98,24 +88,6 @@ const AboutPage: FC = () => {
         tag="The Future"
         title="Join Us in Building Tomorrow"
         description="The future of digital interaction is being shaped right now. Be part of this revolutionary journey as we create new possibilities for connection, creativity, and commerce."
-        className="py-20"
-      >
-        <div className="flex justify-center gap-6 mt-8">
-          <a href="https://discord.gg/Gemvise" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Discord</a>
-          <span className="text-theme-foreground/50">•</span>
-          <a href="https://twitter.com/Gemvise" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Twitter</a>
-          <span className="text-theme-foreground/50">•</span>
-          <a href="mailto:hello@Gemvise.com" className="text-theme-foreground/80 hover:text-theme-foreground transition-colors">Email</a>
-        </div>
-      </Section>
-
-      {/* Contact Section */}
-      <Section
-        variant="default"
-        gradient="dark-light-dark-long"
-        tag="Get in Touch"
-        title="Let's Build Together"
-        description="Have questions or ideas? We'd love to hear from you. Reach out through any of these channels."
         className="py-20"
       >
         <div className="flex justify-center gap-6 mt-8">

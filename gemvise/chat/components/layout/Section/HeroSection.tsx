@@ -4,19 +4,19 @@ import DefaultSection from './DefaultSection';
 
 interface HeroSectionProps extends SectionProps {
   onSearch?: (value: string) => void;
-  trendingGems?: GemCard[];
-  popularGems?: GemCard[];
-  discoverGems?: GemCard[];
+  trending?: GemCard[];
+  popular?: GemCard[];
+  discover?: GemCard[];
 }
 
 const HeroSection = (props: HeroSectionProps) => {
-  const { onSearch, trendingGems = [], popularGems = [], discoverGems = [], ...rest } = props;
+  const { onSearch, trending = [], popular = [], discover = [] } = props;
   const [activeTab, setActiveTab] = useState<'trending' | 'popular' | 'discover'>('trending');
 
   const tabs = [
-    { id: 'trending', label: 'Trending', items: trendingGems },
-    { id: 'popular', label: 'Popular', items: popularGems },
-    { id: 'discover', label: 'Discover', items: discoverGems },
+    { id: 'trending', label: 'Trending', items: trending },
+    { id: 'popular', label: 'Popular', items: popular },
+    { id: 'discover', label: 'Discover', items: discover },
   ];
 
   return (
@@ -24,7 +24,7 @@ const HeroSection = (props: HeroSectionProps) => {
       {/* Main content (2/3) */}
       <div className="lg:w-2/3">
         <div className="bg-gradient-dark-light rounded-[36px] p-16 backdrop-blur">
-          <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-white">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-gradient-pink-purple">
             {props.title}
           </h1>
           <div className="w-full h-[20svh] lg:h-[160px]">

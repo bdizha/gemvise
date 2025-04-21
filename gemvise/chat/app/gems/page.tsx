@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { getAllGems } from '@/data/gems';
-import Section from '@/components/layout/Section/Section';
-import GemGrid from '@/components/gems/GemGrid';
+import Section from '@/components/layout/Section';
 import Tabs from '@/components/ui/Tabs';
+import { type Gem } from '@/types/gems';
 
 export default function GemsPage() {
   const [quantumState, setQuantumState] = useState({
@@ -67,12 +67,31 @@ export default function GemsPage() {
   ];
 
   const [selectedTab, setSelectedTab] = useState(tabs[0].id);
+  const allGems = useMemo(() => getAllGems(), []);
+
+  // Group gems by category
+  const gemsByCategory = useMemo(() => {
+    const categories: Record<string, Gem[]> = {};
+    allGems.forEach(gem => {
+      const category = gem.category || 'Uncategorized';
+      if (!categories[category]) {
+        categories[category] = [];
+      }
+      categories[category].push(gem);
+    });
+    return categories;
+  }, [allGems]);
+
+  const handleGemClick = (gem: Gem) => {
+    // Handle gem click - navigate to gem detail page or open modal
+    console.log('Clicked gem:', gem);
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Section
         variant="hero"
-        theme="dark"
+        theme="dark-light"
         title="Transform Your Experience"
         description="Connect, discover and create for real-time, personalized insights. Engage in dynamic conversations with thought leaders and innovators who are shaping our future."
       >
@@ -85,20 +104,19 @@ export default function GemsPage() {
         </div>
       </Section>
 
-      <Section
-        variant="default"
-        theme="light"
-        title="Explore Our Gems"
-        description="Discover a curated collection of AI-powered expert personas, each bringing unique insights and perspectives."
-      >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <GemGrid 
-            gems={getAllGems()}
-            type="grid"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr w-full"
+      <div className="space-y-12">
+        {Object.entries(gemsByCategory).map(([category, gems]) => (
+          <Section
+            key={category}
+            variant="slider"
+            theme="light-dark"
+            title={category}
+            description={`Explore our collection of ${category.toLowerCase()} experts`}
+            gems={gems}
+            onGemClick={handleGemClick}
           />
-        </div>
-      </Section>
+        ))}
+      </div>
     </div>
   );
 }

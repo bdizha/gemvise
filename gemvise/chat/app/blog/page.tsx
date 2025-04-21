@@ -1,6 +1,6 @@
 import { blogPosts } from '@/data/blog-posts';
 import BlogCard from '@/components/blog/BlogCard';
-import Section from '@/components/layout/Section/Section';
+import Section from '@/components/layout/Section';
 
 export default function BlogPage() {
   return (

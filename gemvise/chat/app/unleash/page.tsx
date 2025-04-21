@@ -1,6 +1,6 @@
 'use client';
 
-import Section from '@/components/layout/Section/Section';
+import Section from '@/components/layout/Section';
 import type { SectionVariant } from '@/components/layout/Section/types';
 
 const creationTools = [

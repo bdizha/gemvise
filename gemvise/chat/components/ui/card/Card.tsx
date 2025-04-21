@@ -11,7 +11,7 @@ const GemCard: FC<GemCardProps> = ({ gem, onClick }) => {
   };
 
   // Map gem categories to shape variants
-  const getShapeVariant = (category: string): ShapeVariant => {
+  const getShapeVariant = (category?: string): ShapeVariant => {
     const variantMap: Record<string, ShapeVariant> = {
       'Finance': 'dark-light-dark',
       'Technology': 'dark-light',
