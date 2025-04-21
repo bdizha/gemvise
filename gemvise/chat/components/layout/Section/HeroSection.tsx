@@ -23,7 +23,7 @@ const HeroSection = (props: HeroSectionProps) => {
     <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto px-4">
       {/* Main content (2/3) */}
       <div className="lg:w-2/3">
-        <div className="bg-gradient-dark-light rounded-[36px] p-16 backdrop-blur">
+        <div className="bg-gradient-dark rounded-[36px] p-16 backdrop-blur">
           <h1 className="text-4xl lg:text-5xl font-bold mb-8 text-gradient-light-dark">
             {props.title}
           </h1>

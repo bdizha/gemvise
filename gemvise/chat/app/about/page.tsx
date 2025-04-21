@@ -25,7 +25,7 @@ const AboutPage: FC = () => {
       {/* Story Section */}
       <Section
         variant="default"
-        gradient="dark-light-dark"
+        gradient="dark"
         tag="Our Mission"
         title="Spark the human imagination"
         description="Gemvise is pioneering a new frontier where imagination meets technology. By seamlessly blending human creativity with AI responsiveness, we're empowering creators to build, own, and evolve unique AI experiences that adapt and grow with every conversation."

@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { type Gem } from '@/types/gems';
 import Section from '@/components/layout/Section';
-import { CategorySection, allGems } from '@/mocks/gems';
+import CategorySection from '@/components/layout/Section/CategorySection';
+import { allGems } from '@/mocks/gems';
 
 // Sample images for the carousel
 const carouselContent = [
@@ -112,7 +113,7 @@ export default function Home() {
         variant="hero"
         title="Connect, discover and create AI personas"
         description="Experience interactive story telling with AI personas"
-        gradient='dark-light'
+        gradient='dark'
         trending={trendingGems}
         popular={popularGems}
         discover={discoverGems}
@@ -120,26 +121,42 @@ export default function Home() {
         carouselContent={carouselContent}
       />
       {/* Category Sections */}
-      {Object.entries({
-        'Latest News': allGems.filter(gem => gem?.category === 'Latest News'),
-        'Companion': allGems.filter(gem => gem?.category === 'Companion'),
-        'Unhinged Comedian': allGems.filter(gem => gem?.category === 'Unhinged Comedian'),
-        'Loyal Friend': allGems.filter(gem => gem?.category === 'Loyal Friend'),
-        'Homework Helper': allGems.filter(gem => gem?.category === 'Homework Helper'),
-        'Not a Doctor': allGems.filter(gem => gem?.category === 'Not a Doctor'),
-        'Not a Therapist': allGems.filter(gem => gem?.category === 'Not a Therapist')
-      }).filter(([_, gems]) => gems.length > 0).map(([category, gems]: [string, Gem[]]) => (
-        <Section
-          key={category}
-          variant="slider"
-          title={category}
-          description={`Explore conversations with our ${category.toLowerCase()} experts`}
-          gems={gems}
-          onGemClick={handleGemClick}
-          className="py-12 lg:py-16"
-          gradient='dark-light'
-        />
-      ))}
+      <CategorySection
+        title="Browse by Category"
+        description="Explore our diverse collection of AI personas"
+        categories={[
+          {
+            title: 'Latest News',
+            gems: allGems.filter(gem => gem?.category === 'Latest News')
+          },
+          {
+            title: 'Companion',
+            gems: allGems.filter(gem => gem?.category === 'Companion')
+          },
+          {
+            title: 'Unhinged Comedian',
+            gems: allGems.filter(gem => gem?.category === 'Unhinged Comedian')
+          },
+          {
+            title: 'Loyal Friend',
+            gems: allGems.filter(gem => gem?.category === 'Loyal Friend')
+          },
+          {
+            title: 'Homework Helper',
+            gems: allGems.filter(gem => gem?.category === 'Homework Helper')
+          },
+          {
+            title: 'Not a Doctor',
+            gems: allGems.filter(gem => gem?.category === 'Not a Doctor')
+          },
+          {
+            title: 'Not a Therapist',
+            gems: allGems.filter(gem => gem?.category === 'Not a Therapist')
+          }
+        ]}
+        onGemClick={handleGemClick}
+        className="py-12 lg:py-16"
+      />
     </div>
   );
 }

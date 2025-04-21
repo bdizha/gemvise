@@ -5,13 +5,14 @@ import DefaultSection from './DefaultSection';
 import GradientSection from './GradientSection';
 import HeroSection from './HeroSection';
 import FeaturedSection from './CategorySection';
-import Slider from '../Slider';
+import GridSlider from '../Grid/GridSlider';
 import { type SectionProps, type SectionVariant, type GemCard } from './types';
-import { type GradientTheme } from './GradientSection';
+import { GradientTheme } from '../../../types/gradients';
 import ValuesSection from './ValuesSection';
-import BenefitsSection from './BenefitsSection';
 
-interface ExtendedSectionProps extends SectionProps {
+interface ExtendedSectionProps extends Omit<SectionProps, 'theme' | 'gradient'> {
+  theme?: GradientTheme;
+  gradient?: GradientTheme;
   trendingGems?: GemCard[];
   popularGems?: GemCard[];
   discoverGems?: GemCard[];
@@ -30,8 +31,8 @@ const ValuesGrid = ({ values }: { values: Array<{ title: string; description: st
   </div>
 );
 
-const Section: React.FC<ExtendedSectionProps & { gradient?: GradientTheme }> = (props) => {
-  const { variant = 'default', theme = 'dark-light', title, description, tag, className = '', gradient = 'light-dark-light' } = props;
+const Section: React.FC<ExtendedSectionProps> = (props) => {
+  const { variant = 'default', theme = 'dark-light' as GradientTheme, title, description, tag, className = '', gradient = 'light-dark-light' as GradientTheme } = props;
 
   const content = (
     <div className="w-full relative z-10">
@@ -48,18 +49,9 @@ const Section: React.FC<ExtendedSectionProps & { gradient?: GradientTheme }> = (
             return <HeroSection {...props} />;
           case 'values':
             return <ValuesSection {...props} />;
-          case 'benefits':
-            return <BenefitsSection {...props} />;
-          case 'featured':
+          case 'slider':
       return (
-        <DefaultSection {...props} theme={theme}>
-          <FeaturedSection gems={props.gems || []} onGemClick={(gem) => props.onGemClick?.(gem)} />
-          {props.children}
-        </DefaultSection>
-      );
-    case 'slider':
-      return (
-        <Slider 
+        <GridSlider 
             title={props.title || ''} 
             cards={props.gems?.map(gem => ({
               title: gem.title,
@@ -82,9 +74,13 @@ const Section: React.FC<ExtendedSectionProps & { gradient?: GradientTheme }> = (
          
       default:
             return (
-              <DefaultSection {...props} gradient={gradient}>
-                {props.children}
-              </DefaultSection>
+              props.children ? (
+                <DefaultSection {...props} gradient={gradient}>
+                  {props.children}
+                </DefaultSection>
+              ) : (
+                <></>
+              )
             );
         }
       })()}

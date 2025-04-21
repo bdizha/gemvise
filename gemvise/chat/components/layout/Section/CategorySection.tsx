@@ -1,36 +1,38 @@
 import React from 'react';
 import { type Gem } from '@/types/gems';
-import Card from '@/components/ui/card/Card';
-import List from '@/components/ui/card/List';
+import GridSlider from '@/components/layout/Grid/GridSlider';
 import DefaultSection from './DefaultSection';
 
-interface CategorySectionProps {
+interface Category {
+  title: string;
   gems: Gem[];
+}
+
+interface CategorySectionProps extends React.ComponentProps<'div'> {
+  categories: Category[];
   onGemClick: (gem: Gem) => void;
   title?: string;
   description?: string;
 }
 
-const CategorySection: React.FC<CategorySectionProps> = ({ gems, onGemClick, title, description }) => {
+const CategorySection: React.FC<CategorySectionProps> = ({ categories, onGemClick, title, description }) => {
   return (
     <DefaultSection title={title || ''} description={description || ''}>
-      <div className="w-full">
-        <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {gems.map((gem) => (
-            <Card 
-              key={gem.id} 
-              gem={gem} 
-              onClick={() => onGemClick(gem)}
-            />
-          ))}
-        </div>
-        <div className="md:hidden">
-          <List 
-            gems={gems} 
-            onSelect={(gemId) => onGemClick(gems.find(g => g.id === gemId)!)}
+      {categories.map((category) => (
+        <div key={category.title} className="mb-8">
+          <GridSlider
+            title={category.title}
+            cards={category.gems.map(gem => ({
+              title: gem.name || '',
+              description: gem.description || '',
+              imageSrc: gem.imageUrl,
+              status: gem.category || '',
+              href: `/chat/${gem.id}`,
+              buttonText: 'Chat now'
+            }))}
           />
         </div>
-      </div>
+      ))}
     </DefaultSection>
   );
 };

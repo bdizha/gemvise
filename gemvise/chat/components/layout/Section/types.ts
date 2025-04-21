@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { GradientTheme } from './GradientSection';
+import { type GradientTheme } from '@/types/gradients';
 import { type Gem } from '@/types/gems';
 
 export type SectionVariant = 'default' | 'gradient' | 'hero' | 'featured' | 'slider' | 'values' | 'benefits';

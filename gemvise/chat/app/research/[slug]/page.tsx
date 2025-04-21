@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { researchPapers } from '@/data/research-papers';
-import Section from '@/components/ui/section/Section';
+import Section from '@/components/layout/Section';
 import Image from 'next/image';
 import Link from 'next/link';
 
