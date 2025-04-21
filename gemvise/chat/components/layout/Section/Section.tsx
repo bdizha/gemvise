@@ -4,8 +4,8 @@ import React from 'react';
 import DefaultSection from './DefaultSection';
 import GradientSection from './GradientSection';
 import HeroSection from './HeroSection';
-import FeaturedSection from './FeaturedGems';
-import SliderSection from './SliderSection';
+import FeaturedSection from './CategorySection';
+import Slider from '../Slider';
 import { type SectionProps, type SectionVariant, type GemCard } from './types';
 import { type GradientTheme } from './GradientSection';
 import ValuesSection from './ValuesSection';
@@ -38,7 +38,7 @@ const Section: React.FC<ExtendedSectionProps & { gradient?: GradientTheme }> = (
       {variant !== 'hero' && variant !== 'slider' && (
         <>
           {tag && <p className="text-sm font-semibold leading-6 text-white/70">{tag}</p>}
-          <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-5xl max-w-[50%] lg:max-w-[50%] text-gradient-purple-pink">{title}</h2>
+          <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-5xl max-w-[50%] lg:max-w-[50%] text-gradient-dark-light">{title}</h2>
           {description && <p className="mt-4 text-base leading-7 text-white/60 max-w-[50%] lg:max-w-[50%]">{description}</p>}
         </>
       )}
@@ -59,7 +59,7 @@ const Section: React.FC<ExtendedSectionProps & { gradient?: GradientTheme }> = (
       );
     case 'slider':
       return (
-        <SliderSection 
+        <Slider 
             title={props.title || ''} 
             cards={props.gems?.map(gem => ({
               title: gem.title,

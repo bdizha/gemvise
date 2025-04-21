@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { type Gem } from '@/types/gems';
 import Section from '@/components/layout/Section';
-import { featuredGems, allGems } from '@/mocks/gems';
+import { CategorySection, allGems } from '@/mocks/gems';
 
 // Sample images for the carousel
 const carouselContent = [
@@ -107,12 +107,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-">
       <Section 
         variant="hero"
-        title="Connect, discover and create"
+        title="Connect, discover and create AI personas"
         description="Experience interactive story telling with AI personas"
-        theme="dark-light"
+        gradient='dark-light'
         trending={trendingGems}
         popular={popularGems}
         discover={discoverGems}
@@ -137,7 +137,7 @@ export default function Home() {
           gems={gems}
           onGemClick={handleGemClick}
           className="py-12 lg:py-16"
-          theme="dark-light"
+          gradient='dark-light'
         />
       ))}
     </div>

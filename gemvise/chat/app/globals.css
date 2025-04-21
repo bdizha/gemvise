@@ -68,6 +68,14 @@
 /* Components */
 
 /* Gradient Text */
+@keyframes gradient-shift {
+  0% { background-position: left center; }
+  25% { background-position: center top; }
+  50% { background-position: right center; }
+  75% { background-position: center bottom; }
+  100% { background-position: left center; }
+}
+
 [class*='text-gradient-'] {
   background-clip: text;
   -webkit-background-clip: text;
@@ -75,18 +83,17 @@
   display: inline-block;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  animation: gradient-shift 12s ease-in-out infinite;
+}
+
+.text-gradient-light-dark {
+  background-image: url('/gradients/named/GV-Gradient-Dark-Light-Dark.png');
+  background-size: 200% 200%;
 }
 
 .text-gradient-dark-light {
-  background-image: linear-gradient(to right, var(--background), var(--foreground));
-}
-
-.text-gradient-pink-purple {
-  background-image: linear-gradient(to right, var(--primary), var(--accent));
-}
-
-.text-gradient-purple-pink {
-  background-image: linear-gradient(to right, var(--accent), var(--primary));
+  background-image: url('/gradients/named/GV-Gradient-Light-Dark-Light.png');
+  background-size: 200% 200%;
 }
 
 /* Footer Gradient */
@@ -157,6 +164,12 @@
 
 /* Light Theme Gradients */
 :root {
+  .bg-gradient-dark {
+    background-image: url('/gradients/named/GV-Gradient-Dark.png');
+    background-size: cover; 
+    background-position: center;
+  }
+
   .bg-gradient-light-dark {
     background-image: url('/gradients/named/GV-Gradient-Light-Dark.png');
     background-size: cover; 

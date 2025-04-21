@@ -1,7 +1,7 @@
 import { type Gem } from '@/types/gems';
 
 // Featured experts that appear in the hero section
-export const featuredGems: Gem[] = [
+export const CategorySection: Gem[] = [
   {
     id: '1',
     name: 'Warren Buffett',
@@ -66,7 +66,7 @@ export const featuredGems: Gem[] = [
 
 // Extended list of all available experts
 export const allGems: Gem[] = [
-  ...featuredGems,
+  ...CategorySection,
   // Finance & Investment
   {
     id: 'finance-1',

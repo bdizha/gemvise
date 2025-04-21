@@ -14,7 +14,7 @@ interface GemListProps {
   title?: string;
 }
 
-const featuredGems: Gem[] = [
+const CategorySection: Gem[] = [
   {
     id: 'einstein',
     name: 'Albert Einstein',
@@ -94,7 +94,7 @@ const featuredGems: Gem[] = [
   }
 ];
 
-export default function GemList({ gems = featuredGems, onSelect, showHeader = true, title = "It's great to see you" }: GemListProps) {
+export default function GemList({ gems = CategorySection, onSelect, showHeader = true, title = "It's great to see you" }: GemListProps) {
   return (
     <section className="sm:pb-20 pb-16" aria-label={title}>
       {showHeader && (
@@ -169,4 +169,4 @@ export default function GemList({ gems = featuredGems, onSelect, showHeader = tr
   );
 }
 
-export { featuredGems };
+export { CategorySection };

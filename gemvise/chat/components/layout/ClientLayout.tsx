@@ -22,7 +22,7 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-dark">
       <Header onToggleSidebar={handleToggleSidebar} onToggleTheme={handleToggleTheme} theme={theme || 'dark'} />
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <main 

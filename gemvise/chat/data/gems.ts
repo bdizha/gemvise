@@ -59,7 +59,7 @@ export const getGemsByCategory = (category: string) =>
 export const getGemById = (id: string) => 
   gems.find(gem => gem.id === id);
 
-export const getFeaturedGems = () => 
+export const getCategorySection = () => 
   gems.slice(0, 4);
 
 export const getAllGems = () => gems;

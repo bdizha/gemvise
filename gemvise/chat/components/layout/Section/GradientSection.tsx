@@ -1,11 +1,10 @@
 'use client';
 
 import * as React from 'react';
-import DefaultSection from './DefaultSection';
 import { SectionProps } from './types';
 
 // Define the available gradient themes
-export type GradientTheme = 'dark-light' | 'light-dark' | 'dark-light-dark' | 'light-dark-light' | 'dark-light-dark-long' | 'pink-purple' | 'pink-purple-pink' | 'purple-pink' | 'purple-pink-purple';
+export type GradientTheme = 'dark' | 'dark-light' | 'light-dark' | 'dark-light-dark' | 'light-dark-light' | 'dark-light-dark-long' | 'pink-purple' | 'pink-purple-pink' | 'purple-pink' | 'purple-pink-purple';
 
 // Define props for the GradientSection component
 export interface GradientSectionProps extends SectionProps {

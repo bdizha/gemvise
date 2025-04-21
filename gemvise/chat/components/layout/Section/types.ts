@@ -42,6 +42,7 @@ export interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
   trending?: GemCard[];
   popular?: GemCard[];
   discover?: GemCard[];
+  gradient?: GradientTheme;
   variant?: SectionVariant;
   title: string;
   description: string;

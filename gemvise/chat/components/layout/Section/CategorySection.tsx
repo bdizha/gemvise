@@ -4,14 +4,14 @@ import Card from '@/components/ui/card/Card';
 import List from '@/components/ui/card/List';
 import DefaultSection from './DefaultSection';
 
-interface FeaturedGemsProps {
+interface CategorySectionProps {
   gems: Gem[];
   onGemClick: (gem: Gem) => void;
   title?: string;
   description?: string;
 }
 
-const FeaturedGems: React.FC<FeaturedGemsProps> = ({ gems, onGemClick, title, description }) => {
+const CategorySection: React.FC<CategorySectionProps> = ({ gems, onGemClick, title, description }) => {
   return (
     <DefaultSection title={title || ''} description={description || ''}>
       <div className="w-full">
@@ -35,4 +35,4 @@ const FeaturedGems: React.FC<FeaturedGemsProps> = ({ gems, onGemClick, title, de
   );
 };
 
-export default FeaturedGems;
+export default CategorySection;

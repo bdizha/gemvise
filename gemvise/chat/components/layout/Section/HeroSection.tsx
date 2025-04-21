@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
 import { type SectionProps, type GemCard } from './types';
-import DefaultSection from './DefaultSection';
 
 interface HeroSectionProps extends SectionProps {
   onSearch?: (value: string) => void;
@@ -24,7 +24,7 @@ const HeroSection = (props: HeroSectionProps) => {
       {/* Main content (2/3) */}
       <div className="lg:w-2/3">
         <div className="bg-gradient-dark-light rounded-[36px] p-16 backdrop-blur">
-          <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-gradient-pink-purple">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-8 text-gradient-light-dark">
             {props.title}
           </h1>
           <div className="w-full h-[20svh] lg:h-[160px]">
@@ -45,12 +45,10 @@ const HeroSection = (props: HeroSectionProps) => {
                   <div className="absolute inset-y-2 right-2 lg:right-4 flex items-center">
                     <button 
                       type="submit" 
-                      className="relative isolate inline-flex items-center justify-center border text-base/6 uppercase font-mono tracking-widest shrink-0 focus:outline-none aspect-square px-3.5 py-1.5 sm:text-sm gap-x-2 bg-primary text-background hover:bg-primary/80 rounded-full"
+                      className="relative isolate inline-flex items-center justify-center border text-base/6 uppercase font-mono tracking-widest shrink-0 focus:outline-none aspect-square px-3.5 py-1.5 sm:text-sm gap-x-2 bg-gradient-light-dark text-background hover:bg-primary/80 rounded-full"
                     >
                       <span className="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden" aria-hidden="true"></span>
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="!size-4">
-                        <path fillRule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clipRule="evenodd"></path>
-                      </svg>
+                      <ArrowRightIcon className="!size-6 text-white/80" aria-hidden="true" />
                     </button>
                   </div>
                 </form>

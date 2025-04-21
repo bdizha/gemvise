@@ -146,12 +146,12 @@ const SliderCard: React.FC<SliderCardProps> = ({
   </div>
 );
 
-interface SliderSectionProps {
+interface SliderProps {
   title: string;
   cards: Array<Omit<SliderCardProps, 'transitionDelay'>>;
 }
 
-const SliderSection: React.FC<SliderSectionProps> = ({ title, cards }) => {
+const Slider: React.FC<SliderProps> = ({ title, cards }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
@@ -349,5 +349,5 @@ const SliderSection: React.FC<SliderSectionProps> = ({ title, cards }) => {
   );
 };
 
-export default SliderSection;
+export default Slider;
 export type { SliderCardProps };
