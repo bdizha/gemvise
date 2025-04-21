@@ -23,13 +23,12 @@ const HeroSection = (props: HeroSectionProps) => {
     <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto px-4">
       {/* Main content (2/3) */}
       <div className="lg:w-2/3">
-        <div className="bg-gradient-dark rounded-[36px] p-16 backdrop-blur">
-          <h1 className="text-4xl lg:text-5xl font-bold mb-8 text-gradient-light-dark">
+        <div className="relative bg-gradient-dark-light rounded-[36px] p-16 backdrop-blur">
+          <h1 className="text-4xl lg:text-5xl font-bold mb-16 text-gradient-light-dark">
             {props.title}
           </h1>
           <div className="w-full h-[20svh] lg:h-[160px]">
             <div className="absolute inset-x-0 flex justify-center items-center z-10">
-           
             </div>
             <form className="relative w-full items-center gap-3 bg-[#1f242a] rounded-full p-px from-primary/5 to-primary/20" onSubmit={(e) => {
                   e.preventDefault();

@@ -1,4 +1,4 @@
-export type GradientTheme = 'dark' | 'dark-light' | 'light-dark' | 'dark-light-dark' | 'light-dark-light' | 'dark-light-dark-long' | 'pink-purple' | 'pink-purple-pink' | 'purple-pink' | 'purple-pink-purple';
+export type GradientTheme = 'dark' | 'dark-light' | 'light-dark' | 'dark-light-dark' | 'light-dark-light' | 'pink-purple' | 'pink-purple-pink' | 'purple-pink' | 'purple-pink-purple';
 
 export const gradientPaths: Record<GradientTheme, string> = {
   'dark': '/gradients/named/GV-Gradient-Dark.png',

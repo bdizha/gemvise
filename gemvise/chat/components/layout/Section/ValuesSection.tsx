@@ -14,7 +14,7 @@ interface ValuesSectionProps extends SectionProps {
   values?: Value[];
 }
 
-const ValuesSection: React.FC<ValuesSectionProps> = ({ title, description, tag, className = '', gradient = 'light-dark-light', values = [] }) => {
+const ValuesSection: React.FC<ValuesSectionProps> = ({ title, description, tag, className = '', gradient = 'light-dark', values = [] }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
       {values.map((value, index) => (

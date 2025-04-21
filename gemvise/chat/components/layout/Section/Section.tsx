@@ -32,7 +32,7 @@ const ValuesGrid = ({ values }: { values: Array<{ title: string; description: st
 );
 
 const Section: React.FC<ExtendedSectionProps> = (props) => {
-  const { variant = 'default', theme = 'dark-light' as GradientTheme, title, description, tag, className = '', gradient = 'light-dark-light' as GradientTheme } = props;
+  const { variant = 'default', theme = 'dark' as GradientTheme, title, description, tag, className = '', gradient = 'light-dark' as GradientTheme } = props;
 
   const content = (
     <div className="w-full relative z-10">

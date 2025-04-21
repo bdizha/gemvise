@@ -87,12 +87,12 @@
 }
 
 .text-gradient-light-dark {
-  background-image: url('/gradients/named/GV-Gradient-Dark-Light-Dark.png');
+  background-image: url('/gradients/desktop/GV-Gradient-Dark-Light-Dark.png');
   background-size: 200% 200%;
 }
 
 .text-gradient-dark-light {
-  background-image: url('/gradients/named/GV-Gradient-Light-Dark-Light.png');
+  background-image: url('/gradients/desktop/GV-Gradient-Light-Dark-Light.png');
   background-size: 200% 200%;
 }
 
@@ -155,29 +155,29 @@
 }
 /* Section Gradient Classes */
 .bg-gradient-header {
-  background-image: url('/gradients/named/GV-GRADIENT-HEADER.png');
+  background-image: url('/gradients/desktop/GV-GRADIENT-HEADER.png');
 }
 
 .bg-gradient-footer {
-  background-image: url('/gradients/named/GV-Gradient-FOOTER.png');
+  background-image: url('/gradients/desktop/GV-Gradient-FOOTER.png');
 }
 
 /* Light Theme Gradients */
 :root {
   .bg-gradient-dark {
-    background-image: url('/gradients/named/GV-Gradient-Dark.png');
+    background-image: url('/gradients/desktop/GV-Gradient-Dark.png');
     background-size: cover; 
     background-position: center;
   }
 
   .bg-gradient-light-dark {
-    background-image: url('/gradients/named/GV-Gradient-Light-Dark.png');
+    background-image: url('/gradients/desktop/GV-Gradient-Light-Dark.png');
     background-size: cover; 
     background-position: center;
   } 
 
   .bg-gradient-light-dark-light {
-    background-image: url('/gradients/named/GV-Gradient-Light-Dark-Light.png');
+    background-image: url('/gradients/desktop/GV-Gradient-Light-Dark-Light.png');
     background-size: cover; 
     background-position: center;
   }
@@ -186,19 +186,13 @@
 /* Dark Theme Gradients */
 .dark {
   .bg-gradient-dark-light {
-    background-image: url('/gradients/named/GV-Gradient-Dark-Light.png');
+    background-image: url('/gradients/desktop/GV-Gradient-Dark-Light.png');
     background-size: cover;
     background-position: center;
   }
 
   .bg-gradient-dark-light-dark {
-    background-image: url('/gradients/named/GV-Gradient-Dark-Light-Dark.png');
-    background-size: cover;
-    background-position: center;
-  }
-
-  .bg-gradient-dark-light-dark-long {
-    background-image: url('/gradients/named/GV-Gradient-Dark-Light-Dark-Long.png');
+    background-image: url('/gradients/desktop/GV-Gradient-Dark-Light-Dark.png');
     background-size: cover;
     background-position: center;
   }
@@ -206,25 +200,25 @@
 
 /* Pink-Purple Gradients */
 .bg-gradient-pink-purple {
-  background-image: url('/gradients/named/GV-Gradient-Pink-Purple.png');
+  background-image: url('/gradients/desktop/GV-Gradient-Pink-Purple.png');
   background-size: cover;
   background-position: center;
 }
 
 .bg-gradient-pink-purple-pink {
-  background-image: url('/gradients/named/GV-Gradient-Pink-Purple-Pink.png');
+  background-image: url('/gradients/desktop/GV-Gradient-Pink-Purple-Pink.png');
   background-size: cover;
   background-position: center;
 }
 
 .bg-gradient-purple-pink {
-  background-image: url('/gradients/named/GV-Gradient-Purple-Pink.png');
+  background-image: url('/gradients/desktop/GV-Gradient-Purple-Pink.png');
   background-size: cover;
   background-position: center;
 }
 
 .bg-gradient-purple-pink-purple {
-  background-image: url('/gradients/named/GV-Gradient-Purple-Pink-Purple.png');
+  background-image: url('/gradients/desktop/GV-Gradient-Purple-Pink-Purple.png');
   background-size: cover;
   background-position: center;
 }

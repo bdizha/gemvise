@@ -38,17 +38,10 @@ export interface GemCard {
   href: string;
 }
 
-export interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SectionProps extends BaseSectionProps {
   trending?: GemCard[];
   popular?: GemCard[];
   discover?: GemCard[];
-  gradient?: GradientTheme;
-  variant?: SectionVariant;
-  title: string;
-  description: string;
-  tag?: string;
-  className?: string;
-  children?: ReactNode;
   values?: Array<{ title: string; description: string }>;
   theme?: GradientTheme;
   isHero?: boolean;

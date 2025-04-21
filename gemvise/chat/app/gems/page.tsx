@@ -60,7 +60,7 @@ export default function GemsPage() {
       id: 'innovation', 
       label: 'Innovation & Future',
       gradient: {
-        default: 'bg-gradient-dark-light-dark-long',
+        default: 'bg-gradient-dark-light-dark',
         alternate: 'bg-gradient-light-dark-light'
       }
     },
