@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.swiper-button-prev,
+.swiper-button-next {
+  color: white !important;
+}
+
 /* Base styles and theme variables */
 :root {
   /* Light Mode */

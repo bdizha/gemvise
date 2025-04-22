@@ -47,8 +47,8 @@ const Modal: React.FC<ModalProps> & ModalSubComponents = ({ isOpen, onClose, chi
             animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
             exit={{ opacity: 0, scale: 0.95, x: '-50%', y: '-50%' }}
             transition={{ duration: 0.15, ease: 'easeOut' }}
-            className={`fixed left-1/2 top-1/2 z-50 transform overflow-hidden bg-white dark:bg-[#232f3e] shadow-lg border border-[#d5d9d9] dark:border-[#3f4b58]
-              ${isMobile ? 'w-full h-full rounded-none' : 'max-w-lg w-full rounded-lg'}`}
+            className={`fixed left-1/2 top-1/2 z-50 transform overflow-hidden bg-gradient-dark-light text-white shadow-lg
+              ${isMobile ? 'w-full h-full rounded-none' : 'max-w-lg w-full rounded-[40px]'}`}
           >
             {children}
           </motion.div>
@@ -59,31 +59,30 @@ const Modal: React.FC<ModalProps> & ModalSubComponents = ({ isOpen, onClose, chi
 };
 
 const ModalHeader: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="flex items-center justify-between p-4 border-b border-[#d5d9d9] dark:border-[#3f4b58]">
-    <h2 className="text-lg font-semibold text-[#0f1111] dark:text-white">{children}</h2>
+  <div className="flex items-center justify-between p-6 bg-gradient-dark">
+    <div>{children}</div>
     <button
-      onClick={(e) => {
-        e.stopPropagation();
-        const modal = (e.target as HTMLElement).closest('[role="dialog"]');
+      type="button"
+      className="p-2 rounded-full hover:bg-white/10 transition-colors"
+      onClick={() => {
+        const modal = document.querySelector('[role="dialog"]');
         if (modal) {
-          const closeEvent = new CustomEvent('modal-close');
-          modal.dispatchEvent(closeEvent);
+          const closeButton = modal.querySelector('[data-testid="modal-close"]');
+          closeButton?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
         }
       }}
-      className="rounded-sm p-1.5 hover:bg-[#f7fafa] dark:hover:bg-[#2f3f4f] transition-colors"
-      aria-label="Close modal"
     >
-      <X className="w-5 h-5 text-[#5f6b7a]" />
+      <X className="w-5 h-5 text-white" />
     </button>
   </div>
 );
 
 const ModalContent: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="p-4 text-[#0f1111] dark:text-white">{children}</div>
+  <div className="p-6">{children}</div>
 );
 
 const ModalFooter: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="flex items-center justify-end space-x-3 p-4 border-t border-[#d5d9d9] dark:border-[#3f4b58] bg-[#f7fafa] dark:bg-[#2f3f4f]">
+  <div className="flex items-center justify-between p-6 border-t border-white/10 bg-gradient-dark">
     {children}
   </div>
 );

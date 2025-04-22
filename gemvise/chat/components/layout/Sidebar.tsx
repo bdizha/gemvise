@@ -34,44 +34,26 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
       </div>
 
       <nav className="mt-4 space-y-2 px-2 flex flex-col items-start">
-        <Link href="/" className="w-full">
-          <button
-            className={`flex h-[48px] w-full items-center gap-3 rounded-[36px] px-4 text-theme-foreground transition-all duration-300 ${pathname === '/' 
-              ? 'bg-gradient-light-dark bg-cover bg-center' 
-              : 'bg-theme-surface hover:bg-gradient-light-dark-light hover:bg-cover hover:bg-center focus:outline-none'}`}
-          >
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-theme-surface bg-cover bg-center transition-all duration-300 hover:bg-gradient-pink-purple">
-              <HomeIcon className="h-5 w-5 text-theme-foreground" />
-            </span>
-            <span>Home</span>
-          </button>
-        </Link>
-
-        <Link href="/about" className="w-full">
-          <button
-            className={`flex h-[48px] w-full items-center gap-3 rounded-[36px] px-4 text-theme-foreground transition-all duration-300 ${pathname === '/about' 
-              ? 'bg-gradient-light-dark bg-cover bg-center' 
-              : 'bg-theme-surface hover:bg-gradient-light-dark-light hover:bg-cover hover:bg-center focus:outline-none'}`}
-          >
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-theme-surface bg-cover bg-center transition-all duration-300 hover:bg-gradient-pink-purple">
-              <InformationCircleIcon className="h-5 w-5 text-theme-foreground" />
-            </span>
-            <span>About</span>
-          </button>
-        </Link>
-
-        <Link href="/gems" className="w-full">
-          <button
-            className={`flex h-[48px] w-full items-center gap-3 rounded-[36px] px-4 text-theme-foreground transition-all duration-300 ${pathname === '/gems' 
-              ? 'bg-gradient-light-dark bg-cover bg-center' 
-              : 'bg-theme-surface hover:bg-gradient-light-dark-light hover:bg-cover hover:bg-center focus:outline-none'}`}
-          >
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-theme-surface bg-cover bg-center transition-all duration-300 hover:bg-gradient-pink-purple">
-              <SparklesIcon className="h-5 w-5 text-theme-foreground" />
-            </span>
-            <span>Gems</span>
-          </button>
-        </Link>
+        {[
+          { href: '/', label: 'Home', icon: HomeIcon },
+          { href: '/about', label: 'About', icon: InformationCircleIcon },
+          { href: '/explore', label: 'Explore', icon: SparklesIcon }
+        ].map(({ href, label, icon: Icon }) => (
+          <Link key={href} href={href} className="w-full">
+            <button
+              className={`flex h-[48px] w-full items-center gap-3 rounded-2xl px-4 text-theme-foreground transition-all duration-300 ${
+                pathname === href
+                  ? 'bg-[#333639]/30 hover:bg-[#333639]/60'
+                  : 'bg-theme-surface hover:bg-[#333639]/60 focus:outline-none'
+              }`}
+            >
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-theme-surface bg-cover bg-center transition-all duration-300 hover:bg-gradient-pink-purple">
+                <Icon className="h-5 w-5 text-theme-foreground" />
+              </span>
+              <span>{label}</span>
+            </button>
+          </Link>
+        ))}
       </nav>
     </aside>
     </>

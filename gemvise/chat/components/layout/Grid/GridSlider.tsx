@@ -3,7 +3,8 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Navigation, Pagination } from 'swiper/modules';
 import { type SliderCardProps, type SliderProps } from './types';
 
@@ -71,21 +72,34 @@ const GridSlider: React.FC<SliderProps> = ({ title, cards }) => {
       <div className="max-w-[1920px] mx-auto">
         <div className="relative">
           <div className="md:px-5">
-            <h2 className="font-sans text-3xl md:text-4xl font-bold mb-8 text-[#0f1111] dark:text-white">
-              {title}
-            </h2>
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="font-sans text-3xl md:text-4xl font-bold text-[#0f1111] dark:text-white">
+                {title}
+              </h2>
+              <button
+                onClick={() => window.location.href = `/category/${title.toLowerCase()}`}
+                className="px-4 py-2 text-sm font-medium border-solid border rounded-full border-white/20 text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors duration-200"
+              >
+                View All
+              </button>
+            </div>
             <Swiper
               modules={[Navigation, Pagination]}
               spaceBetween={20}
               slidesPerView={1}
-              navigation
+              navigation={{
+                prevEl: '.swiper-button-prev',
+                nextEl: '.swiper-button-next',
+                enabled: true,
+                disabledClass: 'opacity-50 cursor-not-allowed'
+              }}
               pagination={{ clickable: true }}
               breakpoints={{
                 640: { slidesPerView: 2 },
                 768: { slidesPerView: 3 },
                 1024: { slidesPerView: 4 }
               }}
-              className="w-full"
+              className="w-full [&_.swiper-button-prev]:!hidden [&_.swiper-button-next]:!hidden"
             >
               {cards.map((card) => (
                 <SwiperSlide key={card.title}>
@@ -93,6 +107,12 @@ const GridSlider: React.FC<SliderProps> = ({ title, cards }) => {
                 </SwiperSlide>
               ))}
             </Swiper>
+            <button className="swiper-button-prev flex h-[48px] w-[48px] items-center justify-center rounded-[36px] bg-black/50 hover:bg-black/70 transition-all duration-300 absolute top-1/2 -translate-y-1/2 left-4 z-10">
+              <ChevronLeftIcon className="text-white" />
+            </button>
+            <button className="swiper-button-next flex h-[48px] w-[48px] items-center justify-center rounded-[36px] bg-black/50 hover:bg-black/70 transition-all duration-300 absolute top-1/2 -translate-y-1/2 right-4 z-10">
+              <ChevronRightIcon className="text-white" />
+            </button>
           </div>
         </div>
       </div>

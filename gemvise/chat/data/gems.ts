@@ -10,7 +10,7 @@ export const gems: Gem[] = [
     imageUrl: '/gradients/mobile/GV-Gradient-01.png',
     description: 'Revolutionary physicist who reshaped our understanding of space, time, and the universe.',
     chatCount: 250000,
-    category: 'Science',
+    category: 'science',
     title: 'The Father of Modern Physics',
     gradient: 'purple-pink',
     followers: 350000
@@ -22,7 +22,7 @@ export const gems: Gem[] = [
     imageUrl: '/gradients/mobile/GV-Gradient-02.png',
     description: 'Brilliant inventor who illuminated the world with AC power.',
     chatCount: 180000,
-    category: 'Innovation',
+    category: 'technology',
     title: 'The Master of Electricity',
     gradient: 'dark-light',
     followers: 280000
@@ -34,7 +34,7 @@ export const gems: Gem[] = [
     imageUrl: '/gradients/mobile/GV-Gradient-03.png',
     description: 'Pioneer in radioactivity research, first woman to win a Nobel Prize.',
     chatCount: 160000,
-    category: 'Science',
+    category: 'science',
     title: 'The Pioneer of Radioactivity',
     gradient: 'pink-purple',
     followers: 220000
@@ -46,15 +46,15 @@ export const gems: Gem[] = [
     imageUrl: '/gradients/mobile/GV-Gradient-04.png',
     description: 'Renaissance polymath spanning art and science.',
     chatCount: 300000,
-    category: 'Art',
+    category: 'arts',
     title: 'The Renaissance Master',
     gradient: 'light-dark',
     followers: 400000
   }
 ];
 
-export const getGemsByCategory = (category: string) => 
-  gems.filter(gem => gem.category.toLowerCase() === category.toLowerCase());
+export const getGemsByCategory = (category: string) =>
+  gems.filter(gem => gem.category?.toLowerCase() === category.toLowerCase());
 
 export const getGemById = (id: string) => 
   gems.find(gem => gem.id === id);
@@ -62,4 +62,6 @@ export const getGemById = (id: string) =>
 export const getCategorySection = () => 
   gems.slice(0, 4);
 
-export const getAllGems = () => gems;
+export const getAllGems = (): Gem[] => {
+  return gems;
+}
