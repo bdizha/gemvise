@@ -20,5 +20,13 @@ export interface SliderCardProps {
 
 export interface SliderProps {
   title: string;
-  cards: Array<Omit<SliderCardProps, 'transitionDelay'>>;
+  cards: {
+    href: string;
+    imageSrc?: string;
+    title: string;
+    description: string;
+    name: string;
+    chatCount: number;
+    followers: number;
+  }[];
 }

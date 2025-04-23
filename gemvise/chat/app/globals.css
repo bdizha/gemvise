@@ -5,6 +5,22 @@
 .swiper-button-prev,
 .swiper-button-next {
   color: white !important;
+  width: 44px !important;
+  height: 44px !important;
+  margin-top: -22px !important;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  display: none !important;
+}
+
+.swiper-button-prev svg,
+.swiper-button-next svg {
+  width: 24px !important;
+  height: 24px !important;
+  object-fit: contain !important;
+  transform-origin: center !important;
 }
 
 /* Base styles and theme variables */
