@@ -120,18 +120,34 @@ export const Hero: FC = () => {
                   >
                     {/* Content visible only when active - fade in */}
                     <div className={`
-                      relative z-10 p-6 text-foreground transition-opacity duration-300 ease-in-out
+                      relative z-10 p-6 text-foreground transition-opacity duration-300 ease-in-out text-center
                       ${isActive ? 'opacity-100 delay-300' : 'opacity-0'} 
                     `}>
-                      <h3 className="text-2xl font-bold mb-2 whitespace-nowrap">{world.name}</h3>
-                      <p className="text-sm mb-4 opacity-90 line-clamp-3">{world.description}</p>
+                      <h3 className="text-3xl font-bold mb-4 whitespace-nowrap text-white/90">{world.name}</h3>
+                      <p className="text-base mb-6 text-white/80 leading-relaxed max-w-md mx-auto">{world.description}</p>
                       {isActive && (
-                        <Link 
-                          href={`/worlds/${world.id}`} 
-                          className="inline-block rounded-full bg-foreground/10 hover:bg-foreground/20 px-4 py-1.5 text-xs font-medium transition-colors"
-                        >
-                          Explore World
-                        </Link>
+                        <div className="mt-4 relative max-w-md mx-auto">
+                          <div className="bg-background/10 backdrop-blur-md rounded-xl p-4 shadow-xl">
+                            <div className="relative">
+                              <div 
+                                className="min-h-[64px] max-h-[140px] w-full rounded-lg bg-white/5 p-4"
+                                style={{
+                                  boxShadow: '0 0 0 1px rgba(255, 255, 255, 0.1)',
+                                }}
+                              >
+                                <textarea
+                                  className="w-full min-h-[16px] bg-transparent border-none outline-none resize-none text-base text-white/90 placeholder:text-white/50 text-center"
+                                  placeholder={world.id === 'boldland' ? 'Embark your adventure...' :
+                                    world.id === 'nakaland' ? 'Discover anime legends...' :
+                                    world.id === 'naimland' ? 'Explore mystical realms...' :
+                                    'Journey through space...'}
+                                  rows={1}
+                                  style={{ height: 'auto' }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       )}
                     </div>
 
@@ -157,6 +173,7 @@ export const Hero: FC = () => {
                 tabs={tabData} 
                 activeTab={activeTab}
                 onChange={(tabId) => setActiveTab(tabId as TabName)}
+                className="space-x-2"
               />
             </div>
             {/* Wrap tabContent in a div with fixed height for 4 items */}

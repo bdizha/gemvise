@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
 
 const buttonVariants = cva(
-  'relative flex items-center justify-center font-medium transition-all duration-[0.4s] ease-out-cubic focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none shadow-[0px_0.5px_3px_0px_rgba(0,0,0,0.20)]',
+  'relative flex items-center justify-center font-medium transition-all duration-[0.4s] ease-out-cubic focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none',
   {
     variants: {
       variant: {
@@ -14,14 +14,14 @@ const buttonVariants = cva(
         secondary: 'bg-accent text-accent-foreground hover:bg-accent/90 focus:ring-accent',
         ghost: 'bg-transparent text-theme-foreground hover:bg-theme-hover focus:ring-primary',
         link: 'text-primary hover:underline focus:ring-primary bg-transparent',
-        tab: 'bg-transparent text-theme-foreground hover:bg-theme-hover focus:ring-primary rounded-full',
-        'tab-active': 'bg-theme-foreground text-theme-background hover:bg-theme-foreground/90 focus:ring-primary rounded-full'
+        tab: 'bg-white/10 text-white/80 hover:bg-white/30 focus:ring-primary focus:ring-offset-background',
+        'tab-active': 'bg-white/20 text-white hover:bg-white/30 focus:ring-primary focus:ring-offset-background'
       },
       size: {
-        default: 'h-12 px-6 rounded-full text-base',
-        sm: 'h-10 px-4 rounded-full text-sm',
-        lg: 'h-14 px-8 rounded-full text-lg',
-        icon: 'h-12 w-12 rounded-full p-0'
+        default: 'h-12 px-6 text-base rounded-full',
+        sm: 'h-10 px-4 text-sm rounded-full',
+        lg: 'h-14 px-8 text-lg rounded-full',
+        icon: 'h-12 w-12 p-0 rounded-full'
       }
     },
     defaultVariants: {
@@ -73,10 +73,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <Comp
+        ref={buttonRef}
         className={clsx(
-          buttonVariants({ variant, size, className })
+          buttonVariants({ variant, size, className }),
+          variant === 'tab-active' && 'active'
         )}
-        ref={ref}
         onClick={handleClick}
         disabled={disabled || isLoading}
         {...props}
