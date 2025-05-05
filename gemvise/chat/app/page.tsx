@@ -1,162 +1,127 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { type Gem } from '@/types/gems';
+import { Hero } from '@/components/home/Hero';
 import Section from '@/components/layout/Section';
-import CategorySection from '@/components/layout/Section/CategorySection';
-import { allGems } from '@/mocks/gems';
+import GridSlider from '@/components/layout/Grid/GridSlider';
+import { worlds } from '@/data/worlds';
 
-// Sample images for the carousel
-const carouselContent = [
-  {
-    src: '/icons/GV-LOGO-02-GOT-06.png',
-    alt: 'Gemvise AI Experts',
-    description: 'Connect, discover and create'
-  },
-  {
-    src: '/icons/GV-LOGO-02-GOT-07.png',
-    alt: 'Gemvise Knowledge Network',
-    description: 'Access a network of specialized knowledge'
-  },
-  {
-    src: '/icons/GV-LOGO-02-GOT-08.png',
-    alt: 'Gemvise Interactive Learning',
-    description: 'Learn through dynamic conversations'
-  }
-];
+// Process collections and gems for display
+// Helper function to get a random gradient image
+const getRandomGradient = () => {
+  const gradientNumbers = ['01', '02', '03', '05', '06', '07', '08', '09'];
+  const randomIndex = Math.floor(Math.random() * gradientNumbers.length);
+  return `/gradients/GV-Gradient-${gradientNumbers[randomIndex]}.png`;
+};
 
-const trendingGems = [
-  {
-    id: 'tim-ferriss',
-    title: 'Learn Languages & Life Hacks',
-    subtitle: 'with Tim Ferriss',
-    imageUrl: '/experts/tim-ferriss.jpg',
-    href: '/chat/tim-ferriss'
-  },
-  {
-    id: 'gary-vee',
-    title: 'Digital Marketing & Entrepreneurship',
-    subtitle: 'with Gary Vaynerchuk',
-    imageUrl: '/experts/gary-vee.jpg',
-    href: '/chat/gary-vee'
-  }
-];
+const processedWorlds = worlds.map(world => {
+  const collections = world.collections.map(collection => ({
+    href: `/world/${world.id}/collection/${collection.id}`,
+    imageSrc: `/gradients/named/GV-Gradient-${collection.type === 'Licensed' ? 'Purple-Pink' : 'Pink-Purple'}.png`,
+    title: collection.name,
+    description: `${collection.type} Collection`,
+    name: collection.name,
+    username: collection.type,
+    chatCount: collection.gems.length,
+    followers: 0,
+    likes: 0
+  }));
 
-const popularGems = [
-  {
-    id: 'warren-buffett',
-    title: 'Investment Strategies',
-    subtitle: 'with Warren Buffett',
-    imageUrl: '/experts/warren-buffett.jpg',
-    href: '/chat/warren-buffett'
-  },
-  {
-    id: 'michelle-obama',
-    title: 'Leadership & Empowerment',
-    subtitle: 'with Michelle Obama',
-    imageUrl: '/experts/michelle-obama.jpg',
-    href: '/chat/michelle-obama'
-  },
-  {
-    id: 'warren-buffett',
-    title: 'Investment Strategies',
-    subtitle: 'with Warren Buffett',
-    imageUrl: '/experts/warren-buffett.jpg',
-    href: '/chat/warren-buffett'
-  },
-  {
-    id: 'michelle-obama',
-    title: 'Leadership & Empowerment',
-    subtitle: 'with Michelle Obama',
-    imageUrl: '/experts/michelle-obama.jpg',
-    href: '/chat/michelle-obama'
-  }
-];
+  const gems = world.collections.flatMap(collection =>
+    collection.gems.map(gem => ({
+      href: `/chat/${gem.id}`,
+      imageSrc: getRandomGradient(),
+      title: gem.name || '',
+      description: `A ${gem.type} from ${collection.name}`,
+      name: gem.name || '',
+      username: gem.attributes.rarity || 'Common',
+      chatCount: 0,
+      followers: 0,
+      likes: gem.attributes.power || 0
+    }))
+  );
 
-const discoverGems = [
-  {
-    id: 'elon-musk',
-    title: 'Tech & Innovation',
-    subtitle: 'with Elon Musk',
-    imageUrl: '/experts/elon-musk.jpg',
-    href: '/chat/elon-musk'
-  },
-  {
-    id: 'gordon-ramsay',
-    title: 'Culinary Excellence',
-    subtitle: 'with Gordon Ramsay',
-    imageUrl: '/experts/gordon-ramsay.jpg',
-    href: '/chat/gordon-ramsay'
-  },
-  
-];
+  return {
+    id: world.id,
+    name: world.name,
+    collections,
+    gems
+  };
+});
+
+// Get legendary and mythic gems
+const legendaryGems = worlds.flatMap(world =>
+  world.collections.flatMap(collection =>
+    collection.gems
+      .filter(gem => gem.attributes.rarity === 'Legendary' || gem.attributes.rarity === 'Mythic')
+      .map(gem => ({
+        href: `/chat/${gem.id}`,
+        imageSrc: '/gradients/named/GV-Gradient-Purple-Pink-Purple.png',
+        title: gem.name || '',
+        description: `${gem.type} from ${collection.name}`,
+        name: gem.name || '',
+        username: gem.attributes.rarity || 'Legendary',
+        chatCount: 0,
+        followers: 0,
+        likes: gem.attributes.power || 0
+      }))
+  )
+).slice(0, 6);
+
+// Get powerful gems
+const powerfulGems = worlds.flatMap(world =>
+  world.collections.flatMap(collection =>
+    collection.gems
+      .filter(gem => gem.attributes.power && gem.attributes.power >= 90)
+      .map(gem => ({
+        href: `/chat/${gem.id}`,
+        imageSrc: '/gradients/named/GV-Gradient-Pink-Purple-Pink.png',
+        title: gem.name || '',
+        description: `Power Level ${gem.attributes.power}`,
+        name: gem.name || '',
+        username: 'Elite',
+        chatCount: 0,
+        followers: 0,
+        likes: gem.attributes.power || 0
+      }))
+  )
+).slice(0, 6);
 
 export default function Home() {
-  const router = useRouter();
-
-  const handleGemClick = (gem: Gem) => {
-    router.push(`/chat/${gem.id}`);
-  };
-
-  const handleSearch = (searchQuery: string) => {
-    if (!searchQuery) return;
-
-    const searchParams = new URLSearchParams();
-    searchParams.set('q', searchQuery);
-    router.push(`/search?${searchParams.toString()}`);
-  };
-
   return (
-    <div className="min-h-screen bg-">
+    <main className="flex-1 overflow-y-auto bg-gradient-dark">
+      <Hero />
+      
       <Section 
-        variant="hero"
-        title="Connect, discover and create AI personas"
-        description="Experience interactive story telling with AI personas"
-        gradient='dark'
-        trending={trendingGems}
-        popular={popularGems}
-        discover={discoverGems}
-        onSearch={handleSearch}
-        carouselContent={carouselContent}
-      />
-      {/* Category Sections */}
-      <CategorySection
-        title="Browse by Category"
-        description="Explore our diverse collection of AI personas"
-        categories={[
-          {
-            title: 'Latest News',
-            gems: allGems.filter(gem => gem?.category === 'Latest News')
-          },
-          {
-            title: 'Companion',
-            gems: allGems.filter(gem => gem?.category === 'Companion')
-          },
-          {
-            title: 'Unhinged Comedian',
-            gems: allGems.filter(gem => gem?.category === 'Unhinged Comedian')
-          },
-          {
-            title: 'Loyal Friend',
-            gems: allGems.filter(gem => gem?.category === 'Loyal Friend')
-          },
-          {
-            title: 'Homework Helper',
-            gems: allGems.filter(gem => gem?.category === 'Homework Helper')
-          },
-          {
-            title: 'Not a Doctor',
-            gems: allGems.filter(gem => gem?.category === 'Not a Doctor')
-          },
-          {
-            title: 'Not a Therapist',
-            gems: allGems.filter(gem => gem?.category === 'Not a Therapist')
-          }
-        ]}
-        onGemClick={handleGemClick}
-        className="py-12 lg:py-16"
-      />
-    </div>
+        title="Explore Worlds" 
+        description="Discover unique collections and characters across different worlds"
+        gradient="dark-light"
+      >
+        <div className="mx-auto w-full px-6 xl:max-w-7xl space-y-32">
+          {processedWorlds.map((world) => (
+            <div key={world.id} className="space-y-16">
+              <GridSlider
+                title={`Collections from ${world.name}`}
+                cards={world.collections}
+              />
+              
+              <GridSlider
+                title={`Characters from ${world.name}`}
+                cards={world.gems}
+              />
+            </div>
+          ))}
+          
+          <GridSlider
+            title="Legendary & Mythic Characters"
+            cards={legendaryGems}
+          />
+          
+          <GridSlider
+            title="Elite Characters"
+            cards={powerfulGems}
+          />
+        </div>
+      </Section>
+    </main>
   );
 }

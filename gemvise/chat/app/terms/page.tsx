@@ -9,7 +9,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-2xl font-bold mb-4">Agreement to Terms</h2>
           <p>
-            By accessing or using Gemvise, you agree to be bound by these Terms of Service and all applicable laws and regulations.
+            By accessing or using Gemium, you agree to be bound by these Terms of Service and all applicable laws and regulations.
           </p>
         </section>
 
@@ -52,7 +52,7 @@ export default function TermsPage() {
         <section>
           <h2 className="text-2xl font-bold mb-4">Contact</h2>
           <p>
-            For any questions about these Terms of Service, please contact us at terms@Gemvise.com
+            For any questions about these Terms of Service, please contact us at terms@Gemium.com
           </p>
         </section>
       </div>

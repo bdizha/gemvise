@@ -8,7 +8,7 @@ const benefits = [
   {
     emoji: '🩺',
     title: 'Comprehensive Health Coverage',
-    description: 'Top-notch health, dental, and vision insurance for you and your family, with a significant portion of the premium covered by Gemvise.'
+    description: 'Top-notch health, dental, and vision insurance for you and your family, with a significant portion of the premium covered by Gemium.'
   },
   {
     emoji: '💰',
@@ -27,7 +27,7 @@ const benefits = [
   }
 ];
 
-const whyGemvise = [
+const whyGemium = [
   {
     title: 'Innovate at the Intersection',
     description: 'Tackle unique challenges blending Large Language Models, user experience, blockchain integration, and scalable backend systems.'
@@ -57,7 +57,7 @@ export default function CareersPage() {
       <Section
         variant={"gradient" as SectionVariant}
         title="Build the Future of Interactive Entertainment & Creator Economies"
-        description="At Gemvise, we're pioneering the next generation of human-computer interaction. We blend cutting-edge AI with the power of blockchain to create not just engaging experiences, but sustainable ecosystems that reward creativity."
+        description="At Gemium, we're pioneering the next generation of human-computer interaction. We blend cutting-edge AI with the power of blockchain to create not just engaging experiences, but sustainable ecosystems that reward creativity."
       >
         <div className="flex justify-center mt-8">
           <button className="bg-button-primary text-background hover:bg-button-primary-hover px-8 py-3 rounded-md">
@@ -66,12 +66,12 @@ export default function CareersPage() {
         </div>
       </Section>
 
-      {/* Why Gemvise Section */}
+      {/* Why Gemium Section */}
       <Section
         variant={"values" as SectionVariant}
-        title="Why Gemvise?"
+        title="Why Gemium?"
         description="Join us in shaping the future of AI interaction and creator economies"
-        values={whyGemvise}
+        values={whyGemium}
       />
 
       {/* Benefits Section */}
@@ -101,7 +101,7 @@ export default function CareersPage() {
             View Open Positions
           </button>
           <button className="border border-button-primary text-button-primary hover:bg-button-primary hover:text-background px-8 py-3 rounded-md">
-            Learn More About Gemvise
+            Learn More About Gemium
           </button>
         </div>
       </Section>

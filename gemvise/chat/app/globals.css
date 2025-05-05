@@ -204,7 +204,32 @@
   }
 }
 
+/* Light Theme Gradients */
+.bg-gradient-light {
+  background-image: url('/gradients/desktop/GV-Gradient-Light.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-gradient-light-dark {
+  background-image: url('/gradients/desktop/GV-Gradient-Light-Dark.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-gradient-light-dark-light {
+  background-image: url('/gradients/desktop/GV-Gradient-Light-Dark-Light.png');
+  background-size: cover;
+  background-position: center;
+}
+
 /* Dark Theme Gradients */
+.bg-gradient-dark {
+  background-image: url('/gradients/desktop/GV-Gradient-Dark.png');
+  background-size: cover;
+  background-position: center;
+}
+
 .dark {
   .bg-gradient-dark-light {
     background-image: url('/gradients/desktop/GV-Gradient-Dark-Light.png');

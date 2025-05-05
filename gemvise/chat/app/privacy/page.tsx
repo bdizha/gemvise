@@ -9,7 +9,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-2xl font-bold mb-4">Your Privacy Matters</h2>
           <p>
-            At Gemvise, we take your privacy seriously. This policy outlines how we collect, use, and protect your personal information.
+            At Gemium, we take your privacy seriously. This policy outlines how we collect, use, and protect your personal information.
           </p>
         </section>
 
@@ -52,7 +52,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
           <p>
-            For any privacy-related concerns, please contact us at privacy@Gemvise.com
+            For any privacy-related concerns, please contact us at privacy@Gemium.com
           </p>
         </section>
       </div>

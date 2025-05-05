@@ -1,4 +1,4 @@
-# GemVise Specification
+# Gemium Specification
 
 ## Technical Configuration
 

@@ -1,119 +1,68 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { getAllGems } from '@/data/gems';
+import { useRouter } from 'next/navigation';
 import Section from '@/components/layout/Section';
-import CategoryTabs from '@/components/ui/CategoryTabs';
-import InterestsModal from '@/components/auth/InterestsModal';
+import GridList from '@/components/layout/Grid/GridList';
 import { type Gem } from '@/types/gems';
-
+import { type GridItem } from '@/components/layout/Grid/types';
+import { useCallback } from 'react';
 export default function ExplorePage() {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [showInterestsModal, setShowInterestsModal] = useState(false);
-  const [filteredGems, setFilteredGems] = useState<Gem[]>([]);
+  const router = useRouter();
   const [gems, setGems] = useState<Gem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const savedInterests = localStorage.getItem('userInterests');
-    const allGems = getAllGems();
-
-    if (!savedInterests) {
-      setShowInterestsModal(true);
-      if (Array.isArray(allGems)) {
-        setGems(allGems);
-        setFilteredGems(allGems);
-      }
-    } else {
+    const fetchGems = async () => {
       try {
-        const parsed = JSON.parse(savedInterests);
-        if (Array.isArray(parsed)) {
-          setSelectedCategories(parsed);
-          if (Array.isArray(allGems)) {
-            setGems(allGems);
-            const filtered = parsed.length > 0
-              ? allGems.filter(gem => gem.category && parsed.includes(gem.category))
-              : allGems;
-            setFilteredGems(filtered);
-          }
-        }
+        const response = await fetch('/api/gems');
+        const data = await response.json();
+        setGems(data);
       } catch (error) {
-        console.error('Failed to parse user interests:', error);
-        setShowInterestsModal(true);
-        if (Array.isArray(allGems)) {
-          setGems(allGems);
-          setFilteredGems(allGems);
-        }
+        console.error('Error fetching gems:', error);
+      } finally {
+        setIsLoading(false);
       }
-    }
+    };
+
+    fetchGems();
   }, []);
 
-  useEffect(() => {
-    const filtered = selectedCategories.length > 0
-      ? gems.filter((gem: Gem) => gem.category && selectedCategories.includes(gem.category))
-      : gems;
-    setFilteredGems(filtered);
-  }, [selectedCategories, gems]);
+  const handleGemClick = useCallback((gemId: string) => {
+    router.push(`/chat/${gemId}`);
+  }, [router]);
 
-  const handleToggleCategory = (categoryId: string) => {
-    setSelectedCategories(prev =>
-      prev.includes(categoryId)
-        ? prev.filter(id => id !== categoryId)
-        : [...prev, categoryId]
-    );
-  };
-
-  const handleGemClick = (gem: Gem) => {
-    // Navigate to gem's chat page
-    window.location.href = `/chat/${gem.id}`;
-  };
-
-  const handleInterestsComplete = (interests: string[]) => {
-    localStorage.setItem('userInterests', JSON.stringify(interests));
-    setSelectedCategories(interests);
-    setShowInterestsModal(false);
-  };
+  const gridItems: GridItem[] = gems.map(gem => ({
+    id: gem.id,
+    title: gem.name,
+    description: gem.description || '',
+    onClick: () => handleGemClick(gem.id)
+  }));
 
   return (
-    <div className="min-h-screen bg-gradient-dark-light text-white">
-    <div className="relative mx-auto max-w-[1074px] xs:py-12 sm:py-24 lg:py-12 overflow-hidden rounded-[40px] mb-16">
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <main className="min-h-screen bg-white dark:bg-gray-900">
+      <Section
+        variant="default"
+        tag="Explore"
+        title="Discover Gems"
+        description="Find your perfect match from our curated collection of AI personas."
+        className="py-20"
+      >
         <div className="mt-8">
-          <CategoryTabs
-            selectedCategories={selectedCategories}
-            onToggle={handleToggleCategory}
-            showIcons={false}
-          />
+          {isLoading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div 
+                  key={`skeleton-${index}`}
+                  className="flex flex-col gap-4 p-6 rounded-2xl bg-gray-100 dark:bg-gray-800 animate-pulse h-[200px]"
+                />
+              ))}
+            </div>
+          ) : (
+            <GridList items={gridItems} />
+          )}
         </div>
-
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredGems.map((gem: Gem) => (
-            <motion.div
-              key={gem.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => handleGemClick(gem)}
-              className={`rounded-[32px] border border-white/10 p-6 cursor-pointer hover:border-white/20 transition-colors bg-gradient-${gem.gradient}`}
-            >
-              <h3 className="text-lg font-semibold">{gem.name}</h3>
-              <p className="mt-2 text-sm text-white/60">{gem.description}</p>
-              {gem.category && (
-                <span className="mt-2 inline-block rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white/80">
-                  {gem.category}
-                </span>
-              )}
-            </motion.div>
-          ))}
-        </div>
-
-        <InterestsModal
-          isOpen={showInterestsModal}
-          onClose={() => setShowInterestsModal(false)}
-          onComplete={handleInterestsComplete}
-        />
-      </div>
-    </div>
-    </div>
+      </Section>
+    </main>
   );
 }

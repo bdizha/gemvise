@@ -459,4 +459,4 @@
 
 ***
 
-This list provides over 440 figures, exceeding the target of 384, with brief summaries covering their significance within the specified eras. It offers a diverse range of personalities from various fields to populate GemVise.
+This list provides over 440 figures, exceeding the target of 384, with brief summaries covering their significance within the specified eras. It offers a diverse range of personalities from various fields to populate Gemium.

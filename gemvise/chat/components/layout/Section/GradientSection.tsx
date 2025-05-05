@@ -2,13 +2,12 @@
 
 import * as React from 'react';
 import { SectionProps } from './types';
-
-// Define the available gradient themes
-export type GradientTheme = 'dark' | 'dark-light' | 'light-dark' | 'dark-light-dark' | 'light-dark-light' | 'dark-light-dark-long' | 'pink-purple' | 'pink-purple-pink' | 'purple-pink' | 'purple-pink-purple';
+import { type GradientTheme } from '@/types/gradients';
 
 // Define props for the GradientSection component
-export interface GradientSectionProps extends SectionProps {
+export interface GradientSectionProps extends Omit<SectionProps, 'theme' | 'gradient'> {
   theme?: GradientTheme;
+  gradient?: GradientTheme;
   isHero?: boolean;
 }
 
@@ -20,17 +19,18 @@ const GradientSection = (props: GradientSectionProps) => {
     className = '', 
     children,
     theme = 'dark',
+    gradient = 'dark-light-dark',
     isHero = false
   } = props;
 
-  // Determine which gradient type to use based on isHero prop
-  const gradientType = isHero ? 'bg-gradient-hero' : 'bg-gradient-regular';
+  // Use gradient prop if provided, otherwise fall back to theme
+  const gradientTheme = gradient || theme;
 
   return (
-    <div className="relative">
+    <div className={`relative ${className}`}>
       {/* Background gradient */}
       <div 
-        className={`pointer-events-none absolute left-0 top-0 z-0 h-full w-full ${gradientType} theme-${theme}`}
+        className={`pointer-events-none absolute left-0 top-0 z-0 h-full w-full bg-gradient-${gradientTheme}`}
       />
 
       {/* Content */}

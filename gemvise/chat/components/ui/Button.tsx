@@ -5,22 +5,23 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
 
 const buttonVariants = cva(
-  'relative flex items-center justify-center text-sm font-medium transition-all duration-[0.4s] ease-out-cubic focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none shadow-[0px_0.5px_3px_0px_rgba(0,0,0,0.20)]',
+  'relative flex items-center justify-center font-medium transition-all duration-[0.4s] ease-out-cubic focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none shadow-[0px_0.5px_3px_0px_rgba(0,0,0,0.20)]',
   {
     variants: {
       variant: {
-        default: 'bg-[#1D1B1A] text-[#F4EFED] border border-solid hover:bg-[#ffffff] hover:text-[#1D1B1A] focus:ring-[#0972d3]',
-        primary: 'bg-[#1D1B1A] text-[#F4EFED] border border-solid hover:bg-[#ffffff] hover:text-[#1D1B1A] focus:ring-[#0972d3]',
-        secondary: 'bg-[#1D1B1A] text-[#F4EFED] border border-solid hover:bg-[#ffffff] hover:text-[#1D1B1A] focus:ring-[#0972d3]',
-        ghost: 'bg-transparent text-[#0f1111] dark:text-white hover:bg-[#f7fafa] dark:hover:bg-[#2f3f4f] focus:ring-[#0972d3]',
-        link: 'text-[#0972d3] hover:underline focus:ring-[#0972d3] bg-transparent',
-        icon: 'relative flex h-10 w-10 items-center justify-center rounded-lg bg-transparent text-[#0f1111] dark:text-white hover:bg-[#f7fafa] dark:hover:bg-[#2f3f4f] transition-colors'
+        default: 'bg-theme-background text-theme-foreground border border-solid hover:bg-theme-foreground hover:text-theme-background focus:ring-primary',
+        primary: 'bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-primary',
+        secondary: 'bg-accent text-accent-foreground hover:bg-accent/90 focus:ring-accent',
+        ghost: 'bg-transparent text-theme-foreground hover:bg-theme-hover focus:ring-primary',
+        link: 'text-primary hover:underline focus:ring-primary bg-transparent',
+        tab: 'bg-transparent text-theme-foreground hover:bg-theme-hover focus:ring-primary rounded-full',
+        'tab-active': 'bg-theme-foreground text-theme-background hover:bg-theme-foreground/90 focus:ring-primary rounded-full'
       },
       size: {
-        default: 'h-[56px] px-6 rounded-[24px] text-[17px]',
-        sm: 'h-[48px] px-5 rounded-[20px] text-[15px]',
-        lg: 'h-[64px] px-7 rounded-[28px] text-[19px]',
-        icon: 'h-[56px] w-[56px] rounded-[24px] text-[17px]'
+        default: 'h-12 px-6 rounded-full text-base',
+        sm: 'h-10 px-4 rounded-full text-sm',
+        lg: 'h-14 px-8 rounded-full text-lg',
+        icon: 'h-12 w-12 rounded-full p-0'
       }
     },
     defaultVariants: {

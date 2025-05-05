@@ -1,85 +1,117 @@
 'use client';
 
 import Link from 'next/link';
+import { Logo } from '../shared/Logo';
+import { Icon } from '../shared/Icon';
+import Funnel from './Funnel';
 
+interface Link {
+  name: string;
+  href: string;
+  label?: string;
+}
 
-const mainLinks = [
-  { name: 'Discover', href: '/discover' },
-  { name: 'Create', href: '/create' },
-  { name: 'Unleash', href: '/unleash' },
-  { name: 'Luminus', href: '/blog' },
-  { name: 'GemLabs', href: '/research' },
-  { name: 'About', href: '/about' },
+interface Social extends Link {
+  icon: (props: React.ComponentProps<'svg'>) => JSX.Element;
+}
+
+const links: Link[] = [
+  { name: 'Discover', href: '/discover', label: 'Discover' },
+  { name: 'Explore', href: '/explore', label: 'Explore' },
+  { name: 'Research', href: '/research', label: 'Research' },
+  { name: 'Blog', href: '/blog', label: 'Blog' },
+  { name: 'About', href: '/about', label: 'About' },
+  { name: 'Privacy', href: '/privacy', label: 'Privacy Policy' },
+  { name: 'Terms', href: '/terms', label: 'Terms of Service' },
 ];
 
-const legalLinks = [
-  { name: 'Privacy Policy', href: '/privacy' },
-  { name: 'Terms of Service', href: '/terms' },
+const socials: Social[] = [
+  { 
+    name: 'Twitter',
+    href: 'https://twitter.com/gemium',
+    label: 'Follow on Twitter',
+    icon: (props) => (
+      <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+      </svg>
+    ),
+  },
 ];
 
 export default function Footer() {
   return (
-    <footer className="relative w-full mt-auto font-geist">
-      <div className="relative w-full overflow-hidden">
-        {/* Modern conic gradient effect */}
-        <div className="footer-gradient-container">
-          <div className="footer-gradient-content">
-            {/* Gradient effect */}
-            <div className="footer-gradient-effect">
-              <div className="footer-gradient-left"></div>
-              <div className="footer-gradient-right"></div>
+    <footer 
+      className="group relative py-12 px-6 md:px-12 lg:px-24 overflow-hidden bg-gradient-dark-light dark:bg-gradient-dark-light"
+     
+    >
+      <div 
+        className="absolute bottom-0 left-0 w-full h-full opacity-[0.08] hidden lg:block transition-transform duration-[2000ms] ease-in-out group-hover:scale-[10]"
+      >
+        <Funnel imageUrl="/icons/Dark-Footer.png" /> 
+      </div>
+      {/* Darkening Overlay */}
+      <div className="absolute inset-0 bg-black dark:bg-black/0 z-0"></div>
+      
+      <div className="container mx-auto relative z-10"> 
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-24">
+          {/* Navigation */}
+          <div className="flex flex-col gap-16">
+            <div className="flex flex-col gap-6 sm:gap-8 lg:gap-12 md:flex-row md:items-center md:justify-between">
+              {/* Logo */}
+              <div className="flex items-center gap-6 sm:gap-8 lg:gap-12">
+                <Link href="/" className="flex-none">
+                  <Logo variant="footer" className="text-primary" />
+                </Link>
+              </div>
+              {/* Links */}
+              <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm font-medium">
+                {links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="transition text-muted hover:text-foreground"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
             </div>
-            
-            {/* Footer content */}
-            <div className="relative w-full flex grow items-center justify-start z-20 pt-16 pb-16 md:pb-32">
-              <div className="w-full space-y-16 sm:space-y-32">
-                <div className="flex flex-col items-center space-y-8">
-                  {/* Main Links */}
-                  <nav className="flex justify-center gap-8 flex-wrap">
-                    {mainLinks.map((link) => (
-                      <Link
-                        key={link.name}
-                        href={link.href}
-                        className="text-sm font-medium bg-clip-text text-transparent bg-gradient-to-r from-stone-700 to-stone-900 hover:from-stone-900 hover:to-stone-950 dark:from-stone-300 dark:to-stone-100 dark:hover:from-stone-100 dark:hover:to-white transition-all hover:underline"
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
-                  </nav>
-                  
-                  {/* Legal Links */}
-                  <nav className="flex justify-center gap-8">
-                    {legalLinks.map((link) => (
-                      <Link
-                        key={link.name}
-                        href={link.href}
-                        className="text-sm font-light bg-clip-text text-transparent bg-gradient-to-r from-stone-600 to-stone-800 hover:from-stone-800 hover:to-stone-900 dark:from-stone-400 dark:to-stone-200 dark:hover:from-stone-200 dark:hover:to-white transition-all hover:underline"
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
-                  </nav>
+
+            {/* Bottom Section */}
+            {socials.length > 0 && (
+            <div className="flex flex-col gap-6 sm:gap-8 lg:gap-12 md:flex-row md:items-center md:justify-between">
+              <div className="flex flex-col items-start gap-6 sm:gap-8 lg:gap-12 md:flex-row">
+                <div className="flex gap-6">
+                  {socials.map((social) => (
+                    <Link
+                      key={social.href}
+                      href={social.href}
+                      className="group"
+                      aria-label={social.label}
+                    >
+                      <social.icon className="h-6 w-6 transition text-muted group-hover:text-foreground" />
+                    </Link>
+                  ))}
                 </div>
-                
-                {/* Copyright and additional info */}
-                <div className="flex items-end justify-between gap-6 py-10 z-10 lg:min-h-[100px]">
-                  <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="size-6 my-2">
-                      <path fillRule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v16.19l6.22-6.22a.75.75 0 1 1 1.06 1.06l-7.5 7.5a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 1 1 1.06-1.06l6.22 6.22V3a.75.75 0 0 1 .75-.75Z" clipRule="evenodd"></path>
-                    </svg>
-                  </div>
-                  <div className="flex flex-col items-end gap-6 sm:gap-8 lg:gap-12 md:flex-row">
-                    <div className="max-w-lg text-stone-700 dark:text-stone-300 font-light tracking-wide">
-                      GemVise: Crafting the future of AI character interaction. Bringing imagination to life through advanced technology, community collaboration, and creator empowerment.
-                    </div>
-                  </div>
+              </div>
+              <div className="flex flex-col items-end gap-6 sm:gap-8 lg:gap-12 md:flex-row">
+                <div className="max-w-lg">
+                  <p className="mt-2 font-light italic text-muted">
+                    Casting the future of role play entertainment
+                  </p>
                 </div>
               </div>
             </div>
+
+            )}
+
+            {/* Copyright */}
+            <div className="flex flex-col items-center justify-between gap-6 sm:gap-8 lg:gap-12 md:flex-row border-t border-border pt-8">
+              <p className="text-sm text-muted">
+                &copy; {new Date().getFullYear()} Gemium. All rights reserved.
+              </p>
+            </div>
           </div>
-          
-          {/* Fallback gradient image for browsers that don't support conic-gradient */}
-          <div className="footer-gradient-image"></div>
         </div>
       </div>
     </footer>

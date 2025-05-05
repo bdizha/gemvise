@@ -20,13 +20,16 @@ export interface SliderCardProps {
 
 export interface SliderProps {
   title: string;
-  cards: {
+  cards: Array<{
     href: string;
     imageSrc?: string;
     title: string;
     description: string;
     name: string;
+    username: string;
     chatCount: number;
     followers: number;
-  }[];
+    likes?: number;
+    fire?: number;
+  }>;
 }

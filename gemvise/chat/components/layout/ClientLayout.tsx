@@ -23,7 +23,12 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-gradient-dark">
-      <Header onToggleSidebar={handleToggleSidebar} onToggleTheme={handleToggleTheme} theme={theme || 'dark'} />
+      <Header 
+        onToggleSidebar={handleToggleSidebar} 
+        onToggleTheme={handleToggleTheme} 
+        theme={theme || 'dark'} 
+        isSidebarOpen={isSidebarOpen}
+      />
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       <main 
         className={`
@@ -31,7 +36,7 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
           pt-16 
           transition-all 
           duration-200 
-          ${isSidebarOpen ? 'pl-64' : 'pl-0'}
+          ${isSidebarOpen ? 'lg:pl-64' : 'pl-0'}
         `}
       >
         <div className="mx-auto w-full">

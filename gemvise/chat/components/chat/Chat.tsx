@@ -19,8 +19,8 @@ const Chat = () => {
     setLoading(true);
 
     try {
-      // Here we'll integrate with GemVise
-      const response = "This is a placeholder response. GemVise integration coming soon!";
+      // Here we'll integrate with Gemium
+      const response = "This is a placeholder response. Gemium integration coming soon!";
       const assistantMessage: Message = { role: 'assistant', content: response };
       setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {

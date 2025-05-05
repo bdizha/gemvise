@@ -7,38 +7,51 @@ import { useTheme } from 'next-themes';
 
 interface LogoProps {
   variant?: 'header' | 'sidebar' | 'footer';
-  showText?: boolean;
+  className?: string;
+  isSidebarOpen?: boolean;
 }
 
-export const Logo = ({ variant = 'header', showText = true }: LogoProps): JSX.Element => {
+export const Logo = ({ variant = 'header', className = '', isSidebarOpen }: LogoProps): JSX.Element => {
   const { theme } = useTheme();
   
   const containerClasses = {
     header: 'flex items-center gap-2',
-    sidebar: 'flex items-center space-x-2 lg:hidden', // Hide on large screens
+    sidebar: 'flex items-center space-x-2', 
     footer: 'flex items-center gap-2'
   };
 
+  // Determine the icon source based on variant and theme
+  const getIconSrc = () => {
+    if (variant === 'footer') {
+      return theme === 'light' ? '/icons/Dark-Square.png' : '/icons/Dark-Square.png';
+    } else if (variant === 'sidebar' || isSidebarOpen) {
+      return theme === 'light' ? '/logos/Dark.png' : '/logos/Light.png';
+    } else {
+      return theme === 'light' ? '/icons/Dark.png' : '/icons/Light.png';
+    }
+  };
+
+  // Determine dimensions based on variant
+  const getDimensions = () => {
+    if (variant === 'sidebar' || isSidebarOpen || variant === 'footer') {
+      return { width: 96, height: 18 };
+    } else {
+      return { width: 32, height: 32 };
+    }
+  };
+
+  const dimensions = getDimensions();
+
   return (
-    <Link href="/" className={containerClasses[variant]}>
+    <Link href="/" className={`${containerClasses[variant]} ${className}`}>
       <Image
-        src={theme === 'light' ? '/icons/ICON-DARK.png' : '/icons/ICON-WHITE.png'}
-        alt="GemVise Icon"
-        width={32}
-        height={32}
-        priority
+        src={getIconSrc()}
+        alt="Gemium Logo"
+        width={dimensions.width}
+        height={dimensions.height}
+        // priority
         className="object-contain"
       />
-      {showText && (
-        <Image
-          src={theme === 'light' ? '/logos/LOGO-DARK.png' : '/logos/LOGO-WHITE.png'}
-          alt="GemVise Logo"
-          width={32}
-          height={25}
-          priority
-          className="object-contain"
-        />
-      )}
     </Link>
   );
 };

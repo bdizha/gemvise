@@ -44,6 +44,7 @@ export interface SectionProps extends BaseSectionProps {
   discover?: GemCard[];
   values?: Array<{ title: string; description: string }>;
   theme?: GradientTheme;
+  gradient?: GradientTheme;
   isHero?: boolean;
   gems?: Gem[];
   onGemClick?: (gem: Gem) => void;

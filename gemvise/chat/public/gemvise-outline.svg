@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="800px" height="300px" viewBox="0 0 800 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>GemVise Outline</title>
+    <title>Gemium Outline</title>
     <g stroke="currentColor" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
         <!-- G -->
         <path d="M120,80 C90,80 65,105 65,135 C65,165 90,190 120,190 C150,190 175,165 175,135 L175,125 L120,125"></path>

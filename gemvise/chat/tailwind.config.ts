@@ -30,30 +30,52 @@ const config: Config = {
         'rotate-negative-360': 'rotate-negative-360 8s linear infinite',
       },
       colors: {
-        primary: {
-          DEFAULT: '#ff9900', // AWS Orange
-          hover: '#ffac31',
-          active: '#e88b00',
-          text: '#ffffff',
+        gemvise: {
+          dark: {
+            DEFAULT: '#030303',  
+            100: '#050505',  
+            200: '#262626',  
+            300: '#535353',  
+            400: '#606060',  
+            500: '#7d7d7d',  
+          },
+          light: {
+            DEFAULT: '#f3f6f9',  
+            100: '#ffffff',  
+            200: '#f9f9f9',  
+            300: '#ded9d7',  
+            400: '#cfcfcf',  
+            500: '#a6a6a6',  
+          }
         },
         background: {
-          light: '#ffffff',
-          dark: '#232f3e',
+          light: 'var(--background)', 
+          dark: 'var(--background)', 
           hover: {
-            light: '#f7fafa',
-            dark: '#2f3f4f',
+            light: 'var(--hover-background)', 
+            dark: 'var(--hover-background)', 
           },
+          subtle: {
+            light: 'var(--background-subtle, var(--background))',
+            dark: 'var(--background-subtle, var(--background))',
+          }
         },
         border: {
-          light: '#d5d9d9',
-          dark: '#3f4b58',
+          light: 'var(--border-color)', 
+          dark: 'var(--border-color)', 
         },
         text: {
-          light: '#0f1111',
-          dark: '#ffffff',
-          muted: '#5f6b7a',
+          light: 'var(--foreground)', 
+          dark: 'var(--foreground)', 
+          muted: {
+             light: 'var(--muted-foreground)', 
+             dark: 'var(--muted-foreground)', 
+          },
+          subtle: {
+             light: 'var(--text-subtle, var(--muted-foreground))',
+             dark: 'var(--text-subtle, var(--muted-foreground))',
+          }
         },
-        // Theme variables
         'theme-background': 'var(--background)',
         'theme-foreground': 'var(--foreground)',
         'theme-primary': 'var(--primary)',
@@ -68,10 +90,13 @@ const config: Config = {
       backgroundImage: {
         'gradient-dark-light': "url('/gradients/named/GV-Gradient-Dark-Light.png')",
         'gradient-dark-light-dark': "url('/gradients/named/GV-Gradient-Dark-Light-Dark.png')",
-        'gradient-purple-pink': "url('/gradients/named/GV-Gradient-Purple-Pink.png')",
-        'gradient-pink-purple': "url('/gradients/named/GV-Gradient-Pink-Purple.png')",
+        'gradient-purple-pink': "linear-gradient(to right, #8A2BE2, #FF69B4)",
+        'gradient-pink-purple': "linear-gradient(to right, #FF69B4, #8A2BE2)",
         'gradient-purple-pink-purple': "url('/gradients/named/GV-Gradient-Purple-Pink-Purple.png')",
         'gradient-pink-purple-pink': "url('/gradients/named/GV-Gradient-Pink-Purple-Pink.png')",
+        'gradient-cyan-blue': 'linear-gradient(to right, #22d3ee, #3b82f6)',
+        'gradient-blue-purple': 'linear-gradient(to right, #3b82f6, #a855f7)',
+        'gradient-pink-orange': 'linear-gradient(to right, #ec4899, #f97316)',
       },
       backgroundClip: {
         text: 'text',
@@ -86,7 +111,6 @@ const config: Config = {
   },
   plugins: [
     plugin(({ addUtilities, addBase }) => {
-      // Add scrollbar-hide utility
       addUtilities({
         '.scrollbar-hide': {
           '-ms-overflow-style': 'none',
@@ -143,7 +167,6 @@ const config: Config = {
       };
       addUtilities(newUtilities);
       
-      // Border styles are handled in globals.css
     }),
   ],
 };

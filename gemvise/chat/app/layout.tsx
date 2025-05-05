@@ -9,7 +9,7 @@ import { ThemeProvider } from 'next-themes';
 import ClientLayout from '@/components/layout/ClientLayout';
 
 export const metadata = {
-  title: 'Gemvise - Unleash Your Potential',
+  title: 'Gemium - Unleash Your Potential',
   description: 'Discover and learn from the greatest minds in history.',
 };
 

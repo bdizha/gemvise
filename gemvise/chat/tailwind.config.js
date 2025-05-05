@@ -7,6 +7,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        dash: {
+          to: {
+            strokeDashoffset: '-6'
+          }
+        }
+      },
       colors: {
         primary: 'var(--primary)',
         background: 'var(--background)',

@@ -9,46 +9,107 @@ export interface Gem {
    * Unique identifier for the Gem.
    */
   id: string;
+
   /**
    * Name of the Gem.
    */
-  name?: string;
-  /**
-   * Title of the Gem.
-   */
-  title: string;
+  name: string;
+
   /**
    * Description of the Gem.
    */
-  description?: string;
+  description: string;
+
+  /**
+   * Genres associated with the Gem.
+   */
+  genres: string[];
+
+  /**
+   * Type of the Gem.
+   */
+  type: 'Character' | 'Story' | 'Adventure';
+
+  /**
+   * World that the Gem belongs to.
+   */
+  world: string;
+
+  /**
+   * Attributes of the Gem.
+   */
+  attributes: {
+    power: number;
+    rarity: 'Legendary' | 'Epic' | 'Mythic';
+    level: number;
+    traits: string[];
+  };
+
+  /**
+   * Optional casting information for character Gems.
+   */
+  casting?: {
+    id: string;
+    name: string;
+    role: string;
+    description: string;
+  }[];
+
+  /**
+   * Username for the Gem (for interactive characters).
+   */
+  username?: string;
+
+  /**
+   * Title of the Gem (for interactive characters).
+   */
+  title?: string;
+
   /**
    * Category of the Gem.
    */
   category?: string;
+
   /**
    * URL of the Gem's image.
    */
-  imageUrl: string;
+  imageUrl?: string;
+
   /**
    * Tailwind CSS gradient class for the Gem's background.
    */
   gradient?: string;
+
   /**
    * List of expertise areas.
    */
   expertise?: string[];
+
   /**
    * Number of followers.
    */
   followers?: number;
+
   /**
    * Number of chat interactions.
    */
   chatCount?: number;
+
+  /**
+   * Number of likes received.
+   */
+  likes?: number;
+
+  /**
+   * Number of fire reactions received.
+   */
+  fire?: number;
+
   /**
    * Subtitle for the Gem.
    */
   subtitle?: string;
+
   /**
    * URL to navigate to when the Gem is clicked.
    */

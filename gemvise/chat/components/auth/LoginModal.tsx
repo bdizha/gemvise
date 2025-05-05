@@ -39,7 +39,7 @@ const LoginModal = ({ onClose, onLogin }: LoginModalProps) => {
         </button>
 
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold mb-2 text-grey-900 dark:text-grey-50">Welcome to GemVise</h2>
+          <h2 className="text-2xl font-bold mb-2 text-grey-900 dark:text-grey-50">Welcome to Gemium</h2>
           <p className="text-grey-600 dark:text-grey-400">Connect with unique gems and personalities</p>
         </div>
 
