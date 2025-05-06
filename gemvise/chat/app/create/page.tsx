@@ -166,7 +166,7 @@ export default function CreatePage() {
                 </div>
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                   <div className="max-w-xl space-y-12">
-                    <h2 className="text-balance text-3xl md:text-4xl lg:text-5xl tracking-tight">
+                    <h2 className="text-balance text-2xl md:text-4xl lg:text-5xl tracking-tight">
                       Create powerful AI gems with Gemium
                     </h2>
                   </div>
@@ -190,7 +190,7 @@ export default function CreatePage() {
               </div>
               <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
                 <div className="max-w-xl space-y-12">
-                  <h2 className="text-balance text-3xl md:text-4xl lg:text-5xl tracking-tight">
+                  <h2 className="text-balance text-2xl md:text-4xl lg:text-5xl tracking-tight">
                     Engage in natural conversations
                   </h2>
                 </div>

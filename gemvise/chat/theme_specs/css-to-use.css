@@ -1446,7 +1446,7 @@ button[data-focused=true]:not([data-focus-visible=true]) {
     border-radius: .25rem
 }
 
-.rounded-2xl {
+.rounded-[4rem] {
     border-radius: 1rem
 }
 
@@ -1458,11 +1458,11 @@ button[data-focused=true]:not([data-focus-visible=true]) {
     border-radius: 9999px
 }
 
-.rounded-lg {
+.rounded-[1.5rem] {
     border-radius: .5rem
 }
 
-.rounded-md {
+.rounded-[1rem] {
     border-radius: .375rem
 }
 
@@ -1470,11 +1470,11 @@ button[data-focused=true]:not([data-focus-visible=true]) {
     border-radius: 0
 }
 
-.rounded-sm {
+.rounded-[1rem] {
     border-radius: .125rem
 }
 
-.rounded-xl {
+.rounded-[1.5rem] {
     border-radius: .75rem
 }
 

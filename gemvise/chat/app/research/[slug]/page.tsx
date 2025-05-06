@@ -115,7 +115,7 @@ export default function ResearchPaper({ params }: { params: { slug: string } }) 
               }
               if (paragraph.startsWith('`')) {
                 return (
-                  <pre key={index} className="bg-stone-100 dark:bg-stone-900 p-4 rounded-lg my-4 overflow-x-auto">
+                  <pre key={index} className="bg-stone-100 dark:bg-stone-900 p-4 rounded-[1.5rem] my-4 overflow-x-auto">
                     <code>{paragraph.replace(/`/g, '')}</code>
                   </pre>
                 );

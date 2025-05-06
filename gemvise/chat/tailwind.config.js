@@ -23,6 +23,7 @@ module.exports = {
         'scrim-8': 'var(--scrim-8)',
         'hero-transparent': 'var(--hero-transparent)',
         'muted-foreground': 'var(--muted-foreground)',
+        'description-gray': '#939699',
         neutral: {
           900: 'var(--background)'
         }

@@ -62,9 +62,9 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
             <div className="relative w-full" ref={createMenuRef}>
               <button
                 onClick={() => setCreateMenuOpen(!createMenuOpen)}
-                className="flex h-[48px] w-full items-center gap-3 rounded-2xl px-4 text-theme-foreground transition-all duration-300 bg-[#333639]/30 hover:bg-[#333639]/60"
+                className="flex h-[48px] w-full items-center gap-3 rounded-[4rem] px-4 text-theme-foreground transition-all duration-300 bg-[#333639]/30 hover:bg-[#333639]/60"
               >
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10">
+                <span className="flex h-8 w-8 items-center justify-center rounded-[1.5rem] bg-white/10">
                   <PlusIcon className="h-5 w-5 text-white" />
                 </span>
                 <span className="flex-1 text-left text-white">Create</span>
@@ -72,7 +72,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
 
               {/* Create Menu Dropdown */}
               {createMenuOpen && (
-                <div className="absolute top-full left-0 w-full mt-2 p-4 bg-[#333639]/30 hover:bg-[#333639]/60 rounded-xl shadow-lg ring-1 ring-theme-foreground/10 backdrop-blur-md z-50">
+                <div className="absolute top-full left-0 w-full mt-2 p-4 bg-[#333639]/30 hover:bg-[#333639]/60 rounded-[1.5rem] shadow-lg ring-1 ring-theme-foreground/10 backdrop-blur-md z-50">
                   {createOptions.map(({ href, label, icon: Icon }) => (
                     <Link
                       key={href}
@@ -80,7 +80,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                       className="flex h-[40px] w-full items-center gap-3 px-4 text-theme-foreground hover:bg-[#333639]/30"
                       onClick={() => setCreateMenuOpen(false)}
                     >
-                      <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10">
+                      <span className="flex h-8 w-8 items-center justify-center rounded-[1.5rem] bg-white/10">
                         <Icon className="h-5 w-5" />
                       </span>
                       <span className="flex-1 text-left">{label}</span>
@@ -96,13 +96,13 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
             ].map(({ href, label, icon: Icon }) => (
               <Link key={href} href={href} className="w-full">
                 <button
-                  className={`flex h-[48px] w-full items-center gap-3 rounded-2xl px-4 text-theme-foreground transition-all duration-300 ${
+                  className={`flex h-[48px] w-full items-center gap-3 rounded-[4rem] px-4 text-theme-foreground transition-all duration-300 ${
                     pathname === href
                       ? 'bg-[#333639]/30 hover:bg-[#333639]/60'
                       : 'hover:bg-[#333639]/60 focus:outline-none'
                   }`}
                 >
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-[1.5rem] bg-white/10">
                     <Icon className="h-5 w-5 text-theme-foreground" />
                   </span>
                   <span className="flex-1 text-left">{label}</span>

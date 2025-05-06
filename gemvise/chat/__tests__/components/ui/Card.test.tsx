@@ -12,7 +12,7 @@ describe('Card Component', () => {
     );
     
     const card = screen.getByTestId('card');
-    expect(card).toHaveClass('rounded-2xl');
+    expect(card).toHaveClass('rounded-[4rem]');
     expect(card).toHaveClass('bg-background');
     expect(card).toHaveClass('shadow-lg');
   });
@@ -79,7 +79,7 @@ describe('Card Component', () => {
     const card = screen.getByTestId('card');
     const img = screen.getByAltText('test');
 
-    expect(card).toHaveClass('rounded-2xl');
+    expect(card).toHaveClass('rounded-[4rem]');
     expect(img).toHaveClass('rounded-t-2xl');
   });
 });

@@ -52,7 +52,7 @@ export default function UnleashPage() {
         description="Turn your imagination into interactive experiences with Gemium's powerful character creation tools. Plus, learn how your creations can participate in our unique blockchain-powered reward system."
       >
         <div className="flex justify-center mt-8">
-          <button className="bg-button-primary text-background hover:bg-button-primary-hover px-8 py-3 rounded-md">
+          <button className="bg-button-primary text-background hover:bg-button-primary-hover px-8 py-3 rounded-[1rem]">
             Start Creating
           </button>
         </div>
@@ -88,7 +88,7 @@ export default function UnleashPage() {
         description="Interact with your character in our testing environment to ensure they behave exactly as you envision. Get instant feedback and make adjustments in real-time."
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-          <div className="p-6 rounded-lg bg-stone-50/50 dark:bg-stone-900/50">
+          <div className="p-6 rounded-[1.5rem] bg-stone-50/50 dark:bg-stone-900/50">
             <h3 className="text-xl font-semibold mb-4">Interactive Testing</h3>
             <ul className="space-y-3 text-grey-600 dark:text-grey-400">
               <li>• Real-time conversation preview</li>
@@ -97,7 +97,7 @@ export default function UnleashPage() {
               <li>• Response style validation</li>
             </ul>
           </div>
-          <div className="p-6 rounded-lg bg-stone-50/50 dark:bg-stone-900/50">
+          <div className="p-6 rounded-[1.5rem] bg-stone-50/50 dark:bg-stone-900/50">
             <h3 className="text-xl font-semibold mb-4">Quality Metrics</h3>
             <ul className="space-y-3 text-grey-600 dark:text-grey-400">
               <li>• Engagement scoring</li>
@@ -117,7 +117,7 @@ export default function UnleashPage() {
         description="Join our community of creators and start building unique AI experiences that reward your creativity."
       >
         <div className="flex flex-wrap justify-center gap-4 mt-8">
-          <button className="bg-button-primary text-background hover:bg-button-primary-hover px-8 py-3 rounded-md">
+          <button className="bg-button-primary text-background hover:bg-button-primary-hover px-8 py-3 rounded-[1rem]">
             Create Your First Character
           </button>
           <a href="/docs" className="text-primary hover:text-primary-hover px-8 py-3">

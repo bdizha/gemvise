@@ -31,7 +31,7 @@ const Header: FC<HeaderProps> = ({ onToggleSidebar, onToggleTheme, theme, isSide
         {/* Sidebar Toggle Button (Mobile) - Always visible */} 
         <button
           onClick={onToggleSidebar}
-          className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white transition-colors duration-200 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 lg:hidden"
+          className="flex h-8 w-8 items-center justify-center rounded-[1.5rem] bg-white/10 text-white transition-colors duration-200 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 lg:hidden"
         >
           <span className="sr-only">Toggle sidebar</span>
           {isSidebarOpen ? (
@@ -44,7 +44,7 @@ const Header: FC<HeaderProps> = ({ onToggleSidebar, onToggleTheme, theme, isSide
         {/* Sidebar Toggle Button (Desktop) - Always visible */}
         <button
           onClick={onToggleSidebar}
-          className="hidden lg:flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-white transition-colors duration-200 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+          className="hidden lg:flex h-8 w-8 items-center justify-center rounded-[1.5rem] bg-white/10 text-white transition-colors duration-200 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
         >
           <span className="sr-only">Toggle sidebar</span>
           {isSidebarOpen ? (

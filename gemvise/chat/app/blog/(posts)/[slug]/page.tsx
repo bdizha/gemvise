@@ -45,7 +45,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         <div className="space-y-12">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-xl space-y-12">
-              <h2 className="text-balance text-3xl md:text-4xl lg:text-5xl tracking-tight">
+              <h2 className="text-balance text-2xl md:text-4xl lg:text-5xl tracking-tight">
                 {post.title}
               </h2>
             </div>
@@ -55,7 +55,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         <hr className="my-12 border-border" />
       </div>
       <div>
-        <div className="prose prose-invert max-w-none text-pretty text-primary prose-hr:border-border prose-p:text-primary/85 prose-li:text-primary/85 prose-a:text-primary prose-a:underline prose-headings:font-normal prose-headings:mt-12 prose-h3:mt-10 prose-h4:mt-6 prose-h5:mt-6 prose-h6:mt-6 prose-h1:text-3xl prose-strong:font-medium prose-th:py-2 prose-th:font-medium prose-td:font-normal prose-td:text-primary/85 prose-td:py-2 prose-code:bg-secondary/20 prose-code:inline-block prose-code:before:content-none prose-code:after:content-none prose-code:mx-0.5 prose-code:px-1.5 prose-code:leading-5 prose-code:text-accent prose-code:font-mono prose-code:font-normal prose-a:underline-offset-2">
+        <div className="prose prose-invert max-w-none text-pretty text-primary prose-hr:border-border prose-p:text-primary/85 prose-li:text-primary/85 prose-a:text-primary prose-a:underline prose-headings:font-normal prose-headings:mt-12 prose-h3:mt-10 prose-h4:mt-6 prose-h5:mt-6 prose-h6:mt-6 prose-h1:text-2xl prose-strong:font-medium prose-th:py-2 prose-th:font-medium prose-td:font-normal prose-td:text-primary/85 prose-td:py-2 prose-code:bg-secondary/20 prose-code:inline-block prose-code:before:content-none prose-code:after:content-none prose-code:mx-0.5 prose-code:px-1.5 prose-code:leading-5 prose-code:text-accent prose-code:font-mono prose-code:font-normal prose-a:underline-offset-2">
           {post.content.split('\n\n').map((paragraph, index) => {
             if (paragraph.startsWith('##')) {
               return (
@@ -97,7 +97,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
             }
             if (paragraph.startsWith('`')) {
               return (
-                <pre key={index} className="bg-stone-100 dark:bg-stone-900 p-4 rounded-lg my-4 overflow-x-auto">
+                <pre key={index} className="bg-stone-100 dark:bg-stone-900 p-4 rounded-[1.5rem] my-4 overflow-x-auto">
                   <code>{paragraph.replace(/`/g, '')}</code>
                 </pre>
               );

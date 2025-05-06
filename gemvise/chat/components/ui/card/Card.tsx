@@ -13,8 +13,8 @@ interface CardProps extends GemCardProps {
 
 const cardStyles: Record<CardVariant, string> = {
   default: 'bg-white dark:bg-gray-800 rounded-[24px] p-6 shadow-sm hover:shadow-md',
-  slider: 'group relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-theme-surface/50 px-8 pb-8 pt-32 backdrop-blur-sm hover:bg-theme-surface/70',
-  gradient: 'relative overflow-hidden rounded-2xl p-4 bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-800 dark:to-gray-900',
+  slider: 'group relative isolate flex flex-col justify-end overflow-hidden rounded-[4rem] bg-theme-surface/50 px-8 pb-8 pt-32 backdrop-blur-sm hover:bg-theme-surface/70',
+  gradient: 'relative overflow-hidden rounded-[4rem] p-4 bg-gradient-to-br from-gray-900 to-gray-800 dark:from-gray-800 dark:to-gray-900',
   tower: 'relative w-full h-[360px] rounded-[32px] overflow-hidden border border-border/10'
 };
 

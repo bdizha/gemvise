@@ -73,21 +73,21 @@ export default function ThemeSwitcher() {
             <div className="flex items-stretch w-full gap-2 justify-stretch">
               <button
                 onClick={() => handleThemeChange('light')}
-                className={`inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium leading-[normal] cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:-mx-0.5 text-primary hover:bg-button-ghost-hover h-10 w-full rounded-lg ${theme === 'light' ? 'bg-button-ghost-hover' : ''}`}
+                className={`inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium leading-[normal] cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:-mx-0.5 text-primary hover:bg-button-ghost-hover h-10 w-full rounded-[1.5rem] ${theme === 'light' ? 'bg-button-ghost-hover' : ''}`}
                 type="button"
               >
                 <Image src="/sun.svg" alt="Light" width={16} height={16} />
               </button>
               <button
                 onClick={() => handleThemeChange('dark')}
-                className={`inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium leading-[normal] cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:-mx-0.5 text-primary hover:bg-button-ghost-hover h-10 w-full rounded-lg ${theme === 'dark' ? 'bg-button-ghost-hover' : ''}`}
+                className={`inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium leading-[normal] cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:-mx-0.5 text-primary hover:bg-button-ghost-hover h-10 w-full rounded-[1.5rem] ${theme === 'dark' ? 'bg-button-ghost-hover' : ''}`}
                 type="button"
               >
                 <Image src="/moon.svg" alt="Dark" width={16} height={16} />
               </button>
               <button
                 onClick={() => handleThemeChange('system')}
-                className={`inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium leading-[normal] cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:-mx-0.5 text-primary hover:bg-button-ghost-hover h-10 w-full rounded-lg ${theme === 'system' ? 'bg-button-ghost-hover' : ''}`}
+                className={`inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium leading-[normal] cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50 disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:-mx-0.5 text-primary hover:bg-button-ghost-hover h-10 w-full rounded-[1.5rem] ${theme === 'system' ? 'bg-button-ghost-hover' : ''}`}
                 type="button"
               >
                 <Image src="/system.svg" alt="System" width={16} height={16} />
@@ -96,7 +96,7 @@ export default function ThemeSwitcher() {
           </div>
           <button
             onClick={() => setIsOpen(false)}
-            className="relative flex select-none items-center cursor-pointer px-3 py-2 rounded-xl text-sm outline-none focus:bg-card-hover w-full"
+            className="relative flex select-none items-center cursor-pointer px-3 py-2 rounded-[1.5rem] text-sm outline-none focus:bg-card-hover w-full"
           >
             Language
           </button>

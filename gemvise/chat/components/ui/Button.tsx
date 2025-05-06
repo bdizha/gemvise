@@ -14,8 +14,8 @@ const buttonVariants = cva(
         secondary: 'bg-accent text-accent-foreground hover:bg-accent/90 focus:ring-accent',
         ghost: 'bg-transparent text-theme-foreground hover:bg-theme-hover focus:ring-primary',
         link: 'text-primary hover:underline focus:ring-primary bg-transparent',
-        tab: 'bg-white/10 text-white/80 hover:bg-white/30 focus:ring-primary focus:ring-offset-background',
-        'tab-active': 'bg-white/20 text-white hover:bg-white/30 focus:ring-primary focus:ring-offset-background'
+        tab: 'w-[7rem] px-6 bg-white/10 text-white/80 hover:bg-white/30 focus:ring-0 focus:ring-offset-0',
+        'tab-active': 'w-[7rem] px-6 bg-white/20 text-white hover:bg-white/30 focus:ring-0 focus:ring-offset-0'
       },
       size: {
         default: 'h-12 px-6 text-base rounded-full',

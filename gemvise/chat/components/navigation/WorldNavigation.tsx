@@ -30,13 +30,13 @@ export const WorldNavigation: FC<WorldNavigationProps> = ({ className = '' }) =>
           return (
             <Link key={world.id} href={href} className="block">
               <button
-                className={`flex h-[48px] w-full items-center gap-3 rounded-2xl px-4 text-theme-foreground transition-all duration-300 ${
+                className={`flex h-[48px] w-full items-center gap-3 rounded-[4rem] px-4 text-theme-foreground transition-all duration-300 ${
                   isActive
                     ? 'bg-[#333639]/30 hover:bg-[#333639]/60'
                     : 'bg-theme-surface hover:bg-[#333639]/60 focus:outline-none'
                 }`}
               >
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-theme-surface bg-cover bg-center transition-all duration-300 hover:bg-gradient-pink-purple">
+                <span className="flex h-8 w-8 items-center justify-center rounded-[1.5rem] bg-theme-surface bg-cover bg-center transition-all duration-300 hover:bg-gradient-pink-purple">
                   <Icon className="h-5 w-5 text-theme-foreground" />
                 </span>
                 <span className="flex-1 text-left">{world.name}</span>

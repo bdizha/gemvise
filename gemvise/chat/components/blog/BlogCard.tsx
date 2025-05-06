@@ -7,7 +7,7 @@ export default function BlogCard({ post }: { post: BlogPost }) {
     <Link href={`/blog/${post.slug}`} className="group">
       <article className="flex flex-col space-y-4">
         {post.imageUrl && (
-          <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-stone-100 dark:bg-stone-900">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-[1.5rem] bg-stone-100 dark:bg-stone-900">
             <Image
               src={post.imageUrl}
               alt={post.title}

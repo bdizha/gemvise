@@ -39,7 +39,7 @@ const Chat = () => {
           ))}
           {loading && (
             <div className="flex justify-start px-4">
-              <div className="rounded-lg bg-gray-100 dark:bg-gray-700 p-4 text-sm text-gray-900 dark:text-gray-100">
+              <div className="rounded-[1.5rem] bg-gray-100 dark:bg-gray-700 p-4 text-sm text-gray-900 dark:text-gray-100">
                 Thinking...
               </div>
             </div>

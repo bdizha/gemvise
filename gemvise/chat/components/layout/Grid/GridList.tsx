@@ -16,7 +16,7 @@ const GridList: React.FC<GridListProps> = ({ items, className = '' }) => {
         <motion.button
           key={item.id} 
           onClick={item.onClick}
-          className="group relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900/50 dark:bg-gray-800/50 px-8 pb-8 pt-32 backdrop-blur-sm hover:bg-gray-800/70 dark:hover:bg-gray-700/70 cursor-pointer text-left"
+          className="group relative isolate flex flex-col justify-end overflow-hidden rounded-[4rem] bg-gray-900/50 dark:bg-gray-800/50 px-8 pb-8 pt-32 backdrop-blur-sm hover:bg-gray-800/70 dark:hover:bg-gray-700/70 cursor-pointer text-left"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

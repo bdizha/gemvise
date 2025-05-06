@@ -51,7 +51,7 @@ const ShapeTower: FC<ShapeTowerProps> = ({
   return (
     <div className={`relative w-full h-full ${className}`}>
       {/* Background Square */}
-      <div className="absolute inset-0 rounded-xl overflow-hidden">
+      <div className="absolute inset-0 rounded-[1.5rem] overflow-hidden">
         <Image
           src={gradientPath}
           alt=""

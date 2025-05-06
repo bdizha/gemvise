@@ -60,7 +60,7 @@ export default function CareersPage() {
         description="At Gemium, we're pioneering the next generation of human-computer interaction. We blend cutting-edge AI with the power of blockchain to create not just engaging experiences, but sustainable ecosystems that reward creativity."
       >
         <div className="flex justify-center mt-8">
-          <button className="bg-button-primary text-background hover:bg-button-primary-hover px-8 py-3 rounded-md">
+          <button className="bg-button-primary text-background hover:bg-button-primary-hover px-8 py-3 rounded-[1rem]">
             View Open Positions
           </button>
         </div>
@@ -81,7 +81,7 @@ export default function CareersPage() {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           {benefits.map((benefit, index) => (
-            <div key={index} className="bg-card p-6 rounded-lg">
+            <div key={index} className="bg-card p-6 rounded-[1.5rem]">
               <div className="text-4xl mb-4">{benefit.emoji}</div>
               <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
               <p className="text-text-secondary">{benefit.description}</p>
@@ -97,10 +97,10 @@ export default function CareersPage() {
         description="Join our team of innovators, creators, and visionaries building the future of interactive AI experiences."
       >
         <div className="flex justify-center mt-8 space-x-4">
-          <button className="bg-button-primary text-background hover:bg-button-primary-hover px-8 py-3 rounded-md">
+          <button className="bg-button-primary text-background hover:bg-button-primary-hover px-8 py-3 rounded-[1rem]">
             View Open Positions
           </button>
-          <button className="border border-button-primary text-button-primary hover:bg-button-primary hover:text-background px-8 py-3 rounded-md">
+          <button className="border border-button-primary text-button-primary hover:bg-button-primary hover:text-background px-8 py-3 rounded-[1rem]">
             Learn More About Gemium
           </button>
         </div>

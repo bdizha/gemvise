@@ -144,7 +144,7 @@ export default function GemList({ gems = CategorySection, onSelect, showHeader =
                     <span className="ms-2 opacity-70">{gems[0].description}</span>
                   </div>
                 </div>
-                <div className="mt-2 w-full bg-white fill-foreground-static-800 text-foreground-static-800 min-[360px]:mt-4 justify-center rounded-3xl before:rounded-3xl relative flex items-center text-base min-h-12 min-w-12 px-3 py-2.5 gap-x-3 before:absolute before:inset-0 before:pointer-events-none before:border before:border-transparent before:contrast-more:border-2 outline-2 outline-offset-1 focus-visible:z-[1] focus-visible:outline focus-visible:outline-stroke-900">
+                <div className="mt-2 w-full bg-white fill-foreground-static-800 text-foreground-static-800 min-[360px]:mt-4 justify-center rounded-[4rem] before:rounded-[4rem] relative flex items-center text-base min-h-12 min-w-12 px-3 py-2.5 gap-x-3 before:absolute before:inset-0 before:pointer-events-none before:border before:border-transparent before:contrast-more:border-2 outline-2 outline-offset-1 focus-visible:z-[1] focus-visible:outline focus-visible:outline-stroke-900">
                   <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="size-6">
                     <path d="M17.2204 8.68703C18.2558 9.25661 18.2558 10.7434 17.2204 11.313L7.2234 16.812C6.22371 17.362 5 16.6393 5 15.4991L5 4.50093C5 3.36068 6.22371 2.63805 7.2234 3.18795L17.2204 8.68703ZM16.7381 10.4377C17.0833 10.2478 17.0833 9.7522 16.7381 9.56234L6.74113 4.06327C6.4079 3.87997 6 4.12084 6 4.50093L6 15.4991C6 15.8792 6.4079 16.12 6.74114 15.9367L16.7381 10.4377Z" fill="currentColor"></path>
                   </svg>

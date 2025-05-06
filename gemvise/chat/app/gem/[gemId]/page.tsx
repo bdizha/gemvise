@@ -43,7 +43,7 @@ export default function GemDetail() {
         <p className="mt-2 text-theme-foreground/60">This gem doesn't exist or is still being discovered.</p>
         <Link
           href="/explore"
-          className="mt-6 rounded-md bg-gradient-pink-purple px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90"
+          className="mt-6 rounded-[1rem] bg-gradient-pink-purple px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90"
         >
           Explore Other Gems
         </Link>
@@ -76,7 +76,7 @@ export default function GemDetail() {
             </div>
             
             <div className="mt-10 max-w-xl lg:mt-0">
-              <div className="relative aspect-square overflow-hidden rounded-2xl bg-theme-surface/50 backdrop-blur-sm">
+              <div className="relative aspect-square overflow-hidden rounded-[4rem] bg-theme-surface/50 backdrop-blur-sm">
                 {gem.imageUrl && (
                   <Image
                     src={gem.imageUrl}
@@ -104,13 +104,13 @@ export default function GemDetail() {
             <div className="mt-10">
               <h3 className="text-lg font-semibold text-theme-foreground mb-4">Attributes</h3>
               <dl className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="rounded-lg bg-theme-surface/50 p-4 backdrop-blur-sm">
+                <div className="rounded-[1.5rem] bg-theme-surface/50 p-4 backdrop-blur-sm">
                   <dt className="text-sm font-medium text-theme-foreground/60">Power Level</dt>
                   <dd className="mt-1 text-2xl font-semibold tracking-tight text-theme-foreground">
                     {gem.attributes.power}
                   </dd>
                 </div>
-                <div className="rounded-lg bg-theme-surface/50 p-4 backdrop-blur-sm">
+                <div className="rounded-[1.5rem] bg-theme-surface/50 p-4 backdrop-blur-sm">
                   <dt className="text-sm font-medium text-theme-foreground/60">Rarity</dt>
                   <dd className="mt-1 text-2xl font-semibold tracking-tight text-theme-foreground">
                     {gem.attributes.rarity}
@@ -122,19 +122,19 @@ export default function GemDetail() {
 
           {/* Right Column */}
           <div>
-            <div className="rounded-2xl bg-theme-surface/50 p-8 backdrop-blur-sm">
+            <div className="rounded-[4rem] bg-theme-surface/50 p-8 backdrop-blur-sm">
               <h3 className="text-lg font-semibold text-theme-foreground mb-6">Actions</h3>
               <div className="space-y-4">
                 <Link
                   href={`/chat/${gem.id}`}
-                  className="flex w-full items-center justify-center gap-2 rounded-md bg-gradient-pink-purple px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90"
+                  className="flex w-full items-center justify-center gap-2 rounded-[1rem] bg-gradient-pink-purple px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90"
                 >
                   <ChatBubbleLeftRightIcon className="h-5 w-5" />
                   Start Conversation
                 </Link>
                 <button
                   type="button"
-                  className="flex w-full items-center justify-center gap-2 rounded-md bg-theme-surface/50 px-4 py-2.5 text-sm font-semibold text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 hover:bg-theme-surface/70"
+                  className="flex w-full items-center justify-center gap-2 rounded-[1rem] bg-theme-surface/50 px-4 py-2.5 text-sm font-semibold text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 hover:bg-theme-surface/70"
                 >
                   <UserGroupIcon className="h-5 w-5" />
                   Share Gem

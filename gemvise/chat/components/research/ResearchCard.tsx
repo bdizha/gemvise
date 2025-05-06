@@ -7,7 +7,7 @@ export default function ResearchCard({ paper }: { paper: ResearchPaper }) {
     <Link href={`/research/${paper.slug}`} className="group">
       <article className="flex flex-col space-y-4">
         {paper.imageUrl && (
-          <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-stone-100 dark:bg-stone-900">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-[1.5rem] bg-stone-100 dark:bg-stone-900">
             <Image
               src={paper.imageUrl}
               alt={paper.title}

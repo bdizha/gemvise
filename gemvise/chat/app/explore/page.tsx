@@ -54,7 +54,7 @@ export default function ExplorePage() {
               {Array.from({ length: 6 }).map((_, index) => (
                 <div 
                   key={`skeleton-${index}`}
-                  className="flex flex-col gap-4 p-6 rounded-2xl bg-gray-100 dark:bg-gray-800 animate-pulse h-[200px]"
+                  className="flex flex-col gap-4 p-6 rounded-[4rem] bg-gray-100 dark:bg-gray-800 animate-pulse h-[200px]"
                 />
               ))}
             </div>

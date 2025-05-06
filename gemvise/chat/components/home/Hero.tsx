@@ -1,6 +1,7 @@
 'use client';
 
 import { FC, useState, useMemo } from 'react';
+import DefaultSection from '@/components/layout/Section/DefaultSection';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { worlds } from '@/data/worlds';
@@ -9,10 +10,10 @@ import { Gem } from '@/types/gemium';
 
 // Define gradient classes to cycle through - for accordion
 const gradients = [
-  'bg-gradient-pink-purple',
-  'bg-gradient-purple-pink',
-  'bg-gradient-light-dark',
-  'bg-gradient-dark-light', // Reusing dark-light for the 4th world (Spaceum)
+  'bg-gradient-dark-light',
+  'bg-gradient-dark-light',
+  'bg-gradient-dark-light',
+  'bg-gradient-dark-light',
 ];
 
 // Tabs for the right column
@@ -35,22 +36,47 @@ export const Hero: FC = () => {
     return worlds[activeWorldIndex].collections?.flatMap(col => col.gems || []) || [];
   }, [activeWorldIndex]);
 
-  const trendingGems = useMemo(() => currentWorldGems.slice(0, 4), [currentWorldGems]);
+  const allGems = useMemo(() => {
+    // Get unique gems using Set
+    const uniqueGems = new Set(
+      worlds?.flatMap(world => 
+        world.collections?.flatMap(col => col.gems || []) || []
+      ).map(gem => JSON.stringify(gem))
+    );
+    return Array.from(uniqueGems).map(gemStr => JSON.parse(gemStr));
+  }, [worlds]);
 
-  const allGems = useMemo(() => worlds?.flatMap(world => 
-    world.collections?.flatMap(col => col.gems || []) || []
-  ) || [], []);
+  const rarityWeights = {
+    'Common': 1,
+    'Uncommon': 2,
+    'Rare': 3,
+    'Epic': 4,
+    'Legendary': 5,
+    'Mythic': 6
+  } as const;
+
+  type RarityType = keyof typeof rarityWeights;
+
+  const trendingGems = useMemo(() => {
+    // Sort by a combination of power and rarity weight
+    const weighted = [...allGems].map(gem => ({
+      ...gem,
+      weight: (gem.attributes?.power || 0) * rarityWeights[(gem.attributes?.rarity || 'Common') as RarityType]
+    }));
+    return weighted
+      .sort((a, b) => b.weight - a.weight)
+      .slice(0, 4)
+      .map(({ weight, ...gem }) => gem);
+  }, [allGems]);
 
   const popularGems = useMemo(() => {
-    return [...allGems]
-      .sort((a, b) => (b.attributes?.power || 0) - (a.attributes?.power || 0))
-      .slice(0, 4);
+    const sorted = [...allGems].sort((a, b) => (b.attributes?.power || 0) - (a.attributes?.power || 0));
+    return sorted.slice(0, 4);
   }, [allGems]);
 
   const upcomingGems = useMemo(() => {
-    return allGems
-      .filter(gem => gem.attributes?.rarity === 'Legendary' || gem.attributes?.rarity === 'Mythic')
-      .slice(0, 4);
+    const filtered = [...allGems].filter(gem => gem.attributes?.rarity === 'Legendary' || gem.attributes?.rarity === 'Mythic');
+    return filtered.slice(0, 4);
   }, [allGems]);
 
   // Handle case where there are no worlds
@@ -60,22 +86,26 @@ export const Hero: FC = () => {
 
   // Helper function to render gems as a vertical list
   const renderGemList = (gems: Gem[]) => { 
-    const displayGems = gems.slice(0, 4); // Limit to 4 items
-
     return (
-      // Container div - no height needed here now
       <div className="pb-2"> 
-        {displayGems.map((gem, index) => ( 
+        {gems.map((gem, index) => ( 
           <Link
             key={gem.id}
-            href={`/chat/${gem.id}`}
-            className="block w-full h-20 mb-2" 
+            href={`/gems/${gem.id}`}
+            className="block w-full h-20" 
           >
-            {/* Use cycling gradients from accordion, rounded-lg, remove overlay */}
-            <div className={`h-full rounded-lg flex items-center justify-center p-2 text-center ${gradients[index % gradients.length]} bg-cover bg-center transition-all`}>
-              <span className="text-xs font-medium text-foreground truncate w-full">
-                {gem.name}
-              </span>
+            <div className={`h-full rounded-[1.5rem] flex items-center p-4 bg-gradient-light-dark bg-cover bg-center transition-all text-[rgb(126,127,130)]`}>
+              <img 
+                src={`/gradients/mobile/GV-Gradient-0${(index % 5) + 1}.png`} 
+                alt="" 
+                className="w-12 h-12 rounded-[1.5rem] mr-4"
+              />
+              <div className="flex-1 text-left">
+                <h3 className="text-sm font-medium text-[rgb(126,127,130)] truncate">{gem.name}</h3>
+                <p className="text-xs text-[rgb(126,127,130)]/80 truncate">
+                  {gem.attributes?.rarity || 'Common'} • {gem.attributes?.power || 0} Power
+                </p>
+              </div>
             </div>
           </Link>
         ))}
@@ -84,16 +114,19 @@ export const Hero: FC = () => {
   };
 
   const tabContent = useMemo(() => {
+    let gems;
     switch (activeTab) {
-      case 'Trending':
-        return renderGemList(trendingGems);
       case 'Popular':
-        return renderGemList(popularGems);
+        gems = popularGems;
+        break;
       case 'Upcoming':
-        return renderGemList(upcomingGems);
+        gems = upcomingGems;
+        break;
+      case 'Trending':
       default:
-        return null;
+        gems = trendingGems;
     }
+    return renderGemList(gems);
   }, [activeTab, trendingGems, popularGems, upcomingGems]);
 
   return (
@@ -110,53 +143,49 @@ export const Hero: FC = () => {
                 return (
                   <div
                     key={world.id}
-                    className={`
-                      relative flex flex-col justify-end overflow-hidden rounded-2xl 
-                      cursor-pointer transition-all duration-500 ease-in-out
-                      ${isActive ? 'w-1/2' : 'w-16'} 
-                      ${gradientClass} 
-                    `}
+                    className={`relative flex flex-col justify-end overflow-hidden rounded-[4rem] cursor-pointer transition-all duration-500 ease-in-out ${isActive ? 'w-3/4' : 'w-[4rem]'} ${isActive ? 'bg-gradient-pink-purple' : gradientClass}`}
                     onMouseEnter={() => setActiveWorldIndex(index)}
                   >
                     {/* Content visible only when active - fade in */}
-                    <div className={`
-                      relative z-10 p-6 text-foreground transition-opacity duration-300 ease-in-out text-center
-                      ${isActive ? 'opacity-100 delay-300' : 'opacity-0'} 
-                    `}>
-                      <h3 className="text-3xl font-bold mb-4 whitespace-nowrap text-white/90">{world.name}</h3>
-                      <p className="text-base mb-6 text-white/80 leading-relaxed max-w-md mx-auto">{world.description}</p>
+                    <div className={`relative z-10 p-6 transition-opacity duration-300 ease-in-out text-center ${isActive ? 'opacity-100 delay-300' : 'opacity-0'} ${isActive ? 'text-white/95' : 'text-[#5f6b7a]'}`}>
+                      <h3 className="text-3xl font-bold mb-4 whitespace-nowrap">{world.name}</h3>
+                      <p className="text-base mb-6 opacity-80 leading-relaxed max-w-md mx-auto">{world.description}</p>
                       {isActive && (
                         <div className="mt-4 relative max-w-md mx-auto">
-                          <div className="bg-background/10 backdrop-blur-md rounded-xl p-4 shadow-xl">
-                            <div className="relative">
-                              <div 
-                                className="min-h-[64px] max-h-[140px] w-full rounded-lg bg-white/5 p-4"
-                                style={{
-                                  boxShadow: '0 0 0 1px rgba(255, 255, 255, 0.1)',
-                                }}
-                              >
-                                <textarea
-                                  className="w-full min-h-[16px] bg-transparent border-none outline-none resize-none text-base text-white/90 placeholder:text-white/50 text-center"
-                                  placeholder={world.id === 'boldland' ? 'Embark your adventure...' :
-                                    world.id === 'nakaland' ? 'Discover anime legends...' :
-                                    world.id === 'naimland' ? 'Explore mystical realms...' :
-                                    'Journey through space...'}
-                                  rows={1}
-                                  style={{ height: 'auto' }}
-                                />
-                              </div>
+                          <div className="bg-background/10 backdrop-blur-md rounded-[1.5rem] p-4 shadow-xl">
+                            <div className="grid grid-cols-2 gap-4">
+                              {currentWorldGems.slice(0, 4).map((gem, i) => (
+                                <Link
+                                  key={i}
+                                  href={`/gems/${gem.id}`}
+                                  className="flex items-center space-x-3 p-2 rounded-[1.5rem] bg-white/6 hover:bg-white/8 transition-colors"
+                                >
+                                  <div className="relative w-10 h-10 rounded-[1.5rem] overflow-hidden bg-gradient-to-br from-white/10 to-white/5">
+                                    {(gem as any).image && (
+                                      <img
+                                        src={(gem as any).image}
+                                        alt={gem.name || ''}
+                                        className="object-cover w-full h-full"
+                                      />
+                                    )}
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-medium text-white truncate">{gem.name}</p>
+                                    <p className="text-xs text-white/60 truncate">{gem.description}</p>
+                                  </div>
+                                </Link>
+                              ))}
                             </div>
                           </div>
                         </div>
                       )}
                     </div>
-
                     {/* Vertical title visible only when inactive */}
                     {!isActive && (
                       <div className="absolute inset-0 flex items-center justify-center p-2">
-                        <span className="[writing-mode:vertical-rl] rotate-180 whitespace-nowrap text-center font-semibold text-foreground opacity-80 text-sm">
-                          {world.name}
-                        </span>
+                        <div className="transform -rotate-90 whitespace-nowrap">
+                          <h3 className="text-lg font-medium text-white/80">{world.name}</h3>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -166,25 +195,26 @@ export const Hero: FC = () => {
           </div>
 
           {/* Right Column (1/3 width on large screens) */}
-          <div className="lg:col-span-1 space-y-6">
-            {/* Tabs Section - Added mb-4 */}
-            <div className="mb-4"> 
-              <Tabs
-                tabs={tabData} 
-                activeTab={activeTab}
-                onChange={(tabId) => setActiveTab(tabId as TabName)}
-                className="space-x-2"
-              />
+          <div className="lg:col-span-1">
+            <div className="flex flex-col h-full gap-2">
+              <div className="flex flex-col gap-3 flex-1 bg-gradient-dark rounded-[1.5rem] p-6">
+                <div className="group relative h-14">
+                  <div id="tabs-container" className="overflow-x-auto scrollbar-none h-full py-1">
+                    <Tabs
+                      tabs={tabData} 
+                      activeTab={activeTab}
+                      onChange={(tabId) => setActiveTab(tabId as TabName)}
+                      className="space-x-2"
+                    />
+                  </div>
+                </div>
+                <div className="flex-1 pt-3">
+                  <div className="h-full overflow-y-auto scrollbar-thin scrollbar-track-white/5 scrollbar-thumb-white/10 hover:scrollbar-thumb-white/20 space-y-4">
+                    {tabContent}
+                  </div>
+                </div>
+              </div>
             </div>
-            {/* Wrap tabContent in a div with fixed height for 4 items */}
-            {/* Height adjusted for 4 * h-20 + 3 * mb-2 = 20rem + 1.5rem = 21.5rem */}
-            <div className="h-[21.5rem] overflow-y-auto scrollbar">
-              {tabContent}
-            </div>
-
-            {/* Spacer */}
-            <div className="h-6"></div>
-
           </div>
         </div>
       </div>

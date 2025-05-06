@@ -30,7 +30,7 @@ const Tabs: React.FC<TabsProps> = ({
   };
 
   return (
-    <div className={`flex gap-2 overflow-x-auto ${className}`}>
+    <div className={`flex gap-2 ${className}`}>
       {tabs.map((tab) => (
         <Button
           key={tab.id}

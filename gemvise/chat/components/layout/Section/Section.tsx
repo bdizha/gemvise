@@ -23,7 +23,7 @@ interface ExtendedSectionProps extends Omit<SectionProps, 'theme' | 'gradient'> 
 const ValuesGrid = ({ values }: { values: Array<{ title: string; description: string }> }) => (
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
     {values.map((value) => (
-      <div key={value.title} className="flex flex-col gap-4 p-6 rounded-lg bg-stone-50/50 dark:bg-stone-900/50">
+      <div key={value.title} className="flex flex-col gap-4 p-6 rounded-[1.5rem] bg-stone-50/50 dark:bg-stone-900/50">
         <h3 className="text-xl font-semibold">{value.title}</h3>
         <p className="text-md/5 opacity-80">{value.description}</p>
       </div>

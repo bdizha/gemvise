@@ -13,7 +13,7 @@ interface SectionProps {
   variant?: SectionVariant;
   gradient?: GradientType;
   tag?: string;
-  title: string;
+  title?: string;
   description?: string;
   values?: Value[];
   className?: string;
@@ -59,6 +59,7 @@ const Section: FC<SectionProps> = ({
       style={style}
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      {tag && title && description && (
         <div className={headerClasses}>
           {tag && (
             <h2 className="text-base font-semibold leading-7 text-theme-foreground/60">
@@ -74,6 +75,7 @@ const Section: FC<SectionProps> = ({
             </p>
           )}
         </div>
+      )}
 
         {values && (
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">

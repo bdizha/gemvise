@@ -37,7 +37,7 @@ export default function WorldDetail() {
         <p className="mt-2 text-theme-foreground/60">This world doesn't exist or is still being created.</p>
         <Link
           href="/explore"
-          className="mt-6 rounded-md bg-gradient-pink-purple px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90"
+          className="mt-6 rounded-[1rem] bg-gradient-pink-purple px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90"
         >
           Explore Other Worlds
         </Link>
@@ -84,12 +84,12 @@ export default function WorldDetail() {
           {world.collections.map((collection) => (
             <article
               key={collection.id}
-              className="group relative isolate flex flex-col justify-between overflow-hidden rounded-2xl bg-theme-surface/50 px-8 pb-8 pt-32 backdrop-blur-sm"
+              className="group relative isolate flex flex-col justify-between overflow-hidden rounded-[4rem] bg-theme-surface/50 px-8 pb-8 pt-32 backdrop-blur-sm"
             >
               <div className="absolute inset-0 -z-10 h-full w-full bg-gradient-to-t from-theme-surface/50 via-theme-surface/20 to-transparent" />
               
               <div className="absolute left-4 top-4">
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-theme-surface/50 backdrop-blur-sm">
+                <span className="flex h-10 w-10 items-center justify-center rounded-[1.5rem] bg-theme-surface/50 backdrop-blur-sm">
                   <SparklesIcon className="h-6 w-6 text-theme-foreground" />
                 </span>
               </div>
@@ -123,7 +123,7 @@ export default function WorldDetail() {
 
       {/* Stats Section */}
       <div className="mx-auto max-w-7xl px-6 lg:px-8 pb-16">
-        <div className="mx-auto max-w-2xl rounded-2xl bg-theme-surface/50 p-8 backdrop-blur-sm lg:mx-0">
+        <div className="mx-auto max-w-2xl rounded-[4rem] bg-theme-surface/50 p-8 backdrop-blur-sm lg:mx-0">
           <h3 className="text-lg font-semibold text-theme-foreground mb-6">World Stats</h3>
           <dl className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-3">
             <div>

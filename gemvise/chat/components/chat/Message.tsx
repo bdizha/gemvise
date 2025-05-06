@@ -8,7 +8,7 @@ interface MessageProps {
 const Message = ({ role, content }: MessageProps) => {
   return (
     <div className={`group relative flex px-4 py-2 ${role === 'user' ? 'justify-end' : 'justify-start'}`}>
-      <div className={`flex max-w-3xl rounded-lg p-4 ${
+      <div className={`flex max-w-3xl rounded-[1.5rem] p-4 ${
         role === 'user'
           ? 'bg-blue-600 text-white'
           : 'bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100'

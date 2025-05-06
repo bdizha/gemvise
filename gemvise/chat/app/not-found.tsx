@@ -22,14 +22,14 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/"
-            className="rounded-md bg-gradient-pink-purple px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-full sm:w-auto"
+            className="rounded-[1rem] bg-gradient-pink-purple px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-full sm:w-auto"
           >
             Return to Home
           </Link>
           
           <Link
             href="/explore"
-            className="rounded-md bg-theme-surface/50 backdrop-blur-sm px-3.5 py-2.5 text-sm font-semibold text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 hover:bg-theme-surface/70 w-full sm:w-auto"
+            className="rounded-[1rem] bg-theme-surface/50 backdrop-blur-sm px-3.5 py-2.5 text-sm font-semibold text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 hover:bg-theme-surface/70 w-full sm:w-auto"
           >
             Explore Worlds
           </Link>

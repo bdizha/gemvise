@@ -25,10 +25,10 @@ export interface SliderProps {
     imageSrc?: string;
     title: string;
     description: string;
-    name: string;
-    username: string;
-    chatCount: number;
-    followers: number;
+    subtitle?: string;
+    cardVariant?: 'default' | 'character' | 'collection';
+    chatCount?: number;
+    followers?: number;
     likes?: number;
     fire?: number;
   }>;

@@ -7,10 +7,11 @@ import { worlds } from '@/data/worlds';
 
 // Process collections and gems for display
 // Helper function to get a random gradient image
-const getRandomGradient = () => {
+const getRandomGradient = (index: number) => {
   const gradientNumbers = ['01', '02', '03', '05', '06', '07', '08', '09'];
-  const randomIndex = Math.floor(Math.random() * gradientNumbers.length);
-  return `/gradients/GV-Gradient-${gradientNumbers[randomIndex]}.png`;
+  // Use the index to deterministically pick a gradient
+  const selectedIndex = index % gradientNumbers.length;
+  return `/gradients/GV-Gradient-${gradientNumbers[selectedIndex]}.png`;
 };
 
 const processedWorlds = worlds.map(world => {
@@ -18,31 +19,29 @@ const processedWorlds = worlds.map(world => {
     href: `/world/${world.id}/collection/${collection.id}`,
     imageSrc: `/gradients/named/GV-Gradient-${collection.type === 'Licensed' ? 'Purple-Pink' : 'Pink-Purple'}.png`,
     title: collection.name,
-    description: `${collection.type} Collection`,
-    name: collection.name,
-    username: collection.type,
+    subtitle: `${collection.type} Collection`, 
+    description: world.description, 
     chatCount: collection.gems.length,
-    followers: 0,
-    likes: 0
+    followers: 0, 
+    likes: 0 
   }));
 
   const gems = world.collections.flatMap(collection =>
-    collection.gems.map(gem => ({
+    collection.gems.map((gem, gemIndex) => ({ 
       href: `/chat/${gem.id}`,
-      imageSrc: getRandomGradient(),
+      imageSrc: getRandomGradient(gemIndex), 
       title: gem.name || '',
-      description: `A ${gem.type} from ${collection.name}`,
-      name: gem.name || '',
-      username: gem.attributes.rarity || 'Common',
-      chatCount: 0,
-      followers: 0,
+      subtitle: gem.attributes.rarity || 'Common', 
+      description: gem.description || `A unique ${gem.type || 'gem'} from ${collection.name}`,
+      chatCount: 0, 
+      followers: 0, 
       likes: gem.attributes.power || 0
     }))
   );
 
   return {
     id: world.id,
-    name: world.name,
+    name: world.name, 
     collections,
     gems
   };
@@ -57,11 +56,10 @@ const legendaryGems = worlds.flatMap(world =>
         href: `/chat/${gem.id}`,
         imageSrc: '/gradients/named/GV-Gradient-Purple-Pink-Purple.png',
         title: gem.name || '',
-        description: `${gem.type} from ${collection.name}`,
-        name: gem.name || '',
-        username: gem.attributes.rarity || 'Legendary',
-        chatCount: 0,
-        followers: 0,
+        subtitle: `${gem.attributes.rarity} - Power ${gem.attributes.power || 0}`, 
+        description: gem.description || `A legendary ${gem.type || 'gem'} from ${collection.name}`,
+        chatCount: 0, 
+        followers: 0, 
         likes: gem.attributes.power || 0
       }))
   )
@@ -76,11 +74,10 @@ const powerfulGems = worlds.flatMap(world =>
         href: `/chat/${gem.id}`,
         imageSrc: '/gradients/named/GV-Gradient-Pink-Purple-Pink.png',
         title: gem.name || '',
-        description: `Power Level ${gem.attributes.power}`,
-        name: gem.name || '',
-        username: 'Elite',
-        chatCount: 0,
-        followers: 0,
+        subtitle: `Elite - Power ${gem.attributes.power}`, 
+        description: gem.description || `An elite ${gem.type || 'gem'} with high power`,
+        chatCount: 0, 
+        followers: 0, 
         likes: gem.attributes.power || 0
       }))
   )
@@ -90,12 +87,7 @@ export default function Home() {
   return (
     <main className="flex-1 overflow-y-auto bg-gradient-dark">
       <Hero />
-      
-      <Section 
-        title="Explore Worlds" 
-        description="Discover unique collections and characters across different worlds"
-        gradient="dark-light"
-      >
+      <Section gradient="dark-light">
         <div className="mx-auto w-full px-6 xl:max-w-7xl space-y-32">
           {processedWorlds.map((world) => (
             <div key={world.id} className="space-y-16">
@@ -122,6 +114,7 @@ export default function Home() {
           />
         </div>
       </Section>
+    
     </main>
   );
 }

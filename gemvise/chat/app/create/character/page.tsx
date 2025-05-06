@@ -31,7 +31,7 @@ export default function CreateCharacter() {
           </span>
         </div>
 
-        <h1 className="text-center text-3xl font-bold tracking-tight text-theme-foreground sm:text-4xl">
+        <h1 className="text-center text-2xl font-bold tracking-tight text-theme-foreground sm:text-4xl">
           Create a New Character
         </h1>
         <p className="mt-2 text-center text-lg leading-8 text-theme-foreground/60">
@@ -48,7 +48,7 @@ export default function CreateCharacter() {
               id="name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="mt-2 block w-full rounded-md border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               required
             />
           </div>
@@ -62,7 +62,7 @@ export default function CreateCharacter() {
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               rows={4}
-              className="mt-2 block w-full rounded-md border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               required
             />
           </div>
@@ -76,7 +76,7 @@ export default function CreateCharacter() {
               id="expertise"
               value={formData.expertise}
               onChange={(e) => setFormData({ ...formData, expertise: e.target.value })}
-              className="mt-2 block w-full rounded-md border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               required
             />
           </div>
@@ -90,7 +90,7 @@ export default function CreateCharacter() {
                 id="world"
                 value={formData.world}
                 onChange={(e) => setFormData({ ...formData, world: e.target.value })}
-                className="mt-2 block w-full rounded-md border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                 required
               >
                 <option value="">Select a world</option>
@@ -109,7 +109,7 @@ export default function CreateCharacter() {
                 id="collection"
                 value={formData.collection}
                 onChange={(e) => setFormData({ ...formData, collection: e.target.value })}
-                className="mt-2 block w-full rounded-md border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                 required
               />
             </div>
@@ -124,7 +124,7 @@ export default function CreateCharacter() {
               id="traits"
               value={formData.traits}
               onChange={(e) => setFormData({ ...formData, traits: e.target.value })}
-              className="mt-2 block w-full rounded-md border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               placeholder="e.g., brave, intelligent, creative"
             />
           </div>
@@ -138,7 +138,7 @@ export default function CreateCharacter() {
               value={formData.imagePrompt}
               onChange={(e) => setFormData({ ...formData, imagePrompt: e.target.value })}
               rows={3}
-              className="mt-2 block w-full rounded-md border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               placeholder="Describe how you want your character to look"
             />
           </div>
@@ -147,13 +147,13 @@ export default function CreateCharacter() {
             <button
               type="button"
               onClick={() => router.back()}
-              className="rounded-md bg-theme-surface/50 px-4 py-2.5 text-sm font-semibold text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 hover:bg-theme-surface/70"
+              className="rounded-[1rem] bg-theme-surface/50 px-4 py-2.5 text-sm font-semibold text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 hover:bg-theme-surface/70"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="rounded-md bg-gradient-pink-purple px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90"
+              className="rounded-[1rem] bg-gradient-pink-purple px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90"
             >
               Create Character
             </button>

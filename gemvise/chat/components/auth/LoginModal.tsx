@@ -28,7 +28,7 @@ const LoginModal = ({ onClose, onLogin }: LoginModalProps) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-midnight-800 rounded-xl p-6 w-full max-w-md relative">
+      <div className="bg-white dark:bg-midnight-800 rounded-[1.5rem] p-6 w-full max-w-md relative">
         <button 
           onClick={onClose}
           className="absolute top-4 right-4 text-grey-500 hover:text-grey-700 dark:text-grey-400 dark:hover:text-grey-300"
@@ -53,14 +53,14 @@ const LoginModal = ({ onClose, onLogin }: LoginModalProps) => {
               id="apiKey"
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
-              className="w-full px-3 py-2 border border-grey-300 dark:border-grey-700 rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-midnight-700 text-grey-900 dark:text-grey-50"
+              className="w-full px-3 py-2 border border-grey-300 dark:border-grey-700 rounded-[1rem] focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-midnight-700 text-grey-900 dark:text-grey-50"
               placeholder="Enter your API key"
               required
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-button-primary text-background hover:bg-button-primary-hover px-4 py-2 rounded-md transition-colors"
+            className="w-full bg-button-primary text-background hover:bg-button-primary-hover px-4 py-2 rounded-[1rem] transition-colors"
           >
             Connect
           </button>

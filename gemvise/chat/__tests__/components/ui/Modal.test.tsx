@@ -20,7 +20,7 @@ describe('Modal Component', () => {
     const modal = screen.getByRole('dialog');
     const backdrop = screen.getByTestId('modal-backdrop');
     
-    expect(modal).toHaveClass('rounded-2xl');
+    expect(modal).toHaveClass('rounded-[4rem]');
     expect(modal).toHaveClass('bg-background/80');
     expect(modal).toHaveClass('shadow-lg');
     expect(backdrop).toHaveClass('backdrop-blur-lg');

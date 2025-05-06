@@ -26,7 +26,7 @@ const ChatInput = ({ onSubmit, loading }: ChatInputProps) => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Send a message..."
-            className="w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-2 pr-10 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:text-gray-200"
+            className="w-full rounded-[1rem] border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-2 pr-10 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:text-gray-200"
             disabled={loading}
           />
           <button
