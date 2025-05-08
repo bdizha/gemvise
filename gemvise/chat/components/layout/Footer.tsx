@@ -49,69 +49,55 @@ export default function Footer() {
       >
         <Funnel imageUrl="/icons/Dark-Footer.png" /> 
       </div>
-      {/* Darkening Overlay */}
-      <div className="absolute inset-0 bg-black dark:bg-black/0 z-0"></div>
-      
-      <div className="container mx-auto relative z-10"> 
-        <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-24">
-          {/* Navigation */}
-          <div className="flex flex-col gap-16">
-            <div className="flex flex-col gap-6 sm:gap-8 lg:gap-12 md:flex-row md:items-center md:justify-between">
-              {/* Logo */}
-              <div className="flex items-center gap-6 sm:gap-8 lg:gap-12">
-                <Link href="/" className="flex-none">
-                  <Logo variant="footer" className="text-primary" />
+      <div className="relative z-10">
+        <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          <div className="flex flex-col items-start text-center sm:text-left">
+            <Logo className="h-8" />
+            <p className="mt-4 text-sm text-description-gray">
+              Discover, Create, and Share Unique Worlds and Characters.
+            </p>
+            <div className="mt-6 flex items-center justify-center gap-x-4">
+              {socials.map((social) => (
+                <Link
+                  key={social.name}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="text-description-gray hover:text-foreground transition-colors duration-300"
+                >
+                  <social.icon className="h-6 w-6" />
                 </Link>
-              </div>
-              {/* Links */}
-              <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm font-medium">
-                {links.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="transition text-muted hover:text-foreground"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* Bottom Section */}
-            {socials.length > 0 && (
-            <div className="flex flex-col gap-6 sm:gap-8 lg:gap-12 md:flex-row md:items-center md:justify-between">
-              <div className="flex flex-col items-start gap-6 sm:gap-8 lg:gap-12 md:flex-row">
-                <div className="flex gap-6">
-                  {socials.map((social) => (
-                    <Link
-                      key={social.href}
-                      href={social.href}
-                      className="group"
-                      aria-label={social.label}
-                    >
-                      <social.icon className="h-6 w-6 transition text-muted group-hover:text-foreground" />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-              <div className="flex flex-col items-end gap-6 sm:gap-8 lg:gap-12 md:flex-row">
-                <div className="max-w-lg">
-                  <p className="mt-2 font-light italic text-muted">
-                    Casting the future of role play entertainment
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            )}
-
-            {/* Copyright */}
-            <div className="flex flex-col items-center justify-between gap-6 sm:gap-8 lg:gap-12 md:flex-row border-t border-border pt-8">
-              <p className="text-sm text-muted">
-                &copy; {new Date().getFullYear()} Gemium. All rights reserved.
-              </p>
+              ))}
             </div>
           </div>
+          <div className="grid grid-cols-2 gap-8 sm:gap-y-12 lg:col-span-3 lg:grid-cols-3">
+            {[ 
+              { title: 'Navigation', items: links.slice(0, 5) }, 
+              { title: 'Legal', items: links.slice(5) } 
+            ].map((section) => (
+              <div key={section.title}>
+                <h3 className="text-base font-semibold leading-6 text-foreground">
+                  {section.title}
+                </h3>
+                <ul role="list" className="mt-6 space-y-4">
+                  {section.items.map((item) => (
+                    <li key={item.name}>
+                      <Link
+                        href={item.href}
+                        className="text-sm leading-6 text-description-gray hover:text-foreground transition-colors duration-300"
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="mt-12 flex flex-col items-center justify-between gap-6 sm:gap-8 lg:gap-12 md:flex-row pt-8">
+          <p className="text-sm leading-5 text-description-gray">
+            &copy; {new Date().getFullYear()} GemVise. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

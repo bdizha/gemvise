@@ -26,17 +26,17 @@
 /* Base styles and theme variables */
 :root {
   /* Light Mode */
-  --background: #f9f6f3;
+  --background: #b0b3b9;
   --foreground: #090603;
   --primary: #f36f93;
-  --primary-foreground: #f9f6f3;
+  --primary-foreground: #b0b3b9;
   --accent: #936ff3;
   --muted-foreground: #696369;
   --surface-elevation-1: rgba(0, 0, 0, 0.05);
   --scrim-8: rgba(0, 0, 0, 0.08);
   --hero-transparent: rgba(249, 246, 243, 0);
   --border-color: #e3e6e9;
-  --hover-background: #f3f6f9;
+  --hover-background: #b0b2b6;
 
   /* Scrollbar */
   --scroll-size: 6px;
@@ -55,7 +55,7 @@
 .dark {
   /* Dark Mode */
   --background: #090603;
-  --foreground: #f9f6f3;
+  --foreground: #b0b3b9;
   --primary: #936ff3;
   --primary-foreground: #090603;
   --accent: #f36f93;

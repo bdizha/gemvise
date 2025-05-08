@@ -89,7 +89,7 @@ const AboutPage: FC = () => {
         title="Silicon Valley & Beyond"
         description="Headquartered in the heart of innovation, with a distributed team of experts working globally to bring the Gemium to life."
         className="py-20 text-center"
-        style={{ background: 'linear-gradient(135deg, #232f3e 0%, #3f4b58 100%)', color: 'white' }}
+        style={{ background: 'linear-gradient(135deg, #030609 0%, #3f4b58 100%)', color: 'white' }}
       />
 
       {/* Future Section - Final CTA Gradient */}

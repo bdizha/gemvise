@@ -40,7 +40,7 @@ const config: Config = {
             500: '#7d7d7d',  
           },
           light: {
-            DEFAULT: '#f3f6f9',  
+            DEFAULT: '#b0b2b6',  
             100: '#ffffff',  
             200: '#f9f9f9',  
             300: '#ded9d7',  

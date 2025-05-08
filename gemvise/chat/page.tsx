@@ -49,7 +49,7 @@ export default function Chat() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-900">
+    <div className="flex flex-col min-h-screen bg-background">
       <header className="fixed top-0 w-full bg-gray-800 p-4 z-10">
         <h1 className="text-xl font-semibold text-white">Chat with Marilyn Monroe</h1>
       </header>

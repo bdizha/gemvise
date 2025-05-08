@@ -87,22 +87,22 @@ export const Hero: FC = () => {
   // Helper function to render gems as a vertical list
   const renderGemList = (gems: Gem[]) => { 
     return (
-      <div className="pb-2"> 
+      <div className="grid gap-2 pb-2"> 
         {gems.map((gem, index) => ( 
           <Link
             key={gem.id}
             href={`/gems/${gem.id}`}
             className="block w-full h-20" 
           >
-            <div className={`h-full rounded-[1.5rem] flex items-center p-4 bg-gradient-light-dark bg-cover bg-center transition-all text-[rgb(126,127,130)]`}>
+            <div className={`h-full rounded-[1.5rem] flex items-center p-4 bg-white/10 backdrop-blur-md transition-all`}>
               <img 
                 src={`/gradients/mobile/GV-Gradient-0${(index % 5) + 1}.png`} 
                 alt="" 
                 className="w-12 h-12 rounded-[1.5rem] mr-4"
               />
               <div className="flex-1 text-left">
-                <h3 className="text-sm font-medium text-[rgb(126,127,130)] truncate">{gem.name}</h3>
-                <p className="text-xs text-[rgb(126,127,130)]/80 truncate">
+                <h3 className="text-sm font-medium text-white truncate">{gem.name}</h3>
+                <p className="text-xs text-white/80 truncate">
                   {gem.attributes?.rarity || 'Common'} • {gem.attributes?.power || 0} Power
                 </p>
               </div>
@@ -152,13 +152,13 @@ export const Hero: FC = () => {
                       <p className="text-base mb-6 opacity-80 leading-relaxed max-w-md mx-auto">{world.description}</p>
                       {isActive && (
                         <div className="mt-4 relative max-w-md mx-auto">
-                          <div className="bg-background/10 backdrop-blur-md rounded-[1.5rem] p-4 shadow-xl">
+                          <div className="bg-background/60 backdrop-blur-md rounded-[1.5rem] p-4 shadow-xl">
                             <div className="grid grid-cols-2 gap-4">
                               {currentWorldGems.slice(0, 4).map((gem, i) => (
                                 <Link
                                   key={i}
                                   href={`/gems/${gem.id}`}
-                                  className="flex items-center space-x-3 p-2 rounded-[1.5rem] bg-white/6 hover:bg-white/8 transition-colors"
+                                  className="flex items-center text-left space-x-3 p-2 rounded-[1.5rem] bg-white/10 hover:bg-white/36 transition-colors"
                                 >
                                   <div className="relative w-10 h-10 rounded-[1.5rem] overflow-hidden bg-gradient-to-br from-white/10 to-white/5">
                                     {(gem as any).image && (
@@ -171,7 +171,7 @@ export const Hero: FC = () => {
                                   </div>
                                   <div className="flex-1 min-w-0">
                                     <p className="text-sm font-medium text-white truncate">{gem.name}</p>
-                                    <p className="text-xs text-white/60 truncate">{gem.description}</p>
+                                    <p className="text-xs text-white truncate">{gem.description}</p>
                                   </div>
                                 </Link>
                               ))}

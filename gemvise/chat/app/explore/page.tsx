@@ -7,6 +7,7 @@ import GridList from '@/components/layout/Grid/GridList';
 import { type Gem } from '@/types/gems';
 import { type GridItem } from '@/components/layout/Grid/types';
 import { useCallback } from 'react';
+
 export default function ExplorePage() {
   const router = useRouter();
   const [gems, setGems] = useState<Gem[]>([]);
@@ -40,7 +41,7 @@ export default function ExplorePage() {
   }));
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900">
+    <main className="min-h-screen bg-white dark:bg-background">
       <Section
         variant="default"
         tag="Explore"
