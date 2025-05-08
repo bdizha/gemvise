@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useSwiper } from 'swiper/react';
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Navigation } from 'swiper/modules';
-import { type SliderProps } from './types';
+import { type SliderProps, type GridItem } from './types';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -23,22 +23,9 @@ const formatNumber = (num: number | undefined): string => {
   return num.toString();
 };
 
-interface SliderCardProps {
-  href: string;
-  imageSrc?: string;
-  title: string;
-  description: string;
-  subtitle?: string;
-  cardVariant?: 'default' | 'character' | 'collection';
-  chatCount?: number;
-  followers?: number;
-  likes?: number;
-  fire?: number;
-}
-
-const SliderCard: React.FC<SliderCardProps> = ({
+const SliderCard: React.FC<GridItem> = ({
   href,
-  imageSrc,
+  imageUrl,
   title,
   description,
   subtitle,
@@ -51,9 +38,9 @@ const SliderCard: React.FC<SliderCardProps> = ({
   <div className="relative flex flex-col w-full text-left p-3 pb-6 md:pb-5 rounded-[40px] hover:shadow-lg transition-shadow duration-300 overflow-hidden cursor-pointer bg-gradient-light-dark">
     <div className="relative z-10">
       <div className="relative w-full aspect-[16/9] mb-4 rounded-[32px] overflow-hidden">
-        {imageSrc && (
+        {imageUrl && (
           <Image
-            src={imageSrc}
+            src={imageUrl}
             alt={title}
             fill
             className="object-cover"
@@ -134,6 +121,11 @@ const NavigationButtons = () => {
 
 const GridSlider: React.FC<SliderProps> = ({ title, cards }) => {
   if (!cards || cards.length < 1) return null;
+
+  const displayableCards = cards.filter(card => typeof card.href === 'string' && card.href.length > 0);
+
+  if (displayableCards.length < 1) return null;
+
   return (
     <section className="block">
       <div className="max-w-[1920px] mx-auto">
@@ -156,16 +148,16 @@ const GridSlider: React.FC<SliderProps> = ({ title, cards }) => {
               slidesPerView={'auto'}
               className="!pb-0"
             >
-              {cards.map((card, index) => (
-                <SwiperSlide key={index} className="!h-auto max-w-[280px] xs:max-w-[320px] sm:max-w-[340px] md:max-w-[360px]">
-                  <Link href={card.href} passHref>
+              {displayableCards.map((card) => (
+                <SwiperSlide key={card.id} className="!h-auto max-w-[280px] xs:max-w-[320px] sm:max-w-[340px] md:max-w-[360px]">
+                  <Link href={card.href!} passHref>
                     <div className="h-full">
                       <SliderCard {...card} />
                     </div>
                   </Link>
                 </SwiperSlide>
               ))}
-              {cards.length >= 4 && <NavigationButtons />}
+              {displayableCards.length >= 4 && <NavigationButtons />}
             </Swiper>
           </div>
         </div>

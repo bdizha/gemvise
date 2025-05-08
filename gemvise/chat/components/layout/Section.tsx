@@ -1,82 +1,121 @@
+import React, { type ReactNode } from 'react';
+import { cn } from '../../utils/utils';
+import { type GridItem } from './Grid/types'; 
+import GridList from './Grid/GridList';     
+import GridSlider from './Grid/GridSlider';   
 import { type FC } from 'react';
 
-export type SectionVariant = 'default' | 'gradient' | 'values' | 'centered';
-export type GradientType = 'dark' | 'light' | 'dark-light' | 'light-dark' | 'dark-light-dark' | 'light-dark-light';
+// Defines the styling variants for the section itself
+export type SectionVariant = 
+  | 'default'
+  | 'gradient'
+  | 'values'
+  | 'centered'
+  | 'hero';
 
-interface Value {
-  name: string;
-  description: string;
-  icon?: (props: React.ComponentProps<'svg'>) => JSX.Element;
-}
+// Defines how items within the section are displayed
+export type ItemsDisplayVariant = 'grid' | 'slider';
 
-interface SectionProps {
-  variant?: SectionVariant;
-  gradient?: GradientType;
+export interface SectionProps {
+  variant?: SectionVariant; // For overall section styling
   tag?: string;
   title?: string;
-  description?: string;
-  values?: Value[];
+  description?: ReactNode;
   className?: string;
-  children?: React.ReactNode;
+  children?: ReactNode; 
+  items?: GridItem[]; 
+  itemsDisplay?: ItemsDisplayVariant; // For displaying items as grid or slider
+  gridClassName?: string; 
+  sliderSectionTitle?: string; // Title specifically for the slider if needed, otherwise section title is used
+  gradient?: 'dark' | 'light' | 'dark-light' | 'light-dark' | 'dark-light-dark' | 'light-dark-light';
+  values?: {
+    name: string;
+    description: string;
+    icon?: (props: React.ComponentProps<'svg'>) => JSX.Element;
+  }[];
   style?: React.CSSProperties;
 }
 
+const variantClasses: Record<SectionVariant, string> = {
+  default: 'p-6 rounded-3xl flex flex-col gap-3 bg-gradient-dark',
+  gradient: 'py-12 md:py-16 bg-gradient-to-b from-background to-background/80',
+  values: 'py-12 md:py-16 bg-muted/30',
+  centered: 'py-12 md:py-16 text-center bg-gradient-dark rounded-3xl p-6',
+  hero: 'py-16 md:py-24 text-center bg-gradient-dark rounded-3xl p-6',
+};
+
+const gradientClasses = {
+  'dark': 'bg-gradient-dark',
+  'light': 'bg-gradient-light',
+  'dark-light': 'bg-gradient-dark-light',
+  'light-dark': 'bg-gradient-light-dark',
+  'dark-light-dark': 'bg-gradient-dark-light-dark',
+  'light-dark-light': 'bg-gradient-light-dark-light',
+};
+
 const Section: FC<SectionProps> = ({
-  variant = 'default',
-  gradient = 'dark',
+  variant: sectionVariant = 'default',
   tag,
   title,
   description,
-  values,
   className,
   children,
+  items,
+  itemsDisplay,
+  gridClassName,
+  sliderSectionTitle,
+  gradient,
+  values,
   style,
 }) => {
-  const variantClasses = {
-    default: '',
-    gradient: 'bg-gradient-dark',
-    values: 'bg-gradient-dark',
-    centered: 'text-center',
-  };
-
-  const gradientClasses = {
-    'dark': 'bg-gradient-dark',
-    'light': 'bg-gradient-light',
-    'dark-light': 'bg-gradient-dark-light',
-    'light-dark': 'bg-gradient-light-dark',
-    'dark-light-dark': 'bg-gradient-dark-light-dark',
-    'light-dark-light': 'bg-gradient-light-dark-light',
-  };
-
-  const headerClasses = [
-    'mx-auto max-w-2xl lg:text-center',
-    variant === 'centered' ? 'text-center' : ''
-  ].filter(Boolean).join(' ');
+  const baseClass = 'w-full';
+  const sectionStyleClasses = variantClasses[sectionVariant] || variantClasses.default;
 
   return (
     <section
-      className={['relative overflow-hidden', 'rounded-[48px]', variantClasses[variant], gradient && gradientClasses[gradient], className].filter(Boolean).join(' ')}
+      className={cn(baseClass, sectionStyleClasses, gradient && gradientClasses[gradient], className)}
       style={style}
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-      {tag && title && description && (
-        <div className={headerClasses}>
-          {tag && (
-            <h2 className="text-base font-semibold leading-7 text-theme-foreground/60">
-              {tag}
-            </h2>
-          )}
-          <h2 className="mt-2 text-3xl font-bold tracking-tight text-theme-foreground sm:text-4xl">
-            {title}
-          </h2>
-          {description && (
-            <p className="mt-6 text-lg leading-8 text-theme-foreground/60">
-              {description}
-            </p>
-          )}
-        </div>
-      )}
+      <div className="container mx-auto px-4 md:px-6 w-full">
+        {(tag || title || description) && (
+          <div
+            className={cn('mb-8 md:mb-12',
+              sectionVariant === 'centered' || sectionVariant === 'hero' ? 'max-w-3xl mx-auto text-center' : 'max-w-xl'
+            )}
+          >
+            {tag && (
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-2">
+                {tag}
+              </p>
+            )}
+            {title && (
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
+                {title}
+              </h2>
+            )}
+            {description && (
+              typeof description === 'string' ? (
+                <p className="text-lg text-muted-foreground">{description}</p>
+              ) : (
+                description
+              )
+            )}
+          </div>
+        )}
+        
+        {/* Conditionally render GridList or GridSlider if items and itemsDisplay are provided */}
+        {items && items.length > 0 && (
+          <div className="relative">
+            {itemsDisplay === 'grid' && (
+              <GridList items={items} className={gridClassName} />
+            )}
+            {itemsDisplay === 'slider' && (
+              <GridSlider title={sliderSectionTitle || title || ''} cards={items} />
+            )}
+          </div>
+        )}
 
+        {/* Render values */}
         {values && (
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
@@ -94,7 +133,8 @@ const Section: FC<SectionProps> = ({
           </div>
         )}
 
-        {children}
+        {/* Render children if items/itemsDisplay are not used, or if you want to add content alongside grid/slider */}
+        {(!items || items.length === 0 || !itemsDisplay) && children}
       </div>
     </section>
   );

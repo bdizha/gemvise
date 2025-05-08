@@ -2,7 +2,10 @@
 
 import * as React from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import Image from 'next/image';
 import { type GridItem } from './types';
+import { cn } from '../../../utils/utils'; 
 
 interface GridListProps {
   items: GridItem[];
@@ -11,22 +14,93 @@ interface GridListProps {
 
 const GridList: React.FC<GridListProps> = ({ items, className = '' }) => {
   return (
-    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 ${className}`}>
-      {items.map((item) => (
-        <motion.button
-          key={item.id} 
-          onClick={item.onClick}
-          className="group relative isolate flex flex-col justify-end overflow-hidden rounded-[4rem] bg-background/50 dark:bg-background/20 px-8 pb-8 pt-32 backdrop-blur-sm hover:bg-gray-800/70 dark:hover:bg-gray-700/70 cursor-pointer text-left"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 opacity-50" />
-          <div className="relative z-10 space-y-2">
-            <h3 className="text-xl font-semibold text-white dark:text-white">{item.title}</h3>
-            <p className="text-white/80 dark:text-white/80 line-clamp-2">{item.description}</p>
+    <div className={cn('grid gap-4 md:gap-6', className)}>
+      {items.map((item) => {
+        const cardContent = (
+          <div
+            className={cn(
+              'group relative flex flex-col overflow-hidden rounded-3xl bg-white/10 backdrop-blur-md text-white transition-all duration-300 ease-in-out h-full'
+            )}
+          >
+            {item.imageUrl && (
+              <div className="relative w-full aspect-[16/9] overflow-hidden rounded-t-3xl">
+                <Image
+                  src={item.imageUrl}
+                  alt={item.title}
+                  fill
+                  className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
+            )}
+            <div className="p-4 flex flex-col flex-grow">
+              {item.subtitle && (
+                <p className="text-xs font-semibold uppercase tracking-wider text-white/80 mb-1">
+                  {item.subtitle}
+                </p>
+              )}
+              <h3 className="text-lg font-semibold text-white mb-2 line-clamp-2">
+                {item.title}
+              </h3>
+              {item.description && (
+                <p className="text-sm text-white/80 line-clamp-3 flex-grow mb-4">
+                  {item.description}
+                </p>
+              )}
+              {(item.chatCount !== undefined || item.followers !== undefined || item.likes !== undefined) && (
+                <div className="mt-auto pt-4 border-t border-white/10">
+                  <dl className="flex justify-between text-xs text-white/70">
+                    {item.chatCount !== undefined && (
+                      <div className="flex flex-col items-center">
+                        <dt className="font-medium">Chats</dt>
+                        <dd>{item.chatCount}</dd>
+                      </div>
+                    )}
+                    {item.followers !== undefined && (
+                      <div className="flex flex-col items-center">
+                        <dt className="font-medium">Followers</dt>
+                        <dd>{item.followers}</dd>
+                      </div>
+                    )}
+                    {item.likes !== undefined && (
+                      <div className="flex flex-col items-center">
+                        <dt className="font-medium">Likes</dt>
+                        <dd>{item.likes}</dd>
+                      </div>
+                    )}
+                  </dl>
+                </div>
+              )}
+            </div>
           </div>
-        </motion.button>
-      ))}
+        );
+
+        const motionProps = {
+          key: item.id,
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.3, ease: 'easeOut' },
+          whileHover: { scale: 1.03, transition: { duration: 0.2 } },
+          whileTap: { scale: 0.98 },
+          className: 'h-full',
+        };
+
+        if (item.href) {
+          return (
+            <Link href={item.href} passHref legacyBehavior>
+              <motion.a {...motionProps} onClick={item.onClick} aria-label={item.title}>
+                {cardContent}
+              </motion.a>
+            </Link>
+          );
+        }
+
+        return (
+          <motion.div {...motionProps} onClick={item.onClick} role="button" tabIndex={0} aria-label={item.title}>
+            {cardContent}
+          </motion.div>
+        );
+      })}
     </div>
   );
 };
