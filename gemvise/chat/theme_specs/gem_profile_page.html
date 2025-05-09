@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gem Profile</title>
+    <link rel="stylesheet" href="css-for-profiles.css">
+</head>
+<body>
+    <header>
+        <h1 id="gem-title">Gem Profile</h1>
+    </header>
+
+    <main id="gem-details-content">
+        <section id="ruby-details" class="gem-section" style="display:none;">
+            <h2>Ruby Details</h2>
+            <p><strong>Color:</strong> Deep Red. <strong>Symbolism:</strong> Passion, Prosperity.</p>
+            <p>A variety of the mineral corundum, colored by chromium.</p>
+        </section>
+
+        <section id="sapphire-details" class="gem-section" style="display:none;">
+            <h2>Sapphire Details</h2>
+            <p><strong>Color:</strong> Blue (common), Pink, Yellow. <strong>Symbolism:</strong> Wisdom, Royalty.</p>
+            <p>Also a corundum variety, blue color from iron and titanium.</p>
+        </section>
+
+        <section id="emerald-details" class="gem-section" style="display:none;">
+            <h2>Emerald Details</h2>
+            <p><strong>Color:</strong> Vibrant Green. <strong>Symbolism:</strong> Hope, Renewal.</p>
+            <p>A variety of the mineral beryl, often has inclusions (jardin).</p>
+        </section>
+        
+        <section id="diamond-details" class="gem-section" style="display:none;">
+            <h2>Diamond Details</h2>
+            <p><strong>Color:</strong> Colorless (prized), fancy colors. <strong>Symbolism:</strong> Love, Strength.</p>
+            <p>Hardest natural material, formed under high pressure.</p>
+        </section>
+
+        <section id="default-details" class="gem-section" style="display:none;">
+            <h2>Information Unavailable</h2>
+            <p>Details for the selected gem are not available, or no gem was specified.</p>
+        </section>
+    </main>
+
+    <footer>
+        <a href="meta-example.html" class="back-link">Back to Gem Collection</a>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const gemName = params.get('gem');
+            const titleElement = document.getElementById('gem-title');
+            const defaultSection = document.getElementById('default-details');
+
+            const allGemSections = document.querySelectorAll('.gem-section');
+            allGemSections.forEach(section => section.style.display = 'none');
+
+            if (gemName) {
+                const formattedGemName = gemName.charAt(0).toUpperCase() + gemName.slice(1);
+                titleElement.textContent = formattedGemName + " Profile";
+                const gemSection = document.getElementById(gemName.toLowerCase() + '-details');
+                
+                if (gemSection) {
+                    gemSection.style.display = 'block';
+                } else {
+                    if (defaultSection) defaultSection.style.display = 'block';
+                    titleElement.textContent = "Gem Profile - Unknown Gem";
+                }
+            } else {
+                if (defaultSection) defaultSection.style.display = 'block';
+                titleElement.textContent = "Gem Profile - No Gem Selected";
+            }
+        });
+    </script>
+</body>
+</html>

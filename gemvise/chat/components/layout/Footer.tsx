@@ -15,12 +15,21 @@ interface Social extends Link {
   icon: (props: React.ComponentProps<'svg'>) => JSX.Element;
 }
 
-const links: Link[] = [
+// Define links for Platform, Community, and Legal sections
+const platformLinks: Link[] = [
+  { name: 'Home', href: '/', label: 'Home' },
   { name: 'Discover', href: '/discover', label: 'Discover' },
-  { name: 'Explore', href: '/explore', label: 'Explore' },
-  { name: 'Research', href: '/research', label: 'Research' },
-  { name: 'Blog', href: '/blog', label: 'Blog' },
+  { name: 'Create', href: '/create', label: 'Create' }, // Assuming '/create' is the path
+];
+
+const communityLinks: Link[] = [
   { name: 'About', href: '/about', label: 'About' },
+  { name: 'Gem Labs', href: '/research', label: 'Gem Labs (Research)' }, // Label changed, href remains /research
+  { name: 'Partners', href: '/partners', label: 'Partners' }, // Assuming '/partners' is the path
+  { name: 'Blog', href: '/blog', label: 'Blog' }, // Moved Blog here
+];
+
+const legalLinks: Link[] = [
   { name: 'Privacy', href: '/privacy', label: 'Privacy Policy' },
   { name: 'Terms', href: '/terms', label: 'Terms of Service' },
 ];
@@ -71,8 +80,9 @@ export default function Footer() {
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-y-12 lg:col-span-3 lg:grid-cols-3">
             {[ 
-              { title: 'Navigation', items: links.slice(0, 5) }, 
-              { title: 'Legal', items: links.slice(5) } 
+              { title: 'Platform', items: platformLinks }, 
+              { title: 'Community', items: communityLinks },
+              { title: 'Legal', items: legalLinks } 
             ].map((section) => (
               <div key={section.title}>
                 <h3 className="text-base font-semibold leading-6 text-foreground">
