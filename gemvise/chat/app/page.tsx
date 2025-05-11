@@ -93,40 +93,44 @@ const powerfulGems: GridItem[] = worlds.flatMap(world =>
 
 export default function Home() {
   return (
-    <main className="flex-1 overflow-y-auto bg-gradient-dark">
-      <Hero />
-      <Section gradient="dark-light" className="py-16 md:py-20"> 
-        <div className="mx-auto w-full px-4 md:px-6 space-y-12 md:space-y-16">
-          {processedWorlds.map((world) => (
-            <div key={world.id} className="space-y-10 md:space-y-12">
-              <Section 
-                items={world.collections} 
-                itemsDisplay="slider" 
-                sliderSectionTitle={`Collections from ${world.name}`}
-              />
-              
-              <Section 
-                items={world.gems} 
-                itemsDisplay="slider" 
-                sliderSectionTitle={`Characters from ${world.name}`}
-              />
-            </div>
-          ))}
+    <main className="flex flex-col gap-24">
+        <Section gradient="dark">
+          <Hero />
+        </Section>
+        {processedWorlds.map((world) => (
+            <Section  key={world.id} 
+              items={world.collections} 
+              itemsDisplay="slider" 
+              sliderSectionTitle={`Collections from ${world.name}`}
+            />
+        ))}
+        {processedWorlds.map((world) => (
+            <Section  key={world.id}
+              items={world.gems} 
+              itemsDisplay="slider" 
+              sliderSectionTitle={`Characters from ${world.name}`}
+            />
+        ))}
+        
+        <Section 
+          items={legendaryGems} 
+          itemsDisplay="slider" 
+          sliderSectionTitle="Legendary & Mythic Characters"
+        />
           
-          <Section 
-            items={legendaryGems} 
-            itemsDisplay="slider" 
-            sliderSectionTitle="Legendary & Mythic Characters"
-          />
-          
-          <Section 
-            items={powerfulGems} 
-            itemsDisplay="slider" 
-            sliderSectionTitle="Elite Characters"
-          />
-        </div>
-      </Section>
-    
+        <Section 
+          items={powerfulGems} 
+          itemsDisplay="slider" 
+          sliderSectionTitle="Elite Characters"
+        />
+        
+      <Section 
+        variant="hero"
+        tag="Explore"
+        title="Discover the GemVise Universe"
+        description="Dive into diverse worlds, meet unique characters, and explore captivating stories. Your next adventure starts here."
+        className="py-16 md:py-24 text-center"
+      />
     </main>
   );
 }

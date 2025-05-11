@@ -26,6 +26,7 @@ export interface SectionProps {
   items?: GridItem[]; 
   itemsDisplay?: ItemsDisplayVariant; // For displaying items as grid or slider
   gridClassName?: string; 
+  gridColumns?: number; // Added prop to control grid columns
   sliderSectionTitle?: string; // Title specifically for the slider if needed, otherwise section title is used
   gradient?: 'dark' | 'light' | 'dark-light' | 'light-dark' | 'dark-light-dark' | 'light-dark-light';
   values?: {
@@ -63,6 +64,7 @@ const Section: FC<SectionProps> = ({
   items,
   itemsDisplay,
   gridClassName,
+  gridColumns,
   sliderSectionTitle,
   gradient,
   values,
@@ -76,7 +78,7 @@ const Section: FC<SectionProps> = ({
       className={cn(baseClass, sectionStyleClasses, gradient && gradientClasses[gradient], className)}
       style={style}
     >
-      <div className="container mx-auto px-4 md:px-6 w-full">
+      <div className="container mx-auto p-4 md:p-8 w-full">
         {(tag || title || description) && (
           <div
             className={cn('mb-8 md:mb-12',
@@ -84,18 +86,18 @@ const Section: FC<SectionProps> = ({
             )}
           >
             {tag && (
-              <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-2">
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-2 leading-tight">
                 {tag}
               </p>
             )}
             {title && (
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4 leading-tight">
                 {title}
               </h2>
             )}
             {description && (
               typeof description === 'string' ? (
-                <p className="text-lg text-muted-foreground">{description}</p>
+                <p className="text-lg text-muted-foreground leading-tight">{description}</p>
               ) : (
                 description
               )
@@ -107,7 +109,7 @@ const Section: FC<SectionProps> = ({
         {items && items.length > 0 && (
           <div className="relative">
             {itemsDisplay === 'grid' && (
-              <GridList items={items} className={gridClassName} />
+              <GridList items={items} className={gridClassName} columns={gridColumns} />
             )}
             {itemsDisplay === 'slider' && (
               <GridSlider title={sliderSectionTitle || title || ''} cards={items} />
@@ -121,11 +123,11 @@ const Section: FC<SectionProps> = ({
             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
               {values.map((value) => (
                 <div key={value.name} className="flex flex-col">
-                  <dt className="text-base font-semibold leading-7 text-theme-foreground">
+                  <dt className="text-base font-semibold leading-7 text-theme-foreground leading-tight">
                     {value.name}
                   </dt>
-                  <dd className="mt-2 flex flex-auto flex-col text-base leading-7 text-theme-foreground/60">
-                    <p className="flex-auto">{value.description}</p>
+                  <dd className="mt-2 flex flex-auto flex-col text-base leading-7 text-theme-foreground/60 leading-tight">
+                    <p className="flex-auto leading-tight">{value.description}</p>
                   </dd>
                 </div>
               ))}

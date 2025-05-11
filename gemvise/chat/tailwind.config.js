@@ -7,12 +7,24 @@ module.exports = {
   ],
   theme: {
     extend: {
+      zIndex: {
+        '55': '55',
+        '60': '60',
+      },
       keyframes: {
         dash: {
           to: {
             strokeDashoffset: '-6'
           }
-        }
+        },
+        'rotate-360': {
+          'from': { transform: 'rotate(0deg)' },
+          'to': { transform: 'rotate(360deg)' },
+        },
+        'rotate-negative-360': {
+          'from': { transform: 'rotate(0deg)' },
+          'to': { transform: 'rotate(-360deg)' },
+        },
       },
       colors: {
         primary: 'var(--primary)',
@@ -25,18 +37,12 @@ module.exports = {
         'muted-foreground': 'var(--muted-foreground)',
         'description-gray': '#939699',
         neutral: {
-          900: 'var(--background)'
+          '300': '#A0A2A5',
+          '500': '#6C6F72',
+          '700': '#333639',
+          '800': '#2A2D30',
+          '900': '#1E2022',
         }
-      },
-      keyframes: {
-        'rotate-360': {
-          'from': { transform: 'rotate(0deg)' },
-          'to': { transform: 'rotate(360deg)' },
-        },
-        'rotate-negative-360': {
-          'from': { transform: 'rotate(0deg)' },
-          'to': { transform: 'rotate(-360deg)' },
-        },
       },
       animation: {
         'rotate-360': 'rotate-360 3s ease-in-out forwards',

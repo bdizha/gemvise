@@ -25,7 +25,6 @@ const RootLayout = ({
           <ClientLayout>
             {children}
           </ClientLayout>
-          <Footer />
         </ThemeProvider>
       </body>
     </html>

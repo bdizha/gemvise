@@ -1,6 +1,6 @@
 import { GemiumWorld, Genre, Collection } from '../types/gemium';
 import { nakalandCollections } from './worlds/nakaland';
-import { boldlandCollections } from './worlds/boldland';
+import { boldlandCollections } from './worlds/boldland/index';
 import { naimlandCollections } from './worlds/naimland';
 
 // Define the genre system

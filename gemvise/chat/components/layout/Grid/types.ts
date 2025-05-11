@@ -14,6 +14,7 @@ export interface GridItem {
   fire?: number; // Or any other 'hotness' metric
   // Additional optional fields
   status?: string; // e.g. 'New', 'Popular'
+  overlayText?: string; // Text for categorization overlay (e.g., 'Scene', 'Featured')
   buttonText?: string; // For a call to action button on the card
   videoSrc?: string; // If a card can play a video preview
   // Any other specific data attributes you might need for card rendering

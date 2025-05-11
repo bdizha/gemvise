@@ -1,112 +1,129 @@
 'use client';
 
 import { type FC } from 'react';
-import Section, { type SectionVariant } from '@/components/layout/Section';
+import Section from '@/components/layout/Section'; 
 import Button from '@/components/ui/Button';
-
-const values = [
-  {
-    title: "Authentic Expertise",
-    description: "Creating meaningful AI conversations with real experts, thought leaders, and creators that deliver genuine value and insights."
-  },
-  {
-    title: "Interactive Learning",
-    description: "Enabling direct, personalized learning through dynamic conversations that adapt to each user's needs and interests."
-  },
-  {
-    title: "Creator Empowerment",
-    description: "Providing a platform for experts to share their knowledge and connect with audiences in new, innovative ways through AI."
-  }
-];
 
 const AboutPage: FC = () => {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="flex flex-col gap-24">
       {/* Story Section - Hero Style Gradient */}
       <Section
-        variant="default"
-        tag="About Gemium"
+        variant="hero" 
         title="Dreams meet Reality"
         description="Crafting the future of entertainment. Bringing imagination to life through interactive AI personas, community collaboration, and creator empowerment."
-        className="py-20 text-center bg-gradient-light-dark-"
+        gradient="dark" 
+        className="py-12 md:py-16"
       />
-      {/* Story Section - Dark Theme for contrast */}
+
+      {/* Our Story Section - Text Focused */}
       <Section
-        variant="default"
+        title="Our Story"
+        description="GemVise started with a simple idea: what if stories could be as dynamic and evolving as the communities that love them? We envisioned a platform where creators could launch entire universes and fans could co-create narratives, characters, and adventures. From that spark, GemVise was born – a place to build, explore, and own the next generation of interactive entertainment."
+        variant="centered" 
+        className="py-12 md:py-16"
+      />
+
+      {/* Our Mission Section (Text Left, Image Right) - Using Children for custom layout */}
+      <Section
+        className="py-12 md:py-16"
         gradient="dark"
-        tag="Our Mission"
-        title="Spark the human imagination"
-        description="Gemium is pioneering a new frontier where imagination meets technology. By seamlessly blending human creativity with AI responsiveness, we're empowering creators to build, own, and evolve unique AI experiences that adapt and grow with every conversation."
-        className="py-20 text-center"
-      />
+      >
+        <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-12 px-4 md:px-8">
+          <div className="md:w-1/2 text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4 leading-tight">
+              Our Mission
+            </h2>
+            <p className="text-lg text-muted-foreground leading-tight">
+              To empower creators and fans to collaboratively build and own the future of storytelling through unique digital collectibles and interactive experiences.
+            </p>
+          </div>
+          <div className="md:w-1/2">
+            <img 
+              src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" 
+              alt="Team collaborating on ideas"
+              className="rounded-lg shadow-lg w-full h-auto object-cover max-h-[400px] md:max-h-[500px]"
+            />
+          </div>
+        </div>
+      </Section>
 
-      {/* Vision Section - Dynamic Gradient inspired by Carousel */}
+      {/* Our Vision Section (Image Left, Text Right) - Using Children */}
       <Section
-        variant="default"
-        tag="Our Vision"
-        title="Build the future of possibilities"
-        description="We're creating more than just a platform - we're building a future where digital creation has tangible value. Our vision extends to the Gemium, an immersive virtual world where AI companions come to life in ways never before possible."
-        className="py-20"
-        style={{ background: 'linear-gradient(135deg, #5785f2 0%, #de5159 100%)', color: 'white' }}
-      />
+        className="py-12 md:py-16"
+        gradient="dark"
+      >
+        <div className="container mx-auto flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12 px-4 md:px-8">
+          <div className="md:w-1/2 text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4 leading-tight">
+              Our Vision
+            </h2>
+            <p className="text-lg text-muted-foreground leading-tight">
+              To be the leading platform where creativity knows no bounds, fostering a vibrant ecosystem of shared narratives and digital ownership.
+            </p>
+          </div>
+          <div className="md:w-1/2">
+            <img 
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
+              alt="Digital world illustration"
+              className="rounded-lg shadow-lg w-full h-auto object-cover max-h-[400px] md:max-h-[500px]"
+            />
+          </div>
+        </div>
+      </Section>
 
-      {/* Values Section - Contrasting Gradient */}
+      {/* Team Section - Updated Gradient and Styles */}
       <Section
-        variant="values"
-        tag="Our Values"
-        title="Making sense. Making value"
-        description="At Gemium, our values shape everything we do. They guide our decisions, inspire our innovations, and define our relationships with creators and users."
-        values={values}
-        className="py-20"
-        style={{ background: 'linear-gradient(135deg, #11EDBA 0%, #AABEFF 100%)', color: '#141925' }}
-      />
-
-      {/* Team Section - Engaging Gradient */}
-      <Section
-        variant="default"
+        variant="centered"
         tag="Join Our Team"
         title="Shape the Future With Us"
         description="We're looking for passionate innovators who want to push the boundaries of AI interaction, blockchain integration, and virtual world development."
-        className="py-20 text-center"
-        style={{ background: 'linear-gradient(135deg, #C484FF 0%, #b879c7 100%)', color: 'white' }}
+        gradient="dark" 
+        className="py-12 md:py-16 text-white"
       >
         <div className="flex justify-center mt-8">
           <Button 
             variant="primary"
             size="lg"
-            onClick={() => window.location.href = '/careers'}
-            className="bg-white text-[#8A2BE2] hover:bg-gray-200 font-semibold"
+            onClick={() => window.location.href = '/careers'} 
+            className="bg-white text-purple-600 hover:bg-gray-200 font-semibold"
           >
             View Open Positions
           </Button>
         </div>
       </Section>
 
-      {/* Location Section - Subtle Gradient */}
+      {/* Location Section - Updated Gradient and Styles */}
       <Section
-        variant="default"
+        variant="centered"
         tag="Our Location"
         title="Silicon Valley & Beyond"
-        description="Headquartered in the heart of innovation, with a distributed team of experts working globally to bring the Gemium to life."
-        className="py-20 text-center"
-        style={{ background: 'linear-gradient(135deg, #030609 0%, #3f4b58 100%)', color: 'white' }}
+        description="Headquartered in the heart of innovation, with a distributed team of experts working globally to bring GemVise to life."
+        gradient="dark-light" 
+        className="py-12 md:py-16 text-white"
       />
 
-      {/* Future Section - Final CTA Gradient */}
+      {/* Future Section / Join Us - Updated Gradient and Styles */}
       <Section
-        variant="default"
-        tag="The Future"
+        variant="centered"
+        tag="Get Involved"
         title="Join Us in Building Tomorrow"
         description="The future of digital interaction is being shaped right now. Be part of this revolutionary journey as we create new possibilities for connection, creativity, and commerce."
-        className="py-20 text-center"
-        style={{ background: 'linear-gradient(135deg, #d15e7e 0%, #FFC55A 100%)', color: '#141925' }}
+        gradient="light" 
+        className="py-12 md:py-16 text-neutral-800"
       >
-        <div className="flex justify-center gap-6 mt-8">
-          <a href="https://discord.gg/Gemium" className="text-[#141925]/80 hover:text-[#141925] transition-colors font-medium">Discord</a>
-          <span className="text-[#141925]/50">•</span>
-          <a href="https://twitter.com/Gemium" className="text-[#141925]/80 hover:text-[#141925] transition-colors font-medium">Twitter</a>
-          <span className="text-[#141925]/50">•</span>
-          <a href="mailto:hello@Gemium.com" className="text-[#141925]/80 hover:text-[#141925] transition-colors font-medium">Email</a>
+        <div className="flex justify-center gap-4 sm:gap-6 mt-8">
+          <a href="https://discord.gg/Gemium" target="_blank" rel="noopener noreferrer" className="text-neutral-700 hover:text-neutral-900 transition-colors font-medium">
+            Discord
+          </a>
+          <span className="text-neutral-500">•</span>
+          <a href="https://twitter.com/Gemium" target="_blank" rel="noopener noreferrer" className="text-neutral-700 hover:text-neutral-900 transition-colors font-medium">
+            Twitter
+          </a>
+          <span className="text-neutral-500">•</span>
+          <a href="mailto:hello@Gemium.com" className="text-neutral-700 hover:text-neutral-900 transition-colors font-medium">
+            Email Us
+          </a>
         </div>
       </Section>
     </main>

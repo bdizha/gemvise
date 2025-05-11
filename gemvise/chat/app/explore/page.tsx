@@ -129,15 +129,6 @@ export default function ExplorePage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      {/* Hero Section */}
-      <Section 
-        variant="hero"
-        tag="Explore"
-        title="Discover the GemVise Universe"
-        description="Dive into diverse worlds, meet unique characters, and explore captivating stories. Your next adventure starts here."
-        className="py-16 md:py-24 text-center"
-      />
-
       {/* Featured Media Section */}
       {mediaGems.length > 0 && (
         <Section
@@ -146,7 +137,7 @@ export default function ExplorePage() {
           title="Featured Media"
           description="Captivating stories, series, and cinematic adventures."
           items={mediaGridItems}
-          itemsDisplay="grid"
+          itemsDisplay="slider"
           gridClassName="xl:grid-cols-4"
         />
       )}
@@ -159,7 +150,7 @@ export default function ExplorePage() {
           title="Meet the Characters"
           description="Iconic personalities and AI companions ready to interact."
           items={characterGridItems}
-          itemsDisplay="grid"
+          itemsDisplay="slider"
           gridClassName="xl:grid-cols-4"
         />
       )}
@@ -172,7 +163,7 @@ export default function ExplorePage() {
           title="Explore the Worlds"
           description="Discover diverse universes, each with unique collections and gems."
           items={worldGridItems}
-          itemsDisplay="grid"
+          itemsDisplay="slider"
           gridClassName="xl:grid-cols-4"
         />
       )}
@@ -185,7 +176,7 @@ export default function ExplorePage() {
           title="Editor's Picks"
           description="Handpicked favorites by the GemVise team, showcasing the best of our universe."
           items={editorsPicksGridItems}
-          itemsDisplay="grid"
+          itemsDisplay="slider"
           gridClassName="xl:grid-cols-4"
         />
       )}
@@ -198,20 +189,20 @@ export default function ExplorePage() {
           title="Anime Spotlight"
           description="Explore gems from the vibrant world of Anime, from classic sagas to new adventures."
           items={animeGridItems}
-          itemsDisplay="grid"
+          itemsDisplay="slider"
           gridClassName="xl:grid-cols-4"
         />
       )}
 
       {/* Community Stories Section (Placeholder) */}
       <Section
-        variant="default"
+        variant="centered"
         tag="Community"
         title="Community Stories & Creations"
         description="Discover tales, characters, and worlds crafted by fellow GemVise users. (Feature Coming Soon!)"
         className="py-12 md:py-16 text-center"
       >
-        <div className="mt-8 p-8 bg-neutral-800/30 rounded-lg">
+        <div className="mt-8 p-8 bg-neutral-800/30 rounded-[3.6rem]">
           <p className="text-lg text-neutral-400">Get ready to share your own narratives and explore user-generated content. This space will soon be filled with creativity from the community!</p>
         </div>
       </Section>

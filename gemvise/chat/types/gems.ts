@@ -28,7 +28,7 @@ export interface Gem {
   /**
    * Type of the Gem.
    */
-  type: 'Character' | 'Story' | 'Adventure';
+  type: 'Character' | 'Story' | 'Adventure' | 'Scene';
 
   /**
    * World that the Gem belongs to.
@@ -114,6 +114,21 @@ export interface Gem {
    * URL to navigate to when the Gem is clicked.
    */
   href?: string;
+
+  /**
+   * Optional array of scene IDs, applicable if type is 'Adventure'.
+   */
+  sceneIds?: string[];
+
+  /**
+   * Optional array of character IDs, applicable if type is 'Scene'.
+   */
+  characterIds?: string[];
+
+  /**
+   * Optional array of character IDs involved in an Adventure.
+   */
+  involvedCharacterIds?: string[];
 }
 
 /**

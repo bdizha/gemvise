@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Logo } from '../shared/Logo';
 import { Icon } from '../shared/Icon';
 import Funnel from './Funnel';
+import Section from './Section';
 
 interface Link {
   name: string;
@@ -49,10 +50,8 @@ const socials: Social[] = [
 
 export default function Footer() {
   return (
-    <footer 
-      className="group relative py-12 px-6 md:px-12 lg:px-24 overflow-hidden bg-gradient-dark-light dark:bg-gradient-dark-light"
-     
-    >
+    <footer>
+      <Section variant="default" className="relative py-12 md:py-16 text-center">
       <div 
         className="absolute bottom-0 left-0 w-full h-full opacity-[0.08] hidden lg:block transition-transform duration-[2000ms] ease-in-out group-hover:scale-[10]"
       >
@@ -110,6 +109,7 @@ export default function Footer() {
           </p>
         </div>
       </div>
+      </Section>
     </footer>
   );
 }

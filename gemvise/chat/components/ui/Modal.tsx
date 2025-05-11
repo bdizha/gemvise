@@ -47,7 +47,7 @@ const Modal: React.FC<ModalProps> & ModalSubComponents = ({ isOpen, onClose, chi
             animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
             exit={{ opacity: 0, scale: 0.95, x: '-50%', y: '-50%' }}
             transition={{ duration: 0.15, ease: 'easeOut' }}
-            className={`fixed left-1/2 top-1/2 z-50 transform overflow-hidden bg-gradient-dark-light text-white shadow-lg
+            className={`fixed left-1/2 top-1/2 z-50 transform overflow-hidden bg-gradient-dark-light text-white shadow-xl
               ${isMobile ? 'w-full h-full rounded-none' : 'max-w-lg w-full rounded-[40px]'}`}
           >
             {children}

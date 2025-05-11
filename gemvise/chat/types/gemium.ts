@@ -29,7 +29,7 @@ export interface Collection {
   id: string;
   name: string;
   description: string;
-  type: 'Original' | 'Licensed' | 'Web3';
+  type: 'Original' | 'Licensed' | 'Web3' | 'CharacterCollection' | 'AdventureCollection' | 'StoryCollection' | 'SceneCollection';
   gems: Gem[];
 }
 
@@ -155,7 +155,8 @@ export enum ContentType {
   STORY = 'Story',
   ADVENTURE = 'Adventure',
   WORLD = 'World',
-  COLLECTION = 'Collection'
+  COLLECTION = 'Collection',
+  SCENE = 'Scene'
 }
 
 // Interaction Types
