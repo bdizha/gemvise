@@ -1,79 +1,98 @@
-export interface Message {
-  id: string;
-  sender: string; // 'user' or character name/ID
-  text: string;
-  timestamp: string; // ISO 8601 format
-}
-
 export interface MockChatSession {
   id: string;
-  adventureId: string;
-  adventureName: string;
-  lastMessageSnippet: string; // Will be derived or less relevant now
-  timestamp: string; // Timestamp of the last message in the session
+  adventureId: string; 
+  adventureName: string; 
+  lastMessageSnippet: string;
+  timestamp: string; 
   unread?: boolean;
-  messages: Message[];
+  messages: ChatMessage[]; 
+}
+
+export interface ChatMessage {
+  id: string; 
+  sender: 'user' | 'gem'; 
+  text: string;
+  timestamp: string; 
 }
 
 export const mockChatHistory: MockChatSession[] = [
   {
-    id: 'chat-1',
-    adventureId: 'neon-nights-datastreams',
-    adventureName: 'Neon Nights & Datastreams',
-    lastMessageSnippet: 'Rosie: Just got the schematics. This is bigger than we thought...',
-    timestamp: '2025-05-11T10:30:00Z', // Timestamp of the last message
+    id: 'neon-nights-datastreams',
+    adventureId: 'neon-nights-datastreams', 
+    adventureName: 'Neon Nights: Datastreams',
+    lastMessageSnippet: "The city's secrets flow in the datastreams...", // This can be updated to the actual last message later
+    timestamp: '2024-07-28T10:30:00Z',
     unread: true,
     messages: [
-      { id: 'msg-1-1', sender: 'user', text: 'Rosie, you there? Found anything on the CyCorp server?', timestamp: '2025-05-11T10:25:00Z' },
-      { id: 'msg-1-2', sender: 'rosie-rocket-riley', text: 'Signal is weak, but I\'m in. They\'ve got layers of ICE I haven\'t seen before.', timestamp: '2025-05-11T10:27:00Z' },
-      { id: 'msg-1-3', sender: 'user', text: 'Anything critical? We need leverage.', timestamp: '2025-05-11T10:28:00Z' },
-      { id: 'msg-1-4', sender: 'rosie-rocket-riley', text: 'Just got the schematics for Project Chimera. This is bigger than we thought...', timestamp: '2025-05-11T10:30:00Z' },
-    ]
+      { id: 'msg-nn-1', sender: 'user', text: "I've jacked into the datastream. What am I looking for?", timestamp: '2024-07-28T10:30:05Z' },
+      { id: 'msg-nn-2', sender: 'gem', text: "Seek the anomalies, the corrupted packets. They whisper of the Architect's grand design.", timestamp: '2024-07-28T10:30:35Z' },
+      { id: 'msg-nn-3', sender: 'user', text: "The Architect? Who's that?", timestamp: '2024-07-28T10:31:00Z' },
+      { id: 'msg-nn-4', sender: 'gem', text: "A ghost in the machine, they say. The one who first wove these neon threads... Some say a rogue AI, others a collective of elite hackers.", timestamp: '2024-07-28T10:31:45Z' },
+      { id: 'msg-nn-5', sender: 'user', text: "How do I find these corrupted packets? The stream is a torrent of data.", timestamp: '2024-07-28T10:32:15Z' },
+      { id: 'msg-nn-6', sender: 'gem', text: "Focus your senses. Look for the echoes, the data that screams out of place. They often congregate around older, forgotten nodes of the net.", timestamp: '2024-07-28T10:32:50Z' },
+      { id: 'msg-nn-7', sender: 'user', text: "Okay, I think I see something... a cluster of distorted signals near the old Zenith Corp servers.", timestamp: '2024-07-28T10:33:30Z' },
+      { id: 'msg-nn-8', sender: 'gem', text: "Zenith Corp... their digital ghost still haunts these wires. Tread carefully. Their ICE is ancient but potent.", timestamp: '2024-07-28T10:34:00Z' },
+      { id: 'msg-nn-9', sender: 'user', text: "I'm past their initial defenses. The data here... it's almost alive. Pulsating.", timestamp: '2024-07-28T10:34:45Z' },
+      { id: 'msg-nn-10', sender: 'gem', text: "You're close to a nexus point. The Architect's influence will be strong here. What do you see?", timestamp: '2024-07-28T10:35:15Z' },
+      { id: 'msg-nn-11', sender: 'user', text: "Fragments of code, blueprints... for some kind of city-wide neural interface? This is dangerous.", timestamp: '2024-07-28T10:36:00Z' },
+      { id: 'msg-nn-12', sender: 'gem', text: "Indeed. Control over the city's very consciousness. That is the Architect's endgame. You must sever this node.", timestamp: '2024-07-28T10:36:35Z' },
+      { id: 'msg-nn-13', sender: 'user', text: "How? The core is shielded by layers of adaptive counter-intrusions.", timestamp: '2024-07-28T10:37:10Z' },
+      { id: 'msg-nn-14', sender: 'gem', text: "Observe the pulse. The shields flicker in a pattern. There's a rhythm to the chaos. Find the off-beat, the moment of vulnerability.", timestamp: '2024-07-28T10:37:45Z' },
+      { id: 'msg-nn-15', sender: 'user', text: "Got it. Timing is critical. I'm uploading a logic bomb to disrupt the core sequence.", timestamp: '2024-07-28T10:38:30Z' },
+      { id: 'msg-nn-16', sender: 'gem', text: "May your code fly true. The datastream holds its breath...", timestamp: '2024-07-28T10:39:00Z' },
+      { id: 'msg-nn-17', sender: 'user', text: "It's in! The node is destabilizing! Alarms are blaring across this sector of the net.", timestamp: '2024-07-28T10:39:40Z' },
+      { id: 'msg-nn-18', sender: 'gem', text: "A necessary consequence. You've struck a blow against the Architect. But this is only one node among many.", timestamp: '2024-07-28T10:40:15Z' },
+      { id: 'msg-nn-19', sender: 'user', text: "So this isn't over? Where do I go next?", timestamp: '2024-07-28T10:40:40Z' },
+      { id: 'msg-nn-20', sender: 'gem', text: "The datastreams will guide you. Seek out other dissonant frequencies. The Architect's web is vast, but not without its flaws.", timestamp: '2024-07-28T10:41:20Z' },
+      { id: 'msg-nn-21', sender: 'user', text: "Will I have allies in this? Or am I fighting this ghost alone?", timestamp: '2024-07-28T10:41:55Z' },
+      { id: 'msg-nn-22', sender: 'gem', text: "There are others who resist the Architect's control. Glitches in the system, rogue programs, even other runners like yourself. Seek them, or let them find you.", timestamp: '2024-07-28T10:42:35Z' },
+      { id: 'msg-nn-23', sender: 'user', text: "Alright. One node down. The city breathes a little easier, even if it doesn't know it yet. Thanks for the guidance.", timestamp: '2024-07-28T10:43:10Z' },
+      { id: 'msg-nn-24', sender: 'gem', text: "The path of a runner is a lonely one, but your actions ripple through the neon glow. Stay sharp. The Architect will adapt.", timestamp: '2024-07-28T10:43:50Z' }
+    ],
   },
   {
-    id: 'chat-2',
-    adventureId: 'the-spy-who-loved-swing',
-    adventureName: 'The Spy Who Loved Swing',
-    lastMessageSnippet: 'Q: The Aston Martin is prepped. Try not to scratch it this time, Sterling.',
-    timestamp: '2025-05-11T09:15:00Z',
-    messages: [
-      { id: 'msg-2-1', sender: 'user', text: 'Q, I need the usual assortment. And make it snappy.', timestamp: '2025-05-11T09:12:00Z' },
-      { id: 'msg-2-2', sender: 'quentin-q-quibble', text: 'Patience, Sterling. Perfection takes time. The Aston Martin is prepped. Try not to scratch it this time.', timestamp: '2025-05-11T09:15:00Z' },
-    ]
+    id: 'the-crimson-artifact',
+    adventureId: 'the-crimson-artifact',
+    adventureName: 'The Crimson Artifact',
+    lastMessageSnippet: 'We need to find the map before they do.',
+    timestamp: '2024-07-27T15:45:10Z',
+    unread: false,
+    messages: [],
   },
   {
-    id: 'chat-3',
-    adventureId: 'neon-nights-datastreams',
-    adventureName: 'Neon Nights & Datastreams',
-    lastMessageSnippet: 'User: I\'m in. What\'s the next move?',
-    timestamp: '2025-05-10T18:45:00Z',
-    // Older messages to make the timeline in sidebar more realistic
-    messages: [
-      { id: 'msg-3-1', sender: 'rosie-rocket-riley', text: 'Meet me at the usual spot. Encrypted comms only.', timestamp: '2025-05-10T18:40:00Z' },
-      { id: 'msg-3-2', sender: 'user', text: 'I\'m in. What\'s the next move?', timestamp: '2025-05-10T18:45:00Z' },
-    ]
-  },
-  {
-    id: 'chat-4',
-    adventureId: 'the-spy-who-loved-swing',
-    adventureName: 'The Spy Who Loved Swing',
-    lastMessageSnippet: 'Moneypenny: Your target is at the casino. Don\'t be late.',
-    timestamp: '2025-05-09T12:00:00Z',
+    id: 'whispers-of-the-ancient-wood',
+    adventureId: 'whispers-of-the-ancient-wood',
+    adventureName: 'Whispers of the Ancient Wood',
+    lastMessageSnippet: 'The forest spirits are restless tonight.',
+    timestamp: '2024-07-26T08:12:00Z',
     unread: true,
-    messages: [
-      { id: 'msg-4-1', sender: 'Moneypenny', text: 'Sterling, your target has been spotted at the Casino Royale. Don\'t be late.', timestamp: '2025-05-09T12:00:00Z' },
-      { id: 'msg-4-2', sender: 'user', text: 'Understood, Moneypenny. Tell M I\'ll be on my best behaviour. Mostly.', timestamp: '2025-05-09T12:02:00Z' }
-    ]
+    messages: [],
   },
   {
-    id: 'chat-5',
-    adventureId: 'neon-nights-datastreams',
-    adventureName: 'Neon Nights & Datastreams',
-    lastMessageSnippet: 'User: Any leads on the data broker?',
-    timestamp: '2025-05-09T08:20:00Z',
-    messages: [
-      { id: 'msg-5-1', sender: 'rosie-rocket-riley', text: 'Heard whispers about a data broker called \'Glitch\'. Operates out of the Lower Sector. Nasty reputation.', timestamp: '2025-05-09T08:15:00Z' },
-      { id: 'msg-5-2', sender: 'user', text: 'Any leads on finding Glitch?', timestamp: '2025-05-09T08:20:00Z' },
-    ]
+    id: 'starship-odyssey-x7',
+    adventureId: 'starship-odyssey-x7',
+    adventureName: 'Starship Odyssey X7',
+    lastMessageSnippet: "Captain, we're picking up a strange signal.",
+    timestamp: '2024-07-25T22:05:30Z',
+    unread: false, 
+    messages: [],
   },
+  {
+    id: 'the-last-dragon-chronicle',
+    adventureId: 'the-last-dragon-chronicle',
+    adventureName: 'The Last Dragon Chronicle',
+    lastMessageSnippet: 'The prophecy speaks of a rider and a choice.',
+    timestamp: '2024-07-24T13:20:00Z',
+    unread: false, 
+    messages: [],
+  },
+  {
+    id: 'the-spy-who-loved-swing',
+    adventureId: 'the-spy-who-loved-swing',
+    adventureName: 'The Spy Who Loved Swing',
+    lastMessageSnippet: 'The casino is crawling with enemy agents tonight, 008.',
+    timestamp: '2024-07-29T09:15:00Z', 
+    unread: true,
+    messages: [],
+  }
 ];

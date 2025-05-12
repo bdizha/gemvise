@@ -13,10 +13,10 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={clsx(
-          'rounded-[1.5rem] bg-white border border-[#d5d9d9] p-4 shadow-sm transition-all duration-200',
-          'dark:bg-[#030609] dark:border-[#3f4b58] dark:text-white',
-          interactive && 'hover:shadow-md hover:border-[#0972d3] cursor-pointer',
-          gradient && 'bg-gradient-to-br from-[#ff9900] to-[#ffac31] text-[#0f1111]',
+          'rounded-[1.5rem] p-4 shadow-sm transition-all duration-200',
+          'bg-white/10 backdrop-blur-md text-white',
+          interactive && 'hover:shadow-md cursor-pointer',
+          gradient && 'bg-gradient-to-br from-[#ff9900] to-[#ffac31] text-neutral-900',
           className
         )}
         style={{ fontFamily: 'var(--font-primary)' }}
@@ -40,7 +40,7 @@ const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
     return (
       <div
         ref={ref}
-        className={clsx('mb-4 text-lg font-semibold', className)}
+        className={clsx('mb-3 text-lg font-semibold text-white', className)}
         {...props}
       >
         {children}
@@ -58,7 +58,7 @@ interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {
 const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <div ref={ref} className={clsx('text-sm', className)} {...props}>
+      <div ref={ref} className={clsx('text-sm text-white/80', className)} {...props}>
         {children}
       </div>
     );
@@ -76,7 +76,7 @@ const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
     return (
       <div
         ref={ref}
-        className={clsx('mt-4 text-sm text-[#5f6b7a]', className)}
+        className={clsx('mt-4 text-sm text-white/60', className)}
         {...props}
       >
         {children}

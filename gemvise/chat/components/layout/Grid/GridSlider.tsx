@@ -36,9 +36,9 @@ const SliderCard: React.FC<GridItem> = ({
   fire,
   overlayText, // Destructure overlayText from props
 }) => (
-  <div className="relative flex flex-col w-full text-left p-3 pb-6 md:pb-5 rounded-[40px] hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer h-full bg-gradient-light-dark rounded-xl md:rounded-3xl">
-    <div className="relative z-10">
-      <div className="relative w-full aspect-[16/9] mb-4 rounded-[32px] overflow-hidden">
+  <div className="relative flex flex-col w-full text-left p-4 transition-shadow duration-300 overflow-hidden cursor-pointer h-full rounded-3xl bg-white/10 backdrop-blur-md">
+    <div className="relative z-10 flex flex-col flex-grow">
+      <div className="relative w-full aspect-[16/9] mb-4 rounded-t-3xl overflow-hidden"> {/* Standardized rounding */}
         {imageUrl && (
           <Image
             src={imageUrl}
@@ -54,38 +54,38 @@ const SliderCard: React.FC<GridItem> = ({
           </div>
         )}
       </div>
-      <div className="flex-1 flex flex-col">
-        <h3 className="text-l font-bold mb-1 text-foreground leading-tight">{title}</h3> {/* Was text-white/60 */}
-        {subtitle && <div className="text-muted-foreground font-normal text-sm truncate mb-1">{subtitle}</div>}
-        <p className="line-clamp-2 text-sm text-ellipsis overflow-hidden whitespace-normal break-anywhere text-muted-foreground mb-4 leading-tight">{description}</p>
-        <div className="flex items-center justify-between">
+      <div className="flex-1 flex flex-col px-1 pb-1"> {/* Add slight padding for text content if needed */}
+        <h3 className="text-lg font-bold mb-1 text-white leading-tight">{title}</h3> {/* Ensured text-white */}
+        {subtitle && <div className="text-white/80 font-normal text-sm truncate mb-1 leading-tight">{subtitle}</div>} {/* Ensured text-white/80 */}
+        <p className="line-clamp-2 text-sm text-ellipsis overflow-hidden whitespace-normal break-anywhere text-white/80 mb-4 flex-grow leading-tight">{description}</p> {/* Ensured text-white/80 */}
+        <div className="flex items-center justify-between mt-auto"> {/* Ensure stats are at the bottom */}
           <div className="flex items-center space-x-1">
-            <svg viewBox="0 0 24 24" fill="none" width="14px" height="14px" className="text-muted-foreground">
+            <svg viewBox="0 0 24 24" fill="none" width="14px" height="14px" className="text-white/80"> {/* Ensured text-white/80 */}
               <path d="M21.5 12c0-5-3.694-8-9.5-8s-9.5 3-9.5 8c0 1.294.894 3.49 1.037 3.83l.037.092c.098.266.49 1.66-1.074 3.722 2.111 1 4.353-.644 4.353-.644 1.551.815 3.397 1 5.147 1 5.806 0 9.5-3 9.5-8Z" stroke="currentColor" strokeLinecap="square" strokeLinejoin="round" strokeWidth="2" />
             </svg>
-            <p className="text-sm text-muted-foreground">{formatNumber(chatCount)}</p>
+            <p className="text-sm text-white/80">{formatNumber(chatCount)}</p> {/* Ensured text-white/80 */}
           </div>
           <div className="flex items-center space-x-1">
-            <svg viewBox="0 0 24 24" fill="none" width="14px" height="14px" className="text-muted-foreground">
+            <svg viewBox="0 0 24 24" fill="none" width="14px" height="14px" className="text-white/80"> {/* Ensured text-white/80 */}
               <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M22 21v-2a4 4 0 0 0-3-3.87" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            <p className="text-sm text-muted-foreground">{formatNumber(followers)}</p>
+            <p className="text-sm text-white/80">{formatNumber(followers)}</p> {/* Ensured text-white/80 */}
           </div>
           <div className="flex items-center space-x-1">
-            <svg viewBox="0 0 24 24" fill="none" width="14px" height="14px" className="text-muted-foreground">
+            <svg viewBox="0 0 24 24" fill="none" width="14px" height="14px" className="text-white/80"> {/* Ensured text-white/80 */}
               <path d="M12 2.5c.3 0 .5.1.7.3l2.8 2.8c1.3 1.3 2.5 2.5 3.8 3.8 1.1 1.1 1.7 2.6 1.7 4.1 0 3.1-2.5 5.6-5.6 5.6-1.2 0-2.4-.4-3.4-1.1-1 .7-2.2 1.1-3.4 1.1-3.1 0-5.6-2.5-5.6-5.6 0-1.5.6-3 1.7-4.1 1.3-1.3 2.5-2.5 3.8-3.8l2.8-2.8c.2-.2.5-.3.7-.3z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            <p className="text-sm text-muted-foreground">{formatNumber(likes)}</p>
+            <p className="text-sm text-white/80">{formatNumber(likes)}</p> {/* Ensured text-white/80 */}
           </div>
           {fire !== undefined && fire > 0 && (
             <div className="flex items-center space-x-1">
-              <svg viewBox="0 0 24 24" fill="none" width="14px" height="14px" className="text-muted-foreground">
+              <svg viewBox="0 0 24 24" fill="none" width="14px" height="14px" className="text-white/80"> {/* Ensured text-white/80 */}
                 <path d="M12 2c.3-.1.6 0 .8.3l2.1 4.2c.1.3.4.5.7.5l4.7.7c.7.1 1 1 .5 1.5l-3.4 3.3c-.2.2-.3.5-.3.8l.8 4.7c.1.7-.6 1.2-1.2.9l-4.2-2.2c-.3-.1-.6-.1-.8 0l-4.2 2.2c-.6.3-1.3-.2-1.2-.9l.8-4.7c.1-.3-.1-.6-.3-.8L2.2 9.2c-.5-.5-.2-1.4.5-1.5l4.7-.7c.3 0 .6-.2.7-.5L10.2 2c.2-.3.5-.4.8-.3z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <p className="text-sm text-muted-foreground">{formatNumber(fire)}</p>
+              <p className="text-sm text-white/80">{formatNumber(fire)}</p> {/* Ensured text-white/80 */}
             </div>
           )}
         </div>

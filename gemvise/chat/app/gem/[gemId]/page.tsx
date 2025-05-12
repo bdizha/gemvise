@@ -4,13 +4,13 @@ import { useParams, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ChatBubbleLeftRightIcon, SparklesIcon, UserGroupIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline';
-import { worlds } from '@/data/worlds';
-import type { Gem } from '@/types/gemium';
+import { ChatBubbleLeftRightIcon, SparklesIcon, UserGroupIcon } from '@heroicons/react/24/outline';
+import { worlds } from '@/data/worldData';
+import type { Gem } from '@/types/gems';
 import Section from '@/components/layout/Section';
 import type { GridItem } from '@/components/layout/Grid/types';
-import ChatMessage from '@/components/chat/ChatMessage';
-import { mockChatHistory, type MockChatSession } from '@/data/mockChatHistory';
+import { mockChatHistory, type ChatMessage } from '@/data/mockChatHistory';
+import ChatMessageItem from '@/components/chat/ChatMessageItem';
 
 const gradients = [
   '/gradients/cha-gradient-00.png',
@@ -30,9 +30,15 @@ export default function GemDetail() {
 
   useEffect(() => {
     const gemId = params.gemId as string;
-    const allGems = worlds.flatMap(world => 
-      world.collections.flatMap(collection => collection.gems)
-    );
+    
+    const allGemsNested = worlds.map((world: World) => [
+      ...(world.characters || []),
+      ...(world.stories || []),
+      ...(world.adventures || []),
+      ...(world.scenes || []),
+    ]);
+    const allGems: Gem[] = allGemsNested.flat();
+
     setAllAvailableGems(allGems);
     const foundGem = allGems.find(g => g.id === gemId);
 
@@ -53,11 +59,6 @@ export default function GemDetail() {
     subtitle: itemGem.attributes?.rarity || itemGem.type,
     cardVariant: itemGem.type ? itemGem.type.toLowerCase() : 'default',
   });
-
-  let currentChatSession: MockChatSession | undefined = undefined;
-  if (gem && gem.type === 'Adventure') {
-    currentChatSession = mockChatHistory.find(session => session.adventureId === gem.id);
-  }
 
   if (loading) {
     return (
@@ -94,18 +95,16 @@ export default function GemDetail() {
                 {gem.name}
               </h1>
               <div className="mt-6 max-w-xl lg:mt-0">
-                {gem.attributes.traits && gem.attributes.traits.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
-                    {gem.attributes.traits.map((trait) => (
-                      <span
-                        key={trait}
-                        className="inline-flex items-center rounded-full bg-theme-surface/50 px-2 py-1 text-xs font-medium text-theme-foreground/80 ring-1 ring-inset ring-theme-foreground/10"
-                      >
-                        {trait}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                <div className="flex flex-wrap gap-2">
+                  {gem.attributes.traits.map((trait) => (
+                    <span
+                      key={trait}
+                      className="inline-flex items-center rounded-full bg-theme-surface/50 px-2 py-1 text-xs font-medium text-theme-foreground/80 ring-1 ring-inset ring-theme-foreground/10"
+                    >
+                      {trait}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
             
@@ -124,25 +123,6 @@ export default function GemDetail() {
           </div>
         </div>
       </div>
-
-      {/* Adventure Chat Log Section */}
-      {gem.type === 'Adventure' && currentChatSession && (
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 mb-12">
-          <h2 className="text-3xl font-bold text-theme-foreground mb-8 flex items-center">
-            <ChatBubbleBottomCenterTextIcon className="h-8 w-8 mr-3 text-theme-accent" />
-            Adventure Log
-          </h2>
-          <div className="space-y-6 bg-theme-surface-overlay p-6 rounded-xl shadow-lg">
-            {currentChatSession.messages.length > 0 ? (
-              currentChatSession.messages.map((msg) => (
-                <ChatMessage key={msg.id} message={msg} allGems={allAvailableGems} />
-              ))
-            ) : (
-              <p className="text-theme-muted-foreground text-center py-4">No messages in this log yet.</p>
-            )}
-          </div>
-        </div>
-      )}
 
       {/* Content Section */}
       <div className="mx-auto max-w-7xl px-6 lg:px-8 pb-16">
@@ -173,28 +153,51 @@ export default function GemDetail() {
             </div>
 
             {gem.type === 'Adventure' && (
-              <div className="mt-10">
-                {gem.involvedCharacterIds && gem.involvedCharacterIds.length > 0 && (
-                  <div className="mb-6">
-                    <Section
-                      items={gem.involvedCharacterIds.map(charId => getGemById(charId)).filter(Boolean).map(g => mapGemToGridItem(g as Gem))}
-                      itemsDisplay="slider"
-                      sliderSectionTitle="Involved Characters"
-                      className="bg-transparent px-0"
-                    />
-                  </div>
-                )}
-                {gem.sceneIds && gem.sceneIds.length > 0 && (
-                  <div>
-                    <Section
-                      items={gem.sceneIds.map(sceneId => getGemById(sceneId)).filter(Boolean).map(g => mapGemToGridItem(g as Gem))}
-                      itemsDisplay="slider"
-                      sliderSectionTitle="Scenes in this Adventure"
-                      className="bg-transparent px-0"
-                    />
-                  </div>
-                )}
-              </div>
+              <>
+                <div className="mt-10">
+                  {gem.involvedCharacterIds && gem.involvedCharacterIds.length > 0 && (
+                    <div className="mb-6">
+                      <Section
+                        items={gem.involvedCharacterIds.map(charId => getGemById(charId)).filter(Boolean).map(g => mapGemToGridItem(g as Gem))}
+                        itemsDisplay="slider"
+                        sliderSectionTitle="Involved Characters"
+                        className="bg-transparent px-0"
+                      />
+                    </div>
+                  )}
+                  {gem.sceneIds && gem.sceneIds.length > 0 && (
+                    <div>
+                      <Section
+                        items={gem.sceneIds.map(sceneId => getGemById(sceneId)).filter(Boolean).map(g => mapGemToGridItem(g as Gem))}
+                        itemsDisplay="slider"
+                        sliderSectionTitle="Scenes in this Adventure"
+                        className="bg-transparent px-0"
+                      />
+                    </div>
+                  )}
+                </div>
+                {(() => {
+                  const adventureChatSession = mockChatHistory.find(session => session.adventureId === gem.id);
+                  if (adventureChatSession && adventureChatSession.messages.length > 0) {
+                    return (
+                      <div className="mt-10">
+                        <Section
+                          variant="default"
+                          className="bg-theme-surface/30 rounded-[2rem] p-6"
+                          title="Adventure Log"
+                        >
+                          <div className="space-y-4 flex flex-col">
+                            {adventureChatSession.messages.map((message) => (
+                              <ChatMessageItem key={message.id} message={message} />
+                            ))}
+                          </div>
+                        </Section>
+                      </div>
+                    );
+                  }
+                  return null;
+                })()}
+              </>
             )}
 
             {gem.type === 'Scene' && gem.characterIds && gem.characterIds.length > 0 && (

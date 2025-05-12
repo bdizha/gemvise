@@ -1,4 +1,23 @@
 import { Collection } from '../../types/gemium';
+import type { World } from '../worldData';
+
+export const naimlandData: World = {
+  id: 'naimland',
+  name: 'NaimLand',
+  href: '/worlds/naimland',
+  imageUrl: '/gradients/worlds/naimland.png',
+  icon: '/gradients/worlds/naimland.png',
+  tags: [],
+  description: '',
+  shortDescription: '',
+  longDescription: '',
+  tone: [],
+  genres: ['Fantasy', 'Adventure', 'Mystery', 'Magic'],
+  themes: [],
+  vibes: [],
+  eras: [],
+  locations: [],
+};
 
 export const naimlandCollections: Collection[] = [
   {

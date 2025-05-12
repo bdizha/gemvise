@@ -2,18 +2,11 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { GlobeAltIcon, SparklesIcon, SunIcon } from '@heroicons/react/24/outline';
-import { worlds } from '@/data/worlds';
+import { worlds } from '@/data/worldData';
 
 interface WorldNavigationProps {
   className?: string;
 }
-
-const worldIcons = {
-  nakaland: SparklesIcon,
-  boldland: GlobeAltIcon,
-  naimland: SunIcon,
-  spaceum: GlobeAltIcon,
-};
 
 export const WorldNavigation: FC<WorldNavigationProps> = ({ className = '' }) => {
   const pathname = usePathname();
@@ -25,7 +18,7 @@ export const WorldNavigation: FC<WorldNavigationProps> = ({ className = '' }) =>
       <div className="px-4 text-sm font-medium text-theme-foreground/60">Worlds</div>
       <div className="space-y-1 w-full">
         {worlds.map((world) => {
-          const Icon = worldIcons[world.id as keyof typeof worldIcons];
+          const Icon = world.icon as React.ElementType;
           const href = `/worlds/${world.id}`;
           const isActive = pathname === href;
 

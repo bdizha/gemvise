@@ -1,10 +1,10 @@
 'use client';
 
-import { FC, useState, useMemo } from 'react';
+import { FC, useState, useMemo, useEffect } from 'react';
 import DefaultSection from '@/components/layout/Section/DefaultSection';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { worlds } from '@/data/worlds';
+import { World, worlds } from '@/data/worldData';
 import Tabs from '@/components/ui/Tabs';
 import { Gem } from '@/types/gemium';
 
@@ -26,25 +26,84 @@ const tabData = tabLabels.map(label => ({
   label: label
 }));
 
-export const Hero: FC = () => {
+// Static default genre labels for fallback
+const defaultGenreLabels = [
+  'All',
+  'Adventure',
+  'Fantasy',
+  'Sci-Fi',
+  'Mystery',
+  'Romance',
+  'Historical',
+  'Thriller',
+  'Comedy',
+  'Drama',
+];
+
+export interface HeroProps {
+  onGenreTabChange?: (genre: string) => void;
+  availableGenres?: string[]; // New optional prop
+}
+
+export const Hero: FC<HeroProps> = ({ onGenreTabChange, availableGenres }) => {
   const [activeWorldIndex, setActiveWorldIndex] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<TabName>('Trending');
 
+  // Determine which genre list to use for rendering tabs
+  const genresToDisplay = useMemo(() => 
+    (availableGenres && availableGenres.length > 0 ? availableGenres : defaultGenreLabels),
+    [availableGenres]
+  );
+
+  // Ensure initial active genre is valid based on the list being used
+  const [activeGenreTab, setActiveGenreTab] = useState<string>(genresToDisplay[0]); 
+
+  // Effect to reset active genre if the available genres change externally 
+  // and the current one is no longer valid
+  useEffect(() => {
+    // Only reset if the list actually changed and the current tab is invalid
+    if (genresToDisplay && !genresToDisplay.includes(activeGenreTab)) {
+      setActiveGenreTab(genresToDisplay[0]);
+    }
+    // If genresToDisplay becomes empty or undefined, reset to 'All' (or default first)
+    else if (!genresToDisplay || genresToDisplay.length === 0) {
+        setActiveGenreTab(defaultGenreLabels[0]);
+    }
+  }, [genresToDisplay, activeGenreTab]);
+
   // Memoized data processing for tabs
   const currentWorldGems = useMemo(() => {
-    if (!worlds?.[activeWorldIndex]?.collections) return [];
-    return worlds[activeWorldIndex].collections?.flatMap(col => col.gems || []) || [];
-  }, [activeWorldIndex]);
+    const world = worlds?.[activeWorldIndex];
+    if (!world) return [];
+    return [
+      ...(world.characters || []),
+      ...(world.stories || []),
+      ...(world.adventures || []),
+      ...(world.scenes || [])
+    ];
+  }, [activeWorldIndex, worlds]);
 
   const allGems = useMemo(() => {
     // Get unique gems using Set
     const uniqueGems = new Set(
       worlds?.flatMap(world => 
-        world.collections?.flatMap(col => col.gems || []) || []
+        [
+          ...(world.characters || []),
+          ...(world.stories || []),
+          ...(world.adventures || []),
+          ...(world.scenes || [])
+        ]
       ).map(gem => JSON.stringify(gem))
     );
-    return Array.from(uniqueGems).map(gemStr => JSON.parse(gemStr));
+    return Array.from(uniqueGems).map(gemStr => JSON.parse(gemStr) as Gem);
   }, [worlds]);
+
+  const filteredGemsByGenre = useMemo(() => {
+    if (activeGenreTab === 'All') {
+      return allGems;
+    }
+    return allGems.filter(gem => gem.genres?.includes(activeGenreTab));
+  }, [allGems, activeGenreTab]);
 
   const rarityWeights = {
     'Common': 1,
@@ -59,25 +118,25 @@ export const Hero: FC = () => {
 
   const trendingGems = useMemo(() => {
     // Sort by a combination of power and rarity weight
-    const weighted = [...allGems].map(gem => ({
+    const weighted = [...filteredGemsByGenre].map(gem => ({
       ...gem,
       weight: (gem.attributes?.power || 0) * rarityWeights[(gem.attributes?.rarity || 'Common') as RarityType]
-    }));
+    })); 
     return weighted
       .sort((a, b) => b.weight - a.weight)
       .slice(0, 4)
       .map(({ weight, ...gem }) => gem);
-  }, [allGems]);
+  }, [filteredGemsByGenre]);
 
   const popularGems = useMemo(() => {
-    const sorted = [...allGems].sort((a, b) => (b.attributes?.power || 0) - (a.attributes?.power || 0));
+    const sorted = [...filteredGemsByGenre].sort((a, b) => (b.attributes?.power || 0) - (a.attributes?.power || 0));
     return sorted.slice(0, 4);
-  }, [allGems]);
+  }, [filteredGemsByGenre]);
 
   const upcomingGems = useMemo(() => {
-    const filtered = [...allGems].filter(gem => gem.attributes?.rarity === 'Legendary' || gem.attributes?.rarity === 'Mythic');
+    const filtered = [...filteredGemsByGenre].filter(gem => gem.attributes?.rarity === 'Legendary' || gem.attributes?.rarity === 'Mythic');
     return filtered.slice(0, 4);
-  }, [allGems]);
+  }, [filteredGemsByGenre]);
 
   // Handle case where there are no worlds
   if (!Array.isArray(worlds) || worlds.length === 0) {
@@ -132,6 +191,33 @@ export const Hero: FC = () => {
   return (
     <section className="py-12 md:py-16 lg:py-20">
       <div className="container mx-auto px-4">
+        {/* New Genre Tabs Row */}
+        <div className="mb-12">
+          <div className="overflow-x-auto whitespace-nowrap pb-2 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
+            {genresToDisplay.map(genre => (
+              <button
+                key={genre}
+                onClick={() => {
+                  setActiveGenreTab(genre);
+                  if (onGenreTabChange) {
+                    onGenreTabChange(genre);
+                  }
+                }}
+                className={`
+                  inline-block rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-200 mr-3 last:mr-0 
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 
+                  ${activeGenreTab === genre 
+                    ? 'bg-white/20 text-white shadow-md'
+                    : 'bg-white/5 hover:bg-white/10 text-white/70 hover:text-white'
+                  }
+                `}
+              >
+                {genre}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-8"> 
           {/* Left Column (2/3 width on large screens) */}
           <div className="lg:col-span-2 mb-8 lg:mb-0"> 

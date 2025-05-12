@@ -51,7 +51,7 @@ const socials: Social[] = [
 export default function Footer() {
   return (
     <footer>
-      <Section variant="default" className="relative py-12 md:py-16 text-center">
+      <Section variant="default" className="relative py-12 md:py-16 text-left">
       <div 
         className="absolute bottom-0 left-0 w-full h-full opacity-[0.08] hidden lg:block transition-transform duration-[2000ms] ease-in-out group-hover:scale-[10]"
       >
@@ -59,12 +59,12 @@ export default function Footer() {
       </div>
       <div className="relative z-10">
         <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          <div className="flex flex-col items-start text-center sm:text-left">
+          <div className="flex flex-col items-start text-left sm:text-left">
             <Logo className="h-8" />
             <p className="mt-4 text-sm text-description-gray">
               Discover, Create, and Share Unique Worlds and Characters.
             </p>
-            <div className="mt-6 flex items-center justify-center gap-x-4">
+            <div className="mt-6 flex items-start justify-start gap-x-4">
               {socials.map((social) => (
                 <Link
                   key={social.name}

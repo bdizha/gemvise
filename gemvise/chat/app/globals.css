@@ -503,7 +503,7 @@ body {
 
 /* Additional Styles from screenshot */
 .bg-theme-surface {
-  background-color: var(--background-color, #ffffff); /* Default to white if var not set */
+  background-color: var(--background); /* Use the theme's --background variable */
 }
 
 .text-theme-foreground {

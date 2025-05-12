@@ -2,7 +2,7 @@
 
 import { Hero } from '@/components/home/Hero';
 import Section from '@/components/layout/Section';
-import { worlds } from '@/data/worlds';
+import { worlds } from '@/data/worldData';
 import { type GridItem } from '@/components/layout/Grid/types';
 
 // Process collections and gems for display
@@ -15,33 +15,28 @@ const getRandomGradient = (index: number) => {
 };
 
 const processedWorlds = worlds.map(world => {
-  const collections: GridItem[] = world.collections.map(collection => ({
-    id: collection.id,
-    href: `/world/${world.id}/collection/${collection.id}`,
-    imageUrl: `/gradients/named/GV-Gradient-${collection.type === 'Licensed' ? 'Purple-Pink' : 'Pink-Purple'}.png`,
-    title: collection.name,
-    subtitle: `${collection.type} Collection`, 
-    description: world.description, 
-    chatCount: collection.gems.length,
-    followers: 0, 
-    likes: 0,
-    cardVariant: 'collection'
-  }));
+  // Collections section is tricky with the new structure, making it empty for now.
+  const collections: GridItem[] = []; 
 
-  const gems: GridItem[] = world.collections.flatMap(collection =>
-    collection.gems.map((gem, gemIndex) => ({ 
-      id: gem.id,
-      href: `/chat/${gem.id}`,
-      imageUrl: getRandomGradient(gemIndex),
-      title: gem.name || '',
-      subtitle: gem.attributes.rarity || 'Common', 
-      description: gem.description || `A unique ${gem.type || 'gem'} from ${collection.name}`,
-      chatCount: 0, 
-      followers: 0, 
-      likes: gem.attributes.power || 0,
-      cardVariant: gem.type === 'Character' ? 'character' : 'default'
-    }))
-  );
+  const allGemsFromWorld = [
+    ...(world.characters || []),
+    ...(world.stories || []),
+    ...(world.adventures || []),
+    ...(world.scenes || [])
+  ];
+
+  const gems: GridItem[] = allGemsFromWorld.map((gem, gemIndex) => ({ 
+    id: gem.id,
+    href: `/chat/${gem.id}`,
+    imageUrl: getRandomGradient(gemIndex), // Existing image logic
+    title: gem.name || '',
+    subtitle: gem.attributes?.rarity || 'Common', 
+    description: gem.description || `A unique ${gem.type || 'gem'} from ${world.name}`, // Adjusted description
+    chatCount: 0, 
+    followers: 0, 
+    likes: gem.attributes?.power || 0,
+    cardVariant: gem.type === 'Character' ? 'character' : 'default' // Gem types can be Character, Story, etc.
+  }));
 
   return {
     id: world.id,
@@ -53,43 +48,55 @@ const processedWorlds = worlds.map(world => {
 
 // Get legendary and mythic gems
 const legendaryGems: GridItem[] = worlds.flatMap(world =>
-  world.collections.flatMap(collection =>
-    collection.gems
-      .filter(gem => gem.attributes.rarity === 'Legendary' || gem.attributes.rarity === 'Mythic')
-      .map(gem => ({
-        id: gem.id,
-        href: `/chat/${gem.id}`,
-        imageUrl: '/gradients/named/GV-Gradient-Purple-Pink-Purple.png',
-        title: gem.name || '',
-        subtitle: `${gem.attributes.rarity} - Power ${gem.attributes.power || 0}`, 
-        description: gem.description || `A legendary ${gem.type || 'gem'} from ${collection.name}`,
-        chatCount: 0, 
-        followers: 0, 
-        likes: gem.attributes.power || 0,
-        cardVariant: 'default'
-      }))
-  )
-).slice(0, 6);
+  [
+    ...(world.characters || []),
+    ...(world.stories || []),
+    ...(world.adventures || []),
+    ...(world.scenes || [])
+  ]
+    .filter(gem => gem.attributes?.rarity === 'Legendary' || gem.attributes?.rarity === 'Mythic')
+    .map(gem => ({ 
+      ...gem,
+      worldName: world.name 
+    }))
+).map(gemWithWorldName => ({ 
+  id: gemWithWorldName.id,
+  href: `/chat/${gemWithWorldName.id}`,
+  imageUrl: '/gradients/named/GV-Gradient-Purple-Pink-Purple.png',
+  title: gemWithWorldName.name || '',
+  subtitle: `${gemWithWorldName.attributes?.rarity} - Power ${gemWithWorldName.attributes?.power || 0}`,
+  description: gemWithWorldName.description || `A legendary ${gemWithWorldName.type || 'gem'} from ${gemWithWorldName.worldName}`,
+  chatCount: 0,
+  followers: 0,
+  likes: gemWithWorldName.attributes?.power || 0,
+  cardVariant: 'default'
+})).slice(0, 6);
 
 // Get powerful gems
 const powerfulGems: GridItem[] = worlds.flatMap(world =>
-  world.collections.flatMap(collection =>
-    collection.gems
-      .filter(gem => gem.attributes.power && gem.attributes.power >= 90)
-      .map(gem => ({
-        id: gem.id,
-        href: `/chat/${gem.id}`,
-        imageUrl: '/gradients/named/GV-Gradient-Pink-Purple-Pink.png',
-        title: gem.name || '',
-        subtitle: `Elite - Power ${gem.attributes.power}`, 
-        description: gem.description || `An elite ${gem.type || 'gem'} with high power`,
-        chatCount: 0, 
-        followers: 0, 
-        likes: gem.attributes.power || 0,
-        cardVariant: 'default'
-      }))
-  )
-).slice(0, 6);
+  [
+    ...(world.characters || []),
+    ...(world.stories || []),
+    ...(world.adventures || []),
+    ...(world.scenes || [])
+  ]
+    .filter(gem => gem.attributes?.power && gem.attributes.power >= 90)
+    .map(gem => ({ 
+      ...gem,
+      worldName: world.name
+    }))
+).map(gemWithWorldName => ({ 
+  id: gemWithWorldName.id,
+  href: `/chat/${gemWithWorldName.id}`,
+  imageUrl: '/gradients/named/GV-Gradient-Pink-Purple-Pink.png',
+  title: gemWithWorldName.name || '',
+  subtitle: `Elite - Power ${gemWithWorldName.attributes?.power}`,
+  description: gemWithWorldName.description || `An elite ${gemWithWorldName.type || 'gem'} from ${gemWithWorldName.worldName} with high power`,
+  chatCount: 0,
+  followers: 0,
+  likes: gemWithWorldName.attributes?.power || 0,
+  cardVariant: 'default'
+})).slice(0, 6);
 
 export default function Home() {
   return (
@@ -101,14 +108,14 @@ export default function Home() {
             <Section  key={world.id} 
               items={world.collections} 
               itemsDisplay="slider" 
-              sliderSectionTitle={`Collections from ${world.name}`}
+              sliderSectionTitle={`Categories from ${world.name}`} // Changed title slightly
             />
         ))}
         {processedWorlds.map((world) => (
             <Section  key={world.id}
               items={world.gems} 
               itemsDisplay="slider" 
-              sliderSectionTitle={`Characters from ${world.name}`}
+              sliderSectionTitle={`Gems from ${world.name}`} // Changed title to be more general
             />
         ))}
         

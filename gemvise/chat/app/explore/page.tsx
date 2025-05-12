@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Section from '@/components/layout/Section';
 import { type Gem } from '@/types/gems';
 import { type GridItem } from '@/components/layout/Grid/types';
-import { worlds as staticWorldsData } from '@/data/worlds';
-import { type GemiumWorld } from '@/types/gemium'; 
+import { worlds as staticWorldsData, type World } from '@/data/worldData'; 
+import { Hero } from '@/components/home/Hero'; 
 
 const getRandomGradient = (index: number) => {
   const gradientNumbers = ['01', '02', '03', '05', '06', '07', '08', '09'];
@@ -16,19 +16,28 @@ const getRandomGradient = (index: number) => {
 
 const processStaticGems = (): Gem[] => {
   let allGemsFromStaticData: Gem[] = [];
-  staticWorldsData.forEach(world => {
-    world.collections.forEach(collection => {
-      collection.gems.forEach((gem, gemIndex) => {
-        const fullGem: Gem = {
-          ...gem,
-          world: world.id,
-          imageUrl: gem.imageUrl || getRandomGradient(allGemsFromStaticData.length + gemIndex),
-          description: gem.description || `A unique ${gem.type || 'gem'} from ${collection.name}`,
-          genres: gem.genres || [],
-          attributes: gem.attributes || { power: 0, rarity: 'Common', level: 0, traits: [] },
-        };
-        allGemsFromStaticData.push(fullGem);
-      });
+  staticWorldsData.forEach((world: World) => {
+    const gemSources: (Gem[] | undefined)[] = [
+      world.characters,
+      world.stories,
+      world.adventures,
+      world.scenes
+    ];
+
+    gemSources.forEach(sourceArray => {
+      if (sourceArray) {
+        sourceArray.forEach((gem: Gem, gemIndex: number) => {
+          const fullGem: Gem = {
+            ...gem,
+            world: world.id,
+            imageUrl: gem.imageUrl || getRandomGradient(allGemsFromStaticData.length + gemIndex),
+            description: gem.description || `A unique ${gem.type || 'gem'} from ${world.name}`,
+            genres: gem.genres || [],
+            attributes: gem.attributes || { power: 0, rarity: 'Common', level: 0, traits: [] },
+          };
+          allGemsFromStaticData.push(fullGem);
+        });
+      }
     });
   });
   return allGemsFromStaticData;
@@ -71,17 +80,17 @@ const mapToGridItems = (items: Gem[], handleItemClick: (itemId: string) => void)
   });
 };
 
-const mapWorldsToGridItems = (worlds: GemiumWorld[], handleWorldClick: (worldId: string) => void): GridItem[] => {
+const mapWorldsToGridItems = (worlds: World[], handleWorldClick: (worldId: string) => void): GridItem[] => {
   return worlds.map((world, index) => {
     return {
       id: world.id,
       title: world.name,
       description: world.description || '',
-      imageUrl: getRandomGradient(index + 1000), // Offset index to avoid collision with gem gradients
+      imageUrl: world.imageUrl || getRandomGradient(index + 1000), // Use actual imageUrl if available
       onClick: () => handleWorldClick(world.id),
-      subtitle: world.genres?.[0]?.name || 'Universe', 
-      cardVariant: 'world', // Explicitly set cardVariant for worlds
-      // href: `/worlds/${world.id}`, // Alternative to onClick
+      subtitle: world.genres?.[0] || 'Universe', // Adjusted for World.genres: string[]
+      cardVariant: 'world', 
+      // href: `/worlds/${world.id}`, 
     };
   });
 };
@@ -89,10 +98,49 @@ const mapWorldsToGridItems = (worlds: GemiumWorld[], handleWorldClick: (worldId:
 export default function ExplorePage() {
   const router = useRouter();
   
-  const allGems = useMemo(() => processStaticGems(), []);
-  const allWorlds = useMemo(() => staticWorldsData, []);
+  const allGemsFromData = useMemo(() => processStaticGems(), []);
+  const allWorldsFromData: World[] = useMemo(() => staticWorldsData, []);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  // Dynamically generate available genres for tabs
+  const availableGenresForTabs = useMemo(() => {
+    const allGemGenres = allGemsFromData.flatMap(gem => gem.genres || []);
+    const allWorldGenres = allWorldsFromData.flatMap(world => world.genres || []);
+    const combinedGenres = Array.from(new Set([...allGemGenres, ...allWorldGenres])).sort();
+    return ['All', ...combinedGenres];
+  }, [allGemsFromData, allWorldsFromData]);
+
+  const [currentGenreFilter, setCurrentGenreFilter] = useState<string>(availableGenresForTabs[0] || 'All');
+
+  // Effect to update currentGenreFilter if availableGenresForTabs changes and current filter is no longer valid
+  useEffect(() => {
+    if (!availableGenresForTabs.includes(currentGenreFilter)) {
+      setCurrentGenreFilter(availableGenresForTabs[0] || 'All');
+    }
+  }, [availableGenresForTabs, currentGenreFilter]);
+
+  const handleGenreTabChange = useCallback((genre: string) => {
+    setCurrentGenreFilter(genre);
+  }, []);
+
+  // Filtered data based on genre
+  const filteredGems = useMemo(() => {
+    if (currentGenreFilter === 'All') {
+      return allGemsFromData;
+    }
+    return allGemsFromData.filter(gem => gem.genres?.includes(currentGenreFilter));
+  }, [allGemsFromData, currentGenreFilter]);
+
+  const filteredWorlds = useMemo(() => {
+    if (currentGenreFilter === 'All') {
+      return allWorldsFromData;
+    }
+    // Assuming world.genres is an array of strings matching genreTabLabels
+    // If world.genres is [{id: '...', name: '...'}], then use: 
+    // world.genres?.some(g => g.name === currentGenreFilter)
+    return allWorldsFromData.filter(world => world.genres?.includes(currentGenreFilter)); 
+  }, [allWorldsFromData, currentGenreFilter]);
 
   const handleGemClick = useCallback((gemId: string) => {
     router.push(`/chat/${gemId}`);
@@ -102,14 +150,18 @@ export default function ExplorePage() {
     router.push(`/worlds/${worldId}`);
   }, [router]);
 
-  const mediaGems = useMemo(() => allGems.filter(gem => gem.type === 'Story' || gem.type === 'Adventure'), [allGems]);
-  const characterGems = useMemo(() => allGems.filter(gem => gem.type === 'Character'), [allGems]);
-  const animeGems = useMemo(() => allGems.filter(gem => Array.isArray(gem.genres) && gem.genres.includes('Anime')), [allGems]);
+  const mediaGems = useMemo(() => filteredGems.filter(gem => gem.type === 'Story' || gem.type === 'Adventure'), [filteredGems]);
+  const characterGems = useMemo(() => filteredGems.filter(gem => gem.type === 'Character'), [filteredGems]);
+  const animeGems = useMemo(() => filteredGems.filter(gem => Array.isArray(gem.genres) && gem.genres.includes('Anime')), [filteredGems]); // Anime might need its own logic or be a genre tab
   
   const editorsPicksGems = useMemo(() => {
     const picks: Gem[] = [];
-    mediaGems.slice(0, Math.min(2, mediaGems.length)).forEach(gem => picks.push(gem));
-    characterGems.slice(0, Math.min(1, characterGems.length)).forEach(gem => picks.push(gem));
+    // Use filteredGems for picks if they should also respect the genre filter
+    const sourceMediaGems = mediaGems; // or filteredGems.filter(gem => gem.type === 'Story' || gem.type === 'Adventure')
+    const sourceCharacterGems = characterGems; // or filteredGems.filter(gem => gem.type === 'Character')
+
+    sourceMediaGems.slice(0, Math.min(2, sourceMediaGems.length)).forEach(gem => picks.push(gem));
+    sourceCharacterGems.slice(0, Math.min(1, sourceCharacterGems.length)).forEach(gem => picks.push(gem));
     return Array.from(new Set(picks.map(g => g.id))).map(id => picks.find(g => g.id === id)!);
   }, [mediaGems, characterGems]);
 
@@ -117,7 +169,7 @@ export default function ExplorePage() {
   const characterGridItems = useMemo(() => mapToGridItems(characterGems, handleGemClick), [characterGems, handleGemClick]);
   const animeGridItems = useMemo(() => mapToGridItems(animeGems, handleGemClick), [animeGems, handleGemClick]);
   const editorsPicksGridItems = useMemo(() => mapToGridItems(editorsPicksGems, handleGemClick), [editorsPicksGems, handleGemClick]);
-  const worldGridItems = useMemo(() => mapWorldsToGridItems(allWorlds, handleWorldClick), [allWorlds, handleWorldClick]);
+  const worldGridItems = useMemo(() => mapWorldsToGridItems(filteredWorlds, handleWorldClick), [filteredWorlds, handleWorldClick]);
 
   if (isLoading) { 
     return (
@@ -129,6 +181,8 @@ export default function ExplorePage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <Hero onGenreTabChange={handleGenreTabChange} availableGenres={availableGenresForTabs} /> {/* Pass the callback */}
+
       {/* Featured Media Section */}
       {mediaGems.length > 0 && (
         <Section
@@ -208,7 +262,7 @@ export default function ExplorePage() {
       </Section>
 
       {/* Placeholder for No Content - if allGems is empty after processing */}
-      {!isLoading && allGems.length === 0 && (
+      {!isLoading && allGemsFromData.length === 0 && (
          <Section
           variant="default"
           title="Nothing to Explore Yet"

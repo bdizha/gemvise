@@ -24,6 +24,40 @@ const AboutPage: FC = () => {
         className="py-12 md:py-16"
       />
 
+      {/* Our Company Values Section */}
+      <Section
+        title="Our Core Values"
+        variant="default" 
+        gradient="dark"
+        className="py-12 md:py-16"
+      >
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center md:text-left">
+            {/* Dream Value */}
+            <div className="p-6 rounded-lg bg-theme-surface/10 shadow-lg">
+              <h3 className="text-2xl font-bold text-theme-accent mb-3">Dream</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                To spark the imagination.
+              </p>
+            </div>
+            {/* Create Value */}
+            <div className="p-6 rounded-lg bg-theme-surface/10 shadow-lg">
+              <h3 className="text-2xl font-bold text-theme-accent mb-3">Create</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                To empower you with the tools to bring any vision to life – from sprawling worlds and unforgettable characters to intricate adventures and unique digital gems, fostering a universe of collaborative storytelling.
+              </p>
+            </div>
+            {/* Delight Value */}
+            <div className="p-6 rounded-lg bg-theme-surface/10 shadow-lg">
+              <h3 className="text-2xl font-bold text-theme-accent mb-3">Delight</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                To deliver captivating interactive experiences where every choice unfolds new possibilities, igniting curiosity and offering endless joy through exploration and shared narrative adventures.
+              </p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
       {/* Our Mission Section (Text Left, Image Right) - Using Children for custom layout */}
       <Section
         className="py-12 md:py-16"
