@@ -3,6 +3,7 @@
 import { type FC } from 'react';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
+import { Logo } from '@/components/shared/Logo';
 
 interface HeaderProps {
   onToggleTheme: () => void;
@@ -18,12 +19,12 @@ const Header: FC<HeaderProps> = ({ onToggleTheme, theme, isSidebarOpen, onOpenAu
         fixed right-0 top-0 z-50 flex h-16 w-full items-center justify-between 
         bg-theme-surface/30 
         backdrop-blur-md transition-all duration-200 
-        left-0 ${isSidebarOpen ? 'pl-64' : 'pl-20'} pr-4
+        left-0 ${isSidebarOpen ? 'pl-64' : 'pl-4'} pr-4
       `}
     >
-      {/* Left side: Conditional Logo - REMOVED */}
-      <div className="flex items-center gap-4">
-        {/* { !isSidebarOpen && <Logo variant="header" isSidebarOpen={isSidebarOpen} className="text-theme-foreground" /> } */}
+      {/* Left side: Logo */}
+      <div className="flex items-center">
+        <Logo variant="header" className="h-8 w-auto text-theme-foreground" />
       </div>
 
       {/* Right-aligned items (e.g., Theme Toggle) */}

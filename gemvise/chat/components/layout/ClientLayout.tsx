@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useTheme } from 'next-themes';
+import { usePathname } from 'next/navigation'; 
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
@@ -13,6 +14,12 @@ interface ClientLayoutProps {
 const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const { theme, setTheme } = useTheme();
+  const pathname = usePathname(); 
+
+  const pathsToHideSidebar = ['/about'];
+  const shouldRenderSidebar = !pathsToHideSidebar.includes(pathname);
+
+  const effectiveSidebarOpen = shouldRenderSidebar && isSidebarOpen;
 
   const handleToggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -20,11 +27,13 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-gradient-dark">
-      <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      {shouldRenderSidebar && (
+        <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      )}
       <Header 
         onToggleTheme={handleToggleTheme} 
         theme={theme || 'dark'} 
-        isSidebarOpen={isSidebarOpen}
+        isSidebarOpen={effectiveSidebarOpen} 
         onOpenAuthModal={() => {}}
       />
       <div 
@@ -37,7 +46,7 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
           overflow-y-auto
           transition-all 
           duration-200
-          ${isSidebarOpen ? 'pl-80' : 'pl-16'}
+          ${effectiveSidebarOpen ? 'pl-80' : 'pl-16'} 
         `}
       >
         <div className="mx-auto w-full">

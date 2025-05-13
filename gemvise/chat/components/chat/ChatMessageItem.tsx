@@ -16,7 +16,7 @@ const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => {
   // User-specific styles
   const userMessageClasses = `
     ${baseMessageClasses}
-    bg-gradient-to-br from-pink-500 via-purple-600 to-blue-600 text-white 
+    bg-theme-primary text-theme-primary-foreground 
     self-start ml-2 
   `; // Example gradient for user
 
@@ -37,7 +37,7 @@ const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => {
           <SparklesIcon className={`${iconClasses} bg-purple-500 text-white`} /> // Gem icon
         )}
         {isUserMessage && (
-          <UserCircleIcon className={`${iconClasses} bg-blue-500 text-white`} /> // User icon
+          <UserCircleIcon className={`${iconClasses} bg-theme-primary text-theme-primary-foreground`} /> // User icon
         )}
         <div className={isUserMessage ? userMessageClasses : gemMessageClasses}>
           <p className="text-sm">{message.text}</p>

@@ -105,31 +105,41 @@ export default function Home() {
           <Hero />
         </Section>
         {processedWorlds.map((world) => (
-            <Section  key={world.id} 
+          world.collections && world.collections.length > 0 && (
+            <Section  key={`${world.id}-collections`} 
               items={world.collections} 
               itemsDisplay="slider" 
-              sliderSectionTitle={`Categories from ${world.name}`} // Changed title slightly
+              sliderSectionTitle={`Categories from ${world.name}`} 
             />
+          )
         ))}
         {processedWorlds.map((world) => (
-            <Section  key={world.id}
+          world.gems && world.gems.length > 0 && (
+            <Section  key={`${world.id}-gems`}
               items={world.gems} 
               itemsDisplay="slider" 
-              sliderSectionTitle={`Gems from ${world.name}`} // Changed title to be more general
+              sliderSectionTitle={`Gems from ${world.name}`} 
             />
+          )
         ))}
         
-        <Section 
-          items={legendaryGems} 
-          itemsDisplay="slider" 
-          sliderSectionTitle="Legendary & Mythic Characters"
-        />
+        {legendaryGems && legendaryGems.length > 0 && (
+          <Section 
+            key="legendary-mythic-gems"
+            items={legendaryGems} 
+            itemsDisplay="slider" 
+            sliderSectionTitle="Legendary & Mythic Characters"
+          />
+        )}
           
-        <Section 
-          items={powerfulGems} 
-          itemsDisplay="slider" 
-          sliderSectionTitle="Elite Characters"
-        />
+        {powerfulGems && powerfulGems.length > 0 && (
+          <Section 
+            key="powerful-gems"
+            items={powerfulGems} 
+            itemsDisplay="slider" 
+            sliderSectionTitle="Elite Characters"
+          />
+        )}
         
       <Section 
         variant="hero"

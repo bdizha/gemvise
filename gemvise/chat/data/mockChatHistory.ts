@@ -94,5 +94,19 @@ export const mockChatHistory: MockChatSession[] = [
     timestamp: '2024-07-29T09:15:00Z', 
     unread: true,
     messages: [],
+  },
+  {
+    id: 'boldland-adv-bold-girls',
+    adventureId: 'boldland-adv-bold-girls',
+    adventureName: 'Bold Girls: Marry a Millionaire',
+    lastMessageSnippet: 'Ready for your first mission, Agent?',
+    timestamp: new Date().toISOString(), 
+    unread: true,
+    messages: [
+      { id: 'bgk-msg-1', sender: 'gem', text: "Welcome, Agent! The Bold Girls Initiative needs your unique talents. Are you ready for your first briefing?", timestamp: new Date(Date.now() - 60000 * 5).toISOString() }, 
+      { id: 'bgk-msg-2', sender: 'user', text: "Absolutely! I'm eager to get started. What's the situation?", timestamp: new Date(Date.now() - 60000 * 4).toISOString() }, 
+      { id: 'bgk-msg-3', sender: 'gem', text: "Excellent. Your mission, codenamed 'Operation Starlight', involves retrieving a sensitive data cache from a rival organization. Discretion is paramount.", timestamp: new Date(Date.now() - 60000 * 3).toISOString() }, 
+      { id: 'bgk-msg-4', sender: 'user', text: "Understood. Any known threats or specific challenges I should anticipate?", timestamp: new Date(Date.now() - 60000 * 2).toISOString() } 
+    ]
   }
 ];
