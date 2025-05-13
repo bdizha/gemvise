@@ -133,7 +133,7 @@ const GridSlider: React.FC<SliderProps> = ({ title, cards }) => {
   if (displayableCards.length < 1) return null;
 
   return (
-    <div className="max-w-[1920px] mx-auto">
+    <div>
         <div className="relative">
             <div className="flex items-center justify-between mb-8">
               <h2 className="font-sans text-lg md:text-xl font-bold text-foreground">
