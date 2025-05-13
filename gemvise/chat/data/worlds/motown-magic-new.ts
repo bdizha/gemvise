@@ -4,8 +4,8 @@ import { MusicalNoteIcon } from '@heroicons/react/24/outline'; // Using a more s
 export const motownMagicNewData: World = {
   id: 'motown-magic',
   name: 'Motown Magic (New)', // Added (New) to distinguish
-  href: '/worlds/motown-magic-new',
-  imageUrl: '/images/worlds/motown-magic-new.webp', // Placeholder
+  href: '/world/motown-magic-new',
+  imageUrl: '/images/world/motown-magic-new.webp', // Placeholder
   icon: MusicalNoteIcon,
   tags: ['1960s', 'motown', 'music', 'soul', 'romance', 'detroit'], // Synthesized from Gems
   description: 'Experience the groundbreaking sound and heartfelt stories of the Motown era in 1960s Detroit.', // Synthesized

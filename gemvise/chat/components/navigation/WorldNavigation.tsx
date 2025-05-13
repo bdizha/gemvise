@@ -19,7 +19,7 @@ export const WorldNavigation: FC<WorldNavigationProps> = ({ className = '' }) =>
       <div className="space-y-1 w-full">
         {worlds.map((world) => {
           const Icon = world.icon as React.ElementType;
-          const href = `/worlds/${world.id}`;
+          const href = `/world/${world.id}`;
           const isActive = pathname === href;
 
           return (
@@ -27,8 +27,8 @@ export const WorldNavigation: FC<WorldNavigationProps> = ({ className = '' }) =>
               <button
                 className={`${baseButtonClasses} ${
                   isActive
-                    ? 'bg-[#333639]/60'
-                    : 'bg-[#333639]/30 hover:bg-[#333639]/60 focus:outline-none'
+                    ? 'bg-muted-foreground/60'
+                    : 'bg-muted-foreground/30 hover:bg-muted-foreground/60 focus:outline-none'
                 }`}
               >
                 <span className="flex h-8 w-8 items-center justify-center rounded-[1.5rem] bg-white/10">

@@ -3,9 +3,9 @@ import type { World } from '../worldData';
 export const suburbanSecretsData: World = {
   id: 'suburban-secrets',
   name: 'Suburban Secrets',
-  href: '/worlds/suburban-secrets',
-  imageUrl: '/gradients/worlds/novusprime.png', // Placeholder, consider updating
-  icon: '/gradients/worlds/novusprime.png', // Placeholder, consider updating
+  href: '/world/suburban-secrets',
+  imageUrl: '/gradients/world/novusprime.png', // Placeholder, consider updating
+  icon: '/gradients/world/novusprime.png', // Placeholder, consider updating
   tags: [],
   description: 'Uncover the hidden lives and dark secrets behind the perfect facade of 1950s suburbia.',
   shortDescription: 'Dark secrets in 1950s suburbia.',

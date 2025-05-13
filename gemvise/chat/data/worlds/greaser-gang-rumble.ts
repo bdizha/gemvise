@@ -3,9 +3,9 @@ import type { World } from '../worldData';
 export const greaserGangRumbleData: World = {
   id: 'greaser-gang-rumble',
   name: 'Greaser Gang Rumble',
-  href: '/worlds/greaser-gang-rumble',
-  imageUrl: '/gradients/worlds/cryosleep.png', // Placeholder, consider updating
-  icon: '/gradients/worlds/cryosleep.png', // Placeholder, consider updating
+  href: '/world/greaser-gang-rumble',
+  imageUrl: '/gradients/world/cryosleep.png', // Placeholder, consider updating
+  icon: '/gradients/world/cryosleep.png', // Placeholder, consider updating
   tags: [],
   description: 'Navigate the tough streets and rivalries of 1950s greaser gangs.',
   shortDescription: '1950s greaser gangs and street rivalries.',

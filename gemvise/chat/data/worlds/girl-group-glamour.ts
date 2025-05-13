@@ -4,8 +4,8 @@ import { ClockIcon } from '@heroicons/react/24/outline';
 export const girlGroupGlamourData: World = {
   id: 'girl-group-glamour',
   name: 'Girl Group Glamour',
-  href: '/worlds/girl-group-glamour',
-  imageUrl: '/gradients/worlds/world13.png',
+  href: '/world/girl-group-glamour',
+  imageUrl: '/gradients/world/world13.png',
   icon: ClockIcon,
   tags: ['Music', '1960s', 'Pop'],
   description: 'Experience the rise of iconic girl groups in the glamorous 1960s music scene.',

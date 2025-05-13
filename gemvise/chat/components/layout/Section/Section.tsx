@@ -88,7 +88,7 @@ const Section: React.FC<ExtendedSectionProps> = (props) => {
   );
 
   return (
-    <div className={`relative w-full px-16 pt-40 pb-40 overflow-hidden rounded-[56px] mb-16 ${className}`}>
+    <div className={`relative w-full px-16 pt-40 pb-16 overflow-hidden rounded-[56px] mb-16 ${className}`}>
       <div className='mx-auto max-w-[1074px]'>
         <div className={`absolute inset-0 transition-opacity duration-500 ease-in-out bg-gradient-${gradient} bg-no-repeat bg-cover bg-center`} />
         {content}

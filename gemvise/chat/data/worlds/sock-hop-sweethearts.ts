@@ -4,8 +4,8 @@ import { HeartIcon } from '@heroicons/react/24/outline';
 export const sockHopSweetheartsData: World = {
   id: 'sock-hop-sweethearts',
   name: 'Sock Hop Sweethearts',
-  href: '/worlds/sock-hop-sweethearts',
-  imageUrl: '/images/worlds/sock-hop-sweethearts.webp',
+  href: '/world/sock-hop-sweethearts',
+  imageUrl: '/images/world/sock-hop-sweethearts.webp',
   icon: HeartIcon,
   tags: ['1950s', 'dance', 'romance', 'school'],
   description: 'Poodle skirts, leather jackets, and dancing the night away at the school gymnasium.',

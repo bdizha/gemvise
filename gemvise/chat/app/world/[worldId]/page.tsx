@@ -5,7 +5,7 @@ import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { GlobeAltIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
-import { worlds } from '../../../data/worlds'; 
+import { worlds } from '../../../data/worldData'; 
 import type { GemiumWorld, Gem } from '../../../types/gemium'; 
 import type { GridItem } from '@/components/layout/Grid/types';
 import Section from '@/components/layout/Section';
@@ -52,8 +52,14 @@ export default function WorldDetail() {
     setWorld(foundWorld || null);
 
     if (foundWorld) {
-      const gemsFromMock = foundWorld.collections?.flatMap(collection => collection.gems || []) || [];
-      setWorldGems(gemsFromMock);
+      // Correctly aggregate gems from the World object's direct gem arrays
+      const allGemsFromWorld: Gem[] = [
+        ...(foundWorld.characters || []),
+        ...(foundWorld.stories || []),
+        ...(foundWorld.adventures || []),
+        ...(foundWorld.scenes || []),
+      ];
+      setWorldGems(allGemsFromWorld);
     } else {
       setWorldGems([]);
     }
@@ -161,10 +167,10 @@ export default function WorldDetail() {
           <div className="mt-6 flex flex-wrap gap-2 justify-center">
             {world.genres.map((genre) => (
               <span
-                key={genre.id} 
+                key={genre} // Assuming genre is a string, use it as key
                 className="inline-flex items-center rounded-full bg-theme-surface/50 px-3 py-1.5 text-xs font-medium text-theme-foreground/80 ring-1 ring-inset ring-theme-foreground/10"
               >
-                {genre.name} 
+                {genre} // Display the string directly
               </span>
             ))}
           </div>

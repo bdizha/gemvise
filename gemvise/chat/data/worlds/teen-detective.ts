@@ -48,8 +48,8 @@ export const teenDetectiveScenes20: Gem[] = [
 export const teenDetectiveData: World = {
   id: 'teen-detective',
   name: 'Teenage Detective Agency',
-  href: '/worlds/teen-detective',
-  imageUrl: '/images/worlds/teen-detective.png',
+  href: '/world/teen-detective',
+  imageUrl: '/images/world/teen-detective.png',
   icon: PuzzlePieceIcon,
   tags: ['mystery', 'comedy', 'teen', '1950s', 'detective'],
   description: 'Join a plucky gang of teenage sleuths in the 1950s as they solve baffling local mysteries, from missing pets to stolen school trophies, all while navigating the dramas of high school and outsmarting their rivals.',

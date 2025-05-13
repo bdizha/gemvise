@@ -209,5 +209,32 @@ export const boldlandCharacters: Gem[] = [
       level: 5, // Experienced gadgeteer
       traits: ['inventive', 'eccentric', 'resourceful', 'witty']
     }
+  },
+  // New Characters Start Here
+  {
+    id: 'boldland-char-boldpup-fox',
+    name: 'Flicker the BoldPup',
+    description: 'A cunning and agile fox, a loyal companion and guide through many of Boldland\'s adventures.',
+    genres: ['Fantasy', 'Adventure', 'Animal'],
+    type: 'Character',
+    world: 'boldland',
+    imageUrl: '/images/world/boldland/characters/boldpup-fox.png',
+    attributes: {
+      rarity: 'Common',
+      traits: ['agile', 'cunning', 'loyal', 'companion']
+    }
+  },
+  {
+    id: 'boldland-char-boldepic-ape',
+    name: 'Grokk the BoldEpic',
+    description: 'A wise and powerful ape, a guardian of the mystical virtual island in \'A Wink to Boldland\'.',
+    genres: ['Fantasy', 'Adventure', 'Animal', 'Guardian'],
+    type: 'Character',
+    world: 'boldland',
+    imageUrl: '/images/world/boldland/characters/boldepic-ape.png',
+    attributes: {
+      rarity: 'Rare',
+      traits: ['wise', 'strong', 'guardian', 'mystical']
+    }
   }
 ];

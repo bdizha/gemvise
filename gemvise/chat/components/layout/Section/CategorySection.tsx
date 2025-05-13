@@ -17,7 +17,7 @@ interface CategorySectionProps extends React.ComponentProps<'div'> {
 
 const CategorySection: React.FC<CategorySectionProps> = ({ categories, onGemClick, title, description }) => {
   return (
-    <div className="relative w-full pt-40 pb-40 overflow-hidden rounded-[56px] mb-16 ">
+    <div className="relative w-full pt-40 pb-16 overflow-hidden rounded-[56px] mb-16 ">
       <div className="mx-auto max-w-[1074px]">
       {categories.map((category) => (
         <div key={category.title} className="mb-8">

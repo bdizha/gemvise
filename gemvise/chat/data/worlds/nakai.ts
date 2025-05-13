@@ -38,9 +38,9 @@ const nakaiStories: Gem[] = [
 export const nakaiData: World = {
   id: 'nakai',
   name: 'Nakai',
-  href: '/worlds/nakai',
-  imageUrl: '/gradients/worlds/nakai.png',
-  icon: '/gradients/worlds/nakai.png',
+  href: '/world/nakai',
+  imageUrl: '/gradients/world/nakai.png',
+  icon: '/gradients/world/nakai.png',
   tags: [],
   description: 'A vibrant world inspired by anime, filled with action, adventure, and fantasy elements. Explore breathtaking landscapes and encounter powerful beings.',
   shortDescription: 'Anime-inspired world of action and fantasy.',

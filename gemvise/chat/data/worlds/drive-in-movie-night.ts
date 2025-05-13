@@ -3,9 +3,9 @@ import type { World } from '../worldData';
 export const driveInMovieNightData: World = {
   id: 'drive-in-movie-night',
   name: 'Drive-In Movie Night',
-  href: '/worlds/drive-in-movie-night',
-  imageUrl: '/gradients/worlds/zephyr.png',
-  icon: '/gradients/worlds/zephyr.png',
+  href: '/world/drive-in-movie-night',
+  imageUrl: '/gradients/world/zephyr.png',
+  icon: '/gradients/world/zephyr.png',
   tags: ['1950s', 'Nostalgia', 'Entertainment', 'Teen'],
   description: 'Experience the classic American pastime of a drive-in movie night.',
   shortDescription: 'Classic drive-in movies.',

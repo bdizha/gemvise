@@ -4,8 +4,8 @@ import { PlayCircleIcon } from '@heroicons/react/24/outline'; // Icon for jukebo
 export const dinerJukeboxData: World = {
   id: 'diner-jukebox',
   name: 'Diner Jukebox Dreams',
-  href: '/worlds/diner-jukebox',
-  imageUrl: '/images/worlds/diner-jukebox.webp', // Placeholder
+  href: '/world/diner-jukebox',
+  imageUrl: '/images/world/diner-jukebox.webp', // Placeholder
   icon: PlayCircleIcon,
   tags: ['1950s', 'diner', 'jukebox', 'romance', 'nostalgia', 'music', 'small town'], // Synthesized
   description: 'Experience the charm of a classic 1950s American diner, where the jukebox plays the hits and young love blossoms over milkshakes.', // Synthesized

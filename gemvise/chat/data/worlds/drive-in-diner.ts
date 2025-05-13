@@ -4,8 +4,8 @@ import { FilmIcon } from '@heroicons/react/24/outline'; // Icon representing dri
 export const driveInDinerData: World = {
   id: 'drive-in-diner',
   name: 'Drive-In Diner Delights',
-  href: '/worlds/drive-in-diner',
-  imageUrl: '/images/worlds/drive-in-diner.webp', // Placeholder
+  href: '/world/drive-in-diner',
+  imageUrl: '/images/world/drive-in-diner.webp', // Placeholder
   icon: FilmIcon,
   tags: ['1950s', 'drive-in', 'diner', 'comedy', 'nostalgia', 'food', 'cars'], // Synthesized
   description: 'Pull up to the classic 1950s drive-in diner, where carhops on roller skates serve up burgers, fries, and fun.', // Synthesized

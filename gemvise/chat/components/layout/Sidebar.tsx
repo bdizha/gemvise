@@ -4,8 +4,17 @@ import { type FC, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/shared/Logo';
-import MenuIcon from '@/components/shared/MenuIcon';
-import { PlusIcon, PaintBrushIcon, UserCircleIcon, GlobeAltIcon, PaperAirplaneIcon, ChatBubbleLeftRightIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
+import { 
+  PlusIcon, 
+  PaintBrushIcon, 
+  UserCircleIcon, 
+  GlobeAltIcon, 
+  PaperAirplaneIcon, 
+  ChatBubbleLeftRightIcon, 
+  ArrowRightIcon, 
+  Bars3BottomLeftIcon, 
+  Bars3BottomRightIcon
+} from '@heroicons/react/24/outline';
 import { mockChatHistory, type MockChatSession } from '@/data/mockChatHistory';
 import { worlds as appWorlds } from '@/data/worldData';
 import { SidebarItem } from './SidebarItem';
@@ -16,9 +25,9 @@ interface SidebarProps {
 }
 
 const createOptions = [
-  { href: '/create/gem', label: 'Create Roleplay', icon: PaintBrushIcon, itemClassName: 'bg-gradient-pink-purple text-[#333639] hover:opacity-80' },
-  { href: '/create/character', label: 'Create Character', icon: UserCircleIcon, itemClassName: 'bg-gradient-pink-purple text-[#333639] hover:opacity-80' },
-  { href: '/create/world', label: 'Create Story', icon: GlobeAltIcon, itemClassName: 'bg-gradient-pink-purple text-[#333639] hover:opacity-80' },
+  { href: '/create/gem', label: 'Create Roleplay', icon: PaintBrushIcon, itemClassName: 'bg-gradient-pink-purple text-muted-foreground hover:opacity-80' },
+  { href: '/create/character', label: 'Create Character', icon: UserCircleIcon, itemClassName: 'bg-gradient-pink-purple text-muted-foreground hover:opacity-80' },
+  { href: '/create/world', label: 'Create Story', icon: GlobeAltIcon, itemClassName: 'bg-gradient-pink-purple text-muted-foreground hover:opacity-80' },
 ];
 
 const mainNavLinks = [
@@ -64,7 +73,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
             className="text-theme-muted-foreground hover:text-theme-foreground"
             aria-label="Toggle sidebar"
           >
-            <MenuIcon className="h-6 w-6" />
+            {isOpen ? <Bars3BottomLeftIcon className="h-6 w-6" /> : <Bars3BottomRightIcon className="h-6 w-6" />}
           </button>
         </div>
 
@@ -78,7 +87,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                     onClick={() => setCreateMenuOpen(!createMenuOpen)}
                     label="Create"
                     icon={PlusIcon}
-                    className='bg-[#333639]/30 hover:bg-[#333639]/60'
+                    className='bg-muted-foreground/30 hover:bg-muted-foreground/60'
                     iconWrapperClassName='bg-white/10'
                     iconClassName='h-5 w-5 text-white'
                     labelClassName='flex-1 text-left text-white'
@@ -154,7 +163,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                       label="View All Timeline"
                       icon={ArrowRightIcon}
                       onClick={closeSidebar}
-                      className='bg-[#333639]/40 hover:bg-[#333639]/70 text-white font-semibold'
+                      className='bg-muted-foreground/40 hover:bg-muted-foreground/70 text-white font-semibold'
                       iconWrapperClassName='bg-white/10'
                       iconClassName='h-5 w-5 text-white'
                       labelClassName='flex-1 text-left'
@@ -190,7 +199,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                       label="View All Worlds"
                       icon={ArrowRightIcon}
                       onClick={closeSidebar}
-                      className='bg-[#333639]/40 hover:bg-[#333639]/70 text-white font-semibold'
+                      className='bg-muted-foreground/40 hover:bg-muted-foreground/70 text-white font-semibold'
                       iconWrapperClassName='bg-white/10'
                       iconClassName='h-5 w-5 text-white'
                       labelClassName='flex-1 text-left'
@@ -203,7 +212,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
           </>
         ) : (
           <div className="flex-grow overflow-y-auto px-2 py-4 space-y-2 thin-scrollbar">
-            <SidebarItem itemType='button' onClick={() => { setIsOpen(true); setCreateMenuOpen(true); }} label="Create" icon={PlusIcon} className='justify-center hover:bg-[#333639]/60' iconWrapperClassName='bg-white/10' iconClassName='h-5 w-5 text-white' labelClassName='hidden' />
+            <SidebarItem itemType='button' onClick={() => { setIsOpen(true); setCreateMenuOpen(true); }} label="Create" icon={PlusIcon} className='justify-center hover:bg-muted-foreground/60' iconWrapperClassName='bg-white/10' iconClassName='h-5 w-5 text-white' labelClassName='hidden' />
             {mainNavLinks.map(({ href, label, icon }) => (
               <SidebarItem key={`${href}-collapsed`} href={href} label={label} icon={icon} onClick={closeSidebar} isActive={pathname === href} className={`justify-center ${pathname === href ? 'bg-[#ff9900]/30' : 'hover:bg-[#ff9900]/20'}`} iconWrapperClassName='bg-white/10' iconClassName='h-5 w-5 text-theme-foreground' labelClassName='hidden' />
             ))}

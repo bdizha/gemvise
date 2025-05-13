@@ -4,8 +4,8 @@ import { MusicalNoteIcon } from '@heroicons/react/24/outline';
 export const dinerJukeboxDreamsData: World = {
   id: 'diner-jukebox-dreams',
   name: 'Diner Jukebox Dreams',
-  href: '/worlds/diner-jukebox-dreams',
-  imageUrl: '/images/worlds/diner-jukebox-dreams.webp',
+  href: '/world/diner-jukebox-dreams',
+  imageUrl: '/images/world/diner-jukebox-dreams.webp',
   icon: MusicalNoteIcon,
   tags: ['1950s', 'music', 'diner', 'romance'],
   description: 'Relive the magic of classic diners, spinning records, and innocent romance under neon lights.',

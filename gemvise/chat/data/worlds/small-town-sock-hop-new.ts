@@ -4,8 +4,8 @@ import { MusicalNoteIcon } from '@heroicons/react/24/outline'; // Or a record/da
 export const smallTownSockHopNewData: World = {
   id: 'small-town-sock-hop',
   name: 'Small Town Sock Hop (New)', // Added (New)
-  href: '/worlds/small-town-sock-hop-new',
-  imageUrl: '/images/worlds/small-town-sock-hop-new.webp', // Placeholder
+  href: '/world/small-town-sock-hop-new',
+  imageUrl: '/images/world/small-town-sock-hop-new.webp', // Placeholder
   icon: MusicalNoteIcon,
   tags: ['1950s', 'sock hop', 'small town', 'teen romance', 'dancing', 'rock-and-roll', 'nostalgia'], // Synthesized
   description: 'Step onto the gymnasium floor for a night of dancing, young love, and rock and roll at a 1950s small-town sock hop.', // Synthesized

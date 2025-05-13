@@ -3,9 +3,9 @@ import type { World } from '../worldData';
 export const spaceRaceRomanceData: World = {
   id: 'space-race-romance',
   name: 'Space Race Romance',
-  href: '/worlds/space-race-romance',
-  imageUrl: '/gradients/worlds/solaris.png', // Placeholder, consider updating. Assumed solaris.png for the last of the original set.
-  icon: '/gradients/worlds/solaris.png', // Placeholder, consider updating
+  href: '/world/space-race-romance',
+  imageUrl: '/gradients/world/solaris.png', // Placeholder, consider updating. Assumed solaris.png for the last of the original set.
+  icon: '/gradients/world/solaris.png', // Placeholder, consider updating
   tags: [],
   description: 'Experience love and ambition amidst the thrilling backdrop of the 1960s Space Race.',
   shortDescription: 'Love and ambition in the 1960s Space Race.',

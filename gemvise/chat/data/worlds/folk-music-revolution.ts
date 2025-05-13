@@ -50,8 +50,8 @@ export const folkRevolutionScenes25: Gem[] = [
 export const folkMusicRevolutionData: World = {
   id: 'folk-music-revolution',
   name: 'Folk Music Revolution',
-  href: '/worlds/folk-music-revolution',
-  imageUrl: '/images/worlds/folk-music-revolution.png', // Placeholder image
+  href: '/world/folk-music-revolution',
+  imageUrl: '/images/world/folk-music-revolution.png', // Placeholder image
   icon: MusicalNoteIcon,
   tags: ['folk music', '1960s', 'protest', 'social change', 'drama', 'music'],
   description: 'Experience the passionate world of 1960s folk music, where songs become anthems for social change and artists challenge the status quo.',

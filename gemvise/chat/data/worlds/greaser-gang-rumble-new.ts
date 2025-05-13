@@ -4,8 +4,8 @@ import { UserGroupIcon } from '@heroicons/react/24/outline'; // Icon representin
 export const greaserGangRumbleNewData: World = {
   id: 'greaser-gang-rumble',
   name: 'Greaser Gang Rumble (New)', // Added (New)
-  href: '/worlds/greaser-gang-rumble-new',
-  imageUrl: '/images/worlds/greaser-gang-rumble-new.webp', // Placeholder
+  href: '/world/greaser-gang-rumble-new',
+  imageUrl: '/images/world/greaser-gang-rumble-new.webp', // Placeholder
   icon: UserGroupIcon,
   tags: ['1950s', 'greasers', 'gangs', 'rivalry', 'drama', 'rock-and-roll'], // Synthesized
   description: 'Experience the rebellious world of 1950s greaser gangs, leather jackets, and rock and roll.', // Synthesized

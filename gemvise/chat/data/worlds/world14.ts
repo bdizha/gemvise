@@ -3,9 +3,9 @@ import type { World } from '../worldData';
 export const world14Data: World = {
   id: 'world14',
   name: 'Aquatica',
-  href: '/worlds/aquatica',
-  imageUrl: '/gradients/worlds/aquatica.png',
-  icon: '/gradients/worlds/aquatica.png',
+  href: '/world/aquatica',
+  imageUrl: '/gradients/world/aquatica.png',
+  icon: '/gradients/world/aquatica.png',
   tags: [],
   description: '',
   shortDescription: '',

@@ -4,8 +4,8 @@ import { MusicalNoteIcon } from '@heroicons/react/24/outline';
 export const woodstockVibesData: World = {
   id: 'woodstock-vibes',
   name: 'Woodstock Music Festival', // Corrected from 'Woodstock Vibes'
-  href: '/worlds/woodstock-vibes',
-  imageUrl: '/images/worlds/woodstock-vibes.webp',
+  href: '/world/woodstock-vibes',
+  imageUrl: '/images/world/woodstock-vibes.webp',
   icon: MusicalNoteIcon,
   tags: ['1960s', 'music festival', 'counterculture', 'peace', 'hippie'],
   description: 'Three days of peace, music, and love at the iconic Woodstock festival.',

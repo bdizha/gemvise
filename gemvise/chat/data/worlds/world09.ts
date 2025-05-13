@@ -3,9 +3,9 @@ import type { World } from '../worldData';
 export const world09Data: World = {
   id: 'world09',
   name: 'Solaris',
-  href: '/worlds/solaris',
-  imageUrl: '/gradients/worlds/solaris.png',
-  icon: '/gradients/worlds/solaris.png',
+  href: '/world/solaris',
+  imageUrl: '/gradients/world/solaris.png',
+  icon: '/gradients/world/solaris.png',
   tags: [],
   description: '',
   shortDescription: '',

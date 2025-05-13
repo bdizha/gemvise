@@ -113,8 +113,8 @@ export interface World {
 }
 
 export const worlds: World[] = [
-  nakaiData,
   boldlandData,
+  nakaiData,
   naimlandData,
   spaceumData,
   world05Data,

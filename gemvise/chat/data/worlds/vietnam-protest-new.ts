@@ -4,8 +4,8 @@ import { MegaphoneIcon } from '@heroicons/react/24/outline'; // Icon for protest
 export const vietnamProtestNewData: World = {
   id: 'vietnam-protest',
   name: 'Vietnam Protest (New)', // Added (New)
-  href: '/worlds/vietnam-protest-new',
-  imageUrl: '/images/worlds/vietnam-protest-new.webp', // Placeholder
+  href: '/world/vietnam-protest-new',
+  imageUrl: '/images/world/vietnam-protest-new.webp', // Placeholder
   icon: MegaphoneIcon,
   tags: ['1960s', '1970s', 'vietnam war', 'protest', 'activism', 'peace movement', 'counterculture'], // Synthesized
   description: 'Experience the passionate and tumultuous era of the anti-Vietnam War protests in the late 1960s and early 1970s.', // Synthesized

@@ -3,9 +3,9 @@ import type { World } from '../worldData';
 export const beatnikCafeData: World = {
   id: 'beatnik-cafe',
   name: 'Beatnik Cafe',
-  href: '/worlds/beatnik-cafe',
-  imageUrl: '/gradients/worlds/veridia.png', // Placeholder, consider updating
-  icon: '/gradients/worlds/veridia.png', // Placeholder, consider updating
+  href: '/world/beatnik-cafe',
+  imageUrl: '/gradients/world/veridia.png', // Placeholder, consider updating
+  icon: '/gradients/world/veridia.png', // Placeholder, consider updating
   tags: [],
   description: 'Immerse yourself in the poetry, jazz, and counterculture of a 1950s Beatnik cafe.',
   shortDescription: '1950s Beatnik cafe culture.',

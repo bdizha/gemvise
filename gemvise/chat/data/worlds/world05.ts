@@ -3,9 +3,9 @@ import type { World } from '../worldData';
 export const world05Data: World = {
   id: 'world05',
   name: 'Aethelgard',
-  href: '/worlds/aethelgard',
-  imageUrl: '/gradients/worlds/aethelgard.png',
-  icon: '/gradients/worlds/aethelgard.png',
+  href: '/world/aethelgard',
+  imageUrl: '/gradients/world/aethelgard.png',
+  icon: '/gradients/world/aethelgard.png',
   tags: [],
   description: '',
   shortDescription: '',

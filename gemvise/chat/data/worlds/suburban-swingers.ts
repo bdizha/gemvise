@@ -4,8 +4,8 @@ import { UserGroupIcon } from '@heroicons/react/24/outline';
 export const suburbanSwingersData: World = {
   id: 'suburban-swingers',
   name: 'Suburban Swingers',
-  href: '/worlds/suburban-swingers',
-  imageUrl: '/images/worlds/suburban-swingers.webp',
+  href: '/world/suburban-swingers',
+  imageUrl: '/images/world/suburban-swingers.webp',
   icon: UserGroupIcon,
   tags: ['1970s', 'suburbia', 'relationships', 'comedy', 'drama'],
   description: 'Key parties, fondue, and questionable fashion choices in 1970s suburbia.',

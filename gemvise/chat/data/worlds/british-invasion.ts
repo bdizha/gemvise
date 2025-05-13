@@ -4,8 +4,8 @@ import { ClockIcon } from '@heroicons/react/24/outline';
 export const britishInvasionData: World = {
   id: 'british-invasion',
   name: 'British Invasion Rockers',
-  href: '/worlds/british-invasion',
-  imageUrl: '/gradients/worlds/world10.png',
+  href: '/world/british-invasion',
+  imageUrl: '/gradients/world/world10.png',
   icon: ClockIcon,
   tags: ['Music', '1960s', 'Rock'],
   description: 'Experience the frenzy of the British Invasion rock scene in the 1960s.',

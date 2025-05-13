@@ -96,7 +96,7 @@ const CategorySection: Gem[] = [
 
 export default function GemList({ gems = CategorySection, onSelect, showHeader = true, title = "It's great to see you" }: GemListProps) {
   return (
-    <section className="sm:pb-20 pb-16" aria-label={title}>
+    <section className="sm:pb-16 pb-16" aria-label={title}>
       {showHeader && (
         <h1 className="text-center text-2xl pb-9">{title}</h1>
       )}

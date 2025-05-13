@@ -4,8 +4,8 @@ import { BriefcaseIcon } from '@heroicons/react/24/outline'; // Icon representin
 export const madMenEraNewData: World = {
   id: 'mad-men-era',
   name: 'Mad Men Era (New)', // Added (New) to distinguish
-  href: '/worlds/mad-men-era-new',
-  imageUrl: '/images/worlds/mad-men-era-new.webp', // Placeholder
+  href: '/world/mad-men-era-new',
+  imageUrl: '/images/world/mad-men-era-new.webp', // Placeholder
   icon: BriefcaseIcon,
   tags: ['1960s', 'advertising', 'madison avenue', 'drama', 'workplace', 'new york'], // Synthesized
   description: 'Navigate the high-stakes world of 1960s Madison Avenue advertising, full of ambition, secrets, and societal change.', // Synthesized

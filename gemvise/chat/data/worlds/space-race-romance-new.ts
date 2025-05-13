@@ -4,8 +4,8 @@ import { RocketLaunchIcon } from '@heroicons/react/24/outline'; // Icon for spac
 export const spaceRaceRomanceNewData: World = {
   id: 'space-race-romance',
   name: 'Space Race Romance (New)', // Added (New)
-  href: '/worlds/space-race-romance-new',
-  imageUrl: '/images/worlds/space-race-romance-new.webp', // Placeholder
+  href: '/world/space-race-romance-new',
+  imageUrl: '/images/world/space-race-romance-new.webp', // Placeholder
   icon: RocketLaunchIcon,
   tags: ['1960s', 'space race', 'nasa', 'engineers', 'astronauts', 'romance', 'sci-fi-lite'], // Synthesized
   description: 'Amidst the Cold War ambition of the 1960s space race, brilliant minds at NASA find love and navigate personal challenges.', // Synthesized

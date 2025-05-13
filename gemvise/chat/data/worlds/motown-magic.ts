@@ -3,9 +3,9 @@ import type { World } from '../worldData';
 export const motownMagicData: World = {
   id: 'motown-magic',
   name: 'Motown Magic',
-  href: '/worlds/motown-magic',
-  imageUrl: '/gradients/worlds/boldland.png', // Placeholder, consider updating
-  icon: '/gradients/worlds/boldland.png', // Placeholder, consider updating
+  href: '/world/motown-magic',
+  imageUrl: '/gradients/world/boldland.png', // Placeholder, consider updating
+  icon: '/gradients/world/boldland.png', // Placeholder, consider updating
   tags: [],
   description: 'Feel the rhythm and soul of the 1960s Motown scene.',
   shortDescription: '1960s Motown rhythm and soul.',

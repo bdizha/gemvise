@@ -4,8 +4,8 @@ import { RocketLaunchIcon } from '@heroicons/react/24/outline';
 export const apolloMoonLandingData: World = {
   id: 'apollo-moon-landing',
   name: 'Apollo Moon Landing',
-  href: '/worlds/apollo-moon-landing',
-  imageUrl: '/images/worlds/apollo-moon-landing.webp',
+  href: '/world/apollo-moon-landing',
+  imageUrl: '/images/world/apollo-moon-landing.webp',
   icon: RocketLaunchIcon,
   tags: ['1960s', 'space', 'history', 'achievement', 'technology'],
   description: 'Witness one of humanity\'s greatest achievements: the first steps on the Moon.',

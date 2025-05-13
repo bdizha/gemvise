@@ -4,8 +4,8 @@ import { SparklesIcon } from '@heroicons/react/24/outline'; // Or consider Music
 export const punkRockUprisingData: World = {
   id: 'punk-rock-uprising',
   name: 'Punk Rock Uprising',
-  href: '/worlds/punk-rock-uprising',
-  imageUrl: '/images/worlds/punk-rock-uprising.webp',
+  href: '/world/punk-rock-uprising',
+  imageUrl: '/images/world/punk-rock-uprising.webp',
   icon: SparklesIcon, // Placeholder, could be more specific
   tags: ['1970s', 'punk rock', 'music', 'rebellion', 'counterculture'],
   description: 'The raw energy, the rebellious spirit, and the iconic fashion of the Punk Rock era.',

@@ -4,8 +4,8 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 export const teenDetectiveAgencyData: World = {
   id: 'teen-detective-agency',
   name: 'Teenage Detective Agency',
-  href: '/worlds/teen-detective-agency',
-  imageUrl: '/images/worlds/teen-detective-agency.webp',
+  href: '/world/teen-detective-agency',
+  imageUrl: '/images/world/teen-detective-agency.webp',
   icon: MagnifyingGlassIcon,
   tags: ['1950s', 'mystery', 'teenagers', 'adventure', 'detective'],
   description: 'A group of smart and resourceful teenagers solve baffling mysteries in their sleepy town.',

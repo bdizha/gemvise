@@ -4,8 +4,8 @@ import { SparklesIcon } from '@heroicons/react/24/outline'; // Placeholder icon
 export const hollywoodDreamsNewData: World = {
   id: 'hollywood-dreams',
   name: 'Hollywood Dreams (New)', // Added (New) to distinguish
-  href: '/worlds/hollywood-dreams-new',
-  imageUrl: '/images/worlds/hollywood-dreams-new.webp', // Placeholder
+  href: '/world/hollywood-dreams-new',
+  imageUrl: '/images/world/hollywood-dreams-new.webp', // Placeholder
   icon: SparklesIcon,
   tags: ['1950s', 'hollywood', 'drama', 'romance', 'fame', 'dreams', 'movie star'], // Synthesized from Gems
   description: 'A small-town girl pursues her dream of movie stardom in the dazzling and cutthroat world of 1950s Hollywood.', // Synthesized

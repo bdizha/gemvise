@@ -3,9 +3,9 @@ import type { World } from '../worldData';
 export const modRockerRivalryData: World = {
   id: 'mod-rocker-rivalry',
   name: 'Mod vs. Rocker Rivalry',
-  href: '/worlds/mod-rocker-rivalry',
-  imageUrl: '/gradients/worlds/technoria.png',
-  icon: '/gradients/worlds/technoria.png',
+  href: '/world/mod-rocker-rivalry',
+  imageUrl: '/gradients/world/technoria.png',
+  icon: '/gradients/world/technoria.png',
   tags: ['1960s', 'Subculture', 'Rivalry', 'UK'],
   description: 'Experience the clash of two iconic British youth subcultures: the sharp-dressed Mods and the leather-clad Rockers.',
   shortDescription: '1960s Mods vs. Rockers.',

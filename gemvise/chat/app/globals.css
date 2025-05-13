@@ -248,44 +248,44 @@
 
 /* Pink-Purple Gradients */
 /* For light mode, we use CSS gradients with lighter shades of primary/accent */
-.bg-gradient-pink-purple-h {
+.bg-gradient-pink-purple{
   /* Light Mode: Light Pink (var(--primary)) to Light Purple (var(--accent)) horizontal */
   background-image: linear-gradient(to right, color-mix(in srgb, var(--primary) 70%, white 30%), color-mix(in srgb, var(--accent) 70%, white 30%));
   background-size: cover;
   background-position: center;
 }
-.dark .bg-gradient-pink-purple-h {
-  background-image: url('/gradients/desktop/GV-Gradient-Pink-Purple-H.png');
+.dark .bg-gradient-pink-purple{
+  background-image: url('/gradients/desktop/GV-Gradient-Pink-Purple.png');
 }
 
-.bg-gradient-pink-purple-v {
+.bg-gradient-pink-purple{
   /* Light Mode: Light Pink (var(--primary)) to Light Purple (var(--accent)) vertical */
   background-image: linear-gradient(to bottom, color-mix(in srgb, var(--primary) 70%, white 30%), color-mix(in srgb, var(--accent) 70%, white 30%));
   background-size: cover;
   background-position: center;
 }
-.dark .bg-gradient-pink-purple-v {
-  background-image: url('/gradients/desktop/GV-Gradient-Pink-Purple-V.png');
+.dark .bg-gradient-pink-purple{
+  background-image: url('/gradients/desktop/GV-Gradient-Pink-Purple.png');
 }
 
-.bg-gradient-purple-pink-h {
+.bg-gradient-purple-pink{
   /* Light Mode: Light Purple (var(--accent)) to Light Pink (var(--primary)) horizontal */
   background-image: linear-gradient(to right, color-mix(in srgb, var(--accent) 70%, white 30%), color-mix(in srgb, var(--primary) 70%, white 30%));
   background-size: cover;
   background-position: center;
 }
-.dark .bg-gradient-purple-pink-h {
-  background-image: url('/gradients/desktop/GV-Gradient-Purple-Pink-H.png');
+.dark .bg-gradient-purple-pink{
+  background-image: url('/gradients/desktop/GV-Gradient-Purple-Pink.png');
 }
 
-.bg-gradient-purple-pink-v {
+.bg-gradient-purple-pink{
   /* Light Mode: Light Purple (var(--accent)) to Light Pink (var(--primary)) vertical */
   background-image: linear-gradient(to bottom, color-mix(in srgb, var(--accent) 70%, white 30%), color-mix(in srgb, var(--primary) 70%, white 30%));
   background-size: cover;
   background-position: center;
 }
-.dark .bg-gradient-purple-pink-v {
-  background-image: url('/gradients/desktop/GV-Gradient-Purple-Pink-V.png');
+.dark .bg-gradient-purple-pink{
+  background-image: url('/gradients/desktop/GV-Gradient-Purple-Pink.png');
 }
 
 /* END OF GRADIENT THEMEING SECTION */

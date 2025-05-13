@@ -4,8 +4,8 @@ import { FilmIcon } from '@heroicons/react/24/outline';
 export const driveInDinerDelightsData: World = {
   id: 'drive-in-diner-delights',
   name: 'Drive-In Diner Delights',
-  href: '/worlds/drive-in-diner-delights',
-  imageUrl: '/images/worlds/drive-in-diner-delights.webp',
+  href: '/world/drive-in-diner-delights',
+  imageUrl: '/images/world/drive-in-diner-delights.webp',
   icon: FilmIcon, // Or CarIcon if available and more appropriate
   tags: ['1950s', 'drive-in', 'cars', 'romance', 'food'],
   description: 'Burgers, fries, and movie magic under the stars at the local drive-in theater and diner.',

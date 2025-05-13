@@ -4,8 +4,8 @@ import { MusicalNoteIcon } from '@heroicons/react/24/outline'; // Or a record/da
 export const sockHopData: World = {
   id: 'sock-hop',
   name: 'Sock Hop Romance',
-  href: '/worlds/sock-hop',
-  imageUrl: '/images/worlds/sock-hop.webp', // Placeholder
+  href: '/world/sock-hop',
+  imageUrl: '/images/world/sock-hop.webp', // Placeholder
   icon: MusicalNoteIcon,
   tags: ['1950s', 'sock hop', 'high school', 'romance', 'dancing', 'rock-and-roll', 'teenagers'], // Synthesized
   description: 'Twirl back to a 1950s high school sock hop, filled with jukebox tunes, hopeful glances, and the thrill of a slow dance.', // Synthesized

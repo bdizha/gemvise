@@ -4,8 +4,8 @@ import { SparklesIcon } from '@heroicons/react/24/outline';
 export const discoInfernoData: World = {
   id: 'disco-inferno-nights',
   name: 'Disco Inferno Nights',
-  href: '/worlds/disco-inferno-nights',
-  imageUrl: '/images/worlds/disco-inferno-nights.webp',
+  href: '/world/disco-inferno-nights',
+  imageUrl: '/images/world/disco-inferno-nights.webp',
   icon: SparklesIcon, // Or a disco ball icon
   tags: ['1970s', 'disco', 'nightlife', 'music', 'dance'],
   description: 'The flashing lights, the pulsating rhythms, and the fashion that defined the Disco era.',

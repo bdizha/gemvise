@@ -4,8 +4,8 @@ import { SparklesIcon } from '@heroicons/react/24/outline';
 export const madcapModSceneData: World = {
   id: 'madcap-mod-scene',
   name: 'Madcap Mod Scene',
-  href: '/worlds/madcap-mod-scene',
-  imageUrl: '/gradients/worlds/world14.png',
+  href: '/world/madcap-mod-scene',
+  imageUrl: '/gradients/world/world14.png',
   icon: SparklesIcon,
   tags: ['1960s', 'Mod Culture', 'Comedy', 'Music'],
   description: 'Dive into the stylish and chaotic world of the 1960s Mod scene in London.',

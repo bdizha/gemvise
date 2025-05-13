@@ -3,9 +3,9 @@ import type { World } from '../worldData';
 export const spaceumData: World = {
   id: 'spaceum',
   name: 'Spaceum',
-  href: '/worlds/spaceum',
-  imageUrl: '/gradients/worlds/spaceum.png',
-  icon: '/gradients/worlds/spaceum.png',
+  href: '/world/spaceum',
+  imageUrl: '/gradients/world/spaceum.png',
+  icon: '/gradients/world/spaceum.png',
   tags: [],
   description: '',
   shortDescription: '',

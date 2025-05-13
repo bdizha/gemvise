@@ -39,10 +39,15 @@ export interface Gem {
    * Attributes of the Gem.
    */
   attributes: {
-    power: number;
-    rarity: 'Legendary' | 'Epic' | 'Mythic';
-    level: number;
-    traits: string[];
+    power?: number;
+    rarity?: 'Common' | 'Uncommon' | 'Rare' | 'Epic' | 'Legendary' | 'Mythic';
+    level?: number;
+    traits?: string[];
+    chapters?: number;
+    difficulty?: string | number;
+    teamSize?: number;
+    scenes?: number;
+    [key: string]: any;
   };
 
   /**

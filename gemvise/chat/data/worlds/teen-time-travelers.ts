@@ -4,8 +4,8 @@ import { ClockIcon } from '@heroicons/react/24/outline';
 export const teenTimeTravelersData: World = {
   id: 'teen-time-travelers',
   name: 'Teen Time Travelers',
-  href: '/worlds/teen-time-travelers',
-  imageUrl: '/gradients/worlds/world15.png',
+  href: '/world/teen-time-travelers',
+  imageUrl: '/gradients/world/world15.png',
   icon: ClockIcon,
   tags: ['Sci-Fi', 'Adventure', 'Teen', 'Comedy'],
   description: 'Join a group of teenagers on wild adventures through time.',

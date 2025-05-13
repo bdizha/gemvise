@@ -4,8 +4,8 @@ import { MusicalNoteIcon } from '@heroicons/react/24/outline'; // Or a guitar/UK
 export const britishInvasionNewData: World = {
   id: 'british-invasion',
   name: 'British Invasion (New)', // Added (New)
-  href: '/worlds/british-invasion-new',
-  imageUrl: '/images/worlds/british-invasion-new.webp', // Placeholder
+  href: '/world/british-invasion-new',
+  imageUrl: '/images/world/british-invasion-new.webp', // Placeholder
   icon: MusicalNoteIcon,
   tags: ['1960s', 'british invasion', 'rock and roll', 'pop music', 'uk', 'bands', 'music'], // Synthesized
   description: 'Experience the electrifying music and cultural phenomenon of the 1960s British Invasion.', // Synthesized

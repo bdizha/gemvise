@@ -3,9 +3,9 @@ import type { World } from '../worldData';
 export const world15Data: World = {
   id: 'world15',
   name: 'Zephyr',
-  href: '/worlds/zephyr',
-  imageUrl: '/gradients/worlds/zephyr.png',
-  icon: '/gradients/worlds/zephyr.png',
+  href: '/world/zephyr',
+  imageUrl: '/gradients/world/zephyr.png',
+  icon: '/gradients/world/zephyr.png',
   tags: [],
   description: '',
   shortDescription: '',

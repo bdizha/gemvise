@@ -8,10 +8,34 @@ import { type GridItem } from '@/components/layout/Grid/types';
 import { worlds as staticWorldsData, type World } from '@/data/worldData'; 
 import { Hero } from '@/components/home/Hero'; 
 
-const getRandomGradient = (index: number) => {
-  const gradientNumbers = ['01', '02', '03', '05', '06', '07', '08', '09'];
-  const selectedIndex = index % gradientNumbers.length;
-  return `/gradients/GV-Gradient-${gradientNumbers[selectedIndex]}.png`;
+// Define the structure for a section configuration
+interface ExploreSectionConfig {
+  id: string;
+  tag: string;
+  title: string;
+  description: string;
+  items: GridItem[];
+  itemsDisplay: 'slider' | 'grid';
+  gridClassName?: string;
+  // sectionVariant?: SectionProps['variant']; // Optional: if sections need different overall styling
+}
+
+// List of available gradient image filenames (excluding .DS_Store)
+const gradientImageFiles = [
+  "GV-Gradient-Dark-Light-Dark.png",
+  "GV-Gradient-Dark-Light.png",
+  "GV-Gradient-Dark.png",
+  "GV-Gradient-Light-Dark-Light.png",
+  "GV-Gradient-Light-Dark.png",
+  "GV-Gradient-Pink-Purple-Pink.png",
+  "GV-Gradient-Pink-Purple.png",
+  "GV-Gradient-Purple-Pink-Purple.png",
+  "GV-Gradient-Purple-Pink.png",
+];
+
+const getRandomGradient = (index: number): string => {
+  const selectedImage = gradientImageFiles[index % gradientImageFiles.length];
+  return `/gradients/desktop/${selectedImage}`;
 };
 
 const processStaticGems = (): Gem[] => {
@@ -72,8 +96,9 @@ const mapToGridItems = (items: Gem[], handleItemClick: (itemId: string) => void)
       id: item.id,
       title: item.name,
       description: item.description || '',
-      imageUrl: item.imageUrl,
+      imageUrl: item.imageUrl || getRandomGradient(item.id.charCodeAt(0) + item.id.length),
       onClick: () => handleItemClick(item.id),
+      href: `/chat/${item.id}`,
       subtitle: item.type === 'Character' ? (item.attributes?.rarity || 'Character') : (item.genres?.[0] || item.type), 
       cardVariant: variant,
     };
@@ -86,11 +111,11 @@ const mapWorldsToGridItems = (worlds: World[], handleWorldClick: (worldId: strin
       id: world.id,
       title: world.name,
       description: world.description || '',
-      imageUrl: world.imageUrl || getRandomGradient(index + 1000), // Use actual imageUrl if available
+      imageUrl: world.imageUrl || getRandomGradient(index + 1000), 
       onClick: () => handleWorldClick(world.id),
       subtitle: world.genres?.[0] || 'Universe', // Adjusted for World.genres: string[]
       cardVariant: 'world', 
-      // href: `/worlds/${world.id}`, 
+      href: `/world/${world.id}`,
     };
   });
 };
@@ -147,29 +172,86 @@ export default function ExplorePage() {
   }, [router]);
 
   const handleWorldClick = useCallback((worldId: string) => {
-    router.push(`/worlds/${worldId}`);
+    router.push(`/world/${worldId}`);
   }, [router]);
 
   const mediaGems = useMemo(() => filteredGems.filter(gem => gem.type === 'Story' || gem.type === 'Adventure'), [filteredGems]);
   const characterGems = useMemo(() => filteredGems.filter(gem => gem.type === 'Character'), [filteredGems]);
-  const animeGems = useMemo(() => filteredGems.filter(gem => Array.isArray(gem.genres) && gem.genres.includes('Anime')), [filteredGems]); // Anime might need its own logic or be a genre tab
   
+  // Anime Spotlight: Source from ALL gems, not just filteredGems
+  const animeGems = useMemo(() => {
+    return allGemsFromData.filter(gem => 
+      Array.isArray(gem.genres) && gem.genres.includes('Anime')
+    );
+  }, [allGemsFromData]);
+  
+  // Editor's Picks / Spotlight: Source from ALL gems, prioritize Legendary/Epic, independent of genre filter
   const editorsPicksGems = useMemo(() => {
-    const picks: Gem[] = [];
-    // Use filteredGems for picks if they should also respect the genre filter
-    const sourceMediaGems = mediaGems; // or filteredGems.filter(gem => gem.type === 'Story' || gem.type === 'Adventure')
-    const sourceCharacterGems = characterGems; // or filteredGems.filter(gem => gem.type === 'Character')
-
-    sourceMediaGems.slice(0, Math.min(2, sourceMediaGems.length)).forEach(gem => picks.push(gem));
-    sourceCharacterGems.slice(0, Math.min(1, sourceCharacterGems.length)).forEach(gem => picks.push(gem));
-    return Array.from(new Set(picks.map(g => g.id))).map(id => picks.find(g => g.id === id)!);
-  }, [mediaGems, characterGems]);
+    const legendary = allGemsFromData.filter(gem => gem.attributes?.rarity === 'Legendary');
+    const epics = allGemsFromData.filter(gem => gem.attributes?.rarity === 'Epic');
+    
+    let picks = legendary.slice(0, 3); // Take up to 3 legendary gems
+    if (picks.length < 5) { // If we have less than 5 picks, add epics
+      picks = picks.concat(epics.slice(0, 5 - picks.length));
+    }
+    // Ensure a specific number of picks, e.g., 4 or 5, or just return what's found
+    return picks.slice(0, 5); // Show up to 5 picks
+  }, [allGemsFromData]);
 
   const mediaGridItems = useMemo(() => mapToGridItems(mediaGems, handleGemClick), [mediaGems, handleGemClick]);
   const characterGridItems = useMemo(() => mapToGridItems(characterGems, handleGemClick), [characterGems, handleGemClick]);
   const animeGridItems = useMemo(() => mapToGridItems(animeGems, handleGemClick), [animeGems, handleGemClick]);
   const editorsPicksGridItems = useMemo(() => mapToGridItems(editorsPicksGems, handleGemClick), [editorsPicksGems, handleGemClick]);
   const worldGridItems = useMemo(() => mapWorldsToGridItems(filteredWorlds, handleWorldClick), [filteredWorlds, handleWorldClick]);
+
+  // Define all sections using a configuration array
+  const sectionConfigs = useMemo((): ExploreSectionConfig[] => [
+    {
+      id: 'popular-stories',
+      tag: 'Media',
+      title: 'Popular Stories',
+      description: 'Captivating stories, series, and cinematic adventures.',
+      items: mediaGridItems,
+      itemsDisplay: 'slider',
+      gridClassName: 'xl:grid-cols-4',
+    },
+    {
+      id: 'popular-characters',
+      tag: 'Characters',
+      title: 'Meet the Characters',
+      description: 'Iconic personalities and AI companions ready to interact.',
+      items: characterGridItems,
+      itemsDisplay: 'slider',
+      gridClassName: 'xl:grid-cols-4',
+    },
+    {
+      id: 'explore-worlds',
+      tag: 'Worlds',
+      title: 'Explore the Worlds',
+      description: 'Discover diverse universes, each with unique collections and gems.',
+      items: worldGridItems,
+      itemsDisplay: 'slider', // Changed to slider as per previous request
+      gridClassName: 'xl:grid-cols-4',
+    },
+    {
+      id: 'editors-picks',
+      tag: 'Spotlight',
+      title: "Editor's Picks",
+      description: 'Handpicked favorites by the GemVise team, showcasing the best of our universe.',
+      items: editorsPicksGridItems,
+      itemsDisplay: 'slider',
+      gridClassName: 'xl:grid-cols-4',
+    },
+    {
+      id: 'anime-spotlight',
+      tag: 'Anime',
+      title: 'Anime Spotlight',
+      description: 'Explore gems from the vibrant world of Anime, from classic sagas to new adventures.',
+      items: animeGridItems,
+      itemsDisplay: 'slider',
+      gridClassName: 'xl:grid-cols-4',
+    },
+  ], [mediaGridItems, characterGridItems, worldGridItems, editorsPicksGridItems, animeGridItems]);
 
   if (isLoading) { 
     return (
@@ -183,92 +265,37 @@ export default function ExplorePage() {
     <main className="min-h-screen bg-background text-foreground">
       <Hero onGenreTabChange={handleGenreTabChange} availableGenres={availableGenresForTabs} /> {/* Pass the callback */}
 
-      {/* Featured Media Section */}
-      {mediaGems.length > 0 && (
-        <Section
-          variant="default"
-          tag="Media"
-          title="Featured Media"
-          description="Captivating stories, series, and cinematic adventures."
-          items={mediaGridItems}
-          itemsDisplay="slider"
-          gridClassName="xl:grid-cols-4"
-        />
-      )}
+      {/* Map through section configurations to render sections */}
+      {sectionConfigs.map(config => (
+        config.items && config.items.length > 0 && (
+          <Section
+            key={config.id}
+            variant={'default'} // Assuming default variant for all explore page sections
+            tag={config.tag}
+            title={config.title}
+            description={config.description}
+            items={config.items}
+            itemsDisplay={config.itemsDisplay}
+            gridClassName={config.gridClassName}
+          />
+        )
+      ))}
 
-      {/* Popular Characters Section */}
-      {characterGems.length > 0 && (
-        <Section
-          variant="default"
-          tag="Characters"
-          title="Meet the Characters"
-          description="Iconic personalities and AI companions ready to interact."
-          items={characterGridItems}
-          itemsDisplay="slider"
-          gridClassName="xl:grid-cols-4"
-        />
-      )}
-
-      {/* Worlds Section */}
-      {worldGridItems.length > 0 && (
-        <Section
-          variant="default"
-          tag="Worlds"
-          title="Explore the Worlds"
-          description="Discover diverse universes, each with unique collections and gems."
-          items={worldGridItems}
-          itemsDisplay="slider"
-          gridClassName="xl:grid-cols-4"
-        />
-      )}
-
-      {/* Editor's Picks Section */}
-      {editorsPicksGems.length > 0 && (
-        <Section
-          variant="default"
-          tag="Spotlight"
-          title="Editor's Picks"
-          description="Handpicked favorites by the GemVise team, showcasing the best of our universe."
-          items={editorsPicksGridItems}
-          itemsDisplay="slider"
-          gridClassName="xl:grid-cols-4"
-        />
-      )}
-
-      {/* Anime Spotlight Section */}
-      {animeGems.length > 0 && (
-        <Section
-          variant="default"
-          tag="Anime"
-          title="Anime Spotlight"
-          description="Explore gems from the vibrant world of Anime, from classic sagas to new adventures."
-          items={animeGridItems}
-          itemsDisplay="slider"
-          gridClassName="xl:grid-cols-4"
-        />
-      )}
-
-      {/* Community Stories Section (Placeholder) */}
-      <Section
-        variant="centered"
-        tag="Community"
-        title="Community Stories & Creations"
-        description="Discover tales, characters, and worlds crafted by fellow GemVise users. (Feature Coming Soon!)"
-        className="py-12 md:py-16 text-center"
-      >
-        <div className="mt-8 p-8 bg-neutral-800/30 rounded-[3.6rem]">
-          <p className="text-lg text-neutral-400">Get ready to share your own narratives and explore user-generated content. This space will soon be filled with creativity from the community!</p>
-        </div>
-      </Section>
-
-      {/* Placeholder for No Content - if allGems is empty after processing */}
+      {/* Fallback if no content matches filters or no sections have items */}
       {!isLoading && allGemsFromData.length === 0 && (
-         <Section
-          variant="default"
-          title="Nothing to Explore Yet"
-          description="We're curating content. Please check back later!"
-          className="py-20 text-center"
-        />
+          <Section
+            variant="default"
+            title="No Gems Available Yet"
+            description="The GemVise universe is still expanding. Check back soon for new additions!"
+          />
+      )}
+      {/* Additional fallback if filters result in no sections having content */}
+      {!isLoading && allGemsFromData.length > 0 && sectionConfigs.every(config => !config.items || config.items.length === 0) && (
+          <Section
+            variant="default"
+            title="No Content Matches Your Filters"
+            description="Try selecting a different genre or broadening your search to discover more gems and worlds."
+          />
       )}
     </main>
   );

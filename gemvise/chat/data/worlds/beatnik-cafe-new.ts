@@ -4,8 +4,8 @@ import { ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline'; // Icon f
 export const beatnikCafeNewData: World = {
   id: 'beatnik-cafe',
   name: 'Beatnik Cafe (New)', // Added (New)
-  href: '/worlds/beatnik-cafe-new',
-  imageUrl: '/images/worlds/beatnik-cafe-new.webp', // Placeholder
+  href: '/world/beatnik-cafe-new',
+  imageUrl: '/images/world/beatnik-cafe-new.webp', // Placeholder
   icon: ChatBubbleLeftRightIcon,
   tags: ['1950s', 'beatnik', 'poetry', 'jazz', 'counterculture', 'coffeehouse'], // Synthesized
   description: 'Immerse yourself in the smoky ambiance of a 1950s Beatnik cafe, filled with poetry, jazz, and philosophical conversations.', // Synthesized

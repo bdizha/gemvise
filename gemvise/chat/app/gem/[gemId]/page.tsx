@@ -5,10 +5,11 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ChatBubbleLeftRightIcon, SparklesIcon, UserGroupIcon } from '@heroicons/react/24/outline';
-import { worlds } from '@/data/worldData';
+import { worlds, type World } from '@/data/worldData';
 import type { Gem } from '@/types/gems';
 import Section from '@/components/layout/Section';
 import type { GridItem } from '@/components/layout/Grid/types';
+import Button from '@/components/ui/Button';
 import { mockChatHistory, type ChatMessage } from '@/data/mockChatHistory';
 import ChatMessageItem from '@/components/chat/ChatMessageItem';
 
@@ -87,45 +88,45 @@ export default function GemDetail() {
   return (
     <div className="min-h-screen bg-theme-surface">
       {/* Hero Section */}
-      <div className="relative overflow-hidden pt-16 pb-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6">
-            <div>
-              <h1 className="text-4xl font-bold tracking-tight text-theme-foreground sm:text-6xl">
-                {gem.name}
-              </h1>
-              <div className="mt-6 max-w-xl lg:mt-0">
-                <div className="flex flex-wrap gap-2">
+      <Section variant="transparent" className="relative pt-12 pb-16">
+        <div className="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6">
+          <div className="flex flex-col items-center text-center">
+            <h1 className="text-4xl font-bold tracking-tight text-theme-foreground sm:text-6xl">
+              {gem.name}
+            </h1>
+            <div className="mt-6 max-w-xl lg:mt-0">
+              {gem.attributes?.traits && (
+                <div className="flex flex-wrap gap-3 justify-center">
                   {gem.attributes.traits.map((trait) => (
                     <span
                       key={trait}
-                      className="inline-flex items-center rounded-full bg-theme-surface/50 px-2 py-1 text-xs font-medium text-theme-foreground/80 ring-1 ring-inset ring-theme-foreground/10"
+                      className="inline-flex items-center rounded-md bg-theme-muted px-3 py-1.5 text-sm font-medium text-theme-muted-foreground transition-all hover:bg-theme-muted/80 ring-1 ring-inset ring-theme-muted-foreground/20"
                     >
                       {trait}
                     </span>
                   ))}
                 </div>
-              </div>
+              )}
             </div>
-            
-            <div className="mt-10 max-w-xl lg:mt-0">
-              <div className="relative aspect-square overflow-hidden rounded-[4rem] bg-theme-surface/50 backdrop-blur-sm">
-                {gem.imageUrl && (
-                  <Image
-                    src={gem.imageUrl}
-                    alt={gem.name}
-                    fill
-                    className="object-cover"
-                  />
-                )}
-              </div>
+          </div>
+          
+          <div className="mt-10 max-w-xl lg:mt-0">
+            <div className="relative aspect-square overflow-hidden rounded-[4rem] bg-theme-surface/50 backdrop-blur-sm">
+              {gem.imageUrl && (
+                <Image
+                  src={gem.imageUrl}
+                  alt={gem.name}
+                  fill
+                  className="object-cover"
+                />
+              )}
             </div>
           </div>
         </div>
-      </div>
+      </Section>
 
       {/* Content Section */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 pb-16">
+      <Section variant="transparent" className="pb-12">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           {/* Left Column */}
           <div>
@@ -254,24 +255,28 @@ export default function GemDetail() {
           </div>
 
           {/* Right Column */}
-          <div>
+          <div className="lg:pt-0">
             <div className="rounded-[4rem] bg-theme-surface/50 p-8 backdrop-blur-sm">
               <h3 className="text-lg font-semibold text-theme-foreground mb-6">Actions</h3>
               <div className="space-y-4">
-                <Link
-                  href={`/chat/${gem.id}`}
-                  className="flex w-full items-center justify-center gap-2 rounded-[1rem] bg-gradient-pink-purple px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90"
+                <Button
+                  variant="primary"
+                  size="default"
+                  className="w-full"
+                  onClick={() => router.push(`/chat/${gem.id}`)}
                 >
-                  <ChatBubbleLeftRightIcon className="h-5 w-5" />
+                  <ChatBubbleLeftRightIcon className="h-5 w-5 mr-2" /> 
                   Start Conversation
-                </Link>
-                <button
-                  type="button"
-                  className="flex w-full items-center justify-center gap-2 rounded-[1rem] bg-theme-surface/50 px-4 py-2.5 text-sm font-semibold text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 hover:bg-theme-surface/70"
+                </Button>
+                <Button
+                  variant="default"
+                  size="default"
+                  className="w-full"
+                  onClick={() => { /* TODO: Implement share functionality */ alert('Share Gem clicked!'); }}
                 >
-                  <UserGroupIcon className="h-5 w-5" />
+                  <UserGroupIcon className="h-5 w-5 mr-2" /> 
                   Share Gem
-                </button>
+                </Button>
               </div>
 
               <div className="mt-8">
@@ -291,7 +296,7 @@ export default function GemDetail() {
             </div>
           </div>
         </div>
-      </div>
+      </Section>
     </div>
   );
 }

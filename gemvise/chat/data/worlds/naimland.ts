@@ -4,9 +4,9 @@ import type { World } from '../worldData';
 export const naimlandData: World = {
   id: 'naimland',
   name: 'NaimLand',
-  href: '/worlds/naimland',
-  imageUrl: '/gradients/worlds/naimland.png',
-  icon: '/gradients/worlds/naimland.png',
+  href: '/world/naimland',
+  imageUrl: '/gradients/world/naimland.png',
+  icon: '/gradients/world/naimland.png',
   tags: [],
   description: '',
   shortDescription: '',

@@ -4,8 +4,8 @@ import { EyeIcon } from '@heroicons/react/24/outline'; // Icon representing espi
 export const coldWarSpiesNewData: World = {
   id: 'cold-war-spies',
   name: 'Cold War Spies (New)', // Added (New) to distinguish
-  href: '/worlds/cold-war-spies-new',
-  imageUrl: '/images/worlds/cold-war-spies-new.webp', // Placeholder
+  href: '/world/cold-war-spies-new',
+  imageUrl: '/images/world/cold-war-spies-new.webp', // Placeholder
   icon: EyeIcon,
   tags: ['1960s', 'cold war', 'espionage', 'thriller', 'spies', 'intrigue'], // Synthesized
   description: 'Enter the shadowy world of Cold War espionage, where trust is a luxury and betrayal is commonplace.', // Synthesized

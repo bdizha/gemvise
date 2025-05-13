@@ -3,9 +3,9 @@ import type { World } from '../worldData';
 export const surfsideSixtiesData: World = {
   id: 'surfside-sixties',
   name: 'Surfside Sixties',
-  href: '/worlds/surfside-sixties',
-  imageUrl: '/gradients/worlds/aethelgard.png', // Placeholder, consider updating
-  icon: '/gradients/worlds/aethelgard.png', // Placeholder, consider updating
+  href: '/world/surfside-sixties',
+  imageUrl: '/gradients/world/aethelgard.png', // Placeholder, consider updating
+  icon: '/gradients/world/aethelgard.png', // Placeholder, consider updating
   tags: [],
   description: 'Catch a wave in the sun-drenched surf culture of the 1960s.',
   shortDescription: '1960s surf culture and beach life.',

@@ -4,8 +4,8 @@ import { FilmIcon } from '@heroicons/react/24/outline'; // Icon for movies/film
 export const driveInMovieNightNewData: World = {
   id: 'drive-in-movie-night',
   name: 'Drive-In Movie Night (New)', // Added (New)
-  href: '/worlds/drive-in-movie-night-new',
-  imageUrl: '/images/worlds/drive-in-movie-night-new.webp', // Placeholder
+  href: '/world/drive-in-movie-night-new',
+  imageUrl: '/images/world/drive-in-movie-night-new.webp', // Placeholder
   icon: FilmIcon,
   tags: ['1950s', 'drive-in', 'movies', 'teenagers', 'romance', 'nostalgia', 'cars'], // Synthesized
   description: 'Relive the classic 1950s drive-in movie experience, complete with teenage romance, cool cars, and creature features.', // Synthesized

@@ -3,9 +3,9 @@ import type { World } from '../worldData';
 export const world08Data: World = {
   id: 'world08',
   name: 'Novus Prime',
-  href: '/worlds/novusprime',
-  imageUrl: '/gradients/worlds/novusprime.png',
-  icon: '/gradients/worlds/novusprime.png',
+  href: '/world/novusprime',
+  imageUrl: '/gradients/world/novusprime.png',
+  icon: '/gradients/world/novusprime.png',
   tags: [],
   description: '',
   shortDescription: '',

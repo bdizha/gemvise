@@ -4,8 +4,8 @@ import { SunIcon } from '@heroicons/react/24/outline'; // Icon representing beac
 export const surfsideSixtiesNewData: World = {
   id: 'surfside-sixties',
   name: 'Surfside Sixties (New)', // Added (New) to distinguish
-  href: '/worlds/surfside-sixties-new',
-  imageUrl: '/images/worlds/surfside-sixties-new.webp', // Placeholder
+  href: '/world/surfside-sixties-new',
+  imageUrl: '/images/world/surfside-sixties-new.webp', // Placeholder
   icon: SunIcon,
   tags: ['1960s', 'surfing', 'beach culture', 'romance', 'california', 'music'], // Synthesized
   description: 'Catch the wave of 1960s California beach culture, with sun, surf, and summer romance.', // Synthesized

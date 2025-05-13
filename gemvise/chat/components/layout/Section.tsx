@@ -11,7 +11,8 @@ export type SectionVariant =
   | 'gradient'
   | 'values'
   | 'centered'
-  | 'hero';
+  | 'hero'
+  | 'transparent';
 
 // Defines how items within the section are displayed
 export type ItemsDisplayVariant = 'grid' | 'slider';
@@ -43,6 +44,7 @@ const variantClasses: Record<SectionVariant, string> = {
   values: 'py-12 md:py-16 bg-muted/30',
   centered: 'py-12 md:py-16 text-center bg-gradient-dark rounded-3xl p-6',
   hero: 'py-16 md:py-24 text-center bg-gradient-dark rounded-3xl p-6',
+  transparent: 'p-0',
 };
 
 const gradientClasses = {

@@ -4,8 +4,8 @@ import { SparklesIcon } from '@heroicons/react/24/outline'; // Or a flower/peace
 export const summerOfLoveNewData: World = {
   id: 'summer-of-love',
   name: 'Psychedelic Summer of Love (New)', // Added (New)
-  href: '/worlds/summer-of-love-new',
-  imageUrl: '/images/worlds/summer-of-love-new.webp', // Placeholder
+  href: '/world/summer-of-love-new',
+  imageUrl: '/images/world/summer-of-love-new.webp', // Placeholder
   icon: SparklesIcon, // Placeholder, consider FaPeace or GiFlowerPot from react-icons if available
   tags: ['1960s', 'summer of love', 'psychedelic', 'hippie', 'counterculture', 'san francisco', 'music'], // Synthesized
   description: 'Journey back to the vibrant and mind-expanding Summer of Love in 1967 San Francisco.', // Synthesized

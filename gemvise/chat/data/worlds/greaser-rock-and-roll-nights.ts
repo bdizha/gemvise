@@ -4,8 +4,8 @@ import { MusicalNoteIcon } from '@heroicons/react/24/outline';
 export const greaserRockAndRollNightsData: World = {
   id: 'greaser-rock-and-roll-nights',
   name: 'Greaser Rock and Roll Nights',
-  href: '/worlds/greaser-rock-and-roll-nights',
-  imageUrl: '/images/worlds/greaser-rock-and-roll-nights.webp',
+  href: '/world/greaser-rock-and-roll-nights',
+  imageUrl: '/images/world/greaser-rock-and-roll-nights.webp',
   icon: MusicalNoteIcon, // Or a motorcycle/jacket icon if available
   tags: ['1950s', 'greasers', 'rocknroll', 'rebellion', 'cars'],
   description: 'Leather jackets, slicked-back hair, fast cars, and the rebellious spirit of rock and roll.',

@@ -4,8 +4,8 @@ import { SpeakerWaveIcon } from '@heroicons/react/24/outline';
 export const smallTownSockHopData: World = {
   id: 'small-town-sock-hop',
   name: 'Small Town Sock Hop',
-  href: '/worlds/small-town-sock-hop',
-  imageUrl: '/images/worlds/small-town-sock-hop.webp',
+  href: '/world/small-town-sock-hop',
+  imageUrl: '/images/world/small-town-sock-hop.webp',
   icon: SpeakerWaveIcon,
   tags: ['1950s', 'small town', 'dance', 'community', 'romance'],
   description: 'Experience the charm of a close-knit community gathering for a night of dancing and fun at the local sock hop.',

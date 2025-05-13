@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { worlds } from '@/data/worlds';
+import { worlds } from '@/data/worldData';
 import Section from '@/components/layout/Section';
 import GradientSection from '@/components/layout/Section/GradientSection';
 import CategoryTabs from '@/components/ui/CategoryTabs';
