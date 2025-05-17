@@ -5,7 +5,7 @@ export const summerOfLoveData: World = {
   id: 'summer-of-love',
   name: 'Psychedelic Summer of Love',
   href: '/world/summer-of-love',
-  imageUrl: '/gradients/world/world12.png',
+  imageUrl: '/gradients/worlds/world12.png',
   icon: ClockIcon,
   tags: ['1960s', 'Counterculture', 'Music', 'Hippie'],
   description: 'Immerse yourself in the vibrant and psychedelic atmosphere of the Summer of Love.',

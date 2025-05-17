@@ -1,21 +1,31 @@
 'use client';
 
 import { forwardRef, useRef, type ButtonHTMLAttributes } from 'react';
+import Link, { type LinkProps as NextLinkProps } from 'next/link';
 import { cva, type VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
 
 const buttonVariants = cva(
-  'relative flex items-center justify-center font-medium transition-all duration-[0.4s] ease-out-cubic focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none',
+  'relative flex items-center font-medium transition-all duration-[0.4s] ease-out-cubic focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none',
   {
     variants: {
       variant: {
-        default: 'bg-theme-background text-theme-foreground border border-solid hover:bg-theme-foreground hover:text-theme-background focus:ring-primary',
-        primary: 'bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-primary',
-        secondary: 'bg-accent text-accent-foreground hover:bg-accent/90 focus:ring-accent',
-        ghost: 'bg-transparent text-theme-foreground hover:bg-theme-hover focus:ring-primary',
-        link: 'text-primary hover:underline focus:ring-primary bg-transparent',
-        tab: 'w-[7rem] px-6 bg-white/10 text-white/80 hover:bg-white/30 focus:ring-0 focus:ring-offset-0',
-        'tab-active': 'w-[7rem] px-6 bg-white/20 text-white hover:bg-white/30 focus:ring-0 focus:ring-offset-0'
+        default: 'bg-theme-background text-theme-foreground border border-solid hover:bg-theme-foreground hover:text-theme-background focus:ring-primary justify-center',
+        primary: 'bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-primary justify-center',
+        secondary: 'bg-accent text-accent-foreground hover:bg-accent/90 focus:ring-accent justify-center',
+        ghost: 'bg-transparent text-theme-foreground hover:bg-theme-hover focus:ring-primary justify-center',
+        link: 'text-primary hover:underline focus:ring-primary bg-transparent justify-start', // Links are usually left-aligned
+        tab: 'w-[7rem] px-6 bg-white/10 text-white/80 hover:bg-white/30 focus:ring-0 focus:ring-offset-0 justify-center',
+        'tab-active': 'w-[7rem] px-6 bg-white/20 text-white hover:bg-white/30 focus:ring-0 focus:ring-offset-0 justify-center',
+        // Sidebar Variants - Expanded
+        sidebar: 'w-full bg-neutral-200 dark:bg-neutral-700/60 text-theme-foreground dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 justify-start text-sm p-3 pr-4 rounded-[4rem]',
+        'sidebar-active': 'w-full bg-[#ff9900]/30 text-white justify-start text-sm p-3 pr-4 rounded-[4rem]',
+        'sidebar-create-main': 'w-full bg-muted-foreground/30 hover:bg-muted-foreground/60 text-white justify-start text-sm p-3 pr-4 rounded-[4rem]',
+        'sidebar-create-option': 'w-full bg-gradient-pink-purple text-white hover:opacity-80 justify-start text-sm p-3 pr-4 rounded-xl',
+        'sidebar-view-all': 'w-full bg-muted-foreground/40 hover:bg-muted-foreground/70 text-white font-semibold justify-start text-sm p-3 pr-4 rounded-[4rem]',
+        // Sidebar Variants - Collapsed (styling primarily for color/bg, padding/size handled by props or size variant)
+        'sidebar-collapsed': 'bg-neutral-200 dark:bg-neutral-700/60 text-theme-foreground dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 justify-center',
+        'sidebar-collapsed-active': 'bg-[#ff9900]/30 text-white justify-center'
       },
       size: {
         default: 'h-12 px-6 text-base rounded-full',
@@ -32,56 +42,72 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'onClick'>,
     VariantProps<typeof buttonVariants> {
+  href?: string;
   asChild?: boolean;
   isLoading?: boolean;
+  type?: 'submit' | 'reset' | 'button';
+  onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+  [key: string]: any;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, isLoading, asChild = false, children, onClick, disabled, ...props }, ref) => {
-    const buttonRef = useRef<HTMLButtonElement>(null);
-
-    const createRipple = (event: React.MouseEvent<HTMLButtonElement>) => {
-      const button = event.currentTarget;
+const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
+  (
+    {
+      className,
+      variant,
+      size,
+      isLoading = false,
+      asChild = false,
+      children,
+      href,
+      onClick,
+      type,
+      disabled,
+      ...props
+    },
+    ref
+  ) => {
+    const createRipple = (event: React.MouseEvent<HTMLElement>) => {
+      const interactiveElement = event.currentTarget;
       const ripple = document.createElement('span');
-      const rect = button.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
-      const x = event.clientX - rect.left - size / 2;
-      const y = event.clientY - rect.top - size / 2;
+      const rect = interactiveElement.getBoundingClientRect();
+      const rippleSize = Math.max(rect.width, rect.height);
+      const x = event.clientX - rect.left - rippleSize / 2;
+      const y = event.clientY - rect.top - rippleSize / 2;
 
-      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.width = ripple.style.height = `${rippleSize}px`;
       ripple.style.left = `${x}px`;
       ripple.style.top = `${y}px`;
       ripple.className = 'ripple';
 
-      button.appendChild(ripple);
+      interactiveElement.appendChild(ripple);
 
       setTimeout(() => {
         ripple.remove();
       }, 600);
     };
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (!disabled) {
-        createRipple(event);
-        onClick?.(event);
+    const effectiveDisabled = disabled || isLoading;
+
+    const combinedClickHandler = (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+      if (effectiveDisabled) {
+        event.preventDefault();
+        return;
       }
+      createRipple(event);
+      onClick?.(event);
     };
 
-    const Comp = asChild ? 'span' : 'button';
+    const commonClassNames = clsx(
+      buttonVariants({ variant, size, className }),
+      variant === 'tab-active' && 'active',
+      { 'cursor-not-allowed': effectiveDisabled }
+    );
 
-    return (
-      <Comp
-        ref={buttonRef}
-        className={clsx(
-          buttonVariants({ variant, size, className }),
-          variant === 'tab-active' && 'active'
-        )}
-        onClick={handleClick}
-        disabled={disabled || isLoading}
-        {...props}
-      >
+    const buttonContent = (
+      <>
         {isLoading ? (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
@@ -90,6 +116,42 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         <span className={clsx('flex items-center gap-2', { 'opacity-0': isLoading })}>
           {children}
         </span>
+      </>
+    );
+
+    if (href && !asChild) {
+      return (
+        <Link
+          href={effectiveDisabled ? '#' : href}
+          ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+          className={clsx(commonClassNames, {
+            'opacity-50 pointer-events-none': effectiveDisabled,
+          })}
+          onClick={combinedClickHandler}
+          aria-disabled={effectiveDisabled}
+          tabIndex={effectiveDisabled ? -1 : undefined}
+          {...(props as Omit<NextLinkProps & React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'|'className'|'onClick'|'ref'|'tabIndex'>)}
+        >
+          {buttonContent}
+        </Link>
+      );
+    }
+
+    const Comp = asChild ? 'span' : 'button';
+
+    return (
+      <Comp
+        ref={ref as React.ForwardedRef<any>}
+        className={commonClassNames}
+        onClick={combinedClickHandler}
+        disabled={Comp === 'button' ? effectiveDisabled : undefined}
+        type={Comp === 'button' ? (type || 'button') : undefined}
+        role={Comp === 'span' ? 'button' : undefined}
+        tabIndex={Comp === 'span' ? (effectiveDisabled ? -1 : 0) : undefined}
+        aria-disabled={effectiveDisabled}
+        {...props}
+      >
+        {buttonContent}
       </Comp>
     );
   }

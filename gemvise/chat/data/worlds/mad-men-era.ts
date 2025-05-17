@@ -4,8 +4,8 @@ export const madMenEraData: World = {
   id: 'mad-men-era',
   name: 'Mad Men Era',
   href: '/world/mad-men-era',
-  imageUrl: '/gradients/world/naimland.png', // Placeholder, consider updating
-  icon: '/gradients/world/naimland.png', // Placeholder, consider updating
+  imageUrl: '/gradients/worlds/naimland.png', // Placeholder, consider updating
+  icon: '/gradients/worlds/naimland.png', // Placeholder, consider updating
   tags: [],
   description: 'Navigate the high-stakes world of 1960s Madison Avenue advertising.',
   shortDescription: '1960s Madison Avenue advertising.',

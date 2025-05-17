@@ -5,7 +5,7 @@ export const britishInvasionData: World = {
   id: 'british-invasion',
   name: 'British Invasion Rockers',
   href: '/world/british-invasion',
-  imageUrl: '/gradients/world/world10.png',
+  imageUrl: '/gradients/worlds/world10.png',
   icon: ClockIcon,
   tags: ['Music', '1960s', 'Rock'],
   description: 'Experience the frenzy of the British Invasion rock scene in the 1960s.',

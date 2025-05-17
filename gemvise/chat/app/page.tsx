@@ -101,14 +101,13 @@ const powerfulGems: GridItem[] = worlds.flatMap(world =>
 export default function Home() {
   return (
     <main className="flex flex-col gap-24">
-        <Section gradient="dark">
           <Hero />
-        </Section>
         {processedWorlds.map((world) => (
           world.collections && world.collections.length > 0 && (
             <Section  key={`${world.id}-collections`} 
               items={world.collections} 
               itemsDisplay="slider" 
+              variant='transparent'
               sliderSectionTitle={`Categories from ${world.name}`} 
             />
           )

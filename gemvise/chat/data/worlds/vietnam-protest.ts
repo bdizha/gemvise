@@ -5,7 +5,7 @@ export const vietnamProtestData: World = {
   id: 'vietnam-protest',
   name: 'Vietnam Protest Voices',
   href: '/world/vietnam-protest',
-  imageUrl: '/gradients/world/world11.png',
+  imageUrl: '/gradients/worlds/world11.png',
   icon: ClockIcon,
   tags: ['Historical', 'Social Movement', '1960s', '1970s'],
   description: 'Explore the passionate voices and turmoil of the Vietnam War protest movement.',

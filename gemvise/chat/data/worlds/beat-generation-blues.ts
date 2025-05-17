@@ -5,7 +5,7 @@ export const beatGenerationBluesData: World = {
   id: 'beat-generation-blues',
   name: 'Beat Generation Blues',
   href: '/world/beat-generation-blues',
-  imageUrl: '/images/world/beat-generation-blues.webp',
+  imageUrl: '/worlds/128-2.png',
   icon: ChatBubbleLeftEllipsisIcon, // Or a book/poetry icon
   tags: ['1950s', 'beatniks', 'poetry', 'jazz', 'counterculture'],
   description: 'Smoky cafes, jazz rhythms, existential poetry, and the search for meaning in a changing world.',

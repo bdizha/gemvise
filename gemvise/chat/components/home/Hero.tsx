@@ -237,160 +237,158 @@ export const Hero: FC<HeroProps> = ({ onGenreTabChange, availableGenres }) => {
   }, [activeTab, trendingGems, popularGems, upcomingGems]);
 
   return (
-    <section className="py-12 md:py-16 lg:py-20">
-      <div className="container mx-auto px-4">
-        {/* New Genre Tabs Row */}
-        <div className="mb-12">
-          <div className="overflow-x-auto whitespace-nowrap pb-2 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
-            {genresToDisplay.map(genre => (
-              <button
-                key={genre}
-                onClick={() => {
-                  setActiveGenreTab(genre);
-                  if (onGenreTabChange) {
-                    onGenreTabChange(genre);
-                  }
-                }}
-                className={`
-                  inline-block rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-200 mr-3 last:mr-0 
-                  focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/50 
-                  ${activeGenreTab === genre 
-                    ? 'bg-[var(--primary)] text-[var(--primary-foreground)] shadow-md' 
-                    : 'bg-transparent border border-[var(--muted-foreground)] text-[var(--foreground)] hover:bg-[var(--primary)]/10 hover:text-[var(--primary)]'
-                  }
-                `}
-              >
-                {genre}
-              </button>
-            ))}
-          </div>
+    <div className="container mx-auto py-4">
+      {/* New Genre Tabs Row */}
+      <div className="mb-12">
+        <div className="overflow-x-auto whitespace-nowrap pb-2 scrollbar-hide" style={{ WebkitOverflowScrolling: 'touch' }}>
+          {genresToDisplay.map(genre => (
+            <button
+              key={genre}
+              onClick={() => {
+                setActiveGenreTab(genre);
+                if (onGenreTabChange) {
+                  onGenreTabChange(genre);
+                }
+              }}
+              className={`
+                inline-block rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-200 mr-3 last:mr-0 
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/50 
+                ${activeGenreTab === genre 
+                  ? 'bg-[var(--primary)] text-[var(--primary-foreground)] shadow-md' 
+                  : 'bg-transparent border border-[var(--muted-foreground)] text-[var(--foreground)] hover:bg-[var(--primary)]/10 hover:text-[var(--primary)]'
+                }
+              `}
+            >
+              {genre}
+            </button>
+          ))}
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-8"> 
-          {/* Left Column (2/3 width on large screens) */}
-          <div className="lg:col-span-2 mb-8 lg:mb-0">
-            <div className="relative flex items-center h-full"> 
-              {/* Previous World Button */}
-              {worlds.length > WORLDS_PER_PAGE && (
-                <button 
-                  onClick={handlePrevWorld} 
-                  disabled={currentWorldStartIndex === 0}
-                  className="absolute -left-4 z-20 p-2 bg-white/10 hover:bg-white/20 rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
-                  aria-label="Previous worlds"
-                >
-                  <ChevronLeftIcon className="h-6 w-6 text-white" />
-                </button>
-              )}
+      <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-8"> 
+        {/* Left Column (2/3 width on large screens) */}
+        <div className="lg:col-span-2 mb-8 lg:mb-0">
+          <div className="relative flex items-center h-full"> 
+            {/* Previous World Button */}
+            {worlds.length > WORLDS_PER_PAGE && (
+              <button 
+                onClick={handlePrevWorld} 
+                disabled={currentWorldStartIndex === 0}
+                className="absolute -left-4 z-20 p-2 bg-white/10 hover:bg-white/20 rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
+                aria-label="Previous worlds"
+              >
+                <ChevronLeftIcon className="h-6 w-6 text-white" />
+              </button>
+            )}
 
-              <div className="flex h-full space-x-4 overflow-hidden w-full justify-start"> 
-                {visibleWorlds.map((world, localIndex) => {
-                  const globalIndex = currentWorldStartIndex + localIndex;
-                  const isActive = activeWorldIndex === globalIndex;
-                  const gradientClass = gradients[globalIndex % gradients.length]; 
+            <div className="flex h-full space-x-4 overflow-hidden w-full justify-start"> 
+              {visibleWorlds.map((world, localIndex) => {
+                const globalIndex = currentWorldStartIndex + localIndex;
+                const isActive = activeWorldIndex === globalIndex;
+                const gradientClass = gradients[globalIndex % gradients.length]; 
 
-                  return (
-                    <Link
-                      href={`/world/${world.id}`}
-                      key={world.id} 
-                      passHref
-                      ref={el => { worldCardRefs.current[localIndex] = el; }} 
-                      className={`relative flex flex-col justify-end overflow-hidden rounded-[4rem] cursor-pointer transition-all duration-500 ease-in-out ${isActive ? 'w-3/4' : 'w-[4rem]'} ${isActive ? 'bg-gradient-pink-purple' : gradientClass} flex-shrink-0`}
-                      // onClick logic can be added here if specific behavior beyond navigation is needed
+                return (
+                  <Link
+                    href={`/world/${world.id}`}
+                    key={world.id} 
+                    passHref
+                    ref={el => { worldCardRefs.current[localIndex] = el; }} 
+                    className={`relative flex flex-col justify-end overflow-hidden rounded-[4rem] cursor-pointer transition-all duration-500 ease-in-out ${isActive ? 'w-3/4' : 'w-[4rem]'} ${isActive ? 'bg-gradient-pink-purple' : gradientClass} flex-shrink-0`}
+                    // onClick logic can be added here if specific behavior beyond navigation is needed
+                  >
+                    {/* Inner div for onMouseEnter and content structure. Ensure it fills the Link area. */}
+                    <div 
+                      className="w-full h-full flex flex-col justify-end" 
+                      onMouseEnter={() => {
+                         if (activeWorldIndex !== globalIndex) { 
+                          setActiveWorldIndex(globalIndex)
+                         }
+                      }}
                     >
-                      {/* Inner div for onMouseEnter and content structure. Ensure it fills the Link area. */}
-                      <div 
-                        className="w-full h-full flex flex-col justify-end" 
-                        onMouseEnter={() => {
-                           if (activeWorldIndex !== globalIndex) { 
-                            setActiveWorldIndex(globalIndex)
-                           }
-                        }}
-                      >
-                        {/* Content visible only when active - fade in */}
-                        <div className={`relative z-10 p-6 transition-opacity duration-300 ease-in-out text-center ${isActive ? 'opacity-100 delay-300' : 'opacity-0'} ${isActive ? 'text-white/95' : 'text-[#5f6b7a]'}`}> 
-                          <h3 className="text-3xl font-bold mb-4 whitespace-nowrap">{world.name}</h3>
-                          <p className="text-base mb-6 opacity-80 leading-relaxed max-w-md mx-auto h-[150px] md:h-[200px] overflow-y-auto scrollbar-thin scrollbar-track-white/10">
-                            {(isActive && world.description) ? world.description : (isActive ? '\u00A0' : '')}
-                          </p>
-                          {isActive && ( 
-                            <div className="mt-4 relative max-w-md mx-auto">
-                              <div className="bg-background/60 backdrop-blur-md rounded-[1.5rem] p-4 shadow-xl h-28 overflow-y-auto scrollbar-thin scrollbar-track-white/5 scrollbar-thumb-white/20 hover:scrollbar-thumb-white/30">
-                                {currentWorldGems && currentWorldGems.length > 0 ? (
-                                  <div className="grid grid-cols-2 gap-3">
-                                    {currentWorldGems.slice(0, 4).map(gem => (
-                                      <Link key={gem.id} href={`/gem/${gem.id}`} className="block group">
-                                        <div className="bg-white/5 p-3 rounded-xl shadow-lg hover:bg-white/10 transition-colors h-full flex flex-col justify-center">
-                                          <p className="text-xs font-medium text-white truncate text-center">{gem.name}</p>
-                                          {gem.attributes?.rarity && (
-                                            <p className="text-[10px] text-white/70 truncate text-center">{gem.attributes.rarity}</p>
-                                          )}
-                                        </div>
-                                      </Link>
-                                    ))}
-                                  </div>
-                                ) : (
-                                  <div className="h-full flex items-center justify-center">
-                                    <p className="text-xs text-white/60 text-center">
-                                      No gems to display for this world yet.
-                                    </p>
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                        {/* Vertical title visible only when inactive */}
-                        {!isActive && (
-                          <div className="absolute inset-0 flex items-center justify-center p-2">
-                            <div className="transform -rotate-90 whitespace-nowrap">
-                              <h3 className="text-lg font-medium text-white/80">{world.name}</h3>
+                      {/* Content visible only when active - fade in */}
+                      <div className={`relative z-10 p-6 transition-opacity duration-300 ease-in-out text-center ${isActive ? 'opacity-100 delay-300' : 'opacity-0'} ${isActive ? 'text-white/95' : 'text-[#5f6b7a]'}`}> 
+                        <h3 className="text-3xl font-bold mb-4 whitespace-nowrap">{world.name}</h3>
+                        <p className="text-base mb-6 opacity-80 leading-relaxed max-w-md mx-auto h-[150px] md:h-[200px] overflow-y-auto scrollbar-thin scrollbar-track-white/10">
+                          {(isActive && world.description) ? world.description : (isActive ? '\u00A0' : '')}
+                        </p>
+                        {isActive && ( 
+                          <div className="mt-4 relative max-w-md mx-auto">
+                            <div className="bg-background/60 backdrop-blur-md rounded-[1.5rem] p-4 shadow-xl h-28 overflow-y-auto scrollbar-thin scrollbar-track-white/5 scrollbar-thumb-white/20 hover:scrollbar-thumb-white/30">
+                              {currentWorldGems && currentWorldGems.length > 0 ? (
+                                <div className="grid grid-cols-2 gap-3">
+                                  {currentWorldGems.slice(0, 4).map(gem => (
+                                    <Link key={gem.id} href={`/gem/${gem.id}`} className="block group">
+                                      <div className="bg-white/5 p-3 rounded-xl shadow-lg hover:bg-white/10 transition-colors h-full flex flex-col justify-center">
+                                        <p className="text-xs font-medium text-white truncate text-center">{gem.name}</p>
+                                        {gem.attributes?.rarity && (
+                                          <p className="text-[10px] text-white/70 truncate text-center">{gem.attributes.rarity}</p>
+                                        )}
+                                      </div>
+                                    </Link>
+                                  ))}
+                                </div>
+                              ) : (
+                                <div className="h-full flex items-center justify-center">
+                                  <p className="text-xs text-white/60 text-center">
+                                    No gems to display for this world yet.
+                                  </p>
+                                </div>
+                              )}
                             </div>
                           </div>
                         )}
                       </div>
-                    </Link>
-                  );
-                })}
-              </div>
-
-              {/* Next World Button */}
-              {worlds.length > WORLDS_PER_PAGE && (
-                <button 
-                  onClick={handleNextWorld} 
-                  disabled={currentWorldStartIndex >= worlds.length - WORLDS_PER_PAGE}
-                  className="absolute -right-4 z-20 p-2 bg-white/10 hover:bg-white/20 rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
-                  aria-label="Next worlds"
-                >
-                  <ChevronRightIcon className="h-6 w-6 text-white" />
-                </button>
-              )}
+                      {/* Vertical title visible only when inactive */}
+                      {!isActive && (
+                        <div className="absolute inset-0 flex items-center justify-center p-2">
+                          <div className="transform -rotate-90 whitespace-nowrap">
+                            <h3 className="text-lg font-medium text-white/80">{world.name}</h3>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
-          </div>
 
-          {/* Right Column (1/3 width on large screens) */}
-          <div className="lg:col-span-1">
-            <div className="flex flex-col h-full gap-2">
-              <div className="flex flex-col gap-3 flex-1 bg-gradient-dark rounded-[1.5rem] p-6">
-                <div className="group relative h-14">
-                  <div id="tabs-container" className="overflow-x-auto scrollbar-none h-full py-1">
-                    <Tabs
-                      tabs={tabData} 
-                      activeTab={activeTab}
-                      onChange={(tabId) => setActiveTab(tabId as TabName)}
-                      className="space-x-2"
-                    />
-                  </div>
+            {/* Next World Button */}
+            {worlds.length > WORLDS_PER_PAGE && (
+              <button 
+                onClick={handleNextWorld} 
+                disabled={currentWorldStartIndex >= worlds.length - WORLDS_PER_PAGE}
+                className="absolute -right-4 z-20 p-2 bg-white/10 hover:bg-white/20 rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
+                aria-label="Next worlds"
+              >
+                <ChevronRightIcon className="h-6 w-6 text-white" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Right Column (1/3 width on large screens) */}
+        <div className="lg:col-span-1">
+          <div className="flex flex-col h-full gap-2">
+            <div className="flex flex-col gap-3 flex-1 bg-gradient-dark rounded-[1.5rem] p-6">
+              <div className="group relative h-14">
+                <div id="tabs-container" className="overflow-x-auto scrollbar-none h-full py-1">
+                  <Tabs
+                    tabs={tabData} 
+                    activeTab={activeTab}
+                    onChange={(tabId) => setActiveTab(tabId as TabName)}
+                    className="space-x-2"
+                  />
                 </div>
-                <div className="flex-1 pt-3">
-                  <div className="h-full overflow-y-auto scrollbar-thin scrollbar-track-white/5 scrollbar-thumb-white/20 hover:scrollbar-thumb-white/30 space-y-4">
-                    {tabContent}
-                  </div>
+              </div>
+              <div className="flex-1 pt-3">
+                <div className="h-full overflow-y-auto scrollbar-thin scrollbar-track-white/5 scrollbar-thumb-white/20 hover:scrollbar-thumb-white/30 space-y-4">
+                  {tabContent}
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
