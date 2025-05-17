@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState, useMemo, useEffect } from 'react';
+import { FC, useState, useMemo, useEffect, useRef } from 'react';
 import DefaultSection from '@/components/layout/Section/DefaultSection';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
@@ -50,6 +50,7 @@ export const Hero: FC<HeroProps> = ({ onGenreTabChange, availableGenres }) => {
   const [activeWorldIndex, setActiveWorldIndex] = useState<number>(0); // This will be the global index
   const [activeTab, setActiveTab] = useState<TabName>('Trending');
   const [currentWorldStartIndex, setCurrentWorldStartIndex] = useState<number>(0);
+  const worldCardRefs = useRef<(HTMLAnchorElement | null)[]>([]); // Added for storing refs to world cards
 
   const WORLDS_PER_PAGE = 5; // Number of worlds to display in the horizontal scroller at a time
 
@@ -142,6 +143,27 @@ export const Hero: FC<HeroProps> = ({ onGenreTabChange, availableGenres }) => {
     return filtered.slice(0, 4);
   }, [filteredGemsByGenre]);
 
+  // Calculate the slice of worlds to display
+  const visibleWorlds = useMemo(() => {
+    // Ensure worldCardRefs is reset if the visible worlds change significantly, to avoid stale refs
+    // This is a simple reset; more sophisticated key-based ref management might be needed for complex cases.
+    worldCardRefs.current = []; 
+    return worlds.slice(currentWorldStartIndex, currentWorldStartIndex + WORLDS_PER_PAGE);
+  }, [worlds, currentWorldStartIndex, WORLDS_PER_PAGE]);
+
+  useEffect(() => {
+    // Find the local index of the active world within the visible set
+    const localActiveIndex = visibleWorlds.findIndex(world => worlds[activeWorldIndex] && world.id === worlds[activeWorldIndex].id);
+
+    if (localActiveIndex !== -1 && worldCardRefs.current[localActiveIndex]) {
+      worldCardRefs.current[localActiveIndex].scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'start', // Align to the start to prevent left cutoff
+      });
+    }
+  }, [activeWorldIndex, visibleWorlds, worlds]);
+
   // Handle case where there are no worlds
   if (!Array.isArray(worlds) || worlds.length === 0) {
     return null;
@@ -168,11 +190,6 @@ export const Hero: FC<HeroProps> = ({ onGenreTabChange, availableGenres }) => {
       setCurrentWorldStartIndex(newStartIndexBasedOnActive);
     }
   };
-
-  // Calculate the slice of worlds to display
-  const visibleWorlds = useMemo(() => {
-    return worlds.slice(currentWorldStartIndex, currentWorldStartIndex + WORLDS_PER_PAGE);
-  }, [worlds, currentWorldStartIndex, WORLDS_PER_PAGE]);
 
   // Helper function to render gems as a vertical list
   const renderGemList = (gems: Gem[]) => { 
@@ -265,60 +282,73 @@ export const Hero: FC<HeroProps> = ({ onGenreTabChange, availableGenres }) => {
                 </button>
               )}
 
-              <div className="flex h-full space-x-4 overflow-hidden w-full justify-center"> 
+              <div className="flex h-full space-x-4 overflow-hidden w-full justify-start"> 
                 {visibleWorlds.map((world, localIndex) => {
                   const globalIndex = currentWorldStartIndex + localIndex;
                   const isActive = activeWorldIndex === globalIndex;
                   const gradientClass = gradients[globalIndex % gradients.length]; 
 
                   return (
-                    <div
+                    <Link
+                      href={`/world/${world.id}`}
                       key={world.id} 
+                      passHref
+                      ref={el => { worldCardRefs.current[localIndex] = el; }} 
                       className={`relative flex flex-col justify-end overflow-hidden rounded-[4rem] cursor-pointer transition-all duration-500 ease-in-out ${isActive ? 'w-3/4' : 'w-[4rem]'} ${isActive ? 'bg-gradient-pink-purple' : gradientClass} flex-shrink-0`}
-                      onMouseEnter={() => setActiveWorldIndex(globalIndex)} 
+                      // onClick logic can be added here if specific behavior beyond navigation is needed
                     >
-                      {/* Content visible only when active - fade in */}
-                      <div className={`relative z-10 p-6 transition-opacity duration-300 ease-in-out text-center ${isActive ? 'opacity-100 delay-300' : 'opacity-0'} ${isActive ? 'text-white/95' : 'text-[#5f6b7a]'}`}> 
-                        <h3 className="text-3xl font-bold mb-4 whitespace-nowrap">{world.name}</h3>
-                        <p className="text-base mb-6 opacity-80 leading-relaxed max-w-md mx-auto h-[150px] md:h-[200px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-white/10">
-                          {(activeWorldIndex === globalIndex && world.description) ? world.description : (activeWorldIndex === globalIndex ? '\u00A0' : '')}
-                        </p>
-                        {activeWorldIndex === globalIndex && (
-                          <div className="mt-4 relative max-w-md mx-auto">
-                            <div className="bg-background/60 backdrop-blur-md rounded-[1.5rem] p-4 shadow-xl h-28 overflow-y-auto scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-white/10">
-                              {currentWorldGems && currentWorldGems.length > 0 ? (
-                                <div className="grid grid-cols-2 gap-3">
-                                  {currentWorldGems.slice(0, 4).map(gem => (
-                                    <Link key={gem.id} href={`/gem/${gem.id}`} className="block group">
-                                      <div className="bg-white/5 p-3 rounded-xl shadow-lg hover:bg-white/10 transition-colors h-full flex flex-col justify-center">
-                                        <p className="text-xs font-medium text-white truncate text-center">{gem.name}</p>
-                                        {gem.attributes?.rarity && (
-                                          <p className="text-[10px] text-white/70 truncate text-center">{gem.attributes.rarity}</p>
-                                        )}
-                                      </div>
-                                    </Link>
-                                  ))}
-                                </div>
-                              ) : (
-                                <div className="h-full flex items-center justify-center">
-                                  <p className="text-xs text-white/60 text-center">
-                                    No gems to display for this world yet.
-                                  </p>
-                                </div>
-                              )}
+                      {/* Inner div for onMouseEnter and content structure. Ensure it fills the Link area. */}
+                      <div 
+                        className="w-full h-full flex flex-col justify-end" 
+                        onMouseEnter={() => {
+                           if (activeWorldIndex !== globalIndex) { 
+                            setActiveWorldIndex(globalIndex)
+                           }
+                        }}
+                      >
+                        {/* Content visible only when active - fade in */}
+                        <div className={`relative z-10 p-6 transition-opacity duration-300 ease-in-out text-center ${isActive ? 'opacity-100 delay-300' : 'opacity-0'} ${isActive ? 'text-white/95' : 'text-[#5f6b7a]'}`}> 
+                          <h3 className="text-3xl font-bold mb-4 whitespace-nowrap">{world.name}</h3>
+                          <p className="text-base mb-6 opacity-80 leading-relaxed max-w-md mx-auto h-[150px] md:h-[200px] overflow-y-auto scrollbar-thin scrollbar-track-white/10">
+                            {(isActive && world.description) ? world.description : (isActive ? '\u00A0' : '')}
+                          </p>
+                          {isActive && ( 
+                            <div className="mt-4 relative max-w-md mx-auto">
+                              <div className="bg-background/60 backdrop-blur-md rounded-[1.5rem] p-4 shadow-xl h-28 overflow-y-auto scrollbar-thin scrollbar-track-white/5 scrollbar-thumb-white/20 hover:scrollbar-thumb-white/30">
+                                {currentWorldGems && currentWorldGems.length > 0 ? (
+                                  <div className="grid grid-cols-2 gap-3">
+                                    {currentWorldGems.slice(0, 4).map(gem => (
+                                      <Link key={gem.id} href={`/gem/${gem.id}`} className="block group">
+                                        <div className="bg-white/5 p-3 rounded-xl shadow-lg hover:bg-white/10 transition-colors h-full flex flex-col justify-center">
+                                          <p className="text-xs font-medium text-white truncate text-center">{gem.name}</p>
+                                          {gem.attributes?.rarity && (
+                                            <p className="text-[10px] text-white/70 truncate text-center">{gem.attributes.rarity}</p>
+                                          )}
+                                        </div>
+                                      </Link>
+                                    ))}
+                                  </div>
+                                ) : (
+                                  <div className="h-full flex items-center justify-center">
+                                    <p className="text-xs text-white/60 text-center">
+                                      No gems to display for this world yet.
+                                    </p>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        {/* Vertical title visible only when inactive */}
+                        {!isActive && (
+                          <div className="absolute inset-0 flex items-center justify-center p-2">
+                            <div className="transform -rotate-90 whitespace-nowrap">
+                              <h3 className="text-lg font-medium text-white/80">{world.name}</h3>
                             </div>
                           </div>
                         )}
                       </div>
-                      {/* Vertical title visible only when inactive */}
-                      {!isActive && (
-                        <div className="absolute inset-0 flex items-center justify-center p-2">
-                          <div className="transform -rotate-90 whitespace-nowrap">
-                            <h3 className="text-lg font-medium text-white/80">{world.name}</h3>
-                          </div>
-                        </div>
-                      )}
-                    </div>
+                    </Link>
                   );
                 })}
               </div>

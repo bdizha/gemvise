@@ -122,9 +122,9 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                     icon={icon}
                     onClick={closeSidebar}
                     isActive={pathname === href}
-                    className={pathname === href ? 'bg-[#ff9900]/30 text-white' : 'bg-neutral-200 dark:bg-neutral-700/60 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 text-theme-foreground'}
+                    className={pathname === href ? 'bg-[#ff9900]/30 text-white' : 'bg-neutral-200 dark:bg-neutral-700/60 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 text-theme-foreground dark:text-neutral-200'}
                     iconWrapperClassName='bg-white/10 dark:bg-black/20'
-                    iconClassName='h-5 w-5 text-theme-foreground'
+                    iconClassName='h-5 w-5 text-theme-foreground dark:text-neutral-200'
                     labelClassName='flex-1 text-left'
                   />
                 ))}
@@ -153,7 +153,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                         onClick={closeSidebar}
                         isActive={pathname === `/gem/${chat.adventureId}`}
                         hasNotification={chat.unread}
-                        className={`${pathname === `/gem/${chat.adventureId}` ? 'bg-[#ff9900]/30 text-white' : 'bg-neutral-200 dark:bg-neutral-700/60 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 text-theme-foreground'}`}
+                        className={`${pathname === `/gem/${chat.adventureId}` ? 'bg-[#ff9900]/30 text-white' : 'bg-neutral-200 dark:bg-neutral-700/60 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 text-theme-foreground dark:text-neutral-200'}`}
                         iconWrapperClassName='bg-white/20 dark:bg-black/30'
                       />
                     ))}
@@ -187,7 +187,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                       imageUrl={world.imageUrl}
                       onClick={closeSidebar}
                       isActive={pathname === world.href}
-                      className={`${pathname === world.href ? 'bg-[#ff9900]/30 text-white' : 'bg-neutral-200 dark:bg-neutral-700/60 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 text-theme-foreground'}`}
+                      className={`${pathname === world.href ? 'bg-[#ff9900]/30 text-white' : 'bg-neutral-200 dark:bg-neutral-700/60 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 text-theme-foreground dark:text-neutral-200'}`}
                       iconWrapperClassName='bg-black/20 backdrop-blur-sm dark:bg-black/30'
                       iconClassName='h-5 w-5 text-white/80'
                       labelClassName='font-semibold'
@@ -214,15 +214,15 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
           <div className="flex-grow overflow-y-auto px-2 py-4 space-y-2 thin-scrollbar">
             <SidebarItem itemType='button' onClick={() => { setIsOpen(true); setCreateMenuOpen(true); }} label="Create" icon={PlusIcon} className='justify-center hover:bg-muted-foreground/60' iconWrapperClassName='bg-white/10' iconClassName='h-5 w-5 text-white' labelClassName='hidden' />
             {mainNavLinks.map(({ href, label, icon }) => (
-              <SidebarItem key={`${href}-collapsed`} href={href} label={label} icon={icon} onClick={closeSidebar} isActive={pathname === href} className={`justify-center ${pathname === href ? 'bg-[#ff9900]/30' : 'bg-neutral-200 dark:bg-neutral-700/60 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 text-theme-foreground'}`} iconWrapperClassName='bg-white/10 dark:bg-black/20' iconClassName='h-5 w-5 text-theme-foreground' labelClassName='hidden' />
+              <SidebarItem key={`${href}-collapsed`} href={href} label={label} icon={icon} onClick={closeSidebar} isActive={pathname === href} className={`justify-center ${pathname === href ? 'bg-[#ff9900]/30' : 'bg-neutral-200 dark:bg-neutral-700/60 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 text-theme-foreground dark:text-neutral-200'}`} iconWrapperClassName='bg-white/10 dark:bg-black/20' iconClassName='h-5 w-5 text-theme-foreground dark:text-neutral-200' labelClassName='hidden' />
             ))}
             <div className="border-t border-white/10 my-3"></div>
             {mockChatHistory.slice(0, 3).map((chat: MockChatSession) => (
-              <SidebarItem key={`${chat.id}-collapsed`} href={`/gem/${chat.adventureId}`} label={chat.adventureName} iconElement={<span className="text-xs font-semibold text-white">{chat.adventureName.substring(0, 1).toUpperCase()}</span>} onClick={closeSidebar} isActive={pathname === `/gem/${chat.adventureId}`} hasNotification={chat.unread} className={`justify-center ${pathname === `/gem/${chat.adventureId}` ? 'bg-[#ff9900]/30' : 'bg-neutral-200 dark:bg-neutral-700/60 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 text-theme-foreground'}`} iconWrapperClassName='bg-white/20 dark:bg-black/30' labelClassName='hidden' />
+              <SidebarItem key={`${chat.id}-collapsed`} href={`/gem/${chat.adventureId}`} label={chat.adventureName} iconElement={<span className="text-xs font-semibold text-white">{chat.adventureName.substring(0, 1).toUpperCase()}</span>} onClick={closeSidebar} isActive={pathname === `/gem/${chat.adventureId}`} hasNotification={chat.unread} className={`justify-center ${pathname === `/gem/${chat.adventureId}` ? 'bg-[#ff9900]/30' : 'bg-neutral-200 dark:bg-neutral-700/60 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 text-theme-foreground dark:text-neutral-200'}`} iconWrapperClassName='bg-white/20 dark:bg-black/30' labelClassName='hidden' />
             ))}
             <div className="border-t border-white/10 my-3"></div>
             {appWorlds.slice(0, 4).map(world => (
-              <SidebarItem key={`${world.id}-collapsed`} href={world.href} label={world.name} icon={world.icon} onClick={closeSidebar} isActive={pathname === world.href} className={`justify-center ${pathname === world.href ? 'ring-2 ring-pink-500' : 'bg-neutral-200 dark:bg-neutral-700/60 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 text-theme-foreground'}`} iconWrapperClassName='bg-black/20 backdrop-blur-sm dark:bg-black/30' iconClassName='h-5 w-5 text-white/80' labelClassName='hidden' imageUrl={world.imageUrl} />
+              <SidebarItem key={`${world.id}-collapsed`} href={world.href} label={world.name} icon={world.icon} onClick={closeSidebar} isActive={pathname === world.href} className={`justify-center ${pathname === world.href ? 'ring-2 ring-pink-500' : 'bg-neutral-200 dark:bg-neutral-700/60 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 text-theme-foreground dark:text-neutral-200'}`} iconWrapperClassName='bg-black/20 backdrop-blur-sm dark:bg-black/30' iconClassName='h-5 w-5 text-white/80' labelClassName='hidden' imageUrl={world.imageUrl} />
             ))}
           </div>
         )}

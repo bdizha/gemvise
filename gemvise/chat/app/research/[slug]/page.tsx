@@ -61,12 +61,12 @@ export default function ResearchPaper({ params }: { params: { slug: string } }) 
         </Section>
 
         {paper.imageUrl && (
-          <div className="relative mx-auto mt-8 aspect-[21/9] max-w-7xl overflow-hidden">
+          <div className="relative mx-auto mt-8 aspect-[21/9] max-w-7xl overflow-hidden rounded-3xl bg-white/10 backdrop-blur-md shadow-lg">
             <Image
               src={paper.imageUrl}
               alt={paper.title}
               fill
-              className="object-cover"
+              className="object-cover rounded-3xl"
               priority
             />
           </div>

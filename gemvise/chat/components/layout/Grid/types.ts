@@ -6,6 +6,7 @@ export interface GridItem {
   href?: string; // For navigation, primary use in sliders
   onClick?: () => void; // For interaction, primary use in grid lists
   subtitle?: string; // e.g., character's rarity, gem's main genre
+  tag?: string; // Optional tag, e.g., for Timeline items like 'B', 'T', 'N'
   cardVariant?: 'default' | 'character' | 'collection' | 'media' | string; // To allow different card styling
   // Engagement metrics (primarily for slider cards, but can be generic)
   chatCount?: number;

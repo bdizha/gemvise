@@ -36,7 +36,7 @@ const SliderCard: React.FC<GridItem> = ({
   fire,
   overlayText, // Destructure overlayText from props
 }) => (
-  <div className="relative flex flex-col w-full text-left p-4 transition-shadow duration-300 overflow-hidden cursor-pointer h-full rounded-3xl bg-white/10 backdrop-blur-md">
+  <div className="relative flex flex-col w-full text-left p-4 transition-shadow duration-300 overflow-hidden cursor-pointer h-full rounded-3xl bg-white/10 backdrop-blur-md shadow-lg">
     <div className="relative z-10 flex flex-col flex-grow">
       <div className="relative w-full aspect-[16/9] mb-4 rounded-t-3xl overflow-hidden"> {/* Standardized rounding */}
         {imageUrl && (
@@ -44,7 +44,7 @@ const SliderCard: React.FC<GridItem> = ({
             src={imageUrl}
             alt={title}
             fill
-            className="object-cover"
+            className="object-cover rounded-t-3xl"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         )}

@@ -21,13 +21,13 @@ const GemDetailPanel: React.FC<GemDetailPanelProps> = ({ gem }) => {
     <div className="p-6 bg-theme-surface-alt rounded-xl shadow-lg space-y-4 h-full overflow-y-auto text-theme-foreground">
       <h2 className="text-2xl font-bold text-theme-primary">{gem.name || 'Unnamed Gem'}</h2>
       
-      <div className="relative w-full h-64 rounded-lg overflow-hidden">
+      <div className="relative w-full h-64 rounded-[1.5rem] overflow-hidden bg-white/10 backdrop-blur-md shadow-lg">
         <Image 
           src={imageUrl} 
           alt={gem.name || 'Gem image'}
           layout="fill"
           objectFit="cover"
-          className="bg-gray-200 dark:bg-gray-700" // Background for image loading or if transparent
+          className="rounded-[1.5rem]"
         />
       </div>
 

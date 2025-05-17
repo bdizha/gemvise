@@ -36,6 +36,7 @@ export interface SectionProps {
     icon?: (props: React.ComponentProps<'svg'>) => JSX.Element;
   }[];
   style?: React.CSSProperties;
+  contentWrapperClassName?: string; // New prop for styling the content wrapper
 }
 
 const variantClasses: Record<SectionVariant, string> = {
@@ -71,9 +72,13 @@ const Section: FC<SectionProps> = ({
   gradient,
   values,
   style,
+  contentWrapperClassName, // Added to destructuring
 }) => {
   const baseClass = 'w-full';
   const sectionStyleClasses = variantClasses[sectionVariant] || variantClasses.default;
+
+  // Determine if content (items or children) exists
+  const hasContent = (items && items.length > 0 && itemsDisplay) || children;
 
   return (
     <section
@@ -107,9 +112,9 @@ const Section: FC<SectionProps> = ({
           </div>
         )}
         
-        {/* Conditionally render GridList or GridSlider if items and itemsDisplay are provided */}
-        {items && items.length > 0 && (
-          <div className="relative">
+        {/* Items Display (Grid/Slider) with optional wrapper */}
+        {items && items.length > 0 && itemsDisplay && (
+          <div className={cn(contentWrapperClassName ? contentWrapperClassName : 'mt-8')}> 
             {itemsDisplay === 'grid' && (
               <GridList items={items} className={gridClassName} columns={gridColumns} />
             )}
@@ -119,7 +124,20 @@ const Section: FC<SectionProps> = ({
           </div>
         )}
 
-        {/* Render values */}
+        {/* Render children if provided. Handles spacing and wrapper if children are sole content. */}
+        {children && (
+          <div className={cn(
+            // If children are the ONLY content (no items displayed) AND contentWrapperClassName is provided,
+            // then children block uses the wrapper class. Otherwise, it defaults to 'mt-8'.
+            (!items || items.length === 0 || !itemsDisplay) && contentWrapperClassName 
+              ? contentWrapperClassName 
+              : 'mt-8'
+          )}>
+            {children}
+          </div>
+        )}
+
+        {/* Render values - outside the content wrapper for now, can be adjusted if needed */}
         {values && (
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
@@ -136,9 +154,6 @@ const Section: FC<SectionProps> = ({
             </dl>
           </div>
         )}
-
-        {/* Render children if items/itemsDisplay are not used, or if you want to add content alongside grid/slider */}
-        {(!items || items.length === 0 || !itemsDisplay) && children}
       </div>
     </section>
   );

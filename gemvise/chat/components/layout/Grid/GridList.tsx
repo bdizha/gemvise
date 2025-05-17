@@ -37,7 +37,7 @@ const GridList: React.FC<GridListProps> = ({ items, className = '', columns }) =
         const cardContent = (
           <div
             className={cn(
-              'group relative flex flex-col overflow-hidden rounded-3xl bg-white/10 backdrop-blur-md transition-all duration-300 ease-in-out h-full'
+              'group relative flex flex-col overflow-hidden rounded-3xl bg-white/10 backdrop-blur-md transition-all duration-300 ease-in-out h-full shadow-lg'
             )}
           >
             {item.imageUrl && (
@@ -46,7 +46,7 @@ const GridList: React.FC<GridListProps> = ({ items, className = '', columns }) =
                   src={item.imageUrl}
                   alt={item.title}
                   fill
-                  className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                  className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105 rounded-t-3xl"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 {item.overlayText && (

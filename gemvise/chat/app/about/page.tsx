@@ -73,11 +73,13 @@ const AboutPage: FC = () => {
             </p>
           </div>
           <div className="md:w-1/2">
-            <img 
-              src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" 
-              alt="Team collaborating on ideas"
-              className="rounded-lg shadow-lg w-full h-auto object-cover max-h-[400px] md:max-h-[500px]"
-            />
+            <div className="rounded-[1.5rem] bg-white/10 backdrop-blur-md shadow-lg overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80" 
+                alt="Team collaborating on ideas"
+                className="rounded-[1.5rem] w-full h-auto object-cover max-h-[400px] md:max-h-[500px]"
+              />
+            </div>
           </div>
         </div>
       </Section>
@@ -97,11 +99,13 @@ const AboutPage: FC = () => {
             </p>
           </div>
           <div className="md:w-1/2">
-            <img 
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
-              alt="Digital world illustration"
-              className="rounded-lg shadow-lg w-full h-auto object-cover max-h-[400px] md:max-h-[500px]"
-            />
+            <div className="rounded-[1.5rem] bg-white/10 backdrop-blur-md shadow-lg overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" 
+                alt="Digital world illustration"
+                className="rounded-[1.5rem] w-full h-auto object-cover max-h-[400px] md:max-h-[500px]"
+              />
+            </div>
           </div>
         </div>
       </Section>

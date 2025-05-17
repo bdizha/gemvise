@@ -2,21 +2,36 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { ResearchPaper } from '@/data/research-papers';
 
+const gradientImages = [
+  "/gradients/GV-Gradient-01.png",
+  "/gradients/GV-Gradient-02.png",
+  "/gradients/GV-Gradient-03.png",
+  "/gradients/GV-Gradient-05.png",
+  "/gradients/GV-Gradient-06.png",
+  "/gradients/GV-Gradient-07.png",
+  "/gradients/GV-Gradient-08.png",
+  "/gradients/GV-Gradient-09.png"
+];
+
 export default function ResearchCard({ paper }: { paper: ResearchPaper }) {
+  let displayImageUrl = paper.imageUrl;
+  if (!displayImageUrl) {
+    const fallbackIndex = paper.slug.length % gradientImages.length;
+    displayImageUrl = gradientImages[fallbackIndex];
+  }
+
   return (
     <Link href={`/research/${paper.slug}`} className="group">
-      <article className="flex flex-col space-y-4">
-        {paper.imageUrl && (
-          <div className="relative aspect-[16/9] overflow-hidden rounded-[1.5rem] bg-stone-100 dark:bg-stone-900">
-            <Image
-              src={paper.imageUrl}
-              alt={paper.title}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-          </div>
-        )}
-        <div className="flex flex-col space-y-2">
+      <article className="flex flex-col space-y-4 h-full bg-white/5 p-4 rounded-3xl shadow-lg backdrop-blur-sm hover:bg-white/10 transition-colors duration-200">
+        <div className="relative aspect-[16/9] overflow-hidden rounded-[1.5rem] bg-white/10 backdrop-blur-md shadow-inner">
+          <Image
+            src={displayImageUrl} 
+            alt={paper.title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        </div>
+        <div className="flex flex-col space-y-2 flex-grow">
           <div className="flex items-center space-x-2">
             <time dateTime={paper.date} className="text-sm text-stone-500 dark:text-stone-400">
               {new Date(paper.date).toLocaleDateString('en-US', {
@@ -39,18 +54,18 @@ export default function ResearchCard({ paper }: { paper: ResearchPaper }) {
               </span>
             </div>
           )}
-          <h2 className="text-xl font-semibold tracking-tight text-stone-800 dark:text-stone-100 group-hover:text-stone-600 dark:group-hover:text-stone-300 transition-colors">
+          <h2 className="text-xl font-semibold tracking-tight text-white group-hover:text-primary transition-colors">
             {paper.title}
           </h2>
-          <p className="text-stone-600 dark:text-stone-400 line-clamp-2">{paper.excerpt}</p>
-          <div className="flex items-center space-x-2">
-            <span className="text-sm text-stone-500 dark:text-stone-400">{paper.author}</span>
+          <p className="text-white/80 line-clamp-2 flex-grow">{paper.excerpt}</p>
+          <div className="flex items-center space-x-2 pt-2">
+            <span className="text-sm text-white/60">{paper.author}</span>
           </div>
           <div className="flex flex-wrap gap-2 pt-2">
             {paper.tags.map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full bg-stone-100 text-stone-800 dark:bg-stone-800 dark:text-stone-200"
+                className="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full bg-white/10 text-white/80"
               >
                 #{tag}
               </span>

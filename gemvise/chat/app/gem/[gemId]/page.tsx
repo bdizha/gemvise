@@ -111,13 +111,13 @@ export default function GemDetail() {
           </div>
           
           <div className="mt-10 max-w-xl lg:mt-0">
-            <div className="relative aspect-square overflow-hidden rounded-[4rem] bg-theme-surface/50 backdrop-blur-sm">
+            <div className="relative aspect-square overflow-hidden rounded-[1.5rem] bg-white/10 backdrop-blur-md shadow-lg">
               {gem.imageUrl && (
                 <Image
                   src={gem.imageUrl}
                   alt={gem.name}
                   fill
-                  className="object-cover"
+                  className="object-cover rounded-[1.5rem]"
                 />
               )}
             </div>
