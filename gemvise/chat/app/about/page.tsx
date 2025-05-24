@@ -1,8 +1,8 @@
 'use client';
 
 import { type FC } from 'react';
-import Section from '@/components/layout/Section'; 
-import Button from '@/components/ui/Button';
+import { Section } from '@/components/layout/Section'; 
+import { Button } from '@/components/layout/Button';
 
 const AboutPage: FC = () => {
   return (

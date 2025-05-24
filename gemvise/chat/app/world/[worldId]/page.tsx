@@ -5,36 +5,90 @@ import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { GlobeAltIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
-import { worlds } from '../../../data/worldData'; 
-import type { GemiumWorld, Gem } from '../../../types/gemium'; 
+import { worlds, type World } from '../../../data/worldData'; 
+import type { Gem } from '../../../types/gemium'; 
 import type { GridItem } from '@/components/layout/Grid/types';
-import Section from '@/components/layout/Section';
-import Tabs from '@/components/ui/Tabs';
+import Card from '@/components/layout/Card/Card';
+import { Grid } from '@/components/layout/Grid';
+import Section, { type SectionProps } from '@/components/layout/Section/Section';
+import { Tabs, type Tab } from '@/components/layout/Tabs';
 
 const gradients = [
-  '/gradients/cha-gradient-00.png',
-  '/gradients/cha-gradient-01.png',
-  '/gradients/cha-gradient-02.png',
-  '/gradients/cha-gradient-03.png',
-  '/gradients/cha-gradient-04.png',
+  '/gradients/GV-gradient-01.png',
+  '/gradients/GV-gradient-02.png',
+  '/gradients/GV-gradient-03.png',
+  '/gradients/GV-gradient-04.png',
+  '/gradients/GV-gradient-05.png',
 ];
 const getRandomGradient = () => gradients[Math.floor(Math.random() * gradients.length)];
 
-type WorldPageTabId = 'roleplays' | 'characters' | 'stories' | 'scenes'; 
+type WorldPageTabId = 'explore' | 'characters' | 'adventures' | 'scenes' | 'about';
 
 const worldPageTabs: { id: WorldPageTabId; label: string }[] = [
-  { id: 'roleplays', label: 'Roleplays' },
+  { id: 'explore', label: 'Explore' },
   { id: 'characters', label: 'Characters' },
-  { id: 'stories', label: 'Stories' },
+  { id: 'adventures', label: 'Adventures' },
   { id: 'scenes', label: 'Scenes' },
+  { id: 'about', label: 'About' },
+];
+
+interface SectionConfig {
+  id: WorldPageTabId;
+  variant: SectionProps['variant'];
+  title: string;
+  items?: GridItem[];
+  description?: string;
+  className?: string;
+  gradient?: SectionProps['gradient'];
+  children?: React.ReactNode;
+  emptyMessage?: string;
+  cta?: {
+    href: string;
+    label: string;
+  };
+}
+
+const sectionsConfig: SectionConfig[] = [
+  {
+    id: 'explore',
+    variant: 'slider',
+    title: 'Featured Content',
+    description: 'Highlights from this world',
+    className: 'bg-gradient-purple-pink-purple/80 backdrop-blur-md rounded-3xl overflow-hidden',
+    gradient: 'dark-light',
+  },
+  {
+    id: 'characters',
+    variant: 'slider',
+    title: 'Characters',
+    gradient: 'dark',
+  },
+  {
+    id: 'adventures',
+    variant: 'slider',
+    title: 'Adventures',
+    gradient: 'dark',
+  },
+  {
+    id: 'scenes',
+    variant: 'slider',
+    title: 'Scenes',
+    gradient: 'dark',
+  },
+  {
+    id: 'about',
+    variant: 'default',
+    title: 'About',
+    gradient: 'dark',
+  },
 ];
 
 export default function WorldDetail() {
   const params = useParams();
-  const [world, setWorld] = useState<GemiumWorld | null>(null);
+  const [world, setWorld] = useState<World | null>(null);
   const [worldGems, setWorldGems] = useState<Gem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<WorldPageTabId>('characters');
+  const [activeTab, setActiveTab] = useState<WorldPageTabId>('explore');
 
   useEffect(() => {
     setLoading(true);
@@ -81,29 +135,58 @@ export default function WorldDetail() {
     cardVariant: gem.type ? gem.type.toLowerCase() : 'default', 
   });
 
+  const featuredWorldBannerGems = useMemo(() => {
+    if (!world) return [];
+    // Take from allGemsInWorld, which includes characters, stories, adventures, scenes
+    return allGemsInWorld.slice(0, 4).map(mapGemToGridItem);
+  }, [allGemsInWorld, world, mapGemToGridItem]);
+
   const roleplayItems = useMemo(() => {
     return allGemsInWorld
       .filter(gem => gem.type === 'Adventure') 
       .map(mapGemToGridItem);
-  }, [allGemsInWorld]);
+  }, [allGemsInWorld, mapGemToGridItem]);
 
   const characterItems = useMemo(() => {
-    return allGemsInWorld
-      .filter(gem => gem.type === 'Character') 
-      .map(mapGemToGridItem);
-  }, [allGemsInWorld]);
+    if (world && world.id === 'boldland') {
+      return [
+        { id: "bp_00057", title: "Pup BFRC 00057", description: "A bold pup from Boldland.", href: "/gem/bp_00057", imageUrl: "/gems/boldland/BOLD-PUPS/bfrc_00057.png" },
+        { id: "bp_00058", title: "Pup BFRC 00058", description: "A brave pup from Boldland.", href: "/gem/bp_00058", imageUrl: "/gems/boldland/BOLD-PUPS/bfrc_00058.png" },
+        { id: "bp_00157", title: "Pup BFRC 00157", description: "An adventurous pup.", href: "/gem/bp_00157", imageUrl: "/gems/boldland/BOLD-PUPS/bfrc_00157.png" },
+        { id: "bp_00158", title: "Pup BFRC 00158", description: "Loyal and friendly pup.", href: "/gem/bp_00158", imageUrl: "/gems/boldland/BOLD-PUPS/bfrc_00158.png" },
+        { id: "bp_00257", title: "Pup BFRC 00257", description: "Always ready for action.", href: "/gem/bp_00257", imageUrl: "/gems/boldland/BOLD-PUPS/bfrc_00257.png" },
+        { id: "bp_00258", title: "Pup BFRC 00258", description: "A playful pup from Boldland.", href: "/gem/bp_00258", imageUrl: "/gems/boldland/BOLD-PUPS/bfrc_00258.png" },
+      ];
+    } else {
+      return allGemsInWorld
+        .filter(gem => gem.type === 'Character') 
+        .map(mapGemToGridItem);
+    }
+  }, [allGemsInWorld, world, mapGemToGridItem]);
 
   const storyItems = useMemo(() => {
     return allGemsInWorld
       .filter(gem => gem.type === 'Story') 
       .map(mapGemToGridItem);
-  }, [allGemsInWorld]);
+  }, [allGemsInWorld, mapGemToGridItem]);
 
   const sceneItems = useMemo(() => {
     return allGemsInWorld
       .filter(gem => gem.type === 'Scene') 
       .map(mapGemToGridItem);
-  }, [allGemsInWorld]);
+  }, [allGemsInWorld, mapGemToGridItem]);
+
+  const genreItems = useMemo(() => {
+    return world?.genres?.map(genre => ({
+      id: `genre-${genre}`,
+      title: genre,
+      description: "", // Required by GridItem type
+      href: `/explore?genre=${genre}`,
+      className: "inline-flex items-center rounded-full bg-white/10 backdrop-blur-md px-4 py-1.5 text-sm font-medium text-white ring-1 ring-inset ring-white/20 hover:bg-white/20 transition-colors duration-200"
+    })) || [];
+  }, [world?.genres]);
+
+  const activeSectionConfig = sectionsConfig.find(config => config.id === activeTab);
 
   if (loading) {
     return (
@@ -123,7 +206,7 @@ export default function WorldDetail() {
         </p>
         <Link
           href="/explore" 
-          className="mt-6 rounded-lg bg-[#ff9900] px-4 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-[#e68a00] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff9900]"
+          className="mt-6 rounded-lg bg-white/10 backdrop-blur-md px-4 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-[#e68a00] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff9900]"
         >
           Explore Other Worlds
         </Link>
@@ -131,73 +214,44 @@ export default function WorldDetail() {
     );
   }
 
-  let currentTabItems: GridItem[] = [];
-  let currentTabTitle = '';
-  switch (activeTab) {
-    case 'roleplays':
-      currentTabItems = roleplayItems;
-      currentTabTitle = worldPageTabs.find(t => t.id === 'roleplays')?.label || 'Roleplays';
-      break;
-    case 'characters':
-      currentTabItems = characterItems;
-      currentTabTitle = worldPageTabs.find(t => t.id === 'characters')?.label || 'Characters';
-      break;
-    case 'stories':
-      currentTabItems = storyItems;
-      currentTabTitle = worldPageTabs.find(t => t.id === 'stories')?.label || 'Stories';
-      break;
-    case 'scenes':
-      currentTabItems = sceneItems;
-      currentTabTitle = worldPageTabs.find(t => t.id === 'scenes')?.label || 'Scenes';
-      break;
-    default:
-      currentTabItems = characterItems; 
-      currentTabTitle = worldPageTabs.find(t => t.id === 'characters')?.label || 'Characters';
-  }
-
   return (
     <div className="min-h-screen bg-gradient-dark flex flex-col gap-8 py-8 px-4 md:px-8 lg:px-12">
+      {/* Hero Section */}
       <Section
-        variant="hero"
-        title={world.name} 
-        description={world.description} 
-        className="bg-neutral-800/50 backdrop-blur-md rounded-3xl p-6 md:p-8 text-white"
-      >
-        {world.genres && world.genres.length > 0 && (
-          <div className="mt-6 flex flex-wrap gap-2 justify-center">
-            {world.genres.map((genre) => (
-              <span
-                key={genre} // Assuming genre is a string, use it as key
-                className="inline-flex items-center rounded-full bg-theme-surface/50 px-3 py-1.5 text-xs font-medium text-theme-foreground/80 ring-1 ring-inset ring-theme-foreground/10"
-              >
-                {genre} // Display the string directly
-              </span>
-            ))}
-          </div>
-        )}
-      </Section>
-
-      <div className="flex justify-center">
-        <Tabs
-          tabs={worldPageTabs}
-          activeTab={activeTab}
-          onChange={(tabId) => setActiveTab(tabId as WorldPageTabId)}
-          className="bg-neutral-800/50 backdrop-blur-md p-1 rounded-full"
-        />
-      </div>
-
-      {currentTabItems.length > 0 ? (
+        variant="profile"
+        heroImageUrl={world.imageUrl || getRandomGradient()}
+        heroImageAlt={`${world.name} world banner`}
+        heroOverlay="bg-gradient-purple-pink-purple/90"
+        heroContentPosition="bottom-left"
+        title={world.name}
+        description={world.description}
+        className="min-h-[400px] mb-8"
+        items={genreItems}
+      />
+      
+      {/* Navigation Tabs */}
+      <Tabs
+        tabs={worldPageTabs}
+        activeTab={activeTab}
+        onChange={(tabId) => setActiveTab(tabId as WorldPageTabId)}
+      />
+      
+      {/* Tab Content */}
+      {activeSectionConfig && (
         <Section
-          items={currentTabItems}
-          itemsDisplay="slider"
-          sliderSectionTitle={currentTabTitle} 
-          className="bg-transparent px-4 md:px-0" 
-        />
-      ) : (
-        <Section title={currentTabTitle} className="bg-transparent">
-          <p className="text-center text-theme-foreground/60 py-10">
-            No {currentTabTitle.toLowerCase()} available for {world.name} yet.
-          </p>
+          key={activeSectionConfig.id}
+          variant={activeSectionConfig.variant}
+          title={activeSectionConfig.title}
+          description={activeSectionConfig.description}
+          items={activeSectionConfig.id === 'explore' ? featuredWorldBannerGems : 
+            activeSectionConfig.id === 'characters' ? characterItems : 
+            activeSectionConfig.id === 'adventures' ? roleplayItems : 
+            activeSectionConfig.id === 'scenes' ? sceneItems : 
+            activeSectionConfig.id === 'about' ? [] : []}
+          className={activeSectionConfig.className}
+          gradient={activeSectionConfig.gradient}
+        >
+          {activeSectionConfig.children}
         </Section>
       )}
     </div>

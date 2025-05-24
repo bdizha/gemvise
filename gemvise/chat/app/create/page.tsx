@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import ShapeTower from '@/components/shapes/ShapeTower'; // Corrected import path for ShapeTower
-import Section from '@/components/layout/Section'; // Added Section import
-import Button from '@/components/ui/Button'; // Added Button import
-import { type GridItem } from '@/components/layout/Grid/types'; // Added GridItem import
+import ShapeTower from '@/components/shapes/ShapeTower';
+import Section from '@/components/layout/Section/Section';
+import { Form, FormField, Input, Button } from '@/components/layout/Form';
+import { type GridItem } from '@/components/layout/Grid/types';
 
 // Sample images for the carousel
 const carouselImages = [
@@ -130,28 +130,33 @@ export default function CreatePage() {
           description="Create powerful AI gems with advanced capabilities in reasoning, coding, and visual processing. Experience the next generation of AI interaction."
         >
           <div className="mt-8 mb-12 max-w-2xl mx-auto">
-            <form className="relative w-full flex items-center gap-3 rounded-full bg-white/5 p-2 backdrop-blur-sm shadow-md">
-              <input 
-                type="text" 
-                className="w-full h-14 rounded-full border-none pl-6 pr-20 
-                           focus:outline-none focus:ring-2 focus:ring-primary/50 
-                           bg-transparent text-white placeholder:text-white/60"
-                placeholder="Describe the gem you want to create... e.g., 'A wise stoic philosopher'"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-              />
-              <Button 
-                type="submit"
-                variant="primary"
-                size="lg"
-                className="absolute right-2 !rounded-full aspect-square !p-3 lg:!p-4"
-                aria-label="Create anything"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                  <path fillRule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
-                </svg>
-              </Button>
-            </form>
+            <Form variant="default" className="relative">
+              <FormField variant="floating">
+                <Input
+                  type="text"
+                  id="query"
+                  placeholder="Describe the gem you want to create... e.g., 'A wise stoic philosopher'"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  variant="filled"
+                  size="lg"
+                  radius="full"
+                  rightIcon={
+                    <Button
+                      type="submit"
+                      variant="primary"
+                      size="icon"
+                      radius="full"
+                      aria-label="Create anything"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                        <path fillRule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+                      </svg>
+                    </Button>
+                  }
+                />
+              </FormField>
+            </Form>
           </div>
         </Section>
 
@@ -212,12 +217,10 @@ export default function CreatePage() {
             <Section
               title="Timeline"
               items={timelineItems}
-              itemsDisplay="grid"
-              variant="transparent" 
+              variant="grid" 
               className="text-center"
-              contentWrapperClassName="mt-8 bg-white/5 backdrop-blur-sm shadow-lg p-6 md:p-8 rounded-3xl overflow-hidden"
             >
-              <Button variant="secondary" size="lg" asChild>
+              <Button variant="secondary" size="lg">
                 <Link href="/timeline">View All Timeline</Link>
               </Button>
             </Section>
@@ -226,25 +229,22 @@ export default function CreatePage() {
             <Section
               title="Worlds"
               items={worldItems}
-              itemsDisplay="grid"
-              variant="transparent" 
+              variant="grid" 
               className="text-center"
-              contentWrapperClassName="mt-8 bg-white/5 backdrop-blur-sm shadow-lg p-6 md:p-8 rounded-3xl overflow-hidden"
             >
-              <Button variant="secondary" size="lg" asChild>
+              <Button variant="secondary" size="lg">
                 <Link href="/worlds">View All Worlds</Link>
               </Button>
             </Section>
 
             {/* Explore Our Creations Slider Section */}
             <Section 
-              variant="gradient" 
+              variant="slider" 
               className="text-center"
               title="Explore Inspiring Creations"
               description="See what's possible and get inspired by a gallery of AI-generated gems and concepts."
               items={exploreItems}
-              itemsDisplay="slider"
-              sliderSectionTitle="Creations Gallery"
+              sliderTitle="Creations Gallery"
             />
           </div>
         </section>

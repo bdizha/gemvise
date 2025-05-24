@@ -84,7 +84,7 @@ import { driveInDinerData } from './worlds/drive-in-diner';
 import { folkMusicRevolutionData } from './worlds/folk-music-revolution';
 
 // Import Gem type
-import { Gem } from '@/types/gemium';
+import { type Gem, type Collection } from '@/types/gemium';
 
 // Define a type for Heroicon components for cleaner interface definition
 type HeroIconType = React.ForwardRefExoticComponent<React.PropsWithoutRef<React.SVGProps<SVGSVGElement>> & { title?: string | undefined; titleId?: string | undefined; } & React.RefAttributes<SVGSVGElement>>;
@@ -105,6 +105,7 @@ export interface World {
   vibes: string[];
   eras: string[];
   locations: string[];
+  collections: Collection[]; // Added collections property
   // Optional Gem arrays
   characters?: Gem[];
   stories?: Gem[];
@@ -178,5 +179,39 @@ export const worlds: World[] = [
   driveInDinerData,
   folkMusicRevolutionData,
 ];
+
+export { boldlandData };
+
+// Utility function to get all unique genres from all worlds and their gems
+const getAllUniqueGenreStrings = (): string[] => {
+  const genreSet = new Set<string>();
+
+  worlds.forEach(world => {
+    // Add genres from the world itself
+    if (world.genres && Array.isArray(world.genres)) {
+      world.genres.forEach(genre => genreSet.add(genre));
+    }
+
+    // Helper to process gems within a world
+    const processGems = (gems: Gem[] | undefined) => {
+      if (gems && Array.isArray(gems)) {
+        gems.forEach(gem => {
+          if (gem.genres && Array.isArray(gem.genres)) {
+            gem.genres.forEach(genre => genreSet.add(genre));
+          }
+        });
+      }
+    };
+
+    processGems(world.characters);
+    processGems(world.stories);
+    processGems(world.adventures);
+    processGems(world.scenes);
+  });
+
+  return Array.from(genreSet).sort(); // Sort alphabetically for consistent order
+};
+
+export const appGenreStrings: string[] = getAllUniqueGenreStrings();
 
 // Example of how you might want to structure character data if needed within this file

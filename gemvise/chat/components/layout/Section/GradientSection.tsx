@@ -8,19 +8,14 @@ import { type GradientTheme } from '@/types/gradients';
 export interface GradientSectionProps extends Omit<SectionProps, 'theme' | 'gradient'> {
   theme?: GradientTheme;
   gradient?: GradientTheme;
-  isHero?: boolean;
 }
 
 const GradientSection = (props: GradientSectionProps) => {
   const { 
-    title, 
-    description, 
-    tag, 
     className = '', 
     children,
     theme = 'dark',
     gradient = 'dark-light-dark',
-    isHero = false
   } = props;
 
   // Use gradient prop if provided, otherwise fall back to theme

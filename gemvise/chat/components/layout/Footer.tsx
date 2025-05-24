@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Logo } from '../shared/Logo';
 import { Icon } from '../shared/Icon';
 import Funnel from './Funnel';
-import Section from './Section';
+import Section from './Section/Section';
 
 interface Link {
   name: string;

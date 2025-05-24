@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Card from '@/components/ui/Card';
+import { Card } from '@/components/layout/Card';
 
 describe('Card Component', () => {
   it('renders with consistent base styling', () => {

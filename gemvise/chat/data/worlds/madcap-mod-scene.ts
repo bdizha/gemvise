@@ -5,7 +5,7 @@ export const madcapModSceneData: World = {
   id: 'madcap-mod-scene',
   name: 'Madcap Mod Scene',
   href: '/world/madcap-mod-scene',
-  imageUrl: '/gradients/worlds/world14.png',
+  imageUrl: '/worlds/logos/aquatica.png',
   icon: SparklesIcon,
   tags: ['1960s', 'Mod Culture', 'Comedy', 'Music'],
   description: 'Dive into the stylish and chaotic world of the 1960s Mod scene in London.',

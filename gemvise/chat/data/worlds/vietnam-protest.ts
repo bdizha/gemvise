@@ -3,9 +3,9 @@ import { ClockIcon } from '@heroicons/react/24/outline';
 
 export const vietnamProtestData: World = {
   id: 'vietnam-protest',
-  name: 'Vietnam Protest Voices',
+  name: 'Vietnam Protest Era',
   href: '/world/vietnam-protest',
-  imageUrl: '/gradients/worlds/world11.png',
+  imageUrl: '/worlds/logos/technoria.png',
   icon: ClockIcon,
   tags: ['Historical', 'Social Movement', '1960s', '1970s'],
   description: 'Explore the passionate voices and turmoil of the Vietnam War protest movement.',

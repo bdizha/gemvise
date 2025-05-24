@@ -5,7 +5,7 @@ export const teenTimeTravelersData: World = {
   id: 'teen-time-travelers',
   name: 'Teen Time Travelers',
   href: '/world/teen-time-travelers',
-  imageUrl: '/gradients/worlds/world15.png',
+  imageUrl: '/worlds/logos/zephyr.png',
   icon: ClockIcon,
   tags: ['Sci-Fi', 'Adventure', 'Teen', 'Comedy'],
   description: 'Join a group of teenagers on wild adventures through time.',

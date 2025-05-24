@@ -1,11 +1,10 @@
 'use client';
 
-import React, { type ElementType } from 'react';
-import { type FC, useEffect, useRef, useState, ReactNode } from 'react';
+import React, { type ElementType, type FC, useEffect, useRef, useState, ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/shared/Logo';
-import Button from '@/components/ui/Button';
+import { Button } from '@/components/layout/Button';
 import {
   PlusIcon,
   PaintBrushIcon,
@@ -16,10 +15,12 @@ import {
   ArrowRightIcon,
   Bars3BottomLeftIcon,
   Bars3BottomRightIcon,
-  ChevronDownIcon
+  ChevronDownIcon,
+  ChevronRightIcon,
+  TagIcon,
 } from '@heroicons/react/24/outline';
 import { mockChatHistory, type MockChatSession } from '@/data/mockChatHistory';
-import { worlds as appWorlds, type World } from '@/data/worldData';
+import { worlds as appWorlds, type World, appGenreStrings } from '@/data/worldData';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -28,7 +29,7 @@ interface SidebarProps {
 
 const renderIcon = (icon: ElementType | string | undefined, className: string, imageUrl?: string, iconElement?: ReactNode) => {
   if (iconElement) return iconElement;
-  if (imageUrl) return <img src={imageUrl} alt="icon" className={className} />;
+  if (imageUrl) return <img src={imageUrl} alt="icon" className={`${className} rounded-full`} />;
   if (typeof icon === 'string') return <img src={icon} alt="icon" className={className} />;
   if (icon) return React.createElement(icon as ElementType, { className });
   return null;
@@ -49,6 +50,11 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
   const [createMenuOpen, setCreateMenuOpen] = useState(false);
   const createMenuRef = useRef<HTMLDivElement>(null);
   const MAX_RECENT_ITEMS = 3;
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -69,6 +75,8 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
 
   const iconBaseClass = 'h-5 w-5';
   const iconWrapperBaseClass = 'flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-[1.5rem]';
+
+  const MAX_GENRES_SIDEBAR = 4; // Define as a local constant
 
   return (
     <>
@@ -150,11 +158,20 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
 
               {/* Timeline Section */}
               <div className="mt-6">
-                <h3 className="px-3 text-xs font-semibold uppercase text-neutral-500 tracking-wider mb-2 flex items-center">
-                  <ChatBubbleLeftRightIcon className="h-4 w-4 mr-1.5" />
-                  Timeline
-                </h3>
-                <div className="space-y-1">
+                <div className="flex items-center justify-between px-3 mb-2">
+                  <h3 className="text-xs font-semibold uppercase text-neutral-500 dark:text-neutral-400 tracking-wider flex items-center">
+                    <ChatBubbleLeftRightIcon className="h-4 w-4 mr-1.5 text-neutral-500 dark:text-neutral-400" />
+                    Timeline
+                  </h3>
+                  {mockChatHistory.length > MAX_RECENT_ITEMS && (
+                    <Link href="/history" passHref legacyBehavior>
+                      <a onClick={closeSidebarAndMenu} className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200">
+                        <ChevronRightIcon className="h-5 w-5" />
+                      </a>
+                    </Link>
+                  )}
+                </div>
+                <div className="space-y-1 px-1">
                   {mockChatHistory
                     .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
                     .slice(0, MAX_RECENT_ITEMS)
@@ -164,18 +181,18 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                         href={`/gem/${chat.adventureId}`}
                         variant={pathname === `/gem/${chat.adventureId}` ? 'sidebar-active' : 'sidebar'}
                         onClick={closeSidebarAndMenu}
-                        className="relative" // For notification dot positioning
+                        className="relative overflow-hidden pr-12" // Added pr-12
                       >
                         <span className={`${iconWrapperBaseClass} ${pathname === `/gem/${chat.adventureId}` ? 'bg-white/15' : 'bg-white/20 dark:bg-black/30'}`}>
                           <span className="text-xs font-semibold text-white">
                             {chat.adventureName.substring(0, 1).toUpperCase()}
                           </span>
                         </span>
-                        <div className="flex-1 min-w-0">
+                        <div className="flex-auto min-w-0 overflow-hidden"> 
                           <p className={`text-left font-medium truncate ${pathname === `/gem/${chat.adventureId}` ? 'text-white' : 'text-theme-foreground dark:text-neutral-200'}`}>{chat.adventureName}</p>
                           <p className={`text-left truncate text-xs ${pathname === `/gem/${chat.adventureId}` ? 'text-white/70' : 'text-neutral-500 dark:text-neutral-400'}`}>{chat.lastMessageSnippet}</p>
                         </div>
-                        {chat.unread && <span className="absolute top-1.5 right-1.5 h-2.5 w-2.5 rounded-full bg-pink-500 border-2 border-neutral-800"></span>}
+                        {chat.unread && <span className="absolute top-1/2 -translate-y-1/2 right-4 h-6 w-6 rounded-full bg-pink-500 border-2 border-white dark:border-neutral-800"></span>}
                       </Button>
                     ))}
                   {mockChatHistory.length > MAX_RECENT_ITEMS && (
@@ -183,36 +200,51 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                       href="/history"
                       variant="sidebar-view-all"
                       onClick={closeSidebarAndMenu}
+                      className="w-full flex justify-center"
                     >
-                       <span className={`${iconWrapperBaseClass} bg-white/5`}>
-                        <ArrowRightIcon className={`${iconBaseClass} text-white`} />
-                      </span>
-                      <span className="flex-1 text-left">View All Timeline</span>
+                      View All Timeline
                     </Button>
                   )}
-                </div>
+                 </div>
               </div>
 
               {/* Worlds Section */}
               <div className="mt-6 mb-4">
-                <h3 className="px-3 text-xs font-semibold uppercase text-neutral-500 tracking-wider mb-2 flex items-center">
-                  <GlobeAltIcon className="h-4 w-4 mr-1.5" />
-                  Worlds
-                </h3>
-                <div className="space-y-1">
+                <div className="flex items-center justify-between px-3 mb-2">
+                  <h3 className="text-xs font-semibold uppercase text-neutral-500 dark:text-neutral-400 tracking-wider flex items-center">
+                    <GlobeAltIcon className="h-4 w-4 mr-1.5 text-neutral-500 dark:text-neutral-400" />
+                    Worlds
+                  </h3>
+                  {appWorlds.length > 4 && (
+                    <Link href="/explore?tab=worlds" passHref legacyBehavior>
+                      <a onClick={closeSidebarAndMenu} className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200">
+                        <ChevronRightIcon className="h-5 w-5" />
+                      </a>
+                    </Link>
+                  )}
+                </div>
+                <div className="space-y-1 px-1">
                   {appWorlds.slice(0, 4).map((world: World) => (
                     <Button
                       key={world.id}
                       href={world.href} 
-                      variant={pathname === world.href ? 'sidebar-active' : 'sidebar'}
+                      variant={'ghost'} 
                       onClick={closeSidebarAndMenu}
-                      style={pathname !== world.href && world.imageUrl ? { backgroundImage: `url(${world.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundBlendMode: 'overlay' } : {}}
-                      className={`${pathname === world.href ? '' : 'bg-neutral-700/30'}`}
+                      className={`w-full flex items-start justify-start p-2.5 rounded-[1rem] bg-white/5 hover:bg-white/10 backdrop-blur-md transition-all duration-200 group ${
+                        isMounted && pathname === world.href ? 'bg-pink-500/20 ring-1 ring-pink-500' : 'bg-opacity-5 hover:bg-opacity-10'
+                      }`}
                     >
-                      <span className={`${iconWrapperBaseClass} ${pathname === world.href ? 'bg-white/15' : 'bg-black/30 backdrop-blur-sm'}`}>
-                        {renderIcon(world.icon, `${iconBaseClass} ${pathname === world.href ? 'text-white' : 'text-white/80'}`, world.imageUrl && pathname === world.href ? undefined : world.imageUrl )}
-                      </span>
-                      <span className={`flex-1 text-left font-semibold ${pathname === world.href ? 'text-white' : 'text-white/90 group-hover:text-white'}`}>{world.name}</span>
+                      <img 
+                        src={world.imageUrl || (typeof world.icon === 'string' ? world.icon : '/gradients/GV-gradient-01.png')} 
+                        alt={world.name}
+                        className="w-8 h-8 rounded-lg mr-3 flex-shrink-0 object-cover" 
+                      />
+                      <div className="flex-1 min-w-0 text-left"> 
+                        <p className={`text-sm font-medium truncate ${isMounted && pathname === world.href ? 'text-pink-100' : 'text-white group-hover:text-pink-200'}`}>{world.name}</p>
+                        <p className={`text-xs truncate ${isMounted && pathname === world.href ? 'text-pink-200/70' : 'text-white/70 group-hover:text-pink-200/80'}`}>
+                          {(world.genres && world.genres[0]) || 'World'}
+                        </p>
+                      </div>
                     </Button>
                   ))}
                   {appWorlds.length > 4 && (
@@ -220,15 +252,67 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                       href="/explore?tab=worlds" 
                       variant="sidebar-view-all"
                       onClick={closeSidebarAndMenu}
+                      className="w-full flex justify-center"
                     >
-                      <span className={`${iconWrapperBaseClass} bg-white/5`}>
-                        <ArrowRightIcon className={`${iconBaseClass} text-white`} />
-                      </span>
-                      <span className="flex-1 text-left">View All Worlds</span>
+                      View All Worlds
                     </Button>
                   )}
                 </div>
               </div>
+
+              {/* Genres Section */}
+              <div className="mt-6 mb-4">
+                <div className="flex items-center justify-between px-3 mb-2">
+                  <h3 className="text-xs font-semibold uppercase text-neutral-500 dark:text-neutral-400 tracking-wider flex items-center">
+                    <TagIcon className="h-4 w-4 mr-1.5 text-neutral-500 dark:text-neutral-400" />
+                    Genres
+                  </h3>
+                  {appGenreStrings && appGenreStrings.length > MAX_GENRES_SIDEBAR && (
+                    <Link href="/explore?tab=genres" passHref legacyBehavior>
+                      <a onClick={closeSidebarAndMenu} className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200">
+                        <ChevronRightIcon className="h-5 w-5" />
+                      </a>
+                    </Link>
+                  )}
+                </div>
+                <div className="space-y-1 px-1">
+                  {appGenreStrings.slice(0, MAX_GENRES_SIDEBAR).map((genreName: string) => {
+                    const genreId = genreName.toLowerCase().replace(/\s+/g, '-');
+                    const genreHref = `/explore?genre=${encodeURIComponent(genreName)}`;
+                    return (
+                      <Button
+                        key={genreId}
+                        href={genreHref}
+                        variant={'ghost'} // Or a new 'sidebar-genre-item' variant if created later
+                        onClick={closeSidebarAndMenu}
+                        className={`w-full flex items-center justify-start p-2.5 rounded-[1rem] bg-white/5 hover:bg-white/10 backdrop-blur-md transition-all duration-200 group ${isMounted && pathname === genreHref ? 'bg-purple-500/20 ring-1 ring-purple-500' : 'bg-opacity-5 hover:bg-opacity-10'
+                        }`}
+                      >
+                        {/* Using TagIcon as a default genre icon for now */}
+                        {renderIcon(
+                          TagIcon, // Default icon
+                          'w-8 h-8 rounded-lg mr-3 flex-shrink-0 object-cover text-white/70 group-hover:text-purple-200', // Basic styling for the icon
+                        )}
+                        <div className="flex-1 min-w-0 text-left">
+                          <p className={`text-sm font-medium truncate ${isMounted && pathname === genreHref ? 'text-purple-100' : 'text-white group-hover:text-purple-200'}`}>{genreName}</p>
+                        </div>
+                      </Button>
+                    );
+                  })}
+                  {appGenreStrings.length > MAX_GENRES_SIDEBAR && (
+                    <Button
+                      href="/explore?tab=genres" 
+                      variant="sidebar-view-all"
+                      onClick={closeSidebarAndMenu}
+                      className="w-full flex justify-center"
+                    >
+                      View All Genres
+                    </Button>
+                  )}
+                </div>
+              </div>
+
+              {/* Rest of the code remains the same */}
             </div>
           </>
         ) 

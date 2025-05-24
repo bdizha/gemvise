@@ -3,19 +3,20 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { worlds } from '@/data/worldData';
-import Section from '@/components/layout/Section';
+import { Section } from '@/components/layout/Section';
 import GradientSection from '@/components/layout/Section/GradientSection';
-import CategoryTabs from '@/components/ui/CategoryTabs';
+import { Tabs, type Tab } from '@/components/layout/Tabs';
 import { type Gem } from '@/types/gems';
-import { type GradientTheme } from '@/components/layout/Section/GradientSection';
+import { type GradientTheme } from '@/types/gradients';
+import { type Collection } from '@/types/gemium';
 
 export default function WorldsPage() {
   const [selectedWorld, setSelectedWorld] = useState<string>('all');
   
   // Get all gems from worlds and add category/expertise
   const allGems = worlds.flatMap(world => 
-    world.collections.flatMap(collection => 
-      collection.gems.map(gem => ({
+    world.collections.flatMap((collection: Collection) => 
+      collection.gems.map(gem => ({ 
         ...gem,
         category: gem.genres[0] || 'Adventure',
         expertise: gem.attributes.traits
@@ -31,16 +32,22 @@ export default function WorldsPage() {
   // Get unique world names for tabs
   const worldNames = ['all', ...worlds.map(world => world.id)];
 
+  // Transform worldNames to Tab[] for the Tabs component
+  const worldTabs: Tab[] = worldNames.map(worldId => ({
+    id: worldId,
+    label: worlds.find(w => w.id === worldId)?.name || (worldId === 'all' ? 'All Worlds' : worldId)
+  }));
+
   return (
     <Section
       title="Explore Worlds"
       description="Discover unique characters and stories across different worlds"
     >
       <div className="space-y-8">
-        <CategoryTabs
-          selectedCategories={[selectedWorld]}
-          onToggle={(category: string) => setSelectedWorld(category)}
-          showIcons={false}
+        <Tabs
+          tabs={worldTabs}
+          activeTab={selectedWorld}
+          onChange={(tabId: string) => setSelectedWorld(tabId)}
         />
         
         <motion.div 

@@ -210,7 +210,60 @@ export const boldlandCharacters: Gem[] = [
       traits: ['inventive', 'eccentric', 'resourceful', 'witty']
     }
   },
-  // New Characters Start Here
+  // New Characters for Bold Girls Adventure
+  {
+    id: 'boldland-char-winnie-winchester',
+    name: 'Winnie Winchester',
+    description: 'A sharp-witted and ambitious young woman leading her friends in the quest for love and fortune in high society. She\'s a master of social strategy.',
+    genres: ['Socialite', 'Strategy', 'Romance'],
+    type: 'Character',
+    world: 'boldland',
+    imageUrl: '/images/world/boldland/characters/winnie-winchester.png',
+    attributes: {
+      rarity: 'Rare',
+      traits: ['ambitious', 'witty', 'strategic', 'leader']
+    }
+  },
+  {
+    id: 'boldland-char-millie-meadows',
+    name: 'Millie Meadows',
+    description: 'A charming and romantic dreamer, Millie seeks a genuine connection but isn\'t afraid to play the game to secure her future.',
+    genres: ['Socialite', 'Romance', 'Dreamer'],
+    type: 'Character',
+    world: 'boldland',
+    imageUrl: '/images/world/boldland/characters/millie-meadows.png',
+    attributes: {
+      rarity: 'Rare',
+      traits: ['charming', 'romantic', 'optimistic', 'social']
+    }
+  },
+  {
+    id: 'boldland-char-nellie-harper',
+    name: 'Nellie "Nell" Harper',
+    description: 'A captivating newcomer with a beautiful voice and an air of mystery. Her sudden appearance shakes up the social scene, attracting attention from desirable bachelors.',
+    genres: ['Performer', 'Mystery', 'Romance'],
+    type: 'Character',
+    world: 'boldland',
+    imageUrl: '/images/world/boldland/characters/nellie-harper.png',
+    attributes: {
+      rarity: 'Rare',
+      traits: ['captivating', 'musical', 'mysterious', 'graceful']
+    }
+  },
+  {
+    id: 'boldland-char-jed-sterling',
+    name: 'Jedediah "Jed" Sterling III',
+    description: 'A debonair and immensely wealthy airline tycoon, known as the city\'s most eligible bachelor. He\'s observant and looking for more than just a pretty face.',
+    genres: ['Tycoon', 'Eligible Bachelor', 'Adventure'],
+    type: 'Character',
+    world: 'boldland',
+    imageUrl: '/images/world/boldland/characters/jed-sterling.png',
+    attributes: {
+      rarity: 'Epic',
+      traits: ['wealthy', 'charming', 'observant', 'pilot']
+    }
+  },
+  // END: New Characters for Bold Girls Adventure
   {
     id: 'boldland-char-boldpup-fox',
     name: 'Flicker the BoldPup',
@@ -236,5 +289,183 @@ export const boldlandCharacters: Gem[] = [
       rarity: 'Rare',
       traits: ['wise', 'strong', 'guardian', 'mystical']
     }
+  },
+  // Characters from Bold Girls Saga
+  {
+    id: 'boldland-char-bg-winnie',
+    name: 'Winnie (Bold Girls)',
+    type: 'Character',
+    world: 'boldland',
+    description: 'An experienced and somewhat cynical burlesque performer from the Bold Girls troupe, offering witty observations and advice to her friends.',
+    imageUrl: '/images/placeholder/bold-girls/winnie.png',
+    attributes: {
+      personality: ['Experienced', 'Witty', 'Observant'],
+      role: 'Performer',
+      keyLines: [
+        "Ah, when that guy takes you to dinner, first thing you know, you're shadow boxing.",
+      ],
+      originalAdventure: 'boldland-bold-girls'
+    },
+    genres: ['Musical', 'Drama', 'Performance'],
+  },
+  {
+    id: 'boldland-char-bg-millie',
+    name: 'Millie (Bold Girls)',
+    type: 'Character',
+    world: 'boldland',
+    description: 'A burlesque performer from the Bold Girls troupe, navigating work and relationships, often sharing her relatable frustrations.',
+    imageUrl: '/images/placeholder/bold-girls/millie.png',
+    attributes: {
+      personality: ['Pragmatic', 'Humorous', 'Relatable'],
+      role: 'Performer',
+      keyLines: [
+        "He says, two can live as cheaply as one. As long as one of us is working. Nothing. Only I'm the one that's working.",
+      ],
+      originalAdventure: 'boldland-bold-girls'
+    },
+    genres: ['Musical', 'Drama', 'Performance'],
+  },
+  {
+    id: 'boldland-char-bg-bubbles',
+    name: 'Bubbles LeRue (Bold Girls)',
+    type: 'Character',
+    world: 'boldland',
+    description: 'The glamorous and confident star of the Bold Girls show, known for her talent and her fiery temperament. She isn\'t afraid to speak her mind or stir up drama.',
+    imageUrl: '/images/placeholder/bold-girls/bubbles.png',
+    attributes: {
+      personality: ['Confident', 'Glamorous', 'Fiery', 'Star Quality'],
+      role: 'Lead Performer / Antagonist',
+      keyLines: [
+        "Well, I ain't going out there. I'm quitting! Right now, this minute, see?",
+        "Why you gray-haired old hag? Shut your mouth or I'll slap it shut.",
+      ],
+      originalAdventure: 'boldland-bold-girls'
+    },
+    genres: ['Musical', 'Drama', 'Performance'],
+  },
+  {
+    id: 'boldland-char-bg-peggy',
+    name: 'Peggy Martin (Peg) (Bold Girls)',
+    type: 'Character',
+    world: 'boldland',
+    description: 'A young, talented, and initially reserved performer in the Bold Girls troupe, under the watchful eye of her mother, Mae. She rises to stardom when an opportunity unexpectedly opens up.',
+    imageUrl: '/images/placeholder/bold-girls/peggy.png',
+    attributes: {
+      personality: ['Talented', 'Reserved', 'Emerging Star'],
+      role: 'Performer / Protagonist',
+      keyLines: [
+        "Okay, Mother.",
+        "Anyone can see I love you. Anyone can see I care.",
+      ],
+      originalAdventure: 'boldland-bold-girls'
+    },
+    genres: ['Musical', 'Drama', 'Performance'],
+  },
+  {
+    id: 'boldland-char-bg-mae',
+    name: 'Mae (Bold Girls)',
+    type: 'Character',
+    world: 'boldland',
+    description: 'Peggy\'s protective mother and a veteran performer herself from the Bold Girls saga. She steps back into the spotlight when needed and fiercely defends her daughter.',
+    imageUrl: '/images/placeholder/bold-girls/mae.png',
+    attributes: {
+      personality: ['Protective', 'Strong-willed', 'Veteran Performer'],
+      role: 'Mother / Performer',
+      keyLines: [
+        "Letting you go out with Bubbles LeRue and her men friends, would that make you feel grown up?",
+        "The show must go on, remember? Okay, it'll go on.",
+      ],
+      originalAdventure: 'boldland-bold-girls'
+    },
+    genres: ['Musical', 'Drama', 'Performance'],
+  },
+  {
+    id: 'boldland-char-bg-joe',
+    name: 'Joe (Bold Girls)',
+    type: 'Character',
+    world: 'boldland',
+    description: 'The pragmatic stage manager for the Bold Girls show, determined to keep it running smoothly amidst backstage chaos and performer antics.',
+    imageUrl: '/images/placeholder/bold-girls/joe.png',
+    attributes: {
+      personality: ['Pragmatic', 'Harried', 'Authoritative'],
+      role: 'Stage Manager',
+      keyLines: [
+        "My job is to get this show on. Now, beat it on stage all of you.",
+        "The show must go on, remember?",
+      ],
+      originalAdventure: 'boldland-bold-girls'
+    },
+    genres: ['Musical', 'Drama', 'Performance'],
+  },
+  {
+    id: 'boldland-char-bg-al',
+    name: 'Al (Bold Girls)',
+    type: 'Character',
+    world: 'boldland',
+    description: 'Millie\'s soldier boyfriend from the Bold Girls saga. Appears somewhat reserved but caring. He is a bit overwhelmed by the backstage drama and Millie\'s outspokenness at times.',
+    imageUrl: '/images/placeholder/bold-girls/al.png',
+    attributes: {
+      personality: ['Reserved', 'Caring', 'Soldier'],
+      role: 'Millie\'s Boyfriend',
+      keyLines: [
+        "Millie, I wish you wouldn't talk like that.",
+        "Say, is this a private fight or can anyone get in it?",
+      ],
+      originalAdventure: 'boldland-bold-girls'
+    },
+    genres: ['Musical', 'Drama', 'Performance'],
+  },
+  {
+    id: 'boldland-char-bg-randy',
+    name: 'Randy (Bold Girls)',
+    type: 'Character',
+    world: 'boldland',
+    description: 'Bubbles LeRue\'s soldier boyfriend from the Bold Girls saga. He is more suave and confident than Al, and enjoys the company of the performers.',
+    imageUrl: '/images/placeholder/bold-girls/randy.png',
+    attributes: {
+      personality: ['Suave', 'Confident', 'Soldier'],
+      role: 'Bubbles\'s Boyfriend',
+      keyLines: [
+        "Well, don't look now, but there's a man in your life.",
+        "Hello, honey.",
+      ],
+      originalAdventure: 'boldland-bold-girls'
+    },
+    genres: ['Musical', 'Drama', 'Performance'],
+  },
+  {
+    id: 'boldland-char-bg-betty',
+    name: 'Betty (Bold Girls)',
+    type: 'Character',
+    world: 'boldland',
+    description: 'One of the performers in the Bold Girls burlesque show. She participates in backstage conversations and group numbers.',
+    imageUrl: '/images/placeholder/bold-girls/betty.png',
+    attributes: {
+      personality: ['Ensemble', 'Interactive'],
+      role: 'Performer',
+      keyLines: [
+        "What's the matter, Bubbles? You sore at somebody?",
+      ],
+      originalAdventure: 'boldland-bold-girls'
+    },
+    genres: ['Musical', 'Drama', 'Performance'],
+  },
+  {
+    id: 'boldland-char-bg-producer',
+    name: 'Mr. Harold (Producer) (Bold Girls)',
+    type: 'Character',
+    world: 'boldland',
+    description: 'The somewhat gruff but fair owner or producer of the theater where the Bold Girls perform. He has an eye for talent and the final say on contracts and show direction.',
+    imageUrl: '/images/placeholder/bold-girls/producer-harold.png',
+    attributes: {
+      personality: ['Business-minded', 'Observant', 'Decisive', 'Fair'],
+      role: 'Theater Owner / Producer',
+      keyLines: [
+        "The girl\'s got talent, Joe. Real talent.",
+        "Alright, let\'s talk numbers for the new headliner."
+      ],
+      originalAdventure: 'boldland-bold-girls'
+    },
+    genres: ['Drama', 'Business'],
   }
 ];

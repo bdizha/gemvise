@@ -4,8 +4,8 @@ export const hollywoodDreamsData: World = {
   id: 'hollywood-dreams',
   name: 'Hollywood Dreams',
   href: '/world/hollywood-dreams',
-  imageUrl: '/gradients/worlds/nakai.png', // Placeholder, consider updating
-  icon: '/gradients/worlds/nakai.png', // Placeholder, consider updating
+  imageUrl: '/worlds/logos/nakai.png',
+  icon: '/worlds/logos/nakai.png',
   tags: [],
   description: 'Experience the glitz and drama of 1950s Hollywood.',
   shortDescription: '1950s Hollywood glitz and drama.',

@@ -4,8 +4,8 @@ export const coldWarSpiesData: World = {
   id: 'cold-war-spies',
   name: 'Cold War Spies',
   href: '/world/cold-war-spies',
-  imageUrl: '/gradients/worlds/spaceum.png', // Placeholder, consider updating
-  icon: '/gradients/worlds/spaceum.png', // Placeholder, consider updating
+  imageUrl: '/worlds/logos/spaceum.png',
+  icon: '/worlds/logos/spaceum.png',
   tags: [],
   description: 'Enter the shadowy world of espionage during the Cold War.',
   shortDescription: 'Cold War espionage and intrigue.',

@@ -4,8 +4,8 @@ import { FC, useState, useMemo, useEffect, useRef } from 'react';
 import DefaultSection from '@/components/layout/Section/DefaultSection';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { World, worlds } from '@/data/worldData';
-import Tabs from '@/components/ui/Tabs';
+import { World, worlds, appGenreStrings } from '@/data/worldData';
+import { Tabs, type Tab } from '@/components/layout/Tabs';
 import { Gem } from '@/types/gemium';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 
@@ -27,19 +27,8 @@ const tabData = tabLabels.map(label => ({
   label: label
 }));
 
-// Static default genre labels for fallback
-const defaultGenreLabels = [
-  'All',
-  'Adventure',
-  'Fantasy',
-  'Sci-Fi',
-  'Mystery',
-  'Romance',
-  'Historical',
-  'Thriller',
-  'Comedy',
-  'Drama',
-];
+// Use dynamic genres from worldData, prepended with 'All'
+const availableGenreLabels = ['All', ...appGenreStrings];
 
 export interface HeroProps {
   onGenreTabChange?: (genre: string) => void;
@@ -56,7 +45,7 @@ export const Hero: FC<HeroProps> = ({ onGenreTabChange, availableGenres }) => {
 
   // Determine which genre list to use for rendering tabs
   const genresToDisplay = useMemo(() => 
-    (availableGenres && availableGenres.length > 0 ? availableGenres : defaultGenreLabels),
+    (availableGenres && availableGenres.length > 0 ? availableGenres : availableGenreLabels),
     [availableGenres]
   );
 
@@ -72,7 +61,7 @@ export const Hero: FC<HeroProps> = ({ onGenreTabChange, availableGenres }) => {
     }
     // If genresToDisplay becomes empty or undefined, reset to 'All' (or default first)
     else if (!genresToDisplay || genresToDisplay.length === 0) {
-        setActiveGenreTab(defaultGenreLabels[0]);
+        setActiveGenreTab(availableGenreLabels[0]);
     }
   }, [genresToDisplay, activeGenreTab]);
 
@@ -198,7 +187,7 @@ export const Hero: FC<HeroProps> = ({ onGenreTabChange, availableGenres }) => {
         {gems.map((gem, index) => ( 
           <Link
             key={gem.id}
-            href={`/gems/${gem.id}`}
+            href={`/gem/${gem.id}`}
             className="block w-full h-20" 
           >
             <div className={`h-full rounded-[1.5rem] flex items-center p-4 bg-white/10 backdrop-blur-md transition-all`}>
@@ -255,7 +244,7 @@ export const Hero: FC<HeroProps> = ({ onGenreTabChange, availableGenres }) => {
                 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]/50 
                 ${activeGenreTab === genre 
                   ? 'bg-[var(--primary)] text-[var(--primary-foreground)] shadow-md' 
-                  : 'bg-transparent border border-[var(--muted-foreground)] text-[var(--foreground)] hover:bg-[var(--primary)]/10 hover:text-[var(--primary)]'
+                  : 'bg-white/10 backdrop-blur-md text-[var(--foreground)] hover:bg-[var(--primary)]/10 hover:text-[var(--primary)]'
                 }
               `}
             >
@@ -308,12 +297,12 @@ export const Hero: FC<HeroProps> = ({ onGenreTabChange, availableGenres }) => {
                       {/* Content visible only when active - fade in */}
                       <div className={`relative z-10 p-6 transition-opacity duration-300 ease-in-out text-center ${isActive ? 'opacity-100 delay-300' : 'opacity-0'} ${isActive ? 'text-white/95' : 'text-[#5f6b7a]'}`}> 
                         <h3 className="text-3xl font-bold mb-4 whitespace-nowrap">{world.name}</h3>
-                        <p className="text-base mb-6 opacity-80 leading-relaxed max-w-md mx-auto h-[150px] md:h-[200px] overflow-y-auto scrollbar-thin scrollbar-track-white/10">
+                        <p className="text-base mb-6 opacity-80 leading-relaxed max-w-md mx-auto h-[150px] md:h-[200px] overflow-y-auto scrollbar-thin scrollbar-track-transparent">
                           {(isActive && world.description) ? world.description : (isActive ? '\u00A0' : '')}
                         </p>
                         {isActive && ( 
                           <div className="mt-4 relative max-w-md mx-auto">
-                            <div className="bg-background/60 backdrop-blur-md rounded-[1.5rem] p-4 shadow-xl h-28 overflow-y-auto scrollbar-thin scrollbar-track-white/5 scrollbar-thumb-white/20 hover:scrollbar-thumb-white/30">
+                            <div className="bg-background/60 backdrop-blur-md rounded-[1.5rem] p-4 shadow-xl h-28 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20 hover:scrollbar-thumb-white/30">
                               {currentWorldGems && currentWorldGems.length > 0 ? (
                                 <div className="grid grid-cols-2 gap-3">
                                   {currentWorldGems.slice(0, 4).map(gem => (
@@ -381,7 +370,7 @@ export const Hero: FC<HeroProps> = ({ onGenreTabChange, availableGenres }) => {
                 </div>
               </div>
               <div className="flex-1 pt-3">
-                <div className="h-full overflow-y-auto scrollbar-thin scrollbar-track-white/5 scrollbar-thumb-white/20 hover:scrollbar-thumb-white/30 space-y-4">
+                <div className="h-full overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20 hover:scrollbar-thumb-white/30 space-y-4">
                   {tabContent}
                 </div>
               </div>

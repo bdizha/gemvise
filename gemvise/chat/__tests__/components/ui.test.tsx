@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import { ThemeProvider } from 'next-themes';
 import Header from '@/components/layout/Header';
 import { type Gem } from '@/types/gems';
-import Card from '@/components/ui/card/Card';
+import { Card } from '@/components/layout/Card';
 
 // Mock next/image since it's not available in test environment
 jest.mock('next/image', () => ({

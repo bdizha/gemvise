@@ -1,6 +1,7 @@
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import { Modal } from '@/components/layout/Modal';
 import '@testing-library/jest-dom';
-import Modal from '@/components/ui/Modal';
 
 const renderModal = (isOpen: boolean) => {
   const onClose = jest.fn();

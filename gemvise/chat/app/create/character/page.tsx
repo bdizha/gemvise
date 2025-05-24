@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
+import Section from '@/components/layout/Section/Section';
+import { Form, FormField, Input, Button } from '@/components/layout/Form';
 
 export default function CreateCharacter() {
   const router = useRouter();
@@ -23,143 +25,153 @@ export default function CreateCharacter() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-surface py-12">
-      <div className="mx-auto max-w-2xl px-6">
+    <Section
+      variant="default"
+      gradient="dark-light"
+      className="min-h-screen py-12"
+    >
+      <div className="mx-auto max-w-2xl">
         <div className="mb-8 flex items-center justify-center">
-          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-theme-surface/50 backdrop-blur-sm">
-            <UserCircleIcon className="h-8 w-8 text-theme-foreground" />
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
+            <UserCircleIcon className="h-8 w-8 text-white" />
           </span>
         </div>
 
-        <h1 className="text-center text-2xl font-bold tracking-tight text-theme-foreground sm:text-4xl">
+        <h1 className="text-center text-2xl font-bold tracking-tight text-white sm:text-4xl">
           Create a New Character
         </h1>
-        <p className="mt-2 text-center text-lg leading-8 text-theme-foreground/60">
+        <p className="mt-2 text-center text-lg leading-8 text-white/60">
           Bring your character to life with rich details and personality.
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-12 space-y-6">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-theme-foreground">
-              Character Name
-            </label>
-            <input
+        <Form onSubmit={handleSubmit} className="mt-12 space-y-6" variant="default" size="2xl">
+          <FormField
+            label="Character Name"
+            htmlFor="name"
+            required
+          >
+            <Input
               type="text"
               id="name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+              variant="filled"
               required
             />
-          </div>
+          </FormField>
 
-          <div>
-            <label htmlFor="description" className="block text-sm font-medium text-theme-foreground">
-              Description
-            </label>
+          <FormField
+            label="Character Description"
+            htmlFor="description"
+            required
+          >
             <textarea
               id="description"
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              rows={4}
-              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+              rows={3}
+              className="w-full rounded-md border bg-white/5 backdrop-blur-md px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 border-white/20 placeholder:text-white/40 text-white focus:border-white/40"
               required
             />
-          </div>
+          </FormField>
 
-          <div>
-            <label htmlFor="expertise" className="block text-sm font-medium text-theme-foreground">
-              Expertise
-            </label>
-            <input
+          <FormField
+            label="Expertise & Skills"
+            htmlFor="expertise"
+            required
+          >
+            <Input
               type="text"
               id="expertise"
               value={formData.expertise}
               onChange={(e) => setFormData({ ...formData, expertise: e.target.value })}
-              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+              variant="filled"
               required
             />
-          </div>
+          </FormField>
 
-          <div className="grid grid-cols-2 gap-6">
-            <div>
-              <label htmlFor="world" className="block text-sm font-medium text-theme-foreground">
-                World
-              </label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <FormField
+              label="World"
+              htmlFor="world"
+              required
+            >
               <select
                 id="world"
                 value={formData.world}
                 onChange={(e) => setFormData({ ...formData, world: e.target.value })}
-                className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                className="w-full rounded-md border bg-white/5 backdrop-blur-md px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 border-white/20 text-white focus:border-white/40 h-10"
                 required
               >
                 <option value="">Select a world</option>
-                <option value="nakaland">NakaLand</option>
                 <option value="boldland">BoldLand</option>
-                <option value="naimland">NaimLand</option>
+                <option value="hollywood-dreams">Hollywood Dreams</option>
+                <option value="motown-magic">Motown Magic</option>
               </select>
-            </div>
+            </FormField>
 
-            <div>
-              <label htmlFor="collection" className="block text-sm font-medium text-theme-foreground">
-                Collection
-              </label>
-              <input
+            <FormField
+              label="Collection"
+              htmlFor="collection"
+            >
+              <Input
                 type="text"
                 id="collection"
                 value={formData.collection}
                 onChange={(e) => setFormData({ ...formData, collection: e.target.value })}
-                className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-                required
+                variant="filled"
+                placeholder="e.g., Bold Girls"
               />
-            </div>
+            </FormField>
           </div>
 
-          <div>
-            <label htmlFor="traits" className="block text-sm font-medium text-theme-foreground">
-              Character Traits (comma-separated)
-            </label>
-            <input
-              type="text"
+          <FormField
+            label="Character Traits"
+            htmlFor="traits"
+            required
+          >
+            <textarea
               id="traits"
               value={formData.traits}
               onChange={(e) => setFormData({ ...formData, traits: e.target.value })}
-              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-              placeholder="e.g., brave, intelligent, creative"
+              rows={4}
+              className="w-full rounded-md border bg-white/5 backdrop-blur-md px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 border-white/20 placeholder:text-white/40 text-white focus:border-white/40"
+              placeholder="Describe the character's personality, quirks, and notable traits"
+              required
             />
-          </div>
+          </FormField>
 
-          <div>
-            <label htmlFor="imagePrompt" className="block text-sm font-medium text-theme-foreground">
-              Image Generation Prompt
-            </label>
-            <textarea
+          <FormField
+            label="Image Prompt"
+            htmlFor="imagePrompt"
+          >
+            <Input
+              type="text"
               id="imagePrompt"
               value={formData.imagePrompt}
               onChange={(e) => setFormData({ ...formData, imagePrompt: e.target.value })}
-              rows={3}
-              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-              placeholder="Describe how you want your character to look"
+              variant="filled"
+              placeholder="Describe how the character should look or paste an image URL"
             />
-          </div>
+          </FormField>
 
-          <div className="flex justify-end gap-4">
-            <button
+          <div className="mt-8 flex justify-end gap-x-4">
+            <Button
               type="button"
+              variant="secondary"
               onClick={() => router.back()}
-              className="rounded-[1rem] bg-theme-surface/50 px-4 py-2.5 text-sm font-semibold text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 hover:bg-theme-surface/70"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
               type="submit"
-              className="rounded-[1rem] bg-gradient-pink-purple px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90"
+              variant="primary"
             >
               Create Character
-            </button>
+            </Button>
           </div>
-        </form>
+        </Form>
       </div>
-    </div>
+    </Section>
   );
 }

@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Button from '@/components/ui/Button';
+import { Button } from '@components/layout/Button';
 
 describe('Button Component', () => {
   it('renders with consistent base styling', () => {

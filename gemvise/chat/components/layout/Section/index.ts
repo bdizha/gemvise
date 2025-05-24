@@ -1,4 +1,2 @@
-export { default as DefaultSection } from './DefaultSection';
-export { default as GradientSection } from './GradientSection';
-export { default } from './Section';
-export * from './types';
+export { default as Section } from './Section';
+export type { SectionProps, SectionVariant } from './Section';

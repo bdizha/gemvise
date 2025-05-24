@@ -59,20 +59,31 @@ export const boldlandAdventures: Gem[] = [
     genres: ['Romance', 'Social Simulation', 'Drama'],
     type: 'Adventure',
     world: 'boldland',
-    imageUrl: '/images/world/boldland/adventures/bold-girls-marry-millionaire.png',
-    attributes: { scenes: 32, rarity: 'Rare', traits: ['socializing', 'strategy', 'romance'] },
-    sceneIds: [],
-    involvedCharacterIds: ['boldland-char-boldpup-fox']
+    imageUrl: '/gems/boldland/BOLD-GIRLS/trailer.png',
+    attributes: { scenes: 4, rarity: 'Rare', traits: ['socializing', 'strategy', 'romance'] },
+    sceneIds: [
+      'boldland-scene-bg-ball-invitation',
+      'boldland-scene-bg-conservatory-secrets',
+      'boldland-scene-bg-dance-with-destiny',
+      'boldland-scene-bg-morning-aftermath'
+    ],
+    involvedCharacterIds: [
+      'boldland-char-winnie-winchester',
+      'boldland-char-millie-meadows',
+      'boldland-char-nell-harper',
+      'boldland-char-jed-sterling',
+      'boldland-char-boldpup-fox' 
+    ]
   },
   {
     id: 'boldland-adv-royal-bride',
     name: 'Royal Bride: Guided Age Cocktail Parties',
-    description: 'Step into the opulent world of royal courtship and high-stakes social maneuvering at exclusive Guided Age cocktail parties. Charm, scheme, and secure your place among Boldland\'s elite.',
-    genres: ['Historical Fiction', 'Romance', 'Social Strategy'],
+    description: 'Step into the opulent world of high society galas and royal courts. As a prospective royal bride, navigate intricate social dynamics, charm influential figures, and make choices that will determine your romantic and political future.',
+    genres: ['Romance', 'Social Simulation', 'Historical Fiction', 'Drama'],
     type: 'Adventure',
     world: 'boldland',
-    imageUrl: '/images/world/boldland/adventures/royal-bride-cocktail-parties.png',
-    attributes: { scenes: 32, rarity: 'Epic', traits: ['etiquette', 'intrigue', 'negotiation'] },
+    imageUrl: '/gems/boldland/BOLD-BRIDE/trailer.png',
+    attributes: { scenes: 25, rarity: 'Epic', traits: ['elegance', 'diplomacy', 'romance'] },
     sceneIds: [],
     involvedCharacterIds: ['boldland-char-boldpup-fox']
   },
@@ -107,9 +118,71 @@ export const boldlandAdventures: Gem[] = [
     genres: ['Sci-Fi', 'Corporate Thriller', 'Futuristic', 'Drama'],
     type: 'Adventure',
     world: 'boldland',
-    imageUrl: '/images/world/boldland/adventures/bold-and-famous-larry-dino.png',
+    imageUrl: '/gems/boldland/BOLD-AND-FAMOUS/trailer.png',
     attributes: { scenes: 32, rarity: 'Legendary', traits: ['technology', 'business-strategy', 'ethics'] },
     sceneIds: [],
     involvedCharacterIds: ['boldland-char-boldpup-fox']
+  },
+  {
+    id: 'boldland-bold-girls',
+    name: 'Bold Girls',
+    type: 'Adventure',
+    world: 'boldland',
+    description: 'Dive into "Backstage & Limelight: The Bold Girls Saga"—a dramatic and heartwarming tale of a burlesque troupe navigating rivalries, dreams, and the spotlight, leading to an unexpected star\'s rise.',
+    imageUrl: '/gems/boldland/BOLD-GIRLS/trailer.png',
+    genres: ['Musical', 'Drama', 'Historical Fiction', 'Performance'],
+    attributes: {
+      rarity: 'Epic',
+      sceneSequence: [
+        'boldland-scene-bgsaga-opening',
+        'boldland-scene-bgsaga-bubbles-blowup',
+        'boldland-scene-bgsaga-rehearsal',
+        'boldland-scene-bgsaga-mae-steps-in',
+        'boldland-scene-bgsaga-peggys-debut',
+        'boldland-scene-bgsaga-buzz',
+        'boldland-scene-bgsaga-party',
+        'boldland-scene-bgsaga-daddy-song',
+      ],
+      themes: ['Ambition', 'Friendship', 'Rivalry', 'Redemption', 'Show Must Go On', 'New Beginnings'],
+      keyCharacters: [
+        'boldland-char-bg-peggy',
+        'boldland-char-bg-bubbles',
+        'boldland-char-bg-mae',
+        'boldland-char-bg-winnie',
+        'boldland-char-bg-millie',
+        'boldland-char-bg-joe',
+        'boldland-char-bg-producer'
+      ],
+      estimatedPlaytime: '3 hours',
+      sourceTranscript: 'bold-girls.dm',
+      episodes: [
+        {
+          id: 'bgsaga-ep1-upheaval-opportunity',
+          name: 'Upheaval & Opportunity',
+          sceneIds: [
+            'boldland-scene-bgsaga-opening',
+            'boldland-scene-bgsaga-bubbles-blowup',
+            'boldland-scene-bgsaga-rehearsal'
+          ]
+        },
+        {
+          id: 'bgsaga-ep2-spotlight-debut',
+          name: 'Stepping into the Spotlight',
+          sceneIds: [
+            'boldland-scene-bgsaga-mae-steps-in',
+            'boldland-scene-bgsaga-peggys-debut',
+            'boldland-scene-bgsaga-buzz'
+          ]
+        },
+        {
+          id: 'bgsaga-ep3-new-star-promises',
+          name: 'The New Star & Future Promises',
+          sceneIds: [
+            'boldland-scene-bgsaga-party',
+            'boldland-scene-bgsaga-daddy-song'
+          ]
+        }
+      ]
+    },
   }
 ];

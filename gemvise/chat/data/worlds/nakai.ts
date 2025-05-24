@@ -11,6 +11,7 @@ const nakaiCharacters: Gem[] = [
     imageUrl: '/images/placeholder/kaito.png',
     attributes: { rarity: 'Epic', power: 85 },
     genres: ['Anime', 'Action', 'Fantasy'],
+    world: 'nakai',
   },
   {
     id: 'nakai-char-02',
@@ -20,6 +21,7 @@ const nakaiCharacters: Gem[] = [
     imageUrl: '/images/placeholder/yumi.png',
     attributes: { rarity: 'Rare', power: 70 },
     genres: ['Anime', 'Fantasy'],
+    world: 'nakai',
   },
 ];
 
@@ -32,6 +34,7 @@ const nakaiStories: Gem[] = [
     imageUrl: '/images/placeholder/serpent-peak.png',
     attributes: { rarity: 'Legendary', chapters: 12 },
     genres: ['Anime', 'Adventure', 'Fantasy'],
+    world: 'nakai',
   },
 ];
 
@@ -39,8 +42,8 @@ export const nakaiData: World = {
   id: 'nakai',
   name: 'Nakai',
   href: '/world/nakai',
-  imageUrl: '/gradients/worlds/nakai.png',
-  icon: '/gradients/worlds/nakai.png',
+  imageUrl: '/worlds/logos/nakai.png',
+  icon: '/worlds/logos/nakai.png',
   tags: [],
   description: 'A vibrant world inspired by anime, filled with action, adventure, and fantasy elements. Explore breathtaking landscapes and encounter powerful beings.',
   shortDescription: 'Anime-inspired world of action and fantasy.',

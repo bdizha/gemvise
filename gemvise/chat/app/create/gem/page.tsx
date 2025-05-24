@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { SparklesIcon } from '@heroicons/react/24/outline';
+import Section from '@/components/layout/Section/Section';
+import { Form, FormField, Input, Button } from '@/components/layout/Form';
 
 export default function CreateGem() {
   const router = useRouter();
@@ -25,170 +27,178 @@ export default function CreateGem() {
   };
 
   return (
-    <div className="min-h-screen bg-theme-surface py-12">
-      <div className="mx-auto max-w-2xl px-6">
+    <Section
+      variant="default"
+      gradient="dark-light"
+      className="min-h-screen py-12"
+    >
+      <div className="mx-auto max-w-2xl">
         <div className="mb-8 flex items-center justify-center">
-          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-theme-surface/50 backdrop-blur-sm">
-            <SparklesIcon className="h-8 w-8 text-theme-foreground" />
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
+            <SparklesIcon className="h-8 w-8 text-white" />
           </span>
         </div>
 
-        <h1 className="text-center text-2xl font-bold tracking-tight text-theme-foreground sm:text-4xl">
+        <h1 className="text-center text-2xl font-bold tracking-tight text-white sm:text-4xl">
           Create a New Gem
         </h1>
-        <p className="mt-2 text-center text-lg leading-8 text-theme-foreground/60">
+        <p className="mt-2 text-center text-lg leading-8 text-white/60">
           Transform real-world expertise into an interactive AI experience.
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-12 space-y-6">
-          <div className="grid grid-cols-2 gap-6">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-theme-foreground">
-                Expert Name
-              </label>
-              <input
+        <Form onSubmit={handleSubmit} className="mt-12 space-y-6" variant="default" size="2xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <FormField
+              label="Expert Name"
+              htmlFor="name"
+              required
+            >
+              <Input
                 type="text"
                 id="name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                variant="filled"
+                placeholder="e.g., Albert Einstein"
                 required
               />
-            </div>
-
-            <div>
-              <label htmlFor="title" className="block text-sm font-medium text-theme-foreground">
-                Professional Title
-              </label>
-              <input
+            </FormField>
+            
+            <FormField
+              label="Title / Profession"
+              htmlFor="title"
+              required
+            >
+              <Input
                 type="text"
                 id="title"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                variant="filled"
+                placeholder="e.g., Theoretical Physicist"
                 required
               />
-            </div>
+            </FormField>
           </div>
 
-          <div>
-            <label htmlFor="expertise" className="block text-sm font-medium text-theme-foreground">
-              Areas of Expertise
-            </label>
-            <input
+          <FormField
+            label="Areas of Expertise"
+            htmlFor="expertise"
+          >
+            <Input
               type="text"
               id="expertise"
               value={formData.expertise}
               onChange={(e) => setFormData({ ...formData, expertise: e.target.value })}
-              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+              variant="filled"
               placeholder="e.g., Investment Strategy, Technology Innovation"
               required
             />
-          </div>
+          </FormField>
 
-          <div>
-            <label htmlFor="background" className="block text-sm font-medium text-theme-foreground">
-              Professional Background
-            </label>
+          <FormField
+            label="Background & Education"
+            htmlFor="background"
+          >
             <textarea
               id="background"
               value={formData.background}
               onChange={(e) => setFormData({ ...formData, background: e.target.value })}
-              rows={4}
-              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-              required
+              rows={3}
+              className="w-full rounded-md border bg-white/5 backdrop-blur-md px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 border-white/20 placeholder:text-white/40 text-white focus:border-white/40"
+              placeholder="Describe the expert's educational background and career journey"
             />
-          </div>
+          </FormField>
 
-          <div>
-            <label htmlFor="philosophy" className="block text-sm font-medium text-theme-foreground">
-              Core Philosophy
-            </label>
+          <FormField
+            label="Philosophy & Approach"
+            htmlFor="philosophy"
+          >
             <textarea
               id="philosophy"
               value={formData.philosophy}
               onChange={(e) => setFormData({ ...formData, philosophy: e.target.value })}
               rows={3}
-              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-              required
+              className="w-full rounded-md border bg-white/5 backdrop-blur-md px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 border-white/20 placeholder:text-white/40 text-white focus:border-white/40"
+              placeholder="Describe the expert's worldview, methodology, and approach to their field"
             />
-          </div>
+          </FormField>
 
-          <div>
-            <label htmlFor="innovations" className="block text-sm font-medium text-theme-foreground">
-              Key Innovations & Achievements
-            </label>
+          <FormField
+            label="Key Innovations & Contributions"
+            htmlFor="innovations"
+          >
             <textarea
               id="innovations"
               value={formData.innovations}
               onChange={(e) => setFormData({ ...formData, innovations: e.target.value })}
               rows={3}
-              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-              required
+              className="w-full rounded-md border bg-white/5 backdrop-blur-md px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 border-white/20 placeholder:text-white/40 text-white focus:border-white/40"
+              placeholder="Describe the expert's most significant contributions to their field"
             />
-          </div>
+          </FormField>
 
           <div className="grid grid-cols-2 gap-6">
-            <div>
-              <label htmlFor="leadership" className="block text-sm font-medium text-theme-foreground">
-                Leadership Style
-              </label>
+            <FormField
+              label="Leadership & Teaching Style"
+              htmlFor="leadership"
+            >
               <textarea
                 id="leadership"
                 value={formData.leadership}
                 onChange={(e) => setFormData({ ...formData, leadership: e.target.value })}
                 rows={3}
-                className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-                required
+                className="w-full rounded-md border bg-white/5 backdrop-blur-md px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 border-white/20 placeholder:text-white/40 text-white focus:border-white/40"
+                placeholder="Describe how the expert leads, teaches, and communicates ideas"
               />
-            </div>
+            </FormField>
 
-            <div>
-              <label htmlFor="currentFocus" className="block text-sm font-medium text-theme-foreground">
-                Current Focus
-              </label>
+            <FormField
+              label="Current Focus & Research Interests"
+              htmlFor="currentFocus"
+            >
               <textarea
                 id="currentFocus"
                 value={formData.currentFocus}
                 onChange={(e) => setFormData({ ...formData, currentFocus: e.target.value })}
                 rows={3}
-                className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-                required
+                className="w-full rounded-md border bg-white/5 backdrop-blur-md px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 border-white/20 placeholder:text-white/40 text-white focus:border-white/40"
+                placeholder="What is the expert currently focused on or interested in?"
               />
-            </div>
+            </FormField>
           </div>
 
-          <div>
-            <label htmlFor="imageUrl" className="block text-sm font-medium text-theme-foreground">
-              Profile Image URL
-            </label>
-            <input
-              type="url"
+          <FormField
+            label="Image Prompt (optional)"
+            htmlFor="imageUrl"
+          >
+            <Input
+              type="text"
               id="imageUrl"
               value={formData.imageUrl}
               onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-              className="mt-2 block w-full rounded-[1rem] border-0 bg-theme-surface/50 py-2 px-3 text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-              placeholder="https://example.com/image.jpg"
+              variant="filled"
+              placeholder="Describe how the expert should look (or paste an image URL)"
             />
-          </div>
+          </FormField>
 
-          <div className="flex justify-end gap-4">
-            <button
+          <div className="mt-8 flex justify-end gap-x-4">
+            <Button
               type="button"
+              variant="secondary"
               onClick={() => router.back()}
-              className="rounded-[1rem] bg-theme-surface/50 px-4 py-2.5 text-sm font-semibold text-theme-foreground shadow-sm ring-1 ring-inset ring-theme-foreground/10 hover:bg-theme-surface/70"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
               type="submit"
-              className="rounded-[1rem] bg-gradient-pink-purple px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-90"
+              variant="primary"
             >
               Create Gem
-            </button>
+            </Button>
           </div>
-        </form>
+        </Form>
       </div>
-    </div>
+    </Section>
   );
 }
