@@ -197,7 +197,7 @@ export const Hero: FC<HeroProps> = ({ onGenreTabChange, availableGenres }) => {
                 className="w-12 h-12 rounded-[1.5rem] mr-4"
               />
               <div className="flex-1 text-left">
-                <h3 className="text-sm font-medium text-white truncate">{gem.name}</h3>
+                <h3 className="text-sm font-medium text-white/64 truncate">{gem.name}</h3>
                 <p className="text-xs text-white/80 truncate">
                   {gem.attributes?.rarity || 'Common'} • {gem.attributes?.power || 0} Power
                 </p>
@@ -308,7 +308,7 @@ export const Hero: FC<HeroProps> = ({ onGenreTabChange, availableGenres }) => {
                                   {currentWorldGems.slice(0, 4).map(gem => (
                                     <Link key={gem.id} href={`/gem/${gem.id}`} className="block group">
                                       <div className="bg-white/5 p-3 rounded-xl shadow-lg hover:bg-white/10 transition-colors h-full flex flex-col justify-center">
-                                        <p className="text-xs font-medium text-white truncate text-center">{gem.name}</p>
+                                        <p className="text-xs font-medium text-white/64 truncate text-center">{gem.name}</p>
                                         {gem.attributes?.rarity && (
                                           <p className="text-[10px] text-white/70 truncate text-center">{gem.attributes.rarity}</p>
                                         )}

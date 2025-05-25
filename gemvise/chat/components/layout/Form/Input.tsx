@@ -9,10 +9,10 @@ const inputVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border-white/20 placeholder:text-white/40 text-white focus:border-white/40',
-        filled: 'border-white/10 bg-white/5 backdrop-blur-md placeholder:text-white/40 text-white focus:border-white/40',
-        outline: 'border-white/20 placeholder:text-white/40 text-white focus:border-white/40',
-        ghost: 'border-transparent placeholder:text-white/40 text-white hover:border-white/20 focus:border-white/40',
+        default: 'border-white/20 placeholder:text-white/40 text-white/48 focus:border-white/40',
+        filled: 'border-white/10 bg-white/5 backdrop-blur-md placeholder:text-white/40 text-white/48 focus:border-white/40',
+        outline: 'border-white/20 placeholder:text-white/40 text-white/48 focus:border-white/40',
+        ghost: 'border-transparent placeholder:text-white/40 text-white/48 hover:border-white/20 focus:border-white/40',
       },
       size: {
         default: 'h-10',

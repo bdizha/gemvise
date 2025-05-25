@@ -6,20 +6,21 @@ import Image from 'next/image';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../../../utils/utils';
 import type { GridItem } from '../Grid/types';
+import Stage from '../Stage/Stage'; // Added import
 
 const cardVariants = cva(
   'relative overflow-hidden transition-all duration-300 ease-in-out',
   {
     variants: {
       variant: {
-        default: 'bg-white/10 backdrop-blur-md rounded-3xl shadow-lg text-white',
-        world: 'rounded-3xl text-white',
-        character: 'bg-white/10 backdrop-blur-md rounded-3xl shadow-lg text-white',
-        adventure: 'bg-white/10 backdrop-blur-md rounded-3xl shadow-lg text-white',
-        story: 'bg-white/10 backdrop-blur-md rounded-3xl shadow-lg text-white',
-        scene: 'bg-white/10 backdrop-blur-md rounded-3xl shadow-lg text-white',
-        collection: 'bg-white/10 backdrop-blur-md rounded-3xl shadow-lg text-white',
-        media: 'bg-white/10 backdrop-blur-md rounded-3xl shadow-lg text-white',
+        default: 'bg-white/10 backdrop-blur-md rounded-3xl shadow-lg text-white/64',
+        world: 'rounded-3xl text-white/64',
+        character: 'bg-white/10 backdrop-blur-md rounded-3xl shadow-lg text-white/64',
+        adventure: 'bg-white/10 backdrop-blur-md rounded-3xl shadow-lg text-white/64',
+        story: 'bg-white/10 backdrop-blur-md rounded-3xl shadow-lg text-white/64',
+        scene: 'bg-white/10 backdrop-blur-md rounded-3xl shadow-lg text-white/64',
+        collection: 'bg-white/10 backdrop-blur-md rounded-3xl shadow-lg text-white/64',
+        media: 'bg-white/10 backdrop-blur-md rounded-3xl shadow-lg text-white/64',
         transparent: 'bg-transparent',
       },
       size: {
@@ -184,12 +185,12 @@ const CardBase = forwardRef<HTMLDivElement | HTMLAnchorElement, CardProps>(
               className="object-cover"
             />
             {item.overlayText && (
-              <div className="absolute bottom-2 left-2 bg-black/60 text-white text-xs px-2 py-1 rounded-full">
+              <div className="absolute bottom-2 left-2 bg-black/60 text-white/48 text-xs px-2 py-1 rounded-full">
                 {item.overlayText}
               </div>
             )}
             {item.status && (
-              <div className="absolute top-2 right-2 bg-primary text-white text-xs px-2 py-1 rounded-full">
+              <div className="absolute top-2 right-2 bg-primary text-white/48 text-xs px-2 py-1 rounded-full">
                 {item.status}
               </div>
             )}
@@ -239,7 +240,7 @@ const CardBase = forwardRef<HTMLDivElement | HTMLAnchorElement, CardProps>(
             )}
             {/* Example Button for World - to be driven by item.buttonText or similar prop */}
             {showButton && item.buttonText && (
-               <button className="mt-4 px-4 py-2 bg-primary text-white rounded-full text-sm hover:bg-primary/80 transition-colors">
+               <button className="mt-4 px-4 py-2 bg-primary text-white/48 rounded-full text-sm hover:bg-primary/80 transition-colors">
                  {item.buttonText}
                </button>
             )}
@@ -254,16 +255,16 @@ const CardBase = forwardRef<HTMLDivElement | HTMLAnchorElement, CardProps>(
             <span className="text-xs font-semibold text-primary mb-1">{item.tag}</span>
           )}
           {showTitle && item.title && (
-            <h3 className={cn("font-bold", titleClassName || "text-lg mb-1 text-white")}>{item.title}</h3>
+            <h3 className={cn("font-bold", titleClassName || "text-lg mb-1 text-white/64")}>{item.title}</h3>
           )}
           {showSubtitle && item.subtitle && (
-            <p className={cn("text-sm", subtitleClassName || "text-white/80 mb-2")}>{item.subtitle}</p>
+            <p className={cn("text-sm", subtitleClassName || "text-white/48 mb-2")}>{item.subtitle}</p>
           )}
           {showDescription && item.description && (
-            <p className={cn("text-sm flex-grow", descriptionClassName || "text-white/80")}>{item.description}</p>
+            <p className={cn("text-sm flex-grow", descriptionClassName || "text-white/48")}>{item.description}</p>
           )}
           {showButton && item.buttonText && (
-            <button className="mt-auto pt-3 px-4 py-2 bg-primary text-white rounded-full text-sm self-start hover:bg-primary/80 transition-colors">
+            <button className="mt-auto pt-3 px-4 py-2 bg-primary text-white/48 rounded-full text-sm self-start hover:bg-primary/80 transition-colors">
               {item.buttonText}
             </button>
           )}
@@ -282,10 +283,17 @@ const CardBase = forwardRef<HTMLDivElement | HTMLAnchorElement, CardProps>(
       <>
         {renderImage()} 
         <div className={cn(
-          'relative z-10 flex flex-col h-full',
-          contentClassName 
+          'relative z-10',
+          variant === 'world' ? 'flex flex-col h-full' : '', // Ensure flex-col for world variant content
+          variant === 'world' ? 'p-4 md:p-6' : size === 'none' ? '' : cardVariants({ size }).match(/p-\d+|p[x|y]-\d+/g)?.join(' '),
+          contentClassName
         )}>
-          {renderContent()} 
+          {variant === 'world' && (
+            <div className="relative w-full h-40 xs:h-48 sm:h-56 md:h-64 mb-4"> {/* Stage container */}
+              <Stage imageUrl={item?.imageUrl || '/worlds/logos/mytherra.png'} />
+            </div>
+          )}
+          {children || renderContent()}
         </div>
       </>
     );

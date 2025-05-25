@@ -72,7 +72,7 @@ const Tabs: React.FC<TabsProps> = ({
       {showScrollButtons && showLeftScroll && (
         <button 
           onClick={() => handleScroll('left')} 
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer inline-flex items-center justify-center rounded-full bg-white/10 text-white/80 hover:bg-white/20 transition-colors p-2"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer inline-flex items-center justify-center rounded-full bg-white/10 text-white/48 hover:bg-white/20 transition-colors p-2"
           aria-label="Scroll left"
         >
           <ChevronLeftIcon className="w-5 h-5" />
@@ -91,8 +91,8 @@ const Tabs: React.FC<TabsProps> = ({
             className={cn(
               "flex items-center justify-center whitespace-nowrap px-6 py-2 rounded-full transition-all duration-300 min-w-[7rem]",
               tab.id === activeTab 
-                ? 'bg-white/20 text-white hover:bg-white/30' 
-                : 'bg-white/10 text-white/80 hover:bg-white/20'
+                ? 'bg-white/20 text-white/48 hover:bg-white/30' 
+                : 'bg-white/10 text-white/48 hover:bg-white/20'
             )}
           >
             {tab.icon && <span className="mr-2">{tab.icon}</span>}
@@ -104,7 +104,7 @@ const Tabs: React.FC<TabsProps> = ({
       {showScrollButtons && showRightScroll && (
         <button 
           onClick={() => handleScroll('right')} 
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer inline-flex items-center justify-center rounded-full bg-white/10 text-white/80 hover:bg-white/20 transition-colors p-2"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer inline-flex items-center justify-center rounded-full bg-white/10 text-white/48 hover:bg-white/20 transition-colors p-2"
           aria-label="Scroll right"
         >
           <ChevronRightIcon className="w-5 h-5" />

@@ -15,17 +15,17 @@ const buttonVariants = cva(
         secondary: 'bg-accent text-accent-foreground hover:bg-accent/90 focus:ring-accent justify-center',
         ghost: 'bg-transparent text-theme-foreground hover:bg-theme-hover focus:ring-primary justify-center',
         link: 'text-primary hover:underline focus:ring-primary bg-transparent justify-start', // Links are usually left-aligned
-        tab: 'w-[7rem] px-6 bg-white/10 text-white/80 hover:bg-white/30 focus:ring-0 focus:ring-offset-0 justify-center',
-        'tab-active': 'w-[7rem] px-6 bg-white/20 text-white hover:bg-white/30 focus:ring-0 focus:ring-offset-0 justify-center',
+        tab: 'w-[7rem] px-6 bg-white/10 text-white/48 hover:bg-white/30 focus:ring-0 focus:ring-offset-0 justify-center',
+        'tab-active': 'w-[7rem] px-6 bg-white/20 text-white/48 hover:bg-white/30 focus:ring-0 focus:ring-offset-0 justify-center',
         // Sidebar Variants - Expanded
         sidebar: 'w-full bg-neutral-200 dark:bg-neutral-700/60 text-theme-foreground dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 justify-start text-sm p-3 pr-4 rounded-[4rem] gap-2',
-        'sidebar-active': 'w-full bg-white/10 backdrop-blur-md/30 text-white justify-start text-sm p-3 pr-4 rounded-[4rem] gap-2',
-        'sidebar-create-main': 'w-full bg-muted-foreground/30 hover:bg-muted-foreground/60 text-white justify-start text-sm p-3 pr-4 rounded-[4rem]',
-        'sidebar-create-option': 'w-full bg-gradient-pink-purple text-white hover:opacity-80 justify-start text-sm p-3 pr-4 rounded-xl',
-        'sidebar-view-all': 'w-full bg-muted-foreground/40 hover:bg-muted-foreground/70 text-white font-semibold justify-start text-sm p-3 pr-4 rounded-[4rem]',
+        'sidebar-active': 'w-full bg-white/10 backdrop-blur-md/30 text-white/48 justify-start text-sm p-3 pr-4 rounded-[4rem] gap-2',
+        'sidebar-create-main': 'w-full bg-muted-foreground/30 hover:bg-muted-foreground/60 text-white/48 justify-start text-sm p-3 pr-4 rounded-[4rem]',
+        'sidebar-create-option': 'w-full bg-gradient-pink-purple text-white/48 hover:opacity-80 justify-start text-sm p-3 pr-4 rounded-xl',
+        'sidebar-view-all': 'w-full bg-muted-foreground/40 hover:bg-muted-foreground/70 text-white/48 font-semibold justify-start text-sm p-3 pr-4 rounded-[4rem]',
         // Sidebar Variants - Collapsed (styling primarily for color/bg, padding/size handled by props or size variant)
         'sidebar-collapsed': 'bg-neutral-200 dark:bg-neutral-700/60 text-theme-foreground dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600/70 justify-center',
-        'sidebar-collapsed-active': 'bg-white/10 backdrop-blur-md/30 text-white justify-center'
+        'sidebar-collapsed-active': 'bg-white/10 backdrop-blur-md/30 text-white/48 justify-center'
       },
       size: {
         default: 'h-12 p-4 text-base rounded-full',

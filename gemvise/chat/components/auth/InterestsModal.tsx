@@ -47,12 +47,12 @@ const InterestsModal: React.FC<InterestsModalProps> = ({ isOpen, onClose, onComp
                 onClick={() => toggleInterest(id)}
                 className={`group inline-flex h-12 items-center justify-between px-6 rounded-full border transition-all duration-300
                   ${isSelected 
-                    ? 'border-white/50 bg-white/10 text-white' 
-                    : 'border-white/20 hover:border-white/40 text-white/80'
+                    ? 'border-white/50 bg-white/10 text-white/64' 
+                    : 'border-white/20 hover:border-white/40 text-white/48'
                   }`}
               >
                 <span>{label}</span>
-                <span className="ml-2 group-hover:text-white transition-colors">
+                <span className="ml-2 group-hover:text-white/75 transition-colors">
                   {isSelected ? (
                     <CheckIcon className="h-4 w-4" />
                   ) : (
@@ -68,7 +68,7 @@ const InterestsModal: React.FC<InterestsModalProps> = ({ isOpen, onClose, onComp
         <div className="flex w-full justify-between items-center">
           <button
             onClick={onClose}
-            className="px-6 py-2.5 text-white/80 hover:text-white transition-colors"
+            className="px-6 py-2.5 text-white/48 hover:text-white/75 transition-colors"
           >
             Skip for now
           </button>

@@ -58,7 +58,7 @@ const Modal: React.FC<ModalProps> & ModalSubComponents = ({
             exit={{ opacity: 0, scale: 0.95, x: '-50%', y: '-50%' }}
             transition={{ duration: 0.15, ease: 'easeOut' }}
             className={cn(
-              'fixed left-1/2 top-1/2 z-50 transform overflow-hidden bg-gradient-dark-light text-white shadow-xl',
+              'fixed left-1/2 top-1/2 z-50 transform overflow-hidden bg-gradient-dark-light text-white/48 shadow-xl',
               isMobile ? 'w-full h-full rounded-none' : 'max-w-lg w-full rounded-[40px]',
               className
             )}
@@ -91,7 +91,7 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({ children, className }) => (
       }}
       data-testid="modal-close"
     >
-      <X className="w-5 h-5 text-white" />
+      <X className="w-5 h-5 text-white/64" />
     </button>
   </div>
 );

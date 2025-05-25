@@ -47,7 +47,7 @@ const HeroSection = (props: HeroSectionProps) => {
                       className="relative isolate inline-flex items-center justify-center border text-base/6 uppercase font-mono tracking-widest shrink-0 focus:outline-none aspect-square px-3.5 py-1.5 sm:text-sm gap-x-2 bg-gradient-light-dark text-background hover:bg-primary/80 rounded-full"
                     >
                       <span className="absolute left-1/2 top-1/2 size-[max(100%,2.75rem)] -translate-x-1/2 -translate-y-1/2 [@media(pointer:fine)]:hidden" aria-hidden="true"></span>
-                      <ArrowRightIcon className="!size-6 text-white/80" aria-hidden="true" />
+                      <ArrowRightIcon className="!size-6 text-white/48" aria-hidden="true" />
                     </button>
                   </div>
                 </form>
@@ -62,7 +62,7 @@ const HeroSection = (props: HeroSectionProps) => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as typeof activeTab)}
-              className={`px-6 py-4 rounded-[32px] text-sm font-medium transition-colors ${activeTab === tab.id ? 'bg-gradient-pink-purple-pink text-white' : 'bg-gradient-light-dark text-white/70 hover:bg-white/20'}`}
+              className={`px-6 py-4 rounded-[32px] text-sm font-medium transition-colors ${activeTab === tab.id ? 'bg-gradient-pink-purple-pink text-white/64' : 'bg-gradient-light-dark text-white/70 hover:bg-white/20'}`}
             >
               {tab.label}
             </button>
@@ -86,7 +86,7 @@ const HeroSection = (props: HeroSectionProps) => {
                 />
               </span>
               <div className="flex flex-col">
-                <p className="line-clamp-1 text-ellipsis text-white">{gem.title}</p>
+                <p className="line-clamp-1 text-ellipsis text-white/64">{gem.title}</p>
                 <p className="line-clamp-1 text-ellipsis text-white/60 text-sm">{gem.subtitle}</p>
               </div>
             </a>

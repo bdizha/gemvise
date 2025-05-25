@@ -54,10 +54,10 @@ export default function ResearchCard({ paper }: { paper: ResearchPaper }) {
               </span>
             </div>
           )}
-          <h2 className="text-xl font-semibold tracking-tight text-white group-hover:text-primary transition-colors">
+          <h2 className="text-xl font-semibold tracking-tight text-white/48 group-hover:text-primary transition-colors">
             {paper.title}
           </h2>
-          <p className="text-white/80 line-clamp-2 flex-grow">{paper.excerpt}</p>
+          <p className="text-white/48 line-clamp-2 flex-grow">{paper.excerpt}</p>
           <div className="flex items-center space-x-2 pt-2">
             <span className="text-sm text-white/60">{paper.author}</span>
           </div>
@@ -65,7 +65,7 @@ export default function ResearchCard({ paper }: { paper: ResearchPaper }) {
             {paper.tags.map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full bg-white/10 text-white/80"
+                className="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full bg-white/10 text-white/48"
               >
                 #{tag}
               </span>

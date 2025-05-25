@@ -49,7 +49,7 @@ const NavigationButtons = () => {
       {!swiper.isBeginning && (
         <button 
           onClick={() => swiper.slidePrev()} 
-          className="absolute top-1/2 -translate-y-1/2 left-4 z-50 cursor-pointer inline-flex items-center justify-center rounded-full bg-white/10 text-white/80 hover:bg-white/20 transition-colors p-2.5"
+          className="absolute top-1/2 -translate-y-1/2 left-4 z-50 cursor-pointer inline-flex items-center justify-center rounded-full bg-white/10 text-white/48 hover:bg-white/20 transition-colors p-2.5"
           aria-label="Previous slide"
         >
           <ChevronLeftIcon className="w-6 h-6 stroke-2" />
@@ -58,7 +58,7 @@ const NavigationButtons = () => {
       {!swiper.isEnd && (
         <button 
           onClick={() => swiper.slideNext()} 
-          className="absolute top-1/2 -translate-y-1/2 right-4 z-50 cursor-pointer inline-flex items-center justify-center rounded-full bg-white/10 text-white/80 hover:bg-white/20 transition-colors p-2.5"
+          className="absolute top-1/2 -translate-y-1/2 right-4 z-50 cursor-pointer inline-flex items-center justify-center rounded-full bg-white/10 text-white/48 hover:bg-white/20 transition-colors p-2.5"
           aria-label="Next slide"
         >
           <ChevronRightIcon className="w-6 h-6 stroke-2" />
@@ -93,14 +93,14 @@ const Slider: React.FC<SliderProps> = ({
       {(title || viewAllHref) && (
         <div className="flex items-center justify-between mb-8">
           {title && (
-            <h2 className="font-sans text-lg md:text-xl font-bold text-white">
+            <h2 className="font-sans text-lg md:text-xl font-bold text-white/64">
               {title}
             </h2>
           )}
           {viewAllHref && (
             <Link
               href={viewAllHref}
-              className="hidden md:inline-flex items-center justify-center rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/30"
+              className="hidden md:inline-flex items-center justify-center rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white/48 transition-colors hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/30"
             >
               {viewAllLabel}
             </Link>

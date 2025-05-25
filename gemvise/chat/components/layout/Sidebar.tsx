@@ -92,7 +92,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
           <Button
             variant="ghost"
             size="icon"
-            className={`text-neutral-400 hover:text-white ${isOpen ? '' : 'p-2.5'}`}
+            className={`text-neutral-400 hover:text-white/75 ${isOpen ? '' : 'p-2.5'}`}
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle sidebar"
           >
@@ -112,7 +112,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                     onClick={() => setCreateMenuOpen(!createMenuOpen)}
                     aria-expanded={createMenuOpen}
                     aria-haspopup="true"
-                    className="text-white"
+                    className="text-white/64"
                   >
                     <span className={`${iconWrapperBaseClass} bg-white/10`}>
                       <PlusIcon className={`${iconBaseClass} text-white`} />
@@ -149,7 +149,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                     onClick={closeSidebarAndMenu}
                   >
                     <span className={`${iconWrapperBaseClass} ${pathname === href ? 'bg-white/15' : 'bg-white/10 dark:bg-black/20'}`}>
-                      {renderIcon(icon, `${iconBaseClass} ${pathname === href ? 'text-white' : 'text-theme-foreground dark:text-neutral-200'}`)}
+                      {renderIcon(icon, `${iconBaseClass} ${pathname === href ? 'text-white/64' : 'text-theme-foreground dark:text-neutral-200'}`)}
                     </span>
                     <span className="flex-1 text-left">{label}</span>
                   </Button>
@@ -184,12 +184,12 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                         className="relative overflow-hidden pr-12" // Added pr-12
                       >
                         <span className={`${iconWrapperBaseClass} ${pathname === `/gem/${chat.adventureId}` ? 'bg-white/15' : 'bg-white/20 dark:bg-black/30'}`}>
-                          <span className="text-xs font-semibold text-white">
+                          <span className="text-xs font-semibold text-white/64">
                             {chat.adventureName.substring(0, 1).toUpperCase()}
                           </span>
                         </span>
                         <div className="flex-auto min-w-0 overflow-hidden"> 
-                          <p className={`text-left font-medium truncate ${pathname === `/gem/${chat.adventureId}` ? 'text-white' : 'text-theme-foreground dark:text-neutral-200'}`}>{chat.adventureName}</p>
+                          <p className={`text-left font-medium truncate ${pathname === `/gem/${chat.adventureId}` ? 'text-white/64' : 'text-theme-foreground dark:text-neutral-200'}`}>{chat.adventureName}</p>
                           <p className={`text-left truncate text-xs ${pathname === `/gem/${chat.adventureId}` ? 'text-white/70' : 'text-neutral-500 dark:text-neutral-400'}`}>{chat.lastMessageSnippet}</p>
                         </div>
                         {chat.unread && <span className="absolute top-1/2 -translate-y-1/2 right-4 h-6 w-6 rounded-full bg-pink-500 border-2 border-white dark:border-neutral-800"></span>}
@@ -240,7 +240,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                         className="w-8 h-8 rounded-lg mr-3 flex-shrink-0 object-cover" 
                       />
                       <div className="flex-1 min-w-0 text-left"> 
-                        <p className={`text-sm font-medium truncate ${isMounted && pathname === world.href ? 'text-pink-100' : 'text-white group-hover:text-pink-200'}`}>{world.name}</p>
+                        <p className={`text-sm font-medium truncate ${isMounted && pathname === world.href ? 'text-pink-100' : 'text-white/75 group-hover:text-pink-200'}`}>{world.name}</p>
                         <p className={`text-xs truncate ${isMounted && pathname === world.href ? 'text-pink-200/70' : 'text-white/70 group-hover:text-pink-200/80'}`}>
                           {(world.genres && world.genres[0]) || 'World'}
                         </p>
@@ -294,7 +294,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                           'w-8 h-8 rounded-lg mr-3 flex-shrink-0 object-cover text-white/70 group-hover:text-purple-200', // Basic styling for the icon
                         )}
                         <div className="flex-1 min-w-0 text-left">
-                          <p className={`text-sm font-medium truncate ${isMounted && pathname === genreHref ? 'text-purple-100' : 'text-white group-hover:text-purple-200'}`}>{genreName}</p>
+                          <p className={`text-sm font-medium truncate ${isMounted && pathname === genreHref ? 'text-purple-100' : 'text-white/75 group-hover:text-purple-200'}`}>{genreName}</p>
                         </div>
                       </Button>
                     );
@@ -324,7 +324,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
             <Button
               variant='sidebar-collapsed'
               size="icon" 
-              className="w-full p-2.5 text-white bg-muted-foreground/30 hover:bg-muted-foreground/60"
+              className="w-full p-2.5 text-white/48 bg-muted-foreground/30 hover:bg-muted-foreground/60"
               onClick={() => { setIsOpen(true); setCreateMenuOpen(true); }} 
               aria-label="Create"
             >
@@ -342,7 +342,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                 onClick={closeSidebarAndMenu}
                 aria-label={href.substring(1)} 
               >
-                 {renderIcon(icon, `${iconBaseClass} ${pathname === href ? 'text-white' : 'text-theme-foreground dark:text-neutral-200'}`)}
+                 {renderIcon(icon, `${iconBaseClass} ${pathname === href ? 'text-white/64' : 'text-theme-foreground dark:text-neutral-200'}`)}
               </Button>
             ))}
 
@@ -359,7 +359,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                 onClick={closeSidebarAndMenu}
                 aria-label={chat.adventureName}
               >
-                <span className="text-xs font-semibold text-white">
+                <span className="text-xs font-semibold text-white/64">
                   {chat.adventureName.substring(0, 1).toUpperCase()}
                 </span>
                 {chat.unread && <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-pink-500 border border-neutral-800"></span>}
@@ -380,7 +380,7 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
                 style={pathname !== world.href && world.imageUrl ? { backgroundImage: `url(${world.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundBlendMode: 'overlay' } : {}}
                 aria-label={world.name}
               >
-                {renderIcon(undefined, `${iconBaseClass} text-white/80`, world.imageUrl)}
+                {renderIcon(undefined, `${iconBaseClass} text-white/48`, world.imageUrl)}
               </Button>
             ))}
           </div>

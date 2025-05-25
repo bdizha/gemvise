@@ -11,7 +11,7 @@ interface WorldNavigationProps {
 export const WorldNavigation: FC<WorldNavigationProps> = ({ className = '' }) => {
   const pathname = usePathname();
 
-  const baseButtonClasses = "flex h-[48px] w-full items-center gap-3 rounded-[4rem] px-4 text-white transition-all duration-300";
+  const baseButtonClasses = "flex h-[48px] w-full items-center gap-3 rounded-[4rem] px-4 text-white/48 transition-all duration-300";
 
   return (
     <div className={`space-y-2 w-full ${className}`}>
@@ -32,9 +32,9 @@ export const WorldNavigation: FC<WorldNavigationProps> = ({ className = '' }) =>
                 }`}
               >
                 <span className="flex h-8 w-8 items-center justify-center rounded-[1.5rem] bg-white/10">
-                  <Icon className="h-5 w-5 text-white" />
+                  <Icon className="h-5 w-5 text-white/64" />
                 </span>
-                <span className="flex-1 text-left text-white">{world.name}</span>
+                <span className="flex-1 text-left text-white/64">{world.name}</span>
               </button>
             </Link>
           );

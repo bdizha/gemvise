@@ -166,7 +166,7 @@ const Section: React.FC<SectionProps> = ({
     return (
       <div className="mb-8 md:mb-12">
         {tag && <p className="text-sm font-semibold leading-6 text-white/70 mb-2">{tag}</p>}
-        {title && <h2 className="text-3xl font-bold tracking-tight sm:text-5xl text-white mb-4">{title}</h2>}
+        {title && <h2 className="text-3xl font-bold tracking-tight sm:text-5xl text-white/48 mb-4">{title}</h2>}
         {description && <div className="text-base leading-7 text-white/60 max-w-prose">{description}</div>}
       </div>
     );
@@ -221,8 +221,8 @@ const Section: React.FC<SectionProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {values.map((value, index) => (
             <div key={index} className="flex flex-col gap-4 p-6 rounded-3xl bg-white/10 backdrop-blur-sm">
-              {value.icon && <div className="text-white/80 mb-2">{value.icon}</div>}
-              <h3 className="text-xl font-semibold text-white">{value.title}</h3>
+              {value.icon && <div className="text-white/48 mb-2">{value.icon}</div>}
+              <h3 className="text-xl font-semibold text-white/64">{value.title}</h3>
               <p className="text-white/70">{value.description}</p>
             </div>
           ))}

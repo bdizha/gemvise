@@ -52,7 +52,7 @@ const FormField = forwardRef<HTMLDivElement, FormFieldProps>(({
       {label && variant !== 'floating' && (
         <label 
           htmlFor={htmlFor} 
-          className="text-sm font-medium text-white/80"
+          className="text-sm font-medium text-white/48"
         >
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
@@ -70,7 +70,7 @@ const FormField = forwardRef<HTMLDivElement, FormFieldProps>(({
               "left-3 text-white/60",
               // Different positioning based on whether the input is focused/filled
               "peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-base",
-              "peer-focus:top-0 peer-focus:text-xs peer-focus:text-white/80",
+              "peer-focus:top-0 peer-focus:text-xs peer-focus:text-white/48",
               "top-0 text-xs"
             )}
           >

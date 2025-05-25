@@ -50,7 +50,7 @@ const GridList: React.FC<GridListProps> = ({ items, className = '', columns }) =
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 {item.overlayText && (
-                  <div className="absolute top-2 right-2 bg-black/70 text-white text-xs font-semibold px-2 py-1 rounded-md z-10">
+                  <div className="absolute top-2 right-2 bg-black/70 text-white/56 text-xs font-semibold px-2 py-1 rounded-md z-10">
                     {item.overlayText}
                   </div>
                 )}

@@ -71,7 +71,7 @@ const WorldCard: React.FC<WorldCardProps> = ({ world, featuredGems = [], classNa
                 {featuredGems.map(item => (
                   <Link key={item.id} href={item.href || '#'} className="block group">
                     <div className="bg-white/5 p-3 rounded-xl shadow-lg hover:bg-white/10 transition-colors h-full flex flex-col justify-center">
-                      <p className="text-xs font-medium text-white truncate text-center">{item.title}</p>
+                      <p className="text-xs font-medium text-white/64 truncate text-center">{item.title}</p>
                       {item.subtitle && (
                         <p className="text-[10px] text-white/70 truncate text-center">{item.subtitle}</p>
                       )}
