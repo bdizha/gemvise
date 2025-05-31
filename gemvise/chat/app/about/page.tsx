@@ -1,8 +1,29 @@
 'use client';
 
-import { type FC } from 'react';
+import { type FC, type ReactNode } from 'react';
 import { Section } from '@/components/layout/Section'; 
 import { Button } from '@/components/layout/Button';
+
+interface CompanyValue {
+  title: string;
+  description: string;
+  icon?: ReactNode;
+}
+
+const coreValuesData: CompanyValue[] = [
+  {
+    title: 'Dream',
+    description: 'To spark the imagination.',
+  },
+  {
+    title: 'Create',
+    description: 'To empower you with the tools to bring any vision to life – from sprawling worlds and unforgettable characters to intricate adventures and unique digital gems, fostering a universe of collaborative storytelling.',
+  },
+  {
+    title: 'Delight',
+    description: 'To deliver captivating interactive experiences where every choice unfolds new possibilities, igniting curiosity and offering endless joy through exploration and shared narrative adventures.',
+  },
+];
 
 const AboutPage: FC = () => {
   return (
@@ -27,36 +48,11 @@ const AboutPage: FC = () => {
       {/* Our Company Values Section */}
       <Section
         title="Our Core Values"
-        variant="default" 
+        variant="values" 
+        values={coreValuesData}
         gradient="dark"
         className="py-12 md:py-16"
-      >
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center md:text-left">
-            {/* Dream Value */}
-            <div className="p-6 rounded-3xl shadow-xl bg-gradient-purple-pink text-white">
-              <h3 className="text-2xl font-bold text-white mb-3">Dream</h3>
-              <p className="text-white/80 leading-relaxed">
-                To spark the imagination.
-              </p>
-            </div>
-            {/* Create Value */}
-            <div className="p-6 rounded-3xl shadow-xl bg-gradient-cyan-blue text-white">
-              <h3 className="text-2xl font-bold text-white mb-3">Create</h3>
-              <p className="text-white/80 leading-relaxed">
-                To empower you with the tools to bring any vision to life – from sprawling worlds and unforgettable characters to intricate adventures and unique digital gems, fostering a universe of collaborative storytelling.
-              </p>
-            </div>
-            {/* Delight Value */}
-            <div className="p-6 rounded-3xl shadow-xl bg-gradient-pink-orange text-white">
-              <h3 className="text-2xl font-bold text-white mb-3">Delight</h3>
-              <p className="text-white/80 leading-relaxed">
-                To deliver captivating interactive experiences where every choice unfolds new possibilities, igniting curiosity and offering endless joy through exploration and shared narrative adventures.
-              </p>
-            </div>
-          </div>
-        </div>
-      </Section>
+      />
 
       {/* Our Mission Section (Text Left, Image Right) - Using Children for custom layout */}
       <Section
